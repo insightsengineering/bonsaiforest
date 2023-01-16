@@ -18,3 +18,9 @@ navbar:
   right:
     - icon: fa-github
       href: https://github.com/insightsengineering/shrinkforest
+
+reference:
+  - title: Model Fit Functions
+    contents:
+      - hello
+      - test
