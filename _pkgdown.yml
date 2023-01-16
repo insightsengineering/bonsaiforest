@@ -22,4 +22,5 @@ navbar:
 reference:
   - title: Model Fit Functions
     contents:
+      - hello
       - test
