@@ -1,16 +1,17 @@
 Type: Package
 Package: shrinkforest
 Title: Shrinkage based Forest Plots
-Version: 0.0.0.9001
-Date: 2023-01-05
+Version: 0.0.0.9002
+Date: 2023-01-16
 Authors@R:
     person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = c("aut", "cre"))
-Description: Subgroup analyses are routinely performed in clinical trial analyses.
-  From a methodological perspective, two key issues of subgroup analyses are 
-  multiplicity (even if only predefined subgroups are investigated) and the
-  low sample sizes of subgroups which lead to highly variable estimates.
-  This package implements subgroup estimates based on Bayesian shrinkage priors, 
-  as well as penalized likelihood inference.
+Description: Subgroup analyses are routinely performed in clinical trial
+    analyses.  From a methodological perspective, two key issues of
+    subgroup analyses are multiplicity (even if only predefined subgroups
+    are investigated) and the low sample sizes of subgroups which lead to
+    highly variable estimates.  This package implements subgroup estimates
+    based on Bayesian shrinkage priors, as well as penalized likelihood
+    inference.
 License: Apache License 2.0 | file LICENSE
 URL: https://github.com/insightsengineering/shrinkforest/
 BugReports: https://github.com/insightsengineering/shrinkforest/issues
