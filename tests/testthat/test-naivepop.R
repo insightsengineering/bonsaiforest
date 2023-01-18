@@ -1,7 +1,7 @@
 test_that("Naivepop produces expected coefficients of the model", {
   dat <- survival::myeloid
-  result <- coef(naivepop("futime", "trt", dat, "survival", "death")$fit)
-  expected <- coef(coxph(Surv(futime, death) ~ trt, data = dat))
+  result <- stats::coef(naivepop("futime", "trt", dat, "survival", "death")$fit)
+  expected <- stats::coef(survival::coxph(survival::Surv(futime, death) ~ trt, data = dat))
   expect_equal(result, expected)
 })
 

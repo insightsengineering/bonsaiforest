@@ -2,27 +2,28 @@
 % Please edit documentation in R/naivepop.R
 \name{naivepop}
 \alias{naivepop}
-\title{Naivepop function}
+\title{Naive Overall Population Model Estimation}
 \usage{
-naivepop(resp, trt, data, resptype, status = NULL)
+naivepop(resp, trt, data, resptype = c("survival", "binary"), status = NULL)
 }
 \arguments{
-\item{resp}{(\code{character}) \cr for the response variable name.}
+\item{resp}{(\code{string})\cr the response variable name.}
 
-\item{trt}{(\code{character}) \cr for the treatment variable name.}
+\item{trt}{(\code{string})\cr the treatment variable name.}
 
-\item{data}{(\verb{data frame}) \cr for the data frame with the variables.}
+\item{data}{(\verb{data frame})\cr the data frame with the variables.}
 
-\item{resptype}{(\code{character}) \cr for the type of data used. Can be "survival"
+\item{resptype}{(\code{string})\cr the type of data used. Can be "survival"
 or "binary".}
 
-\item{status}{(\code{character}) \cr for the status variable name in survival data.}
+\item{status}{(\code{string})\cr only for "survival" \code{resptype},
+the status variable name in survival data.}
 }
 \value{
-List with fit, model, resptype, data
+List with \code{fit}, \code{model}, \code{resptype}, \code{data}.
 }
 \description{
-Function to fit the naivepop model to the data. This model is going to
+Function to fit the naive overall population model to the data. This model is going to
 estimate the subgroup treatment effects with the overall population
 treatment effect.
 }

@@ -2,6 +2,6 @@
 "_PACKAGE"
 
 #' @import checkmate
-#' @import survival
-#' @importFrom  stats as.formula glm
+#' @importFrom survival aareg
+#' @importFrom stats acf
 NULL
