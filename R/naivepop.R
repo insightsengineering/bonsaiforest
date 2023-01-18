@@ -25,7 +25,7 @@ naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status
 
   fit_pop <- if (resptype == "survival"){
     assert_string(status)
-    form_surv <- as.formula(paste("survival::Surv(", resp, ",", status, ") ~ ", trt))
+    form_surv <- stats::as.formula(paste("survival::Surv(", resp, ",", status, ") ~ ", trt))
     survival::coxph(formula = form_surv, data = data)
   } else if (resptype == "binary"){
     form_bin <- stats::as.formula(paste(resp, " ~ ", trt))
