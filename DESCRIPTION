@@ -1,8 +1,8 @@
 Type: Package
 Package: shrinkforest
 Title: Shrinkage based Forest Plots
-Version: 0.0.0.9003
-Date: 2023-01-16
+Version: 0.0.0.9004
+Date: 2023-01-19
 Authors@R:
     person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = c("aut", "cre"))
 Description: Subgroup analyses are routinely performed in clinical trial
@@ -19,9 +19,9 @@ Depends:
     R (>= 4.1)
 Imports:
     checkmate,
-    survival,
     stats,
-    stringr
+    stringr,
+    survival
 Suggests:
     knitr,
     testthat (>= 2.0)
