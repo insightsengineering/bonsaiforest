@@ -1,0 +1,32 @@
+---
+title: "High level structure"
+output: html_document
+date: "2023-01-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+In randomized clinical trials the homogeneity of treatment effect estimates in subgroups is studied using forest plots. However, the naive way of estimating  these subgroup treatment effects has to be interpreted with great care because of the smaller sample size of the subgroups (leading to large variability of the estimated effects) and the frequently large number of investigated subgroups. 
+
+Subgroup treatment effect estimates with a lower mean-square error based on frequentist and Bayesian shrinkage have been studied. In this package we are implementing the functions needed to apply these shrinkage methods to data sets with survival and binary outcomes.
+
+
+## Treatment effect estimation methods
+
+### Naive Overall Population Model Estimation
+
+To estimate the treatment effect of the different subgroups we can always consider the naive estimate based on the overall population. This will lead to the same treatment effect for all the subgroups (the naive treatment effect obtained from all the population).
+
+In our package this overall population treatment effect can be estimated using the function naivepop.
+
+Given the response and the treatment variables, this function fits a model with all the data giving us the information to obtain an estimate of the treatment effects.
+
+In the case of time-to-event data we will fit a Cox regression with a censoring variable, with the treatment as explanatory variable and with the time to event as response variable. By taking the exponential of the coefficient associated with treatment we obtain the hazard ratio. 
+
+In the case of data with binary outcome we will fit a logistic regression model with treatment as explanatory variable and with the binary considered variable as response. The coefficient associated with treatment can be interpreted as the log odds ratio.
+
+
