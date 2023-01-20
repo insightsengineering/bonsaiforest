@@ -6,6 +6,8 @@ SECURITY.md
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^vignettes/hello\.Rmd$
+^vignettes/high_level_structure\.Rmd$
+^vignettes/overview\.Rmd$
 ^docs$
 ^\.github$
 README.*

@@ -1,11 +1,9 @@
 ---
 title: "High level structure"
-output: html_document
 date: "2023-01-20"
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+library(shrinkforest)
 ```
 
 ## Functions of the package
