@@ -4,7 +4,7 @@
 #'
 #'
 #' @format
-#' A data frame with 1000 rows and 14 columns:
+#' A `data.frame` with 1000 rows and 14 columns:
 #' \describe{
 #'   \item{id}{Integer variable with the id of the patient.}
 #'   \item{arm}{Factor variable with 2 levels: control and treatment.}
