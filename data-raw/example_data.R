@@ -2,23 +2,23 @@
 library(usethis)
 library(MASS)
 
-simul_covariates <- function(n, p_catvar=10, add_contVars = F){
+simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE) {
   #-- generate a covariate matrix of n observations including treatment arm
   # and p_catvar covariates
   #-- note: p_catvar leads to 25 subgroups from 10 variables
   # block diagonal covariance matrix for underlying multivariate normal data
   # create covariate matrix in blocks of 10
-  Sigma <- matrix(0, nrow = 10, ncol = 10)
-  Sigma[1:5, 1:5] <- 0     # first 5 covariates uncorrelated with everything
-  Sigma[6:8, 6:8] <- 0.25   # cov 6-8 with "moderate" correlation
-  Sigma[9:10, 9:10] <- 0.5  # cov 9-10 with "high" correlation
-  diag(Sigma) <- 1 # variance 1
-  no_10_blocks <- ceiling(p_catvar/10)
+  sigma <- matrix(0, nrow = 10, ncol = 10)
+  sigma[1:5, 1:5] <- 0     # first 5 covariates uncorrelated with everything
+  sigma[6:8, 6:8] <- 0.25   # cov 6-8 with "moderate" correlation
+  sigma[9:10, 9:10] <- 0.5  # cov 9-10 with "high" correlation
+  diag(sigma) <- 1 # variance 1
+  no_10_blocks <- ceiling(p_catvar / 10)
   x <- NULL
   z <- NULL
   for (j in 1:no_10_blocks){
     # continuous version
-    z_j <- data.frame(mvrnorm(n, mu = rep(0, 10), Sigma = Sigma))
+    z_j <- data.frame(mvrnorm(n, mu = rep(0, 10), Sigma = sigma))
     colnames(z_j) <- paste("z", (j - 1) * 10 + 1:10, sep = "_")
     if (j==1) {z <- z_j} else { z <- cbind(z, z_j)}
     # categorized version
@@ -46,7 +46,7 @@ simul_covariates <- function(n, p_catvar=10, add_contVars = F){
     if (j == 1) {x <- x_j} else { x <- cbind(x, x_j)}
   }
   x <- cbind(arm = sample(rep(c(0, 1), c(n %/% 2, n - n %/% 2))), x[, 1:p_catvar])
-  if (add_contVars) x <- cbind(x, z[, 1:p_catvar])
+  if (add_contvars) x <- cbind(x, z[, 1:p_catvar])
   x
 }
 
@@ -79,7 +79,7 @@ quicksimul <- function(n, coef, sigma_aft, recr_duration, rate_cens, n_events){
   #and simul_pfs (assuming 10 covariates)
   # Regression coefficients are for an AFT with over-parametrized dummy
   #coding for arm-subgroup interactions (see creation of design matrix below)
-  covariates <- simul_covariates(n = n, p_catvar = 10, add_contVars = F)
+  covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = F)
   #- create design matrix with over-parametrized
   #dummy coding for arm-subgroup interactions
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
