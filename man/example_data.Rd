@@ -5,9 +5,7 @@
 \alias{example_data}
 \title{Example data}
 \format{
-\subsection{\code{example_data}}{
-
-A data frame with 1000 rows and 14 columns:
+A \code{data.frame} with 1000 rows and 14 columns:
 \describe{
 \item{id}{Integer variable with the id of the patient.}
 \item{arm}{Factor variable with 2 levels: control and treatment.}
@@ -19,7 +17,6 @@ of each patient.}
 of each patient. 0 indicates that the event of interest did not happen
 and 1 indicates that it did.}
 ...
-}
 }
 }
 \usage{
