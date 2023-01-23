@@ -3,7 +3,7 @@
 #' A simulated data set for a realistic scenario of a clinical trial.
 #'
 #'
-#' @format ## `example_data`
+#' @format
 #' A data frame with 1000 rows and 14 columns:
 #' \describe{
 #'   \item{id}{Integer variable with the id of the patient.}
