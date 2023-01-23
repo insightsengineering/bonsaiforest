@@ -20,7 +20,7 @@ simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE) {
     # continuous version
     z_j <- data.frame(mvrnorm(n, mu = rep(0, 10), Sigma = sigma))
     colnames(z_j) <- paste("z", (j - 1) * 10 + 1:10, sep = "_")
-    if (j==1) {z <- z_j} else { z <- cbind(z, z_j)}
+    if (j == 1) {z <- z_j} else { z <- cbind(z, z_j)} #nolint
     # categorized version
     x_j <- data.frame(v1 = cut(z_j[, 1], c(-Inf, qnorm(0.5), Inf),
                                labels = c("a", "b")),
@@ -39,18 +39,18 @@ simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE) {
                       v8 = cut(z_j[, 8], c(-Inf, qnorm(c(0.2, 0.5)), Inf),
                                labels = c("a", "b", "c")),
                       v9 = cut(z_j[, 9], c(-Inf, qnorm(0.2), Inf),
-                               labels = c("a","b")),
+                               labels = c("a", "b")),
                       v10 = cut(z_j[, 10], c(-Inf, qnorm(c(0.2, 0.5)), Inf),
                                 labels = c("a", "b", "c")))
     colnames(x_j) <- paste("x", (j - 1) * 10 + 1:10, sep = "_")
-    if (j == 1) {x <- x_j} else { x <- cbind(x, x_j)}
+    if (j == 1) {x <- x_j} else { x <- cbind(x, x_j)} #nolint
   }
   x <- cbind(arm = sample(rep(c(0, 1), c(n %/% 2, n - n %/% 2))), x[, 1:p_catvar])
   if (add_contvars) x <- cbind(x, z[, 1:p_catvar])
   x
 }
 
-simul_pfs <- function(lp_aft, sigma_aft, recr_duration, rate_cens, n_events){
+simul_pfs <- function(lp_aft, sigma_aft, recr_duration, rate_cens, n_events){ #nolint
   n <- length(lp_aft)
   # Uncensored event time
   log_tt_pfs <- c(lp_aft + sigma_aft * log(rexp(n, rate = 1)))
@@ -74,16 +74,16 @@ simul_pfs <- function(lp_aft, sigma_aft, recr_duration, rate_cens, n_events){
   data.frame(tt_pfs = tt_pfs, ev_pfs = ev_pfs)
 }
 
-quicksimul <- function(n, coef, sigma_aft, recr_duration, rate_cens, n_events){
+quicksimul <- function(n, coef, sigma_aft, recr_duration, rate_cens, n_events){ #nolint
   # Quickly simulate actual data combining functions covariates
   #and simul_pfs (assuming 10 covariates)
   # Regression coefficients are for an AFT with over-parametrized dummy
   #coding for arm-subgroup interactions (see creation of design matrix below)
-  covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = F)
+  covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = FALSE)
   #- create design matrix with over-parametrized
   #dummy coding for arm-subgroup interactions
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
-  design_main <- model.matrix(update(subgroup_model,~arm+.), data = covariates)
+  design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)
   subgroup_vars <- all.vars(subgroup_model)
   design_ia <- NULL
   for (j in subgroup_vars){
@@ -113,7 +113,7 @@ sigma_aft <- 0.85
 coef_raw <- rep(0, 42)
 names(coef_raw) <- c("(Intercept)", "arm", "x_1b", "x_2b", "x_3b", "x_4b", "x_4c",
                      "x_5b", "x_5c", "x_5d", "x_6b", "x_7b", "x_8b", "x_8c",
-                     "x_9b", "x_10b", "x_10c","x_1a_arm", "x_1b_arm", "x_2a_arm",
+                     "x_9b", "x_10b", "x_10c", "x_1a_arm", "x_1b_arm", "x_2a_arm",
                      "x_2b_arm", "x_3a_arm", "x_3b_arm", "x_4a_arm", "x_4b_arm",
                      "x_4c_arm", "x_5a_arm", "x_5b_arm", "x_5c_arm", "x_5d_arm",
                      "x_6a_arm", "x_6b_arm", "x_7a_arm", "x_7b_arm", "x_8a_arm",
