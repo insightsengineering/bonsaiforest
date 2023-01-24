@@ -21,12 +21,26 @@ Subgroup treatment effect estimates with a lower mean-square error based on freq
 
 To estimate the treatment effect of the different subgroups we can always consider the naive estimate based on the overall population. This will lead to the same treatment effect for all the subgroups (the naive treatment effect obtained from all the population).
 
-In our package this overall population treatment effect can be estimated using the function naivepop.
+In our package this overall population treatment effect can be estimated using the function `naivepop`.
 
 Given the response and the treatment variables, this function fits a model with all the data giving us the information to obtain an estimate of the treatment effects.
 
 In the case of time-to-event data we will fit a Cox regression with a censoring variable, with the treatment as explanatory variable and with the time to event as response variable. By taking the exponential of the coefficient associated with treatment we obtain the hazard ratio. 
 
 In the case of data with binary outcome we will fit a logistic regression model with treatment as explanatory variable and with the binary considered variable as response. The coefficient associated with treatment can be interpreted as the log odds ratio.
+
+
+### Naive Model Estimation
+The traditional way to estimate the treatment effect of the different subgroups is what we call the naive estimation.
+
+In our package this naive treatment effect estimation can be performed using the function `naive`.
+
+Given the response, treatment and subgroup variables, this function fits a model in each one of the data sets corresponding to a specific subgroup (for example if the subgroup that we are studying is Sex=Female we are going to fit the model just with the data of the patients that are female) in order to obtain the necessary information to estimate the specific treatment effects.
+
+In the case of time-to-event data, for each one of the subgroup-specific data sets, we will fit a Cox regression with a censoring variable, with the treatment as explanatory variable and with the time to event as response variable. By taking the exponential of the coefficient associated with treatment we obtain the hazard ratio associated with the specific subgroup.
+
+In the case of data with binary outcome, for each one of the subgroup-specific data sets, we will fit a logistic regression model with treatment as explanatory variable and with the binary considered variable as response. The coefficients associated with treatment can be interpreted as the log odds ratio associated with the specific subgroup.
+
+
 
 

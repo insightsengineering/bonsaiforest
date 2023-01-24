@@ -25,6 +25,7 @@ reference:
       - hello
       - test
       - naivepop
+      - naive
   - title: Data Sets
     contents:
       - example_data

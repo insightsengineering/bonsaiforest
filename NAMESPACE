@@ -2,9 +2,11 @@
 
 export(generate_stacked_data)
 export(hello)
+export(naive)
 export(naivepop)
 export(test)
 import(checkmate)
+importFrom(broom,tidy)
 importFrom(dplyr,arrange)
 importFrom(stats,acf)
 importFrom(survival,aareg)

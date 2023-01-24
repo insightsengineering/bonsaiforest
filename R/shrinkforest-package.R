@@ -7,4 +7,5 @@
 #' @importFrom tibble as_tibble
 #' @importFrom tidyr gather
 #' @importFrom dplyr arrange
+#' @importFrom broom tidy
 NULL

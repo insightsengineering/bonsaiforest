@@ -25,5 +25,11 @@ The `naivepop` function is used to estimate the subgroup treatment effects with 
 In this function we make a distinction depending on the type of data that we have. In the case of survival data we fit a Cox regression model (using coxph) with treatment as explanatory variable. Instead, if we have binary data, we fit a logistic regression model (using glm with the binomial family) with treatment as explanatory variable. This fitted model is going to be included as part of the output of our function.
 
 
+### Naive
+The `naive`function is used to estimate the subgroup treatment effects with the naive treatment effects per subgroup.
+
+In this function we make a distinction between binary and survival data (the main difference between them is that in binary we are going to use glm models with the binomial family and in survival we are going to use coxph models). With `generate_stacked_data` we obtain the stacked by subgroups data frame and we fit a model (depending on the type of response the glm or the coxph) on each one of the data sets corresponding to a specific subgroup. These fitted models are going to be part of the output as well as a data set with the components of the summary of those models that are going to be useful to obtain the treatment effect.
+
+
 
 
