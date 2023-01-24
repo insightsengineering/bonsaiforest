@@ -18,7 +18,7 @@ We gather the columns of the different variables and we create two columns: one 
 
 
 ### Preprocessing_data
-The `preprocessing_data`function is used to obtain from the original data frame 3 different design matrices and a vector with the name of the subgroups that are going to be studied. 
+The `preprocess` function is used to obtain from the original data frame 3 different design matrices and a vector with the name of the subgroups that are going to be studied. 
 
 The first of the matrices is `design_ia` which is the design matrix of a model just with the interactions between treatment and the subgrouping covariates.
 
