@@ -17,6 +17,20 @@ The `generate_stacked_data` function is used to generate a data frame with the d
 We gather the columns of the different variables and we create two columns: one with the subgroup variable and the other one with the value of the subgroup variable. Doing this we are going to increase the number of rows of the data frame (the new number of rows is going to be the initial one times the number of subgroup variables). Finally, we sort the rows of the new data frame by the subgroup and we output this sorted data frame.
 
 
+### Preprocessing_data
+The `preprocessing_data`function is used to obtain from the original data frame 3 different design matrices and a vector with the name of the subgroups that are going to be studied. 
+
+The first of the matrices is `design_ia` which is the design matrix of a model just with the interactions between treatment and the subgrouping covariates.
+
+Another matrix is `design_main` which is the design matrix of a model with the main effects of treatment and the subgroup variables. 
+
+The last matrix is `design_dummy` which is the matrix of a model just with the subgrouping covariates and using one-hot encoding. 
+
+To obtain all these matrices we just obtain the design matrices of some specified models (for example just considering one of the covariates) and when needed we bind them to obtain the three desired matrices.
+
+Finally we also obtain the vector `subgr_names` with the exact name of the different subgroups that we are going to study.
+
+
 ## Main functions
 
 ### Naivepop
