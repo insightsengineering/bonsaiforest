@@ -57,4 +57,3 @@ preprocessing_data <- function(trt, subgr, covars, data) {
        design_dummy = design_dummy,
        subgr_names = subgr_names)
 }
-
