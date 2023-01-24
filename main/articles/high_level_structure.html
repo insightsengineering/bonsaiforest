@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9005</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -96,11 +90,29 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/insightsengineering/shrinkforest/" class="external-link">shrinkforest</a></span><span class="op">)</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="functions-of-the-package">Functions of the package<a class="anchor" aria-label="anchor" href="#functions-of-the-package"></a>
-</h2>
 <p>In this vignette we are going to briefly describe the high level
-structure of the functions used in this package.</p>
+structure of the functions used (the main ones and the helper ones) in
+this package.</p>
+<div class="section level2">
+<h2 id="helper-functions">Helper functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a>
+</h2>
+<div class="section level3">
+<h3 id="generate_stacked_data">Generate_stacked_data<a class="anchor" aria-label="anchor" href="#generate_stacked_data"></a>
+</h3>
+<p>The <code>generate_stacked_data</code> function is used to generate a
+data frame with the data stacked by the subgroups.</p>
+<p>We gather the columns of the different variables and we create two
+columns: one with the subgroup variable and the other one with the value
+of the subgroup variable. Doing this we are going to increase the number
+of rows of the data frame (the new number of rows is going to be the
+initial one times the number of subgroup variables). Finally, we sort
+the rows of the new data frame by the subgroup and we output this sorted
+data frame.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
+</h2>
 <div class="section level3">
 <h3 id="naivepop">Naivepop<a class="anchor" aria-label="anchor" href="#naivepop"></a>
 </h3>
