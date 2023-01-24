@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9006</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -131,6 +125,22 @@ that we have. In the case of survival data we fit a Cox regression model
 have binary data, we fit a logistic regression model (using glm with the
 binomial family) with treatment as explanatory variable. This fitted
 model is going to be included as part of the output of our function.</p>
+</div>
+<div class="section level3">
+<h3 id="naive">Naive<a class="anchor" aria-label="anchor" href="#naive"></a>
+</h3>
+<p>The <code>naive</code>function is used to estimate the subgroup
+treatment effects with the naive treatment effects per subgroup.</p>
+<p>In this function we make a distinction between binary and survival
+data (the main difference between them is that in binary we are going to
+use glm models with the binomial family and in survival we are going to
+use coxph models). With <code>generate_stacked_data</code> we obtain the
+stacked by subgroups data frame and we fit a model (depending on the
+type of response the glm or the coxph) on each one of the data sets
+corresponding to a specific subgroup. These fitted models are going to
+be part of the output as well as a data set with the components of the
+summary of those models that are going to be useful to obtain the
+treatment effect.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
