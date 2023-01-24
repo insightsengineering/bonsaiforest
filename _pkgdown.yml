@@ -32,3 +32,4 @@ reference:
   - title: Helper functions
     contents:
       - generate_stacked_data
+      - preprocess
