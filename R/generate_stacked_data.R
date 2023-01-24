@@ -19,7 +19,7 @@
 #' @examples
 #' generate_stacked_data(Surv(tt_pfs, ev_pfs) ~ arm, ~ x_1 + x_2, example_data, "survival")
 generate_stacked_data <- function(base_model, subgroup_model, data,
-                                  resptype = c("survival", "binary")){
+                                  resptype = c("survival", "binary")) {
   assert_formula(base_model)
   assert_formula(subgroup_model)
   assert_data_frame(data)
@@ -28,10 +28,10 @@ generate_stacked_data <- function(base_model, subgroup_model, data,
   data <- tibble::as_tibble(data)
   subgroup_vars <- all.vars(subgroup_model)
   resp_var <- all.vars(base_model)[1]
-  if (resptype == "survival"){
+  if (resptype == "survival") {
     status_var <- all.vars(base_model)[2]
     arm_var <- all.vars(base_model)[3]
-  } else if (resptype == "binary"){
+  } else if (resptype == "binary") {
     status_var <- NULL
     arm_var <- all.vars(base_model)[2]
   }
@@ -46,10 +46,10 @@ generate_stacked_data <- function(base_model, subgroup_model, data,
   subgroup <- factor(subgroup, levels = subgroup_names)
   d <- cbind(d, subgroup)
   d <- dplyr::arrange(d, subgroup)
-  d <- if (resptype == "survival"){
+  d <- if (resptype == "survival") {
     dplyr::rename_at(d, dplyr::vars(c(arm_var, resp_var, status_var)),
                      ~ c("arm", "time", "status"))
-  } else if (resptype == "binary"){
+  } else if (resptype == "binary") {
     dplyr::rename_at(d, dplyr::vars(c(arm_var, resp_var)), ~ c("arm", "y"))
   }
   d
