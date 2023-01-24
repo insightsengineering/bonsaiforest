@@ -21,7 +21,10 @@ Imports:
     checkmate,
     stats,
     stringr,
-    survival
+    survival,
+    tibble,
+    tidyr,
+    dplyr
 Suggests:
     knitr,
     testthat (>= 2.0)

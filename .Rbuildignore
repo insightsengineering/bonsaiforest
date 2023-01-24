@@ -5,6 +5,7 @@ SECURITY.md
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
+^data-raw$
 ^vignettes/hello\.Rmd$
 ^vignettes/high_level_structure\.Rmd$
 ^vignettes/overview\.Rmd$
@@ -19,3 +20,4 @@ coverage.*
 init.sh
 workflows.md
 images
+^data-raw$
