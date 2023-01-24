@@ -32,8 +32,9 @@ naive <- function(resp, trt, subgr, data,
     stacked_data <- generate_stacked_data(base_model, subgr_model, data,
                                           resptype = resptype)
     list_subg <- split(stacked_data, ~ subgroup)
-    fit <- lapply(list_subg, FUN = function(data) {survival::coxph(survival::Surv(time, status)
-                                                                  ~ arm, data = data)})
+    fit <- lapply(list_subg, FUN = function(data) {
+      survival::coxph(survival::Surv(time, status) ~ arm, data = data)
+      })
     naive_estimates <- cbind(subgroup = names(fit),
                              do.call(rbind.data.frame, lapply(fit, broom::tidy)))
   } else if (resptype == "binary") {
@@ -41,8 +42,9 @@ naive <- function(resp, trt, subgr, data,
     stacked_data <- generate_stacked_data(base_model, subgr_model, data,
                                           resptype = resptype)
     list_subg <- split(stacked_data, ~ subgroup)
-    fit <- lapply(list_subg, FUN = function(data) {stats::glm(y ~ arm, data = data,
-                                                      family = "binomial")})
+    fit <- lapply(list_subg, FUN = function(data) {
+      stats::glm(y ~ arm, data = data, family = "binomial")
+      })
     naive_estimates <- cbind(subgroup = names(fit),
                              do.call(rbind.data.frame,
                                      lapply(fit, broom::tidy))[seq(2,
