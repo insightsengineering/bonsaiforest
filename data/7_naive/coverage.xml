@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage line-rate="0.97752808988764" branch-rate="0" lines-covered="87" lines-valid="89" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-01-24 14:30:02">
+<coverage line-rate="0.978021978021978" branch-rate="0" lines-covered="89" lines-valid="91" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-01-24 14:35:05">
   <sources/>
   <packages>
-    <package name="shrinkforest" line-rate="0.97752808988764" branch-rate="0" complexity="0">
+    <package name="shrinkforest" line-rate="0.978021978021978" branch-rate="0" complexity="0">
       <classes>
         <class name="generate_stacked_data.R" filename="R/generate_stacked_data.R" line-rate="1" branch-rate="0" complexity="0">
           <methods>
@@ -123,11 +123,13 @@
                 <line number="48" hits="1" branch="false"/>
                 <line number="49" hits="1" branch="false"/>
                 <line number="50" hits="1" branch="false"/>
-                <line number="52" hits="2" branch="false"/>
-                <line number="53" hits="2" branch="false"/>
+                <line number="51" hits="1" branch="false"/>
+                <line number="52" hits="1" branch="false"/>
                 <line number="54" hits="2" branch="false"/>
                 <line number="55" hits="2" branch="false"/>
                 <line number="56" hits="2" branch="false"/>
+                <line number="57" hits="2" branch="false"/>
+                <line number="58" hits="2" branch="false"/>
               </lines>
             </method>
           </methods>
@@ -161,11 +163,13 @@
             <line number="48" hits="1" branch="false"/>
             <line number="49" hits="1" branch="false"/>
             <line number="50" hits="1" branch="false"/>
-            <line number="52" hits="2" branch="false"/>
-            <line number="53" hits="2" branch="false"/>
+            <line number="51" hits="1" branch="false"/>
+            <line number="52" hits="1" branch="false"/>
             <line number="54" hits="2" branch="false"/>
             <line number="55" hits="2" branch="false"/>
             <line number="56" hits="2" branch="false"/>
+            <line number="57" hits="2" branch="false"/>
+            <line number="58" hits="2" branch="false"/>
           </lines>
         </class>
         <class name="naivepop.R" filename="R/naivepop.R" line-rate="0.888888888888889" branch-rate="0" complexity="0">
