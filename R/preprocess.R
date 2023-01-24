@@ -17,8 +17,7 @@
 #' @export
 #'
 #' @examples
-#' preprocessing_data("arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
-#'  example_data)
+#' preprocess("arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"), example_data)
 preprocess <- function(trt, subgr, covars, data) {
   assert_string(trt)
   assert_character(subgr)

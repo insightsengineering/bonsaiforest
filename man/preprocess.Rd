@@ -28,6 +28,5 @@ to a model with just the main effects and to a model just with the covariates
 and one-hot encoding.
 }
 \examples{
-preprocessing_data("arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
- example_data)
+preprocess("arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"), example_data)
 }
