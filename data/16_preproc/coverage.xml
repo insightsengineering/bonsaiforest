@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage line-rate="0.983870967741935" branch-rate="0" lines-covered="122" lines-valid="124" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-01-24 15:52:27">
+<coverage line-rate="0.983870967741935" branch-rate="0" lines-covered="122" lines-valid="124" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-01-24 16:08:52">
   <sources/>
   <packages>
     <package name="shrinkforest" line-rate="0.983870967741935" branch-rate="0" complexity="0">
@@ -218,10 +218,11 @@
             <line number="40" hits="2" branch="false"/>
           </lines>
         </class>
-        <class name="preprocessing_data.R" filename="R/preprocessing_data.R" line-rate="1" branch-rate="0" complexity="0">
+        <class name="preprocess.R" filename="R/preprocess.R" line-rate="1" branch-rate="0" complexity="0">
           <methods>
-            <method name="preprocessing_data" signature="" line-rate="1" branch-rate="0">
+            <method name="preprocess" signature="" line-rate="1" branch-rate="0">
               <lines>
+                <line number="22" hits="1" branch="false"/>
                 <line number="23" hits="1" branch="false"/>
                 <line number="24" hits="1" branch="false"/>
                 <line number="25" hits="1" branch="false"/>
@@ -235,30 +236,30 @@
                 <line number="33" hits="1" branch="false"/>
                 <line number="34" hits="1" branch="false"/>
                 <line number="35" hits="1" branch="false"/>
-                <line number="36" hits="1" branch="false"/>
+                <line number="36" hits="3" branch="false"/>
                 <line number="37" hits="3" branch="false"/>
                 <line number="38" hits="3" branch="false"/>
                 <line number="39" hits="3" branch="false"/>
                 <line number="40" hits="3" branch="false"/>
-                <line number="41" hits="3" branch="false"/>
+                <line number="42" hits="1" branch="false"/>
                 <line number="43" hits="1" branch="false"/>
                 <line number="44" hits="1" branch="false"/>
                 <line number="45" hits="1" branch="false"/>
                 <line number="46" hits="1" branch="false"/>
-                <line number="47" hits="1" branch="false"/>
+                <line number="47" hits="2" branch="false"/>
                 <line number="48" hits="2" branch="false"/>
                 <line number="49" hits="2" branch="false"/>
-                <line number="50" hits="2" branch="false"/>
+                <line number="51" hits="1" branch="false"/>
                 <line number="52" hits="1" branch="false"/>
-                <line number="53" hits="1" branch="false"/>
+                <line number="54" hits="1" branch="false"/>
                 <line number="55" hits="1" branch="false"/>
                 <line number="56" hits="1" branch="false"/>
                 <line number="57" hits="1" branch="false"/>
-                <line number="58" hits="1" branch="false"/>
               </lines>
             </method>
           </methods>
           <lines>
+            <line number="22" hits="1" branch="false"/>
             <line number="23" hits="1" branch="false"/>
             <line number="24" hits="1" branch="false"/>
             <line number="25" hits="1" branch="false"/>
@@ -272,26 +273,25 @@
             <line number="33" hits="1" branch="false"/>
             <line number="34" hits="1" branch="false"/>
             <line number="35" hits="1" branch="false"/>
-            <line number="36" hits="1" branch="false"/>
+            <line number="36" hits="3" branch="false"/>
             <line number="37" hits="3" branch="false"/>
             <line number="38" hits="3" branch="false"/>
             <line number="39" hits="3" branch="false"/>
             <line number="40" hits="3" branch="false"/>
-            <line number="41" hits="3" branch="false"/>
+            <line number="42" hits="1" branch="false"/>
             <line number="43" hits="1" branch="false"/>
             <line number="44" hits="1" branch="false"/>
             <line number="45" hits="1" branch="false"/>
             <line number="46" hits="1" branch="false"/>
-            <line number="47" hits="1" branch="false"/>
+            <line number="47" hits="2" branch="false"/>
             <line number="48" hits="2" branch="false"/>
             <line number="49" hits="2" branch="false"/>
-            <line number="50" hits="2" branch="false"/>
+            <line number="51" hits="1" branch="false"/>
             <line number="52" hits="1" branch="false"/>
-            <line number="53" hits="1" branch="false"/>
+            <line number="54" hits="1" branch="false"/>
             <line number="55" hits="1" branch="false"/>
             <line number="56" hits="1" branch="false"/>
             <line number="57" hits="1" branch="false"/>
-            <line number="58" hits="1" branch="false"/>
           </lines>
         </class>
         <class name="test.R" filename="R/test.R" line-rate="1" branch-rate="0" complexity="0">
