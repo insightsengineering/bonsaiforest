@@ -28,3 +28,6 @@ reference:
   - title: Data Sets
     contents:
       - example_data
+  - title: Helper functions
+    contents:
+      - generate_stacked_data
