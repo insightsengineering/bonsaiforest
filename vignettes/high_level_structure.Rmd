@@ -45,5 +45,12 @@ The `naive`function is used to estimate the subgroup treatment effects with the 
 In this function we make a distinction between binary and survival data (the main difference between them is that in binary we are going to use glm models with the binomial family and in survival we are going to use coxph models). With `generate_stacked_data` we obtain the stacked by subgroups data frame and we fit a model (depending on the type of response the glm or the coxph) on each one of the data sets corresponding to a specific subgroup. These fitted models are going to be part of the output as well as a data set with the components of the summary of those models that are going to be useful to obtain the treatment effect.
 
 
+### Elastic_net
+The `elastic_net` function is used to estimate the subgroup treatment effects
+using penalization on the interaction terms between treatment and the 
+subgroup covariates.
+
+We are going to use the function cv.glmnet to fit the model. We are going to consider the design matrix (obtained after applying to the data the function `preprocess`) with the main effects and the interaction effects and we are going to create a penalty_factor vector with entries 0 if the coefficients are not going to be penalized (as for the main effects) and 1 if they are going to be penalized (as for the interaction effects). Depending on the kind of data that we have we are going to consider the cox family (for survival) or the binomial family (for binary). The value of alpha is the elastic net mixing parameter and can take values between 0 and 1. If we put it to 1 we are going to apply lasso penalty on the interaction effects and if we put it to 0 we are going to apply ridge penalty on the interaction effects.
+
 
 

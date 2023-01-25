@@ -26,6 +26,7 @@ reference:
       - test
       - naivepop
       - naive
+      - elastic_net
   - title: Data Sets
     contents:
       - example_data
