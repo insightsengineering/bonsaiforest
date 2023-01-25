@@ -10,12 +10,12 @@ test_that("Horseshoe outputs the right elements for survival", {
   colnames(y) <- c("tt_pfs", "ev_pfs")
   data_model <- cbind(design_matrix, y)
   sort_resp <- sort(y[, 1])
-  diff_resp <- min(sort_resp - c(0, sort_resp[ - length(y[, 1])]))
+  diff_resp <- min(sort_resp - c(0, sort_resp[- length(y[, 1])]))
   limits_resp <- c(max(min(y[, 1]) - diff_resp, 0), max(y[, 1]) + diff_resp)
   quantiles_resp <- quantile(y[, 1], c(0.25, 0.5, 0.75))
   bhaz <- list(Boundary.knots = limits_resp, knots = quantiles_resp,
                intercept = FALSE)
-  fit_brms <- suppressWarnings(brms::brm(brms::bf(tt_pfs|cens(1 - ev_pfs) ~ a + b,
+  fit_brms <- suppressWarnings(brms::brm(brms::bf(tt_pfs | cens(1 - ev_pfs) ~ a + b,
                                                   nl = TRUE) +
                                            brms::lf(a ~ 0 + arm0 + arm1 + x_1b +
                                                       x_2b + x_3b) +
@@ -46,7 +46,7 @@ test_that("Horseshoe outputs the right elements for binary", {
   result[[1]] <- as.matrix(result$fit$fit)
   prep_data <- preprocess("arm", c("x_1", "x_3"), c("x_1", "x_2", "x_3"),
                           example_data)
-  design_matrix <- cbind(prep_data$design_main[ ,-1], prep_data$design_ia)
+  design_matrix <- cbind(prep_data$design_main[, -1], prep_data$design_ia)
   y <- as.data.frame(example_data$ev_pfs)
   colnames(y) <- c("ev_pfs")
   data_model <- cbind(design_matrix, y)

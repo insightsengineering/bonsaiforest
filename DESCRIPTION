@@ -27,7 +27,8 @@ Imports:
     survival,
     tibble,
     tidyr,
-    brms
+    brms,
+    splines2
 Suggests:
     knitr,
     testthat (>= 2.0)
