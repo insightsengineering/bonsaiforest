@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9009</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -188,6 +182,22 @@ going to consider the cox family (for survival) or the binomial family
 can take values between 0 and 1. If we put it to 1 we are going to apply
 lasso penalty on the interaction effects and if we put it to 0 we are
 going to apply ridge penalty on the interaction effects.</p>
+</div>
+<div class="section level3">
+<h3 id="horseshoe">Horseshoe<a class="anchor" aria-label="anchor" href="#horseshoe"></a>
+</h3>
+<p>The <code>horseshoe</code>function is used to estimate the subgroup
+treatment effects using a bayesian model with a horseshoe prior on the
+interaction terms between treatment and the subgroup covariates.</p>
+<p>We are going to apply the function <code>preprocess</code> to our
+data in order to obtain the design matrix needed to fit the model. Then
+we use the brm function to fit our model and we are going to consider a
+normal N(0,5) prior on the main effects and a regularized horseshoe
+prior on the interaction effects. Depending on the kind of data we are
+going to choose the cox family (for survival data) or the bernoulli
+family (for binary data). In the case of survival data before fitting
+the model we specify what is the shape (the boundary and the internal
+knots) of the spline that is going to fit the baseline hazard.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
