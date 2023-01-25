@@ -9,4 +9,5 @@
 #' @importFrom dplyr arrange
 #' @importFrom broom tidy
 #' @importFrom glmnet cv.glmnet
+#' @importFrom brms brm
 NULL

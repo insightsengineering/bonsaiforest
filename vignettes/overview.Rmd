@@ -48,4 +48,12 @@ We are going to obtain the subgroup treatment effects by fitting a model with al
 One option to shrink these coefficients is using a frequentist shrinkage model like the elastic net (ridge and lasso are special cases of it). It is important to leave the main effects unpenalized so we need to fit the model taking into account the different penalizations. Depending on the data we are going to fit a penalized Cox regression (for survival data) or a penalized logistic regression (for binary data). To obtain the subgroup treatment effects from this penalized model we need to marginalize over the different subgroups. 
 
 
+### Bayesian Shrinkage Model Estimation
+We are going to obtain the subgroup treatment effects by fitting a bayesian model with all the available covariates and their interactions with treatment. We are applying over these interaction coefficients a shrinkage prior while over the main effect coefficients we apply a normal prior with a wide variance (we are consider a not very informative prior). 
+
+The shrinkage prior chosen for the interaction coefficients is the horseshoe prior as it shrinks towards zero the coefficients that are close to zero but leaves unpenalized the large coefficients. As we want to detect the large differences between subgroup-specific treatment effects and the overall population effect it is interesting that those large differences are not shrunken towards zero. 
+
+After fitting the model we are going to have samples from the estimated posterior distribution of these coefficients. With them, after marginalizing over the different subgroups, we are going to be able to obtain the subgroup treatment effects estimates.
+
+
 

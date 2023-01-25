@@ -27,6 +27,7 @@ reference:
       - naivepop
       - naive
       - elastic_net
+      - horseshoe
   - title: Data Sets
     contents:
       - example_data
