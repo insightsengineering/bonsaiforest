@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9008</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -169,6 +163,25 @@ corresponding to a specific subgroup. These fitted models are going to
 be part of the output as well as a data set with the components of the
 summary of those models that are going to be useful to obtain the
 treatment effect.</p>
+</div>
+<div class="section level3">
+<h3 id="elastic_net">Elastic_net<a class="anchor" aria-label="anchor" href="#elastic_net"></a>
+</h3>
+<p>The <code>elastic_net</code> function is used to estimate the
+subgroup treatment effects using penalization on the interaction terms
+between treatment and the subgroup covariates.</p>
+<p>We are going to use the function cv.glmnet to fit the model. We are
+going to consider the design matrix (obtained after applying to the data
+the function <code>preprocess</code>) with the main effects and the
+interaction effects and we are going to create a penalty_factor vector
+with entries 0 if the coefficients are not going to be penalized (as for
+the main effects) and 1 if they are going to be penalized (as for the
+interaction effects). Depending on the kind of data that we have we are
+going to consider the cox family (for survival) or the binomial family
+(for binary). The value of alpha is the elastic net mixing parameter and
+can take values between 0 and 1. If we put it to 1 we are going to apply
+lasso penalty on the interaction effects and if we put it to 0 we are
+going to apply ridge penalty on the interaction effects.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
