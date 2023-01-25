@@ -8,4 +8,5 @@
 #' @importFrom tidyr gather
 #' @importFrom dplyr arrange
 #' @importFrom broom tidy
+#' @importFrom glmnet cv.glmnet
 NULL

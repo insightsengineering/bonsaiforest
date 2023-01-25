@@ -25,7 +25,8 @@ Imports:
     stringr,
     survival,
     tibble,
-    tidyr
+    tidyr,
+    glmnet
 Suggests:
     knitr,
     testthat (>= 2.0)
