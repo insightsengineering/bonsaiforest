@@ -9,4 +9,6 @@
 #' @importFrom dplyr arrange
 #' @importFrom broom tidy
 #' @importFrom glmnet cv.glmnet
+#' @importFrom brms brm
+#' @importFrom splines2 mSpline
 NULL

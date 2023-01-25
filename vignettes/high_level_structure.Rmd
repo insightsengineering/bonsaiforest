@@ -53,4 +53,11 @@ subgroup covariates.
 We are going to use the function cv.glmnet to fit the model. We are going to consider the design matrix (obtained after applying to the data the function `preprocess`) with the main effects and the interaction effects and we are going to create a penalty_factor vector with entries 0 if the coefficients are not going to be penalized (as for the main effects) and 1 if they are going to be penalized (as for the interaction effects). Depending on the kind of data that we have we are going to consider the cox family (for survival) or the binomial family (for binary). The value of alpha is the elastic net mixing parameter and can take values between 0 and 1. If we put it to 1 we are going to apply lasso penalty on the interaction effects and if we put it to 0 we are going to apply ridge penalty on the interaction effects.
 
 
+### Horseshoe
+The `horseshoe`function is used to estimate the subgroup treatment effects
+using a bayesian model with a horseshoe prior on the interaction terms between treatment and the subgroup covariates.
+
+We are going to apply the function `preprocess` to our data in order to obtain the design matrix needed to fit the model. Then we use the brm function to fit our model and we are going to consider a normal N(0,5) prior on the main effects and a regularized horseshoe prior on the interaction effects. Depending on the kind of data we are going to choose the cox family (for survival data) or the bernoulli family (for binary data). In the case of survival data before fitting the model we specify what is the shape (the boundary and the internal knots) of the spline that is going to fit the baseline hazard. 
+
+
 

@@ -14,3 +14,8 @@ preprocess
 cv
 glmnet
 penalization
+brm
+brms
+bernoulli
+warmup
+bayesian
