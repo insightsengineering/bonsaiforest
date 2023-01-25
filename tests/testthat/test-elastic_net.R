@@ -22,7 +22,7 @@ test_that("Elastic_net outputs the right elements for survival", {
                    resptype = "survival",
                    data = example_data,
                    alpha = 1,
-                   design_matrix = design_matrix ,
+                   design_matrix = design_matrix,
                    design_dummy = prep_data$design_dummy,
                    y = y,
                    subgr_names = prep_data$subgr_names)
@@ -52,7 +52,7 @@ test_that("Elastic_net outputs the right elements for binary", {
                    resptype = "binary",
                    data = example_data,
                    alpha = 0,
-                   design_matrix = design_matrix ,
+                   design_matrix = design_matrix,
                    design_dummy = prep_data$design_dummy,
                    y = y,
                    subgr_names = prep_data$subgr_names)

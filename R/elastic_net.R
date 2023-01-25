@@ -65,7 +65,7 @@ elastic_net <- function(resp, trt, subgr, covars, data,
        resptype = resptype,
        data = data,
        alpha = alpha,
-       design_matrix = design_matrix ,
+       design_matrix = design_matrix,
        design_dummy = prep_data$design_dummy,
        y = y,
        subgr_names = prep_data$subgr_names)
