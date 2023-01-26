@@ -32,10 +32,10 @@ naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status
     stats::glm(formula = form_bin, data = data, family = "binomial")
   }
 
-  list(
-    fit = fit_pop,
-    model = "naive_pop",
-    resptype = resptype,
-    data = data
-  )
+  result <- list(fit = fit_pop,
+                model = "naive_pop",
+                resptype = resptype,
+                data = data)
+  class(result) <- c("shrinkforest", "naivepop")
+  return(result)
 }

@@ -51,9 +51,11 @@ naive <- function(resp, trt, subgr, data,
                                                                    2 * length(fit),
                                                                    2), ])
   }
-  list(fit = fit,
-       estimates = naive_estimates,
-       model = "naive",
-       resptype = resptype,
-       data = data)
+  result <- list(fit = fit,
+                estimates = naive_estimates,
+                model = "naive",
+                resptype = resptype,
+                data = data)
+  class(result) <- c("shrinkforest", "naive")
+  return(result)
 }
