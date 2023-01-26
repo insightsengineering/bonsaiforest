@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage line-rate="0.991189427312775" branch-rate="0" lines-covered="225" lines-valid="227" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-01-25 18:11:58">
+<coverage line-rate="0.991416309012876" branch-rate="0" lines-covered="231" lines-valid="233" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-01-26 13:50:03">
   <sources/>
   <packages>
-    <package name="shrinkforest" line-rate="0.991189427312775" branch-rate="0" complexity="0">
+    <package name="shrinkforest" line-rate="0.991416309012876" branch-rate="0" complexity="0">
       <classes>
         <class name="elastic_net.R" filename="R/elastic_net.R" line-rate="1" branch-rate="0" complexity="0">
           <methods>
@@ -46,6 +46,8 @@
                 <line number="69" hits="2" branch="false"/>
                 <line number="70" hits="2" branch="false"/>
                 <line number="71" hits="2" branch="false"/>
+                <line number="72" hits="2" branch="false"/>
+                <line number="73" hits="2" branch="false"/>
               </lines>
             </method>
           </methods>
@@ -88,6 +90,8 @@
             <line number="69" hits="2" branch="false"/>
             <line number="70" hits="2" branch="false"/>
             <line number="71" hits="2" branch="false"/>
+            <line number="72" hits="2" branch="false"/>
+            <line number="73" hits="2" branch="false"/>
           </lines>
         </class>
         <class name="generate_stacked_data.R" filename="R/generate_stacked_data.R" line-rate="1" branch-rate="0" complexity="0">
@@ -245,6 +249,8 @@
                 <line number="99" hits="2" branch="false"/>
                 <line number="100" hits="2" branch="false"/>
                 <line number="101" hits="2" branch="false"/>
+                <line number="102" hits="2" branch="false"/>
+                <line number="103" hits="2" branch="false"/>
               </lines>
             </method>
           </methods>
@@ -314,6 +320,8 @@
             <line number="99" hits="2" branch="false"/>
             <line number="100" hits="2" branch="false"/>
             <line number="101" hits="2" branch="false"/>
+            <line number="102" hits="2" branch="false"/>
+            <line number="103" hits="2" branch="false"/>
           </lines>
         </class>
         <class name="naive.R" filename="R/naive.R" line-rate="1" branch-rate="0" complexity="0">
@@ -356,6 +364,8 @@
                 <line number="56" hits="2" branch="false"/>
                 <line number="57" hits="2" branch="false"/>
                 <line number="58" hits="2" branch="false"/>
+                <line number="59" hits="2" branch="false"/>
+                <line number="60" hits="2" branch="false"/>
               </lines>
             </method>
           </methods>
@@ -396,6 +406,8 @@
             <line number="56" hits="2" branch="false"/>
             <line number="57" hits="2" branch="false"/>
             <line number="58" hits="2" branch="false"/>
+            <line number="59" hits="2" branch="false"/>
+            <line number="60" hits="2" branch="false"/>
           </lines>
         </class>
         <class name="naivepop.R" filename="R/naivepop.R" line-rate="0.888888888888889" branch-rate="0" complexity="0">
