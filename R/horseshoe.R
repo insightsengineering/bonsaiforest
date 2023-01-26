@@ -91,12 +91,14 @@ horseshoe <- function(resp, trt, subgr, covars, data,
                           iter = iter, warmup = warmup, chains = chains,
                           control = list(adapt_delta = 0.95), seed = 0)
   }
-  list(fit = fit_brms,
-       model = "horseshoe",
-       resptype = resptype,
-       data = data,
-       design_matrix = design_matrix,
-       design_dummy = prep_data$design_dummy,
-       y = y,
-       subgr_names = prep_data$subgr_names)
+  result <- list(fit = fit_brms,
+                 model = "horseshoe",
+                 resptype = resptype,
+                 data = data,
+                 design_matrix = design_matrix,
+                 design_dummy = prep_data$design_dummy,
+                 y = y,
+                 subgr_names = prep_data$subgr_names)
+  class(result) <- c("shrinkforest", "horseshoe")
+  return(result)
 }

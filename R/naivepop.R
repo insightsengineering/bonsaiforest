@@ -17,25 +17,25 @@
 #'
 #' @examples
 #' naivepop("futime", "trt", survival::myeloid, "survival", "death")
-naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status = NULL){
+naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status = NULL) {
   assert_string(resp)
   assert_string(trt)
   assert_data_frame(data)
   resptype <- match.arg(resptype)
 
-  fit_pop <- if (resptype == "survival"){
+  fit_pop <- if (resptype == "survival") {
     assert_string(status)
     form_surv <- stats::as.formula(paste("survival::Surv(", resp, ",", status, ") ~ ", trt))
     survival::coxph(formula = form_surv, data = data)
-  } else if (resptype == "binary"){
+  } else if (resptype == "binary") {
     form_bin <- stats::as.formula(paste(resp, " ~ ", trt))
     stats::glm(formula = form_bin, data = data, family = "binomial")
   }
 
-  list(
-    fit = fit_pop,
-    model = "naive_pop",
-    resptype = resptype,
-    data = data
-  )
+  result <- list(fit = fit_pop,
+                model = "naive_pop",
+                resptype = resptype,
+                data = data)
+  class(result) <- c("shrinkforest", "naivepop")
+  return(result)
 }

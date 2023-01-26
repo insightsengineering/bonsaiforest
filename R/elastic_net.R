@@ -60,13 +60,15 @@ elastic_net <- function(resp, trt, subgr, covars, data,
                                     alpha = alpha)
     y <- data[[resp]]
   }
-  list(fit = fit_glmnet,
-       model = "elastic_net",
-       resptype = resptype,
-       data = data,
-       alpha = alpha,
-       design_matrix = design_matrix,
-       design_dummy = prep_data$design_dummy,
-       y = y,
-       subgr_names = prep_data$subgr_names)
+  result <- list(fit = fit_glmnet,
+                 model = "elastic_net",
+                 resptype = resptype,
+                 data = data,
+                 alpha = alpha,
+                 design_matrix = design_matrix,
+                 design_dummy = prep_data$design_dummy,
+                 y = y,
+                 subgr_names = prep_data$subgr_names)
+  class(result) <- c("shrinkforest", "elastic_net")
+  return(result)
 }

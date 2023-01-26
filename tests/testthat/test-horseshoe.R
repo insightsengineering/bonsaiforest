@@ -36,6 +36,7 @@ test_that("Horseshoe outputs the right elements for survival", {
                    design_dummy = prep_data$design_dummy,
                    y = y,
                    subgr_names = prep_data$subgr_names)
+  class(expected) <- c("shrinkforest", "horseshoe")
   expect_equal(result, expected)
 })
 
@@ -67,5 +68,6 @@ test_that("Horseshoe outputs the right elements for binary", {
                    design_dummy = prep_data$design_dummy,
                    y = y,
                    subgr_names = prep_data$subgr_names)
+  class(expected) <- c("shrinkforest", "horseshoe")
   expect_equal(result, expected)
 })
