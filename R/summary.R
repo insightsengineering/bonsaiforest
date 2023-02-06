@@ -12,7 +12,7 @@
 #' summary(naivepop_fit_surv)
 summary.naivepop <- function(object, ...) {
   assert_class(object, c("shrinkforest", "naivepop"))
-  trt_effect <- if (object$resptype == "survival"){
+  if (object$resptype == "survival"){
     exp(stats::coef(object$fit))
   } else if (object$resptype == "binary"){
     stats::coef(object$fit)[2]
