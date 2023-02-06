@@ -43,3 +43,6 @@ reference:
     contents:
       - generate_stacked_data
       - preprocess
+  - title: Summary
+    contents:
+      - summary.naivepop
