@@ -2,20 +2,21 @@
 % Please edit documentation in R/summary.R
 \name{summary.naivepop}
 \alias{summary.naivepop}
-\title{Summary Function}
+\title{Summary Naivepop Function}
 \usage{
 \method{summary}{naivepop}(object, ...)
 }
 \arguments{
-\item{object}{(\code{shrinkforest})\cr the shrinkforest object.}
+\item{object}{(\code{naivepop})\cr the naivepop object.}
 
 \item{...}{\cr arguments of summary.}
 }
 \value{
-The estimated subgroup treatment effects.
+The estimated overall treatment effects.
 }
 \description{
-Function to obtain the subgroup treatment effect of a shrinkforest object.
+Function to obtain the overall subgroup treatment effect of a
+naivepop object.
 }
 \examples{
 summary(naivepop_fit_surv)
