@@ -35,8 +35,8 @@ reference:
       - naivepop_fit_bin
       - naive_fit_surv
       - naive_fit_bin
-      - elastic_net_surv
-      - elastic_net_bin
+      - elastic_net_fit_surv
+      - elastic_net_fit_bin
       - horseshoe_fit_surv
       - horseshoe_fit_bin
   - title: Helper functions
