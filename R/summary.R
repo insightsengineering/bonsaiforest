@@ -17,6 +17,6 @@ summary.naivepop <- function(object, ...) {
   } else if (object$resptype == "binary"){
     stats::coef(object$fit)[2]
   }
-  return(trt_effect)
+  trt_effect
 }
 
