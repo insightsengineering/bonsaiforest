@@ -31,6 +31,12 @@
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/elastic_net.html</loc>
   </url>
   <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/elastic_net_fit_bin.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/elastic_net_fit_surv.html</loc>
+  </url>
+  <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/example_data.html</loc>
   </url>
   <url>
@@ -43,16 +49,31 @@
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/horseshoe.html</loc>
   </url>
   <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/horseshoe_fit_bin.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/horseshoe_fit_surv.html</loc>
+  </url>
+  <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/index.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naive.html</loc>
   </url>
   <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naive_fit_bin.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naive_fit_surv.html</loc>
+  </url>
+  <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naivepop.html</loc>
   </url>
   <url>
-    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naivepop_fit.html</loc>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naivepop_fit_bin.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naivepop_fit_surv.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/preprocess.html</loc>
