@@ -60,4 +60,12 @@ using a bayesian model with a horseshoe prior on the interaction terms between t
 We are going to apply the function `preprocess` to our data in order to obtain the design matrix needed to fit the model. Then we use the brm function to fit our model and we are going to consider a normal N(0,5) prior on the main effects and a regularized horseshoe prior on the interaction effects. Depending on the kind of data we are going to choose the cox family (for survival data) or the bernoulli family (for binary data). In the case of survival data before fitting the model we specify what is the shape (the boundary and the internal knots) of the spline that is going to fit the baseline hazard. 
 
 
+## Summary functions
+With the `summary` function we are going to obtain the estimated treatment effect of all the models fitted on the data. Depending on the class of the fitted object we are going to apply different functions:
+
+### Summary.naivepop
+The `summary.naivepop` function obtains the overall treatment effect of the data given an object of class `naivepop`.
+
+If we have survival data the estimated overall hazard ratio is going to be just the exponential of the coefficient of the cox model fitted on the data. If we have binary data then the estimated overall log-odds ratio is going to be the coefficient of the fitted model associated with the treatment.
+
 

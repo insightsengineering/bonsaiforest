@@ -28,6 +28,7 @@ reference:
       - naive
       - elastic_net
       - horseshoe
+      - summary
   - title: Data Folder
     contents:
       - example_data
