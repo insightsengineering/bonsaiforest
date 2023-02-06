@@ -28,9 +28,10 @@ reference:
       - naive
       - elastic_net
       - horseshoe
-  - title: Data Sets
+  - title: Data Folder
     contents:
       - example_data
+      - naivepop_fit
   - title: Helper functions
     contents:
       - generate_stacked_data
