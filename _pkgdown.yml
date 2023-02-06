@@ -31,7 +31,14 @@ reference:
   - title: Data Folder
     contents:
       - example_data
-      - naivepop_fit
+      - naivepop_fit_surv
+      - naivepop_fit_bin
+      - naive_fit_surv
+      - naive_fit_bin
+      - elastic_net_surv
+      - elastic_net_bin
+      - horseshoe_fit_surv
+      - horseshoe_fit_bin
   - title: Helper functions
     contents:
       - generate_stacked_data
