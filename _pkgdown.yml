@@ -46,3 +46,4 @@ reference:
   - title: Summary
     contents:
       - summary.naivepop
+      - summary.naive

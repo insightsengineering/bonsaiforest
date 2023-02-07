@@ -19,3 +19,32 @@ summary.naivepop <- function(object, ...) {
   }
   trt_effect
 }
+
+
+#' Summary Naive
+#'
+#' Function to obtain the naive subgroup treatment effects of an object fitted
+#' with the `naive` function.
+#' @param object (`naive`)\cr the naive object.
+#' @param conf (`scalar`)\cr the confidence level of the intervals. Default is
+#' 0.95.
+#' @param ... Arguments of summary.
+#'
+#' @return `trt_effect`
+#' @export
+#'
+#' @examples
+#' summary(naive_fit_surv)
+summary.naive <- function(object, conf = 0.95, ...) {
+  assert_class(object, c("shrinkforest", "naive"))
+  assert_scalar(conf)
+  alpha <- 1 - conf
+  estim <- object$estimates
+  estim$trt.effect <- estim$estimate
+  estim$trt.conf.low <- estim$estimate + stats::qnorm(alpha / 2) * estim$std.error
+  estim$trt.conf.high <- estim$estimate - stats::qnorm(alpha / 2) * estim$std.error
+  if (object$resptype == "survival"){
+    estim[, c(7:9)] <- exp(estim[, c(7:9)])
+  }
+  estim[, c(1, 7:9)]
+}
