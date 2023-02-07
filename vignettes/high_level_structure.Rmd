@@ -31,8 +31,8 @@ To obtain all these matrices we just obtain the design matrices of some specifie
 Finally we also obtain the vector `subgr_names` with the exact name of the different subgroups that we are going to study.
 
 
-### lOR_estimation
-The `lOR_estimation` function is used to obtain the log-odds ratio of a subgroup in the case of binary data. 
+### Lor_estimation
+The `lor_estimation` function is used to obtain the log-odds ratio of a subgroup in the case of binary data. 
 
 The idea is to create two matrices with the same structure as the dummy matrix that defines the subgroup data but in one of them considering that the treatment is present in all observations and in the other one considering that the treatment is not present in any observation.
 

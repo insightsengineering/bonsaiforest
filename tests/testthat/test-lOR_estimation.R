@@ -1,5 +1,5 @@
-test_that("lOR_estimation outputs the right element", {
-  result <- lOR_estimation(elastic_net_fit_bin$design_matrix,
+test_that("lor_estimation outputs the right element", {
+  result <- lor_estimation(elastic_net_fit_bin$design_matrix,
                            elastic_net_fit_bin$design_dummy,
                            as.matrix(coef(elastic_net_fit_bin$fit,
                                           s = elastic_net_fit_bin$fit$lambda.min)))

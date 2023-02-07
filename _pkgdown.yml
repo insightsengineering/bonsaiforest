@@ -43,7 +43,7 @@ reference:
     contents:
       - generate_stacked_data
       - preprocess
-      - lOR_estimation
+      - lor_estimation
   - title: Summary
     contents:
       - summary.naivepop
