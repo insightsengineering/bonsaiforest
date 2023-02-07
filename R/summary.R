@@ -43,7 +43,7 @@ summary.naive <- function(object, conf = 0.95, ...) {
   estim$trt.effect <- estim$estimate
   estim$trt.conf.low <- estim$estimate + stats::qnorm(alpha / 2) * estim$std.error
   estim$trt.conf.high <- estim$estimate - stats::qnorm(alpha / 2) * estim$std.error
-  if (object$resptype == "survival"){
+  if (object$resptype == "survival") {
     estim[, c(7:9)] <- exp(estim[, c(7:9)])
   }
   estim[, c(1, 7:9)]
