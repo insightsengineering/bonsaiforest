@@ -39,10 +39,14 @@ reference:
       - elastic_net_fit_bin
       - horseshoe_fit_surv
       - horseshoe_fit_bin
+      - design_matrix_bin1
+      - design_dummy_bin1
+      - est_coef_bin1
   - title: Helper functions
     contents:
       - generate_stacked_data
       - preprocess
+      - lor_estimation
   - title: Summary
     contents:
       - summary.naivepop
