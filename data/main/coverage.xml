@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage line-rate="0.991416309012876" branch-rate="0" lines-covered="231" lines-valid="233" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-02-06 14:49:08">
+<coverage line-rate="0.99163179916318" branch-rate="0" lines-covered="237" lines-valid="239" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-02-07 07:44:22">
   <sources/>
   <packages>
-    <package name="shrinkforest" line-rate="0.991416309012876" branch-rate="0" complexity="0">
+    <package name="shrinkforest" line-rate="0.99163179916318" branch-rate="0" complexity="0">
       <classes>
         <class name="elastic_net.R" filename="R/elastic_net.R" line-rate="1" branch-rate="0" complexity="0">
           <methods>
@@ -530,6 +530,28 @@
             <line number="55" hits="9" branch="false"/>
             <line number="56" hits="9" branch="false"/>
             <line number="57" hits="9" branch="false"/>
+          </lines>
+        </class>
+        <class name="summary.R" filename="R/summary.R" line-rate="1" branch-rate="0" complexity="0">
+          <methods>
+            <method name="summary.naivepop" signature="" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="14" hits="2" branch="false"/>
+                <line number="15" hits="2" branch="false"/>
+                <line number="16" hits="1" branch="false"/>
+                <line number="17" hits="1" branch="false"/>
+                <line number="18" hits="1" branch="false"/>
+                <line number="20" hits="2" branch="false"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="2" branch="false"/>
+            <line number="15" hits="2" branch="false"/>
+            <line number="16" hits="1" branch="false"/>
+            <line number="17" hits="1" branch="false"/>
+            <line number="18" hits="1" branch="false"/>
+            <line number="20" hits="2" branch="false"/>
           </lines>
         </class>
         <class name="test.R" filename="R/test.R" line-rate="1" branch-rate="0" complexity="0">
