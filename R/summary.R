@@ -30,7 +30,9 @@ summary.naivepop <- function(object, ...) {
 #' 0.95.
 #' @param ... Arguments of summary.
 #'
-#' @return `trt_effect`
+#' @return A `data.frame` with 4 columns: the subgroup variables, the estimated
+#' treatment effect and the low and high bounds of the confidence interval of the
+#' treatment effect.
 #' @export
 #'
 #' @examples

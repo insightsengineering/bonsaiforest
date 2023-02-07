@@ -15,7 +15,9 @@
 \item{...}{Arguments of summary.}
 }
 \value{
-\code{trt_effect}
+A \code{data.frame} with 4 columns: the subgroup variables, the estimated
+treatment effect and the low and high bounds of the confidence interval of the
+treatment effect.
 }
 \description{
 Function to obtain the naive subgroup treatment effects of an object fitted
