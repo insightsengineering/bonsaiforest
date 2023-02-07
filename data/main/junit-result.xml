@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="elastic_net" timestamp="2023-02-07T07:41:59Z" hostname="e81447397dff" tests="2" skipped="0" failures="0" errors="0" time="0.489">
-    <testcase time="0.348" classname="elastic_net" name="Elastic_net_outputs_the_right_elements_for_survival"/>
-    <testcase time="0.141" classname="elastic_net" name="Elastic_net_outputs_the_right_elements_for_binary"/>
+  <testsuite name="elastic_net" timestamp="2023-02-07T13:42:40Z" hostname="f8a2fb1631ca" tests="2" skipped="0" failures="0" errors="0" time="0.495">
+    <testcase time="0.353" classname="elastic_net" name="Elastic_net_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.142" classname="elastic_net" name="Elastic_net_outputs_the_right_elements_for_binary"/>
   </testsuite>
-  <testsuite name="generate_stacked_data" timestamp="2023-02-07T07:41:59Z" hostname="e81447397dff" tests="5" skipped="0" failures="0" errors="0" time="0.3">
-    <testcase time="0.105" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
-    <testcase time="0.0470000000000002" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
+  <testsuite name="generate_stacked_data" timestamp="2023-02-07T13:42:40Z" hostname="f8a2fb1631ca" tests="5" skipped="0" failures="0" errors="0" time="0.306">
+    <testcase time="0.107" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
     <testcase time="0.0469999999999997" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
-    <testcase time="0.048" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
-    <testcase time="0.0529999999999999" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_binary"/>
+    <testcase time="0.0470000000000002" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0509999999999997" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0540000000000003" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_binary"/>
   </testsuite>
-  <testsuite name="hello" timestamp="2023-02-07T07:41:59Z" hostname="e81447397dff" tests="1" skipped="0" failures="0" errors="0" time="0.023">
+  <testsuite name="hello" timestamp="2023-02-07T13:42:41Z" hostname="f8a2fb1631ca" tests="1" skipped="0" failures="0" errors="0" time="0.023">
     <testcase time="0.0230000000000001" classname="hello" name="hello_greets_the_entity"/>
   </testsuite>
-  <testsuite name="horseshoe" timestamp="2023-02-07T07:41:59Z" hostname="e81447397dff" tests="2" skipped="0" failures="0" errors="0" time="254.639">
-    <testcase time="162.615" classname="horseshoe" name="Horseshoe_outputs_the_right_elements_for_survival"/>
-    <testcase time="92.024" classname="horseshoe" name="Horseshoe_outputs_the_right_elements_for_binary"/>
+  <testsuite name="horseshoe" timestamp="2023-02-07T13:42:41Z" hostname="f8a2fb1631ca" tests="2" skipped="0" failures="0" errors="0" time="257.992">
+    <testcase time="164.386" classname="horseshoe" name="Horseshoe_outputs_the_right_elements_for_survival"/>
+    <testcase time="93.606" classname="horseshoe" name="Horseshoe_outputs_the_right_elements_for_binary"/>
   </testsuite>
-  <testsuite name="naive" timestamp="2023-02-07T07:46:14Z" hostname="e81447397dff" tests="2" skipped="0" failures="0" errors="0" time="0.322">
-    <testcase time="0.158999999999992" classname="naive" name="Naive_outputs_the_right_elements_for_survival"/>
-    <testcase time="0.162999999999954" classname="naive" name="Naive_outputs_the_right_elements_for_binary"/>
+  <testsuite name="naive" timestamp="2023-02-07T13:46:59Z" hostname="f8a2fb1631ca" tests="2" skipped="0" failures="0" errors="0" time="0.327">
+    <testcase time="0.161000000000001" classname="naive" name="Naive_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.165999999999997" classname="naive" name="Naive_outputs_the_right_elements_for_binary"/>
   </testsuite>
-  <testsuite name="naivepop" timestamp="2023-02-07T07:46:14Z" hostname="e81447397dff" tests="2" skipped="0" failures="0" errors="0" time="0.023">
-    <testcase time="0.0160000000000196" classname="naivepop" name="Naivepop_produces_expected_coefficients_of_the_model"/>
+  <testsuite name="naivepop" timestamp="2023-02-07T13:46:59Z" hostname="f8a2fb1631ca" tests="2" skipped="0" failures="0" errors="0" time="0.024">
+    <testcase time="0.0169999999999959" classname="naivepop" name="Naivepop_produces_expected_coefficients_of_the_model"/>
     <testcase time="0.007000000000005" classname="naivepop" name="Naivepop_outputs_the_right_elements"/>
   </testsuite>
-  <testsuite name="preprocess" timestamp="2023-02-07T07:46:14Z" hostname="e81447397dff" tests="1" skipped="0" failures="0" errors="0" time="0.011">
-    <testcase time="0.0110000000000241" classname="preprocess" name="Preprocess_outputs_the_right_elements"/>
+  <testsuite name="preprocess" timestamp="2023-02-07T13:46:59Z" hostname="f8a2fb1631ca" tests="1" skipped="0" failures="0" errors="0" time="0.012">
+    <testcase time="0.0120000000000005" classname="preprocess" name="Preprocess_outputs_the_right_elements"/>
   </testsuite>
-  <testsuite name="summary" timestamp="2023-02-07T07:46:14Z" hostname="e81447397dff" tests="2" skipped="0" failures="0" errors="0" time="0.007">
+  <testsuite name="summary" timestamp="2023-02-07T13:46:59Z" hostname="f8a2fb1631ca" tests="4" skipped="0" failures="0" errors="0" time="0.013">
     <testcase time="0.00499999999999545" classname="summary" name="Summary_outputs_the_right_element_for_naivepop_survival"/>
     <testcase time="0.00200000000000955" classname="summary" name="Summary_outputs_the_right_element_for_naivepop_binary"/>
+    <testcase time="0.0029999999999859" classname="summary" name="Summary_outputs_the_right_element_for_naive_survival"/>
+    <testcase time="0.0029999999999859" classname="summary" name="Summary_outputs_the_right_element_for_naive_binary"/>
   </testsuite>
-  <testsuite name="test" timestamp="2023-02-07T07:46:14Z" hostname="e81447397dff" tests="1" skipped="0" failures="0" errors="0" time="0.004">
-    <testcase time="0.00399999999996226" classname="test" name="test_works_as_expected"/>
+  <testsuite name="test" timestamp="2023-02-07T13:46:59Z" hostname="f8a2fb1631ca" tests="1" skipped="0" failures="0" errors="0" time="0.004">
+    <testcase time="0.0040000000000191" classname="test" name="test_works_as_expected"/>
   </testsuite>
 </testsuites>
