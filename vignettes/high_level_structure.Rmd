@@ -31,6 +31,14 @@ To obtain all these matrices we just obtain the design matrices of some specifie
 Finally we also obtain the vector `subgr_names` with the exact name of the different subgroups that we are going to study.
 
 
+### lOR_estimation
+The `lOR_estimation` function is used to obtain the log-odds ratio of a subgroup in the case of binary data. 
+
+The idea is to create two matrices with the same structure as the dummy matrix that defines the subgroup data but in one of them considering that the treatment is present in all observations and in the other one considering that the treatment is not present in any observation.
+
+Then we obtain for each one of this matrices (considering the estimated coefficients from the fitted model and the general idea of logistic regression) the probability of having an event averaging over all individuals. With this probability obtained for the case of just having treatment and the case of just having control, we can obtain the log odds ratio (which is the output of this function).
+
+
 ## Main functions
 
 ### Naivepop
