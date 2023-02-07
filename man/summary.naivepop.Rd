@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{(\code{naivepop})\cr the naivepop object.}
 
-\item{...}{arguments of summary.}
+\item{...}{Arguments of summary.}
 }
 \value{
 The estimated overall treatment effects.

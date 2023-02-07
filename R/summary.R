@@ -3,7 +3,7 @@
 #' Function to obtain the overall subgroup treatment effect of a
 #' naivepop object.
 #' @param object (`naivepop`)\cr the naivepop object.
-#' @param ... arguments of summary.
+#' @param ... Arguments of summary.
 #'
 #' @return The estimated overall treatment effects.
 #' @export
