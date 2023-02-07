@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9013</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -204,6 +198,26 @@ going to choose the cox family (for survival data) or the bernoulli
 family (for binary data). In the case of survival data before fitting
 the model we specify what is the shape (the boundary and the internal
 knots) of the spline that is going to fit the baseline hazard.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="summary-functions">Summary functions<a class="anchor" aria-label="anchor" href="#summary-functions"></a>
+</h2>
+<p>With the <code>summary</code> function we are going to obtain the
+estimated treatment effect of all the models fitted on the data.
+Depending on the class of the fitted object we are going to apply
+different functions:</p>
+<div class="section level3">
+<h3 id="summary-naivepop">Summary.naivepop<a class="anchor" aria-label="anchor" href="#summary-naivepop"></a>
+</h3>
+<p>The <code>summary.naivepop</code> function obtains the overall
+treatment effect of the data given an object of class
+<code>naivepop</code>.</p>
+<p>If we have survival data the estimated overall hazard ratio is going
+to be just the exponential of the coefficient of the cox model fitted on
+the data. If we have binary data then the estimated overall log-odds
+ratio is going to be the coefficient of the fitted model associated with
+the treatment.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
