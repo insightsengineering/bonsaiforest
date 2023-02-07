@@ -28,6 +28,12 @@
     <loc>https://insightsengineering.github.io/shrinkforest/main/news/index.html</loc>
   </url>
   <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/design_dummy_bin1.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/design_matrix_bin1.html</loc>
+  </url>
+  <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/elastic_net.html</loc>
   </url>
   <url>
@@ -35,6 +41,9 @@
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/elastic_net_fit_surv.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/est_coef_bin1.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/example_data.html</loc>
@@ -56,6 +65,9 @@
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/lor_estimation.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/naive.html</loc>
