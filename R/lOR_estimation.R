@@ -19,7 +19,7 @@ lor_estimation <- function(x_subg, dummy_subg, est_coef) {
   assert_matrix(est_coef)
   x_arm <- list()
   for (i in 0:1){
-    x_arm[[i+1]] <- cbind(rep(1, nrow(x_subg)), rep(i, nrow(x_subg)),
+    x_arm[[i + 1]] <- cbind(rep(1, nrow(x_subg)), rep(i, nrow(x_subg)),
                x_subg[, 2:(ncol(x_subg) - ncol(dummy_subg))], i * dummy_subg)
   }
   prob <- function(x, est_coef) {
