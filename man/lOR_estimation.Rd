@@ -22,7 +22,5 @@ Log-odds ratio of the studied subgroup.
 Function to estimate the subgroup log-odds ratio for binary data.
 }
 \examples{
-lor_estimation(elastic_net_fit_bin$design_matrix,
- elastic_net_fit_bin$design_dummy, as.matrix(coef(elastic_net_fit_bin$fit,
- s = elastic_net_fit_bin$fit$lambda.min)))
+lor_estimation(design_matrix_bin1, design_dummy_bin1, est_coef_bin1)
 }

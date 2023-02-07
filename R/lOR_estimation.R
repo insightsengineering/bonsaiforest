@@ -12,25 +12,24 @@
 #' @export
 #'
 #' @examples
-#' lor_estimation(elastic_net_fit_bin$design_matrix,
-#'  elastic_net_fit_bin$design_dummy, as.matrix(coef(elastic_net_fit_bin$fit,
-#'  s = elastic_net_fit_bin$fit$lambda.min)))
+#' lor_estimation(design_matrix_bin1, design_dummy_bin1, est_coef_bin1)
 lor_estimation <- function(x_subg, dummy_subg, est_coef) {
   assert_matrix(x_subg)
   assert_matrix(dummy_subg)
   assert_matrix(est_coef)
-  x1 <- cbind(rep(1, nrow(x_subg)), rep(1, nrow(x_subg)),
-              x_subg[, 2:(ncol(x_subg) - ncol(dummy_subg))], dummy_subg)
-  x0 <- cbind(rep(1, nrow(x_subg)), rep(0, nrow(x_subg)),
-              x_subg[, 2:(ncol(x_subg) - ncol(dummy_subg))], 0 * dummy_subg)
+  x_arm <- list()
+  for (i in 0:1){
+    x_arm[[i+1]] <- cbind(rep(1, nrow(x_subg)), rep(i, nrow(x_subg)),
+               x_subg[, 2:(ncol(x_subg) - ncol(dummy_subg))], i * dummy_subg)
+  }
   prob <- function(x, est_coef) {
     k <- as.matrix(x) %*%  as.matrix(est_coef)
     p <- exp(k) / (1 + exp(k))
     y <- apply(p, 2, mean)
     y
   }
-  y1 <- prob(x1, est_coef)
-  y0 <- prob(x0, est_coef)
-  phi <- as.numeric(log(y1 / (1 - y1)) - log(y0 / (1 - y0)))
+  y_arm <- lapply(x_arm, prob, est_coef = est_coef)
+  phi <- as.numeric(log(y_arm[[2]] / (1 - y_arm[[2]])) -
+                      log(y_arm[[1]] / (1 - y_arm[[1]])))
   phi
 }
