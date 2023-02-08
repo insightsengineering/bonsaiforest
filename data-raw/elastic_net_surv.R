@@ -17,8 +17,15 @@ bh <- gbm::basehaz.gbm(
 ind_time <- which(status_un == 1)
 h0 <- bh[ind_time]
 est_coef_surv <- as.matrix(coef(fit, s = fit$lambda.min))
+
+### Dummy matrix for subgroup
+ind <- which(elastic_net_fit_surv$design_dummy[, 1] == 1)
+dummy1 <- elastic_net_fit_surv$design_dummy[ind, ]
+design1 <- elastic_net_fit_surv$design_matrix[ind, ]
 elastic_net_surv <- list(
   h0 = h0, est_coef = est_coef_surv,
-  x = elastic_net_fit_surv$design_matrix
+  x = elastic_net_fit_surv$design_matrix,
+  dummy1 = dummy1,
+  design1 = design1
 )
 usethis::use_data(elastic_net_surv, overwrite = TRUE)
