@@ -23,6 +23,7 @@ Imports:
     checkmate,
     dplyr,
     glmnet,
+    Rcpp,
     splines2,
     stats,
     stringr,
@@ -41,3 +42,6 @@ LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
