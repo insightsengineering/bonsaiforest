@@ -39,8 +39,8 @@ reference:
       - elastic_net_fit_bin
       - horseshoe_fit_surv
       - horseshoe_fit_bin
-      - design_matrix_bin1
-      - design_dummy_bin1
+      - design_matrix1
+      - design_dummy1
       - est_coef_bin1
   - title: Helper functions
     contents:

@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' lor_estimation(design_matrix_bin1, design_dummy_bin1, est_coef_bin1)
+#' lor_estimation(design_matrix1, design_dummy1, est_coef_bin1)
 lor_estimation <- function(x_subg, dummy_subg, est_coef) {
   assert_matrix(x_subg)
   assert_matrix(dummy_subg)
