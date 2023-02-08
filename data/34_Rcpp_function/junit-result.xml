@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="elastic_net" timestamp="2023-02-08T09:53:54Z" hostname="9c98afc818f5" tests="2" skipped="0" failures="0" errors="0" time="0.49">
+    <testcase time="0.348" classname="elastic_net" name="Elastic_net_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.142" classname="elastic_net" name="Elastic_net_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="generate_stacked_data" timestamp="2023-02-08T09:53:54Z" hostname="9c98afc818f5" tests="5" skipped="0" failures="0" errors="0" time="0.306">
+    <testcase time="0.105" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0470000000000002" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0470000000000002" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.052" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0549999999999997" classname="generate_stacked_data" name="Generate_stacked_data_outputs_the_right_element_for_binary"/>
+  </testsuite>
+  <testsuite name="hello" timestamp="2023-02-08T09:53:54Z" hostname="9c98afc818f5" tests="1" skipped="0" failures="0" errors="0" time="0.023">
+    <testcase time="0.0230000000000001" classname="hello" name="hello_greets_the_entity"/>
+  </testsuite>
+  <testsuite name="horseshoe" timestamp="2023-02-08T09:53:55Z" hostname="9c98afc818f5" tests="2" skipped="0" failures="0" errors="0" time="256.328">
+    <testcase time="162.834" classname="horseshoe" name="Horseshoe_outputs_the_right_elements_for_survival"/>
+    <testcase time="93.494" classname="horseshoe" name="Horseshoe_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="lOR_estimation" timestamp="2023-02-08T09:58:11Z" hostname="9c98afc818f5" tests="1" skipped="0" failures="0" errors="0" time="0.006">
+    <testcase time="0.00600000000002865" classname="lOR_estimation" name="lor_estimation_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="naive" timestamp="2023-02-08T09:58:11Z" hostname="9c98afc818f5" tests="2" skipped="0" failures="0" errors="0" time="0.322">
+    <testcase time="0.151999999999987" classname="naive" name="Naive_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.170000000000016" classname="naive" name="Naive_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="naivepop" timestamp="2023-02-08T09:58:11Z" hostname="9c98afc818f5" tests="2" skipped="0" failures="0" errors="0" time="0.019">
+    <testcase time="0.0139999999999532" classname="naivepop" name="Naivepop_produces_expected_coefficients_of_the_model"/>
+    <testcase time="0.00499999999999545" classname="naivepop" name="Naivepop_outputs_the_right_elements"/>
+  </testsuite>
+  <testsuite name="preprocess" timestamp="2023-02-08T09:58:11Z" hostname="9c98afc818f5" tests="1" skipped="0" failures="0" errors="0" time="0.012">
+    <testcase time="0.0120000000000005" classname="preprocess" name="Preprocess_outputs_the_right_elements"/>
+  </testsuite>
+  <testsuite name="summary" timestamp="2023-02-08T09:58:11Z" hostname="9c98afc818f5" tests="4" skipped="0" failures="0" errors="0" time="0.012">
+    <testcase time="0.00600000000002865" classname="summary" name="Summary_outputs_the_right_element_for_naivepop_survival"/>
+    <testcase time="0.00200000000000955" classname="summary" name="Summary_outputs_the_right_element_for_naivepop_binary"/>
+    <testcase time="0.00200000000000955" classname="summary" name="Summary_outputs_the_right_element_for_naive_survival"/>
+    <testcase time="0.00200000000000955" classname="summary" name="Summary_outputs_the_right_element_for_naive_binary"/>
+  </testsuite>
+  <testsuite name="test" timestamp="2023-02-08T09:58:11Z" hostname="9c98afc818f5" tests="1" skipped="0" failures="0" errors="0" time="0.005">
+    <testcase time="0.00499999999999545" classname="test" name="test_works_as_expected"/>
+  </testsuite>
+</testsuites>
