@@ -1,7 +1,6 @@
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
-
 // [[Rcpp::export]]
 List surv_prob(arma::mat k, arma::mat h){
   NumericMatrix surv(h.n_rows, h.n_cols);
@@ -13,4 +12,3 @@ List surv_prob(arma::mat k, arma::mat h){
   }
   return List::create(surv);
 }
-
