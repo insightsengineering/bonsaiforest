@@ -11,7 +11,7 @@ survival_curves(x, h0, est_coef)
 
 \item{h0}{(\code{numeric})\cr the vector with the cumulative baseline hazard.}
 
-\item{est_coef}{(\code{numeric})\cr the estimated coefficients from the fitted
+\item{est_coef}{(\code{matrix})\cr the estimated coefficients from the fitted
 model.}
 }
 \value{
