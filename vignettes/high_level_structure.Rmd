@@ -38,15 +38,26 @@ The idea is to create two matrices with the same structure as the dummy matrix t
 
 Then we obtain for each one of this matrices (considering the estimated coefficients from the fitted model and the general idea of logistic regression) the probability of having an event averaging over all individuals. With this probability obtained for the case of just having treatment and the case of just having control, we can obtain the log odds ratio (which is the output of this function).
 
+
 ### Surv_prob
 The `surv_prob` function is used to obtain an average survival curve considering the curves from each one of the individuals.
 
 The idea is that we have two matrices where one (`h`) has the values of the cumulative baseline hazard at each one of the event times and the other one (`k`) has the values -exponential of the product between the estimated coefficients and the values of the covariates of an individual. So we are going to have two matrices one with as many rows as event times and the other one with as many rows as individuals. If we want to obtain the survival curve for one of this individuals we would just have to multiply the correspondent element of k times the matrix h and take exponential of that value. We can repeat this for every individual and then we can take an average of all these values to obtain the average survival curve.  
 
+
 ### Survival_curves
 The `survival_curves` function is used to obtain the average survival curve given the design matrix, the cumulative baseline hazard and the estimated coefficients.
 
 In this function we obtain the matrix `K2` (using the design matrix and the estimated coefficients of the fitted model). Then we apply the `surv_prob` function to this `K2` and the cumulative baseline hazard `h0` in order to obtain the average survival curve.
+
+
+### Ahr_estimation
+The `ahr_estimation` function is used to estimate the average hazard ratio of a subgroup.
+
+We first build two matrices: one where all the individuals are in the control group and another one where all the individuals are in the treatment group. Given each one of these matrices we obtain the average survival probabilities associated to them. 
+
+Having these survival probabilities we can consider a value of `gamma` that defines a specific weight function to estimate the average hazard ratio. For the value of `gamma` equal to 1 we have that the average hazard ratio is the same as the odds of concordance. 
+
 
 ## Main functions
 
