@@ -14,4 +14,5 @@
 #' @importFrom brms brm
 #' @importFrom splines2 mSpline
 #' @importFrom Rcpp evalCpp
+#' @importFrom gbm gbm
 NULL
