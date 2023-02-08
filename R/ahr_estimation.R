@@ -28,17 +28,23 @@ ahr_estimation <- function(x_subg, dummy_subg, est_coef, h0, gamma = 1) {
   assert_scalar(gamma)
   res <- list()
   for (i in 0:1) {
-    x <- cbind(rep(abs(i - 1), nrow(x_subg)), rep(i, nrow(x_subg)),
-               x_subg[, 3:(ncol(x_subg) - ncol(dummy_subg))], i * dummy_subg)
+    x <- cbind(
+      rep(abs(i - 1), nrow(x_subg)), rep(i, nrow(x_subg)),
+      x_subg[, 3:(ncol(x_subg) - ncol(dummy_subg))], i * dummy_subg
+    )
     res[[i + 1]] <- survival_curves(x, h0, est_coef)
   }
   N <- nrow(res[[1]])
-  num <- apply(res[[1]] ^ gamma *
-                 (res[[2]] ^ gamma - rbind(1, as.data.frame(res[[2]][-N,])) ^ gamma),
-               2, sum)
-  den <- apply(res[[2]] ^ gamma *
-                 (res[[1]] ^ gamma - rbind(1, as.data.frame(res[[1]][-N,])) ^ gamma),
-               2, sum)
+  num <- apply(
+    res[[1]]^gamma *
+      (res[[2]]^gamma - rbind(1, as.data.frame(res[[2]][-N, ]))^gamma),
+    2, sum
+  )
+  den <- apply(
+    res[[2]]^gamma *
+      (res[[1]]^gamma - rbind(1, as.data.frame(res[[1]][-N, ]))^gamma),
+    2, sum
+  )
   ahr <- as.numeric(num / den)
   ahr
 }
