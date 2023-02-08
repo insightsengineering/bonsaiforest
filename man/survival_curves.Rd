@@ -22,5 +22,6 @@ Function to obtain the average survival curve from all individual
 survival curves.
 }
 \examples{
-survival_curves(elastic_net_surv$x, elastic_net_surv$h0, elastic_net_surv$est_coef)
+survival_curves(elastic_net_surv$x, elastic_net_surv$h0,
+ elastic_net_surv$est_coef)
 }
