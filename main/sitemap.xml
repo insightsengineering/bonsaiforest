@@ -43,6 +43,9 @@
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/elastic_net_fit_surv.html</loc>
   </url>
   <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/elastic_net_surv.html</loc>
+  </url>
+  <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/est_coef_bin1.html</loc>
   </url>
   <url>
@@ -98,6 +101,9 @@
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/summary.naivepop.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/survival_curves.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/test.html</loc>
