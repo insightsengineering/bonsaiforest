@@ -12,14 +12,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // surv_prob
-List surv_prob(arma::mat K, arma::mat H);
-RcppExport SEXP _shrinkforest_surv_prob(SEXP KSEXP, SEXP HSEXP) {
+List surv_prob(arma::mat k, arma::mat h);
+RcppExport SEXP _shrinkforest_surv_prob(SEXP kSEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type K(KSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type H(HSEXP);
-    rcpp_result_gen = Rcpp::wrap(surv_prob(K, H));
+    Rcpp::traits::input_parameter< arma::mat >::type k(kSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type h(hSEXP);
+    rcpp_result_gen = Rcpp::wrap(surv_prob(k, h));
     return rcpp_result_gen;
 END_RCPP
 }
