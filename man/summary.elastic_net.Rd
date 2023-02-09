@@ -13,14 +13,14 @@
 the average hazard ratio. Default is 1 (in this case the average hazard
 ratio obtained can be interpreted as the odds of concordance).}
 
+\item{l}{(\code{scalar})\cr the maximum value of time that wants to be studied to
+obtain the average hazard ratio. Default is the maximum value of time when
+there was an event.}
+
 \item{lambda}{(\code{scalar})\cr the penalization constant in the elastic net.
 Default is the value that leads to minimal cross validation error.}
 
 \item{...}{Arguments of summary}
-
-\item{L}{(\code{scalar})\cr the maximum value of time that wants to be studied to
-obtain the average hazard ratio. Default is the maximum value of time when
-there was an event.}
 }
 \value{
 \code{data.frame} with the subgroup names and with the estimated subgroup
