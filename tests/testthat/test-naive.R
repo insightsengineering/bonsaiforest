@@ -1,4 +1,4 @@
-test_that("Naive outputs the right elements for survival", {
+test_that("naive outputs the right elements for survival", {
   result <- naive("tt_pfs", "arm", c("x_1", "x_2"),
                   example_data, "survival", "ev_pfs")
   stacked_data <- generate_stacked_data(Surv(tt_pfs, ev_pfs) ~ arm,
@@ -20,7 +20,7 @@ test_that("Naive outputs the right elements for survival", {
 })
 
 
-test_that("Naive outputs the right elements for binary", {
+test_that("naive outputs the right elements for binary", {
   result <- naive("ev_pfs", "arm", c("x_1", "x_2"),
                   example_data, "binary")
   stacked_data <- generate_stacked_data(ev_pfs ~ arm,

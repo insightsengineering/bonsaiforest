@@ -1,4 +1,4 @@
-test_that("Elastic_net outputs the right elements for survival", {
+test_that("elastic_net outputs the right elements for survival", {
   set.seed(0)
   result <- elastic_net("tt_pfs", "arm", c("x_1", "x_3"),
                         c("x_1", "x_2", "x_3"), example_data,
@@ -31,7 +31,7 @@ test_that("Elastic_net outputs the right elements for survival", {
 })
 
 
-test_that("Elastic_net outputs the right elements for binary", {
+test_that("elastic_net outputs the right elements for binary", {
   set.seed(0)
   result <- elastic_net("ev_pfs", "arm", c("x_1", "x_3"),
                         c("x_1", "x_2", "x_3"), example_data,

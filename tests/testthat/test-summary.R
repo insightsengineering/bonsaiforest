@@ -1,16 +1,16 @@
-test_that("Summary outputs the right element for naivepop survival", {
+test_that("summary outputs the right element for naivepop survival", {
   result <- summary(naivepop_fit_surv)
   expected <- exp(coef(naivepop_fit_surv$fit))
   expect_equal(result, expected)
 })
 
-test_that("Summary outputs the right element for naivepop binary", {
+test_that("summary outputs the right element for naivepop binary", {
   result <- summary(naivepop_fit_bin)
   expected <- coef(naivepop_fit_bin$fit)[2]
   expect_equal(result, expected)
 })
 
-test_that("Summary outputs the right element for naive survival", {
+test_that("summary outputs the right element for naive survival", {
   result <- summary(naive_fit_surv)
   expected <- data.frame(
     subgroup = c("x_1.a", "x_1.b", "x_2.a", "x_2.b", "x_3.a", "x_3.b", "x_4.a",
@@ -33,7 +33,7 @@ test_that("Summary outputs the right element for naive survival", {
   expect_equal(result, expected, tolerance = 0.001)
 })
 
-test_that("Summary outputs the right element for naive binary", {
+test_that("summary outputs the right element for naive binary", {
   result <- summary(naive_fit_bin)
   expected <- data.frame(
     subgroup = c("x_1.a", "x_1.b", "x_2.a", "x_2.b", "x_3.a", "x_3.b", "x_4.a",

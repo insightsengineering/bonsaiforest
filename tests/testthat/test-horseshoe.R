@@ -1,4 +1,4 @@
-test_that("Horseshoe outputs the right elements for survival", {
+test_that("horseshoe outputs the right elements for survival", {
   result <- suppressWarnings(horseshoe("tt_pfs", "arm", c("x_1", "x_3"),
                       c("x_1", "x_2", "x_3"), example_data,
                       "survival", "ev_pfs", chains = 1))
@@ -40,7 +40,7 @@ test_that("Horseshoe outputs the right elements for survival", {
   expect_equal(result, expected)
 })
 
-test_that("Horseshoe outputs the right elements for binary", {
+test_that("horseshoe outputs the right elements for binary", {
   result <- suppressWarnings(horseshoe("ev_pfs", "arm", c("x_1", "x_3"),
                       c("x_1", "x_2", "x_3"), example_data,
                       "binary", chains = 1))

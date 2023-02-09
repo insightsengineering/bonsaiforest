@@ -1,4 +1,4 @@
-test_that("Preprocess outputs the right elements", {
+test_that("preprocess outputs the right elements", {
   result <- preprocess("arm", c("x_1", "x_3"), c("x_1", "x_2", "x_3"),
                                example_data)
   design_main <- stats::model.matrix(~ -1 + arm + x_1 + x_2 + x_3,

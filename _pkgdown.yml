@@ -49,6 +49,7 @@ reference:
       - preprocess
       - lor_estimation
       - survival_curves
+      - ahr_estimation
   - title: Summary
     contents:
       - summary.naivepop

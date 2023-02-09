@@ -7,7 +7,7 @@ coxph
 glm
 naivepop
 Naivepop
-Surv
+surv
 trt
 subgrouping
 preprocess
@@ -19,4 +19,5 @@ brms
 bernoulli
 warmup
 bayesian
-Lor
+lor
+ahr
