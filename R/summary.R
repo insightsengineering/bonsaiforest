@@ -82,7 +82,7 @@ summary.elastic_net <- function(object, gamma = 1, L = NULL, lambda = NULL, ...)
   assert_scalar(gamma)
   if (is.null(lambda)) {
     lambda <- fit$lambda.min
-  } else{
+  } else {
     assert_scalar(lambda)
   }
   est_coef <- as.matrix(stats::coef(fit, s = lambda))
@@ -96,12 +96,14 @@ summary.elastic_net <- function(object, gamma = 1, L = NULL, lambda = NULL, ...)
     lp <- stats::predict(fit, lambda, newx = as.matrix(x))
     lp_un <- lp[order_resp]
     status_un <- y$status[order_resp]
-    bh <- gbm::basehaz.gbm(t = resp_un, delta = status_un, f.x = lp_un,
-                           t.eval = resp_un, smooth = TRUE, cumulative = TRUE)
+    bh <- gbm::basehaz.gbm(
+      t = resp_un, delta = status_un, f.x = lp_un,
+      t.eval = resp_un, smooth = TRUE, cumulative = TRUE
+    )
     resp_ev <- resp_un[which(status_un == 1)]
     if (is.null(L)) {
       L <- max(resp_ev)
-    } else{
+    } else {
       assert_scalar(L)
     }
     ind_time <- which(status_un == 1 & resp_un <= L)
