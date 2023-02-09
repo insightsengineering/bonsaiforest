@@ -36,11 +36,13 @@ ahr_estimation <- function(x_subg, dummy_subg, est_coef, h0, gamma = 1) {
   }
   n <- nrow(res[[1]])
   frac <- list()
-  for (i in 1:2){
+  for (i in 1:2) {
     j <- setdiff(c(1, 2), i)
-    frac[[i]] <- apply(res[[i]]^gamma *
-                         (res[[j]]^gamma - rbind(1, as.data.frame(res[[j]][-n, ]))^gamma),
-                       2, sum)
+    frac[[i]] <- apply(
+      res[[i]]^gamma *
+        (res[[j]]^gamma - rbind(1, as.data.frame(res[[j]][-n, ]))^gamma),
+      2, sum
+    )
   }
   ahr <- as.numeric(frac[[1]] / frac[[2]])
   ahr
