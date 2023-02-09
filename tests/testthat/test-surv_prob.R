@@ -1,4 +1,4 @@
-test_that("Surv_prob outputs the right element", {
+test_that("surv_prob outputs the right element", {
   mat1 <- matrix(c(1, 2, 3), ncol = 1)
   mat2 <- matrix(c(1, 0, 1), ncol = 1)
   result <- surv_prob(mat1, mat2)
