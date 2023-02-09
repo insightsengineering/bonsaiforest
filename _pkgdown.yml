@@ -50,6 +50,7 @@ reference:
       - lor_estimation
       - survival_curves
       - ahr_estimation
+      - subgroups
   - title: Summary
     contents:
       - summary.naivepop

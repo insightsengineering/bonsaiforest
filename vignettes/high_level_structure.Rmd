@@ -59,6 +59,13 @@ We first build two matrices: one where all the individuals are in the control gr
 Having these survival probabilities we can consider a value of `gamma` that defines a specific weight function to estimate the average hazard ratio. For the value of `gamma` equal to 1 we have that the average hazard ratio is the same as the odds of concordance. 
 
 
+### subgroups
+The `subgroups` function is used to estimate the treatment effect of each one of the subgroups considered.
+
+We find the design and the dummy matrix associated with each one of the subgroups and given these matrices we call `ahr_estimation` (in the case of survival data) to obtain the average hazard ratio of the subgroup or we call `lor_estimation` (in the case of binary data) to obtain the log odds ratio of the subgroup.
+
+
+
 ## Main functions
 
 ### naivepop
