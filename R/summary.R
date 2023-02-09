@@ -102,7 +102,7 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
     )
     resp_ev <- resp_un[which(status_un == 1)]
     if (is.null(l)) {
-      L <- max(resp_ev)
+      l <- max(resp_ev)
     } else {
       assert_scalar(l)
     }
