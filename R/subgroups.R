@@ -23,9 +23,11 @@
 #' @export
 #'
 #' @examples
-#' subgroups(elastic_net_fit_surv$design_matrix, elastic_net_fit_surv$design_dummy,
-#' elastic_net_fit_surv$subgr_names, "survival", elastic_net_surv$est_coef,
-#' elastic_net_surv$h0)
+#' subgroups(
+#'   elastic_net_fit_surv$design_matrix, elastic_net_fit_surv$design_dummy,
+#'   elastic_net_fit_surv$subgr_names, "survival", elastic_net_surv$est_coef,
+#'   elastic_net_surv$h0
+#' )
 subgroups <- function(x, x_dummy, subgr_names,
                       resptype = c("survival", "binary"),
                       est_coef, h0 = NULL, gamma = 1) {
@@ -38,13 +40,13 @@ subgroups <- function(x, x_dummy, subgr_names,
   trt_subg <- matrix(nrow = length(subgr_names), ncol = ncol(est_coef))
   i <- 1
   for (j in subgr_names) {
-    x_subg <- x[which(x_dummy[, j] == 1),]
-    dummy_subg <- x_dummy[which(x_dummy[, j] == 1),]
+    x_subg <- x[which(x_dummy[, j] == 1), ]
+    dummy_subg <- x_dummy[which(x_dummy[, j] == 1), ]
     if (resptype == "survival") {
       assert_numeric(h0)
-      trt_subg[i,] <- ahr_estimation(x_subg, dummy_subg, est_coef, h0, gamma)
+      trt_subg[i, ] <- ahr_estimation(x_subg, dummy_subg, est_coef, h0, gamma)
     } else if (resptype == "binary") {
-      trt_subg[i,] <- lor_estimation(x_subg, dummy_subg, est_coef)
+      trt_subg[i, ] <- lor_estimation(x_subg, dummy_subg, est_coef)
     }
     i <- i + 1
   }
