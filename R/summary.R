@@ -74,7 +74,7 @@ summary.naive <- function(object, conf = 0.95, ...) {
 #'
 #' @examples
 #' summary(elastic_net_fit_surv)
-summary.elastic_net <- function(object, gamma = 1, L = NULL, lambda = NULL, ...) {
+summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...) {
   assert_class(object, c("shrinkforest", "elastic_net"))
   x <- object$design_matrix
   resptype <- object$resptype
@@ -87,7 +87,7 @@ summary.elastic_net <- function(object, gamma = 1, L = NULL, lambda = NULL, ...)
   }
   est_coef <- as.matrix(stats::coef(fit, s = lambda))
   if (resptype == "binary") {
-    trt.eff <- subgroups(object, est_coef)
+    trt_eff <- subgroups(object, est_coef)
   } else if (resptype == "survival") {
     y <- object$y
     assert_data_frame(y)
@@ -101,14 +101,14 @@ summary.elastic_net <- function(object, gamma = 1, L = NULL, lambda = NULL, ...)
       t.eval = resp_un, smooth = TRUE, cumulative = TRUE
     )
     resp_ev <- resp_un[which(status_un == 1)]
-    if (is.null(L)) {
+    if (is.null(l)) {
       L <- max(resp_ev)
     } else {
-      assert_scalar(L)
+      assert_scalar(l)
     }
-    ind_time <- which(status_un == 1 & resp_un <= L)
+    ind_time <- which(status_un == 1 & resp_un <= l)
     h0 <- bh[ind_time]
-    trt.eff <- subgroups(object, est_coef, h0, gamma)
+    trt_eff <- subgroups(object, est_coef, h0, gamma)
   }
-  trt.eff
+  trt_eff
 }
