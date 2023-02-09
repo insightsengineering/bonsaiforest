@@ -1,9 +1,6 @@
 test_that("subgroups outputs the right element for survival", {
   result <- subgroups(
-    elastic_net_fit_surv$design_matrix,
-    elastic_net_fit_surv$design_dummy,
-    elastic_net_fit_surv$subgr_names,
-    "survival", elastic_net_surv$est_coef,
+    elastic_net_fit_surv, elastic_net_surv$est_coef,
     elastic_net_surv$h0
   )
   expected <- data.frame(
@@ -20,10 +17,7 @@ test_that("subgroups outputs the right element for survival", {
 
 test_that("subgroups outputs the right element for binary", {
   result <- subgroups(
-    elastic_net_fit_bin$design_matrix,
-    elastic_net_fit_bin$design_dummy,
-    elastic_net_fit_bin$subgr_names,
-    "binary", est_coef_bin1
+    elastic_net_fit_bin, est_coef_bin1
   )
   expected <- data.frame(
     subgroup = elastic_net_fit_surv$subgr_names,

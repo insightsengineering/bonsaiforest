@@ -4,27 +4,10 @@
 \alias{subgroups}
 \title{Subgroup Treatment Effect}
 \usage{
-subgroups(
-  x,
-  x_dummy,
-  subgr_names,
-  resptype = c("survival", "binary"),
-  est_coef,
-  h0 = NULL,
-  gamma = 1
-)
+subgroups(object, est_coef, h0 = NULL, gamma = 1)
 }
 \arguments{
-\item{x}{(\code{matrix})\cr the matrix with the subgroup covariates.}
-
-\item{x_dummy}{(\code{matrix})\cr the dummy matrix with the subgroup
-covariates.}
-
-\item{subgr_names}{(\code{character})\cr the character vector with the subgroups
-that are going to be considered.}
-
-\item{resptype}{(\code{string})\cr the type of data used. Can be "survival"
-or "binary".}
+\item{object}{(\code{shrinkforest})\cr the fitted shrinkforest object.}
 
 \item{est_coef}{(\code{matrix})\cr the estimated coefficients from the fitted
 model.}
@@ -45,7 +28,8 @@ Function to obtain the estimated treatment effect in each one of the
 considered subgroups.
 }
 \examples{
-subgroups(elastic_net_fit_surv$design_matrix, elastic_net_fit_surv$design_dummy,
-elastic_net_fit_surv$subgr_names, "survival", elastic_net_surv$est_coef,
-elastic_net_surv$h0)
+subgroups(
+  elastic_net_fit_surv, elastic_net_surv$est_coef,
+  elastic_net_surv$h0
+)
 }
