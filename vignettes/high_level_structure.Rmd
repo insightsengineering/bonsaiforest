@@ -31,38 +31,49 @@ To obtain all these matrices we just obtain the design matrices of some specifie
 Finally we also obtain the vector `subgr_names` with the exact name of the different subgroups that we are going to study.
 
 
-### Lor_estimation
+### lor_estimation
 The `lor_estimation` function is used to obtain the log-odds ratio of a subgroup in the case of binary data. 
 
 The idea is to create two matrices with the same structure as the dummy matrix that defines the subgroup data but in one of them considering that the treatment is present in all observations and in the other one considering that the treatment is not present in any observation.
 
 Then we obtain for each one of this matrices (considering the estimated coefficients from the fitted model and the general idea of logistic regression) the probability of having an event averaging over all individuals. With this probability obtained for the case of just having treatment and the case of just having control, we can obtain the log odds ratio (which is the output of this function).
 
-### Surv_prob
+
+### surv_prob
 The `surv_prob` function is used to obtain an average survival curve considering the curves from each one of the individuals.
 
 The idea is that we have two matrices where one (`h`) has the values of the cumulative baseline hazard at each one of the event times and the other one (`k`) has the values -exponential of the product between the estimated coefficients and the values of the covariates of an individual. So we are going to have two matrices one with as many rows as event times and the other one with as many rows as individuals. If we want to obtain the survival curve for one of this individuals we would just have to multiply the correspondent element of k times the matrix h and take exponential of that value. We can repeat this for every individual and then we can take an average of all these values to obtain the average survival curve.  
+
 
 ### Survival_curves
 The `survival_curves` function is used to obtain the average survival curve given the design matrix, the cumulative baseline hazard and the estimated coefficients.
 
 In this function we obtain the matrix `K2` (using the design matrix and the estimated coefficients of the fitted model). Then we apply the `surv_prob` function to this `K2` and the cumulative baseline hazard `h0` in order to obtain the average survival curve.
 
+
+### ahr_estimation
+The `ahr_estimation` function is used to estimate the average hazard ratio of a subgroup.
+
+We first build two matrices: one where all the individuals are in the control group and another one where all the individuals are in the treatment group. Given each one of these matrices we obtain the average survival probabilities associated to them. 
+
+Having these survival probabilities we can consider a value of `gamma` that defines a specific weight function to estimate the average hazard ratio. For the value of `gamma` equal to 1 we have that the average hazard ratio is the same as the odds of concordance. 
+
+
 ## Main functions
 
-### Naivepop
+### naivepop
 The `naivepop` function is used to estimate the subgroup treatment effects with the naive overall population treatment effect. 
 
 In this function we make a distinction depending on the type of data that we have. In the case of survival data we fit a Cox regression model (using coxph) with treatment as explanatory variable. Instead, if we have binary data, we fit a logistic regression model (using glm with the binomial family) with treatment as explanatory variable. This fitted model is going to be included as part of the output of our function.
 
 
-### Naive
+### naive
 The `naive`function is used to estimate the subgroup treatment effects with the naive treatment effects per subgroup.
 
 In this function we make a distinction between binary and survival data (the main difference between them is that in binary we are going to use glm models with the binomial family and in survival we are going to use coxph models). With `generate_stacked_data` we obtain the stacked by subgroups data frame and we fit a model (depending on the type of response the glm or the coxph) on each one of the data sets corresponding to a specific subgroup. These fitted models are going to be part of the output as well as a data set with the components of the summary of those models that are going to be useful to obtain the treatment effect.
 
 
-### Elastic_net
+### elastic_net
 The `elastic_net` function is used to estimate the subgroup treatment effects
 using penalization on the interaction terms between treatment and the 
 subgroup covariates.
@@ -70,7 +81,7 @@ subgroup covariates.
 We are going to use the function cv.glmnet to fit the model. We are going to consider the design matrix (obtained after applying to the data the function `preprocess`) with the main effects and the interaction effects and we are going to create a penalty_factor vector with entries 0 if the coefficients are not going to be penalized (as for the main effects) and 1 if they are going to be penalized (as for the interaction effects). Depending on the kind of data that we have we are going to consider the cox family (for survival) or the binomial family (for binary). The value of alpha is the elastic net mixing parameter and can take values between 0 and 1. If we put it to 1 we are going to apply lasso penalty on the interaction effects and if we put it to 0 we are going to apply ridge penalty on the interaction effects.
 
 
-### Horseshoe
+### horseshoe
 The `horseshoe`function is used to estimate the subgroup treatment effects
 using a bayesian model with a horseshoe prior on the interaction terms between treatment and the subgroup covariates.
 
@@ -80,12 +91,12 @@ We are going to apply the function `preprocess` to our data in order to obtain t
 ## Summary functions
 With the `summary` function we are going to obtain the estimated treatment effect of all the models fitted on the data. Depending on the class of the fitted object we are going to apply different functions:
 
-### Summary.naivepop
+### summary.naivepop
 The `summary.naivepop` function obtains the overall treatment effect of the data given an object of class `naivepop`.
 
 If we have survival data the estimated overall hazard ratio is going to be just the exponential of the coefficient of the cox model fitted on the data. If we have binary data then the estimated overall log-odds ratio is going to be the coefficient of the fitted model associated with the treatment.
 
-### Summary.naive 
+### summary.naive 
 The `summary.naive` function obtains the subgroup treatment effects and their confidence intervals given an object of class `naive`.
 
 In a `naive` object we have an element which already has the information of the estimated treatment effects (obtained from each one of the models fitted on the subgroup data). To obtain the boundaries of the confidence interval we just have to consider the standard error of these estimated treatment effects and the needed normal quantile. In the case of survival data we are going to use the exponential function in order to show hazard ratios.
