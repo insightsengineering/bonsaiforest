@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage line-rate="0.993421052631579" branch-rate="0" lines-covered="302" lines-valid="304" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-02-09 06:53:26">
+<coverage line-rate="0.993464052287582" branch-rate="0" lines-covered="304" lines-valid="306" branches-covered="0" branches-valid="0" complexity="0" version="3.6.1" timestamp="2023-02-09 08:11:40">
   <sources/>
   <packages>
-    <package name="shrinkforest" line-rate="0.993421052631579" branch-rate="0" complexity="0">
+    <package name="shrinkforest" line-rate="0.993464052287582" branch-rate="0" complexity="0">
       <classes>
         <class name="ahr_estimation.R" filename="R/ahr_estimation.R" line-rate="1" branch-rate="0" complexity="0">
           <methods>
@@ -27,8 +27,10 @@
                 <line number="41" hits="2" branch="false"/>
                 <line number="42" hits="2" branch="false"/>
                 <line number="43" hits="2" branch="false"/>
-                <line number="45" hits="1" branch="false"/>
-                <line number="46" hits="1" branch="false"/>
+                <line number="44" hits="2" branch="false"/>
+                <line number="45" hits="2" branch="false"/>
+                <line number="47" hits="1" branch="false"/>
+                <line number="48" hits="1" branch="false"/>
               </lines>
             </method>
           </methods>
@@ -52,8 +54,10 @@
             <line number="41" hits="2" branch="false"/>
             <line number="42" hits="2" branch="false"/>
             <line number="43" hits="2" branch="false"/>
-            <line number="45" hits="1" branch="false"/>
-            <line number="46" hits="1" branch="false"/>
+            <line number="44" hits="2" branch="false"/>
+            <line number="45" hits="2" branch="false"/>
+            <line number="47" hits="1" branch="false"/>
+            <line number="48" hits="1" branch="false"/>
           </lines>
         </class>
         <class name="elastic_net.R" filename="R/elastic_net.R" line-rate="1" branch-rate="0" complexity="0">
