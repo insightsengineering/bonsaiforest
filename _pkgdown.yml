@@ -55,3 +55,4 @@ reference:
     contents:
       - summary.naivepop
       - summary.naive
+      - summary.elastic_net
