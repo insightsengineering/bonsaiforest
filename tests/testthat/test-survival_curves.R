@@ -1,4 +1,4 @@
-test_that("Survival_curves outputs the right element", {
+test_that("survival_curves outputs the right element", {
   mat <- matrix(c(1, 2, 3, 4), nrow = 2)
   h0 <- c(1, 2, 3)
   est_coef <- matrix(c(1, 0), ncol = 1)
