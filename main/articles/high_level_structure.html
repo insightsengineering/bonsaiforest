@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9019</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -138,7 +132,7 @@ matrices.</p>
 exact name of the different subgroups that we are going to study.</p>
 </div>
 <div class="section level3">
-<h3 id="lor_estimation">Lor_estimation<a class="anchor" aria-label="anchor" href="#lor_estimation"></a>
+<h3 id="lor_estimation">lor_estimation<a class="anchor" aria-label="anchor" href="#lor_estimation"></a>
 </h3>
 <p>The <code>lor_estimation</code> function is used to obtain the
 log-odds ratio of a subgroup in the case of binary data.</p>
@@ -155,7 +149,7 @@ having treatment and the case of just having control, we can obtain the
 log odds ratio (which is the output of this function).</p>
 </div>
 <div class="section level3">
-<h3 id="surv_prob">Surv_prob<a class="anchor" aria-label="anchor" href="#surv_prob"></a>
+<h3 id="surv_prob">surv_prob<a class="anchor" aria-label="anchor" href="#surv_prob"></a>
 </h3>
 <p>The <code>surv_prob</code> function is used to obtain an average
 survival curve considering the curves from each one of the
@@ -184,12 +178,27 @@ we apply the <code>surv_prob</code> function to this <code>K2</code> and
 the cumulative baseline hazard <code>h0</code> in order to obtain the
 average survival curve.</p>
 </div>
+<div class="section level3">
+<h3 id="ahr_estimation">ahr_estimation<a class="anchor" aria-label="anchor" href="#ahr_estimation"></a>
+</h3>
+<p>The <code>ahr_estimation</code> function is used to estimate the
+average hazard ratio of a subgroup.</p>
+<p>We first build two matrices: one where all the individuals are in the
+control group and another one where all the individuals are in the
+treatment group. Given each one of these matrices we obtain the average
+survival probabilities associated to them.</p>
+<p>Having these survival probabilities we can consider a value of
+<code>gamma</code> that defines a specific weight function to estimate
+the average hazard ratio. For the value of <code>gamma</code> equal to 1
+we have that the average hazard ratio is the same as the odds of
+concordance.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
 </h2>
 <div class="section level3">
-<h3 id="naivepop">Naivepop<a class="anchor" aria-label="anchor" href="#naivepop"></a>
+<h3 id="naivepop">naivepop<a class="anchor" aria-label="anchor" href="#naivepop"></a>
 </h3>
 <p>The <code>naivepop</code> function is used to estimate the subgroup
 treatment effects with the naive overall population treatment
@@ -202,7 +211,7 @@ binomial family) with treatment as explanatory variable. This fitted
 model is going to be included as part of the output of our function.</p>
 </div>
 <div class="section level3">
-<h3 id="naive">Naive<a class="anchor" aria-label="anchor" href="#naive"></a>
+<h3 id="naive">naive<a class="anchor" aria-label="anchor" href="#naive"></a>
 </h3>
 <p>The <code>naive</code>function is used to estimate the subgroup
 treatment effects with the naive treatment effects per subgroup.</p>
@@ -218,7 +227,7 @@ summary of those models that are going to be useful to obtain the
 treatment effect.</p>
 </div>
 <div class="section level3">
-<h3 id="elastic_net">Elastic_net<a class="anchor" aria-label="anchor" href="#elastic_net"></a>
+<h3 id="elastic_net">elastic_net<a class="anchor" aria-label="anchor" href="#elastic_net"></a>
 </h3>
 <p>The <code>elastic_net</code> function is used to estimate the
 subgroup treatment effects using penalization on the interaction terms
@@ -237,7 +246,7 @@ lasso penalty on the interaction effects and if we put it to 0 we are
 going to apply ridge penalty on the interaction effects.</p>
 </div>
 <div class="section level3">
-<h3 id="horseshoe">Horseshoe<a class="anchor" aria-label="anchor" href="#horseshoe"></a>
+<h3 id="horseshoe">horseshoe<a class="anchor" aria-label="anchor" href="#horseshoe"></a>
 </h3>
 <p>The <code>horseshoe</code>function is used to estimate the subgroup
 treatment effects using a bayesian model with a horseshoe prior on the
@@ -261,7 +270,7 @@ estimated treatment effect of all the models fitted on the data.
 Depending on the class of the fitted object we are going to apply
 different functions:</p>
 <div class="section level3">
-<h3 id="summary-naivepop">Summary.naivepop<a class="anchor" aria-label="anchor" href="#summary-naivepop"></a>
+<h3 id="summary-naivepop">summary.naivepop<a class="anchor" aria-label="anchor" href="#summary-naivepop"></a>
 </h3>
 <p>The <code>summary.naivepop</code> function obtains the overall
 treatment effect of the data given an object of class
@@ -273,7 +282,7 @@ ratio is going to be the coefficient of the fitted model associated with
 the treatment.</p>
 </div>
 <div class="section level3">
-<h3 id="summary-naive">Summary.naive<a class="anchor" aria-label="anchor" href="#summary-naive"></a>
+<h3 id="summary-naive">summary.naive<a class="anchor" aria-label="anchor" href="#summary-naive"></a>
 </h3>
 <p>The <code>summary.naive</code> function obtains the subgroup
 treatment effects and their confidence intervals given an object of
