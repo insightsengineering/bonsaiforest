@@ -35,16 +35,13 @@ ahr_estimation <- function(x_subg, dummy_subg, est_coef, h0, gamma = 1) {
     res[[i + 1]] <- survival_curves(x, h0, est_coef)
   }
   n <- nrow(res[[1]])
-  num <- apply(
-    res[[1]]^gamma *
-      (res[[2]]^gamma - rbind(1, as.data.frame(res[[2]][-n, ]))^gamma),
-    2, sum
-  )
-  den <- apply(
-    res[[2]]^gamma *
-      (res[[1]]^gamma - rbind(1, as.data.frame(res[[1]][-n, ]))^gamma),
-    2, sum
-  )
-  ahr <- as.numeric(num / den)
+  frac <- list()
+  for (i in 1:2){
+    j <- setdiff(c(1, 2), i)
+    frac[[i]] <- apply(res[[i]]^gamma *
+                         (res[[j]]^gamma - rbind(1, as.data.frame(res[[j]][-n, ]))^gamma),
+                       2, sum)
+  }
+  ahr <- as.numeric(frac[[1]] / frac[[2]])
   ahr
 }
