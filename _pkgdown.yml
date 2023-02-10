@@ -51,6 +51,7 @@ reference:
       - survival_curves
       - ahr_estimation
       - subgroups
+      - trt_horseshoe
   - title: Summary
     contents:
       - summary.naivepop
