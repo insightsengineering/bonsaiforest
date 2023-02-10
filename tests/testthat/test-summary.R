@@ -102,3 +102,73 @@ test_that("summary outputs the right element for elastic_net binary", {
   )
   expect_equal(result, expected, tolerance = 0.001)
 })
+
+
+test_that("summary outputs the right element for horseshoe survival", {
+  result <- summary(horseshoe_fit_surv)
+  posterior <- trt_horseshoe(horseshoe_fit_surv)
+  summary_post <- data.frame(
+    subgroup = horseshoe_fit_surv$subgr_names,
+    trt.median = c(
+      0.6599, 0.653, 0.6577, 0.656, 0.6304,
+      0.6662, 0.6444, 0.6445, 0.6701, 0.6887,
+      0.6275, 0.6515, 0.6542, 0.6564, 0.6561,
+      0.6204, 0.6785, 0.6359, 0.636, 0.6796,
+      0.6375, 0.6633, 0.6506, 0.6585, 0.6579
+    ),
+    trt.cred.low = c(
+      0.4968, 0.4911, 0.4876, 0.4969, 0.4091,
+      0.5053, 0.4769, 0.4644, 0.4984, 0.5021,
+      0.3401, 0.4743, 0.4818, 0.4809, 0.4956,
+      0.4085, 0.5143, 0.4418, 0.4484, 0.5127,
+      0.3869, 0.5082, 0.4668, 0.4924, 0.4949
+    ),
+    trt.cred.high = c(
+      0.8661, 0.8561, 0.8778, 0.8574, 0.8471,
+      0.8726, 0.8513, 0.8596, 0.9478, 1.2081,
+      0.8558, 0.8699, 0.8677, 0.9133, 0.8514,
+      0.8395, 0.9036, 0.8616, 0.8472, 0.9172,
+      0.8634, 0.863, 0.8791, 0.8853, 0.8607
+    )
+  )
+  expected <- list(
+    posterior = posterior,
+    summary_post = summary_post
+  )
+  expect_equal(result, expected, tolerance = 0.001)
+})
+
+
+test_that("summary outputs the right element for horseshoe binary", {
+  result <- summary(horseshoe_fit_bin)
+  posterior <- trt_horseshoe(horseshoe_fit_bin)
+  summary_post <- data.frame(
+    subgroup = horseshoe_fit_surv$subgr_names,
+    trt.median = c(
+      -0.4633, -0.467, -0.4665, -0.4646, -0.5009,
+      -0.4543, -0.4785, -0.4804, -0.4518, -0.4323,
+      -0.5206, -0.4689, -0.4556, -0.475, -0.4644,
+      -0.5204, -0.4338, -0.4949, -0.4847, -0.4391,
+      -0.5097, -0.4503, -0.4749, -0.4636, -0.468
+    ),
+    trt.cred.low = c(
+      -0.7766, -0.7841, -0.7985, -0.7675, -0.9803,
+      -0.7566, -0.8233, -0.8547, -0.7796, -0.7773,
+      -1.2444, -0.8131, -0.7818, -0.8101, -0.7719,
+      -0.9656, -0.746, -0.9154, -0.8507, -0.7549,
+      -1.1072, -0.7497, -0.8368, -0.8013, -0.7792
+    ),
+    trt.cred.high = c(
+      -0.1563, -0.1635, -0.1476, -0.162, -0.1583,
+      -0.1513, -0.1592, -0.1524, -0.0998, 0.0454,
+      -0.1698, -0.1386, -0.1305, -0.1126, -0.1641,
+      -0.1858, -0.0937, -0.1575, -0.1677, -0.112,
+      -0.1563, -0.1444, -0.1148, -0.116, -0.1576
+    )
+  )
+  expected <- list(
+    posterior = posterior,
+    summary_post = summary_post
+  )
+  expect_equal(result, expected, tolerance = 0.001)
+})

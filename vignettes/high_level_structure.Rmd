@@ -122,5 +122,11 @@ The `summary.elastic_net` function obtains the subgroup treatment effects given 
 We first have to obtain the estimated coefficients of the fitted model given a value of `lambda` (the default one is minimizes the cross validation error). After that, if our data is binary we just have to call `subgroups` with the information in the `elastic_net` object. If we have survival data then we first have to obtain the cumulative baseline hazard. To do so we first sort the response time, we predict the values of the regression model in the log hazard scale and then we compute the Breslow estimator of the cumulative baseline hazard. In the end we are just going to consider the values of this cumulative baseline hazard in the event time points (the time points where an event happened) that are smaller than a value `L` (by default it is just going to be the maximum of the event time points). Once that we have the cumulative baseline hazard `h0` we can call the function `subgroups` to obtain the treatment estimates. We can also specify the parameter `gamma` (it defines the weights to obtain the average hazard ratio). Default is 1 (in this case the average hazard ratio obtained can be interpreted as the odds of concordance).
 
 
+### summary.horseshoe
+The `summary.horseshoe` function obtains the estimated posterior distribution of the treatment effects and summarizes its information establishing the median of this distribution as the estimated treatment effect and using the quantiles to define a credible interval.
+
+We first have to call `trt_horseshoe` to obtain the samples from the estimated posterior distribution of the treatment effects and then for each one of the subgroups we obtain the median and the correspondent quantiles of the samples to obtain the estimated subgroup treatment effects and the bounds of the credible intervals.
+
+
 
 
