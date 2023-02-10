@@ -86,8 +86,8 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
     assert_scalar(lambda)
   }
   est_coef <- as.matrix(stats::coef(fit, s = lambda))
-  if (resptype == "binary") {
-    trt_eff <- subgroups(object, est_coef)
+  trt_eff <- if (resptype == "binary") {
+    subgroups(object, est_coef)
   } else if (resptype == "survival") {
     y <- object$y
     assert_data_frame(y)
@@ -108,7 +108,7 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
     }
     ind_time <- which(status_un == 1 & resp_un <= l)
     h0 <- bh[ind_time]
-    trt_eff <- subgroups(object, est_coef, h0, gamma)
+    subgroups(object, est_coef, h0, gamma)
   }
   trt_eff
 }
