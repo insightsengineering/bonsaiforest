@@ -113,3 +113,52 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
   }
   trt_eff
 }
+
+
+#' Summary Horseshoe Function
+#'
+#' Function to obtain the estimated subgroup treatment effects from a `horseshoe`
+#' model and a credible interval for them.
+#'
+#' @param object (`horseshoe`)\cr the horseshoe object.
+#' @param conf (`scalar`)\cr the level of the credible intervals. Default is
+#' 0.95.
+#' @param gamma (`scalar`)\cr numeric value defining the weights to obtain
+#' the average hazard ratio. Default is 1 (in this case the average hazard
+#' ratio obtained can be interpreted as the odds of concordance). Just needed
+#' when using survival data.
+#' @param l (`scalar`)\cr the maximum value of time that wants to be studied to
+#' obtain the average hazard ratio. Default is the maximum value of time when
+#' there was an event. Just needed when using survival data.
+#' @param m (`scalar`)\cr the value that defines the equally spaced time points
+#' where the survival curves are going to be studied. Default is 50. Just needed
+#' when using survival data.
+#' @param ... Arguments of summary.
+#'
+#' @return `list` with the approximated posterior distribution of the treatment
+#'  effects and a `data.frame` with the estimated subgroup treatment effect
+#'  (with the median) and the bounds of the credible intervals.
+#'
+#' @export
+#'
+#' @examples
+#' summary(horseshoe_fit_surv)
+summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, ...) {
+  assert_class(object, c("shrinkforest", "horseshoe"))
+  assert_scalar(conf)
+  assert_scalar(gamma)
+  assert_int(m)
+  if (!is.null(l)) {
+    assert_scalar(l)
+  }
+  alpha <- 1 - conf
+  result <- trt_horseshoe(object, gamma, l, m)
+  trt_quant <- apply(result[, -1], 1, stats::quantile,
+                     prob = c(0.5, alpha / 2, 1 - alpha / 2))
+  summary_post <- data.frame(subgroup = object$subgr_names,
+                             trt.median = trt_quant[1, ],
+                             trt.cred.low = trt_quant[2, ],
+                             trt.cred.high = trt_quant[3, ])
+  print(summary_post)
+  invisible(list(posterior = result, summary_post = summary_post))
+}
