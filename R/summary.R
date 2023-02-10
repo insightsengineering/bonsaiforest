@@ -154,11 +154,14 @@ summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, 
   alpha <- 1 - conf
   result <- trt_horseshoe(object, gamma, l, m)
   trt_quant <- apply(result[, -1], 1, stats::quantile,
-                     prob = c(0.5, alpha / 2, 1 - alpha / 2))
-  summary_post <- data.frame(subgroup = object$subgr_names,
-                             trt.median = trt_quant[1, ],
-                             trt.cred.low = trt_quant[2, ],
-                             trt.cred.high = trt_quant[3, ])
+    prob = c(0.5, alpha / 2, 1 - alpha / 2)
+  )
+  summary_post <- data.frame(
+    subgroup = object$subgr_names,
+    trt.median = trt_quant[1, ],
+    trt.cred.low = trt_quant[2, ],
+    trt.cred.high = trt_quant[3, ]
+  )
   print(summary_post)
   invisible(list(posterior = result, summary_post = summary_post))
 }
