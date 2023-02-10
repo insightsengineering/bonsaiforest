@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="ahr_estimation" timestamp="2023-02-10T10:46:09Z" hostname="4f31d0f19e35" tests="1" skipped="0" failures="0" errors="0" time="0.035">
+    <testcase time="0.0350000000000001" classname="ahr_estimation" name="ahr_estimation_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="elastic_net" timestamp="2023-02-10T10:46:09Z" hostname="4f31d0f19e35" tests="2" skipped="0" failures="0" errors="0" time="0.565">
+    <testcase time="0.409" classname="elastic_net" name="elastic_net_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.156000000000001" classname="elastic_net" name="elastic_net_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="generate_stacked_data" timestamp="2023-02-10T10:46:09Z" hostname="4f31d0f19e35" tests="5" skipped="0" failures="0" errors="0" time="0.34">
+    <testcase time="0.108" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0519999999999996" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0530000000000008" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0569999999999995" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0700000000000003" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_binary"/>
+  </testsuite>
+  <testsuite name="hello" timestamp="2023-02-10T10:46:10Z" hostname="4f31d0f19e35" tests="1" skipped="0" failures="0" errors="0" time="0.006">
+    <testcase time="0.00600000000000023" classname="hello" name="hello_greets_the_entity"/>
+  </testsuite>
+  <testsuite name="horseshoe" timestamp="2023-02-10T10:46:10Z" hostname="4f31d0f19e35" tests="2" skipped="0" failures="0" errors="0" time="268.014">
+    <testcase time="170.804" classname="horseshoe" name="horseshoe_outputs_the_right_elements_for_survival"/>
+    <testcase time="97.21" classname="horseshoe" name="horseshoe_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="lOR_estimation" timestamp="2023-02-10T10:50:38Z" hostname="4f31d0f19e35" tests="1" skipped="0" failures="0" errors="0" time="0.006">
+    <testcase time="0.00600000000002865" classname="lOR_estimation" name="lor_estimation_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="naive" timestamp="2023-02-10T10:50:38Z" hostname="4f31d0f19e35" tests="2" skipped="0" failures="0" errors="0" time="0.376">
+    <testcase time="0.173000000000002" classname="naive" name="naive_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.202999999999975" classname="naive" name="naive_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="naivepop" timestamp="2023-02-10T10:50:38Z" hostname="4f31d0f19e35" tests="2" skipped="0" failures="0" errors="0" time="0.022">
+    <testcase time="0.0149999999999864" classname="naivepop" name="naivepop_produces_expected_coefficients_of_the_model"/>
+    <testcase time="0.007000000000005" classname="naivepop" name="naivepop_outputs_the_right_elements"/>
+  </testsuite>
+  <testsuite name="preprocess" timestamp="2023-02-10T10:50:38Z" hostname="4f31d0f19e35" tests="1" skipped="0" failures="0" errors="0" time="0.013">
+    <testcase time="0.0130000000000337" classname="preprocess" name="preprocess_outputs_the_right_elements"/>
+  </testsuite>
+  <testsuite name="subgroups" timestamp="2023-02-10T10:50:38Z" hostname="4f31d0f19e35" tests="2" skipped="0" failures="0" errors="0" time="0.329">
+    <testcase time="0.311999999999955" classname="subgroups" name="subgroups_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0170000000000528" classname="subgroups" name="subgroups_outputs_the_right_element_for_binary"/>
+  </testsuite>
+  <testsuite name="summary" timestamp="2023-02-10T10:50:38Z" hostname="4f31d0f19e35" tests="6" skipped="0" failures="0" errors="0" time="0.28">
+    <testcase time="0.00599999999997181" classname="summary" name="summary_outputs_the_right_element_for_naivepop_survival"/>
+    <testcase time="0.0029999999999859" classname="summary" name="summary_outputs_the_right_element_for_naivepop_binary"/>
+    <testcase time="0.00300000000004275" classname="summary" name="summary_outputs_the_right_element_for_naive_survival"/>
+    <testcase time="0.0029999999999859" classname="summary" name="summary_outputs_the_right_element_for_naive_binary"/>
+    <testcase time="0.245000000000005" classname="summary" name="summary_outputs_the_right_element_for_elastic_net_survival"/>
+    <testcase time="0.0199999999999818" classname="summary" name="summary_outputs_the_right_element_for_elastic_net_binary"/>
+  </testsuite>
+  <testsuite name="surv_prob" timestamp="2023-02-10T10:50:39Z" hostname="4f31d0f19e35" tests="1" skipped="0" failures="0" errors="0" time="0.006">
+    <testcase time="0.00600000000002865" classname="surv_prob" name="surv_prob_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="survival_curves" timestamp="2023-02-10T10:50:39Z" hostname="4f31d0f19e35" tests="1" skipped="0" failures="0" errors="0" time="0.005">
+    <testcase time="0.00499999999999545" classname="survival_curves" name="survival_curves_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="test" timestamp="2023-02-10T10:50:39Z" hostname="4f31d0f19e35" tests="1" skipped="0" failures="0" errors="0" time="0.005">
+    <testcase time="0.00499999999999545" classname="test" name="test_works_as_expected"/>
+  </testsuite>
+  <testsuite name="trt_horseshoe" timestamp="2023-02-10T10:50:39Z" hostname="4f31d0f19e35" tests="2" skipped="0" failures="0" errors="0" time="82.921">
+    <testcase time="76.859" classname="trt_horseshoe" name="trt_horseshoe_outputs_the_right_element_for_survival"/>
+    <testcase time="6.06200000000001" classname="trt_horseshoe" name="trt_horseshoe_outputs_the_right_element_for_binary"/>
+  </testsuite>
+</testsuites>
