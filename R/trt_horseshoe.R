@@ -35,22 +35,28 @@ trt_horseshoe <- function(object, gamma = 1, l = NULL, m = 50) {
     assert_scalar(gamma)
     y <- object$y
     est_coef <- t(as.matrix(fit_hs$fit)[1:iter, 1:(ncol(x))])
-    sbhaz <- as.matrix(as.matrix(fit_hs$fit)[1:iter,
-                                             c("sbhaz[1]", "sbhaz[2]", "sbhaz[3]",
-                                               "sbhaz[4]", "sbhaz[5]", "sbhaz[6]")])
+    sbhaz <- as.matrix(as.matrix(fit_hs$fit)[
+      1:iter,
+      c(
+        "sbhaz[1]", "sbhaz[2]", "sbhaz[3]",
+        "sbhaz[4]", "sbhaz[5]", "sbhaz[6]"
+      )
+    ])
     if (is.null(l)) {
       l <- max(y[which(y[, 2] == 1), 1])
     } else {
       assert_scalar(l)
     }
 
-    resp_used <-  seq(1, m) * l / m
+    resp_used <- seq(1, m) * l / m
     sort_resp <- sort(y[, 1])
     diff_resp <- min(sort_resp - c(0, sort_resp[-length(y[, 1])]))
     limits_resp <- c(max(min(y[, 1]) - diff_resp, 0), max(y[, 1]) + diff_resp)
     quantiles_resp <- stats::quantile(y[, 1], c(0.25, 0.5, 0.75))
-    ispline <- splines2::iSpline(resp_used, Boundary.knots = limits_resp,
-                                 knots = quantiles_resp, intercept = FALSE)
+    ispline <- splines2::iSpline(resp_used,
+      Boundary.knots = limits_resp,
+      knots = quantiles_resp, intercept = FALSE
+    )
     h0 <- ispline %*% t(sbhaz)
     subgroups(object, est_coef, h0, gamma)
   }
