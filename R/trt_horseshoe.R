@@ -29,12 +29,12 @@ trt_horseshoe <- function(object, gamma = 1, l = NULL, m = 50) {
   suppressWarnings(ms <- summary(fit_hs))
   iter <- ms$chains * (ms$iter - ms$warmup)
   trt_eff <- if (resptype == "binary") {
-    est_coef <- t(as.matrix(fit_hs$fit)[1:iter, 1:(ncol(x) + 1)])
+    est_coef <- t(as.matrix(fit_hs$fit)[seq_len(iter), seq_len(ncol(x) + 1)])
     subgroups(object, est_coef)
   } else if (resptype == "survival") {
     assert_scalar(gamma)
     y <- object$y
-    est_coef <- t(as.matrix(fit_hs$fit)[1:iter, 1:(ncol(x))])
+    est_coef <- t(as.matrix(fit_hs$fit)[seq_len(iter), seq_len(ncol(x))])
     sbhaz <- as.matrix(as.matrix(fit_hs$fit)[
       1:iter,
       c(
