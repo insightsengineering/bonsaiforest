@@ -103,10 +103,17 @@ The `summary.naivepop` function obtains the overall treatment effect of the data
 
 If we have survival data the estimated overall hazard ratio is going to be just the exponential of the coefficient of the cox model fitted on the data. If we have binary data then the estimated overall log-odds ratio is going to be the coefficient of the fitted model associated with the treatment.
 
+
 ### summary.naive 
 The `summary.naive` function obtains the subgroup treatment effects and their confidence intervals given an object of class `naive`.
 
 In a `naive` object we have an element which already has the information of the estimated treatment effects (obtained from each one of the models fitted on the subgroup data). To obtain the boundaries of the confidence interval we just have to consider the standard error of these estimated treatment effects and the needed normal quantile. In the case of survival data we are going to use the exponential function in order to show hazard ratios.
+
+
+### summary.elastic_net
+The `summary.elastic_net` function obtains the subgroup treatment effects given an object of class `elastic_net`.
+
+We first have to obtain the estimated coefficients of the fitted model given a value of `lambda` (the default one is minimizes the cross validation error). After that, if our data is binary we just have to call `subgroups` with the information in the `elastic_net` object. If we have survival data then we first have to obtain the cumulative baseline hazard. To do so we first sort the response time, we predict the values of the regression model in the log hazard scale and then we compute the Breslow estimator of the cumulative baseline hazard. In the end we are just going to consider the values of this cumulative baseline hazard in the event time points (the time points where an event happened) that are smaller than a value `L` (by default it is just going to be the maximum of the event time points). Once that we have the cumulative baseline hazard `h0` we can call the function `subgroups` to obtain the treatment estimates. We can also specify the parameter `gamma` (it defines the weights to obtain the average hazard ratio). Default is 1 (in this case the average hazard ratio obtained can be interpreted as the odds of concordance).
 
 
 

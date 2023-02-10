@@ -50,3 +50,65 @@ summary.naive <- function(object, conf = 0.95, ...) {
   }
   estim[, c(1, 7:9)]
 }
+
+
+#' Summary Elastic Net Function
+#'
+#' Function to obtain the naive subgroup treatment effects of an object fitted
+#' with the `elastic_net` function.
+#'
+#' @param object (`elastic_net`)\cr the elastic_net object.
+#' @param gamma (`scalar`)\cr numeric value defining the weights to obtain
+#' the average hazard ratio. Default is 1 (in this case the average hazard
+#' ratio obtained can be interpreted as the odds of concordance).
+#' @param l (`scalar`)\cr the maximum value of time that wants to be studied to
+#' obtain the average hazard ratio. Default is the maximum value of time when
+#' there was an event.
+#' @param lambda (`scalar`)\cr the penalization constant in the elastic net.
+#' Default is the value that leads to minimal cross validation error.
+#' @param ... Arguments of summary
+#'
+#' @return `data.frame` with the subgroup names and with the estimated subgroup
+#' treatment effects.
+#' @export
+#'
+#' @examples
+#' summary(elastic_net_fit_surv)
+summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...) {
+  assert_class(object, c("shrinkforest", "elastic_net"))
+  x <- object$design_matrix
+  resptype <- object$resptype
+  fit <- object$fit
+  assert_scalar(gamma)
+  if (is.null(lambda)) {
+    lambda <- fit$lambda.min
+  } else {
+    assert_scalar(lambda)
+  }
+  est_coef <- as.matrix(stats::coef(fit, s = lambda))
+  trt_eff <- if (resptype == "binary") {
+    subgroups(object, est_coef)
+  } else if (resptype == "survival") {
+    y <- object$y
+    assert_data_frame(y)
+    order_resp <- order(y$resp)
+    resp_un <- y$resp[order_resp]
+    lp <- stats::predict(fit, lambda, newx = as.matrix(x))
+    lp_un <- lp[order_resp]
+    status_un <- y$status[order_resp]
+    bh <- gbm::basehaz.gbm(
+      t = resp_un, delta = status_un, f.x = lp_un,
+      t.eval = resp_un, smooth = TRUE, cumulative = TRUE
+    )
+    resp_ev <- resp_un[which(status_un == 1)]
+    if (is.null(l)) {
+      l <- max(resp_ev)
+    } else {
+      assert_scalar(l)
+    }
+    ind_time <- which(status_un == 1 & resp_un <= l)
+    h0 <- bh[ind_time]
+    subgroups(object, est_coef, h0, gamma)
+  }
+  trt_eff
+}
