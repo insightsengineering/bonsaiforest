@@ -5,6 +5,6 @@
 #'
 #' @format
 #' A `horseshoe` object fitted with `example_data`, considering as subgroup
-#' variables all the covariates x_1, ..., x_10 and `binary` response type.
+#' variables just the covariates x_1 and x_2 and `binary` response type.
 #' @source This is an artificial example.
 "horseshoe_fit_bin"
