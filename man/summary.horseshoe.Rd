@@ -28,7 +28,8 @@ when using survival data.}
 \item{...}{Arguments of summary.}
 }
 \value{
-\code{list} with the approximated posterior distribution of the treatment
+Object of class \code{summary.horseshoe} which is a \code{list} with the
+approximated posterior distribution of the treatment
 effects and a \code{data.frame} with the estimated subgroup treatment effect
 (with the median) and the bounds of the credible intervals.
 }
@@ -37,5 +38,5 @@ Function to obtain the estimated subgroup treatment effects from a \code{horsesh
 model and a credible interval for them.
 }
 \examples{
-summary(horseshoe_fit_surv)
+summary(horseshoe_fit_bin)
 }

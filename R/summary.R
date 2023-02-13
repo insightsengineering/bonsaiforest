@@ -135,14 +135,15 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
 #' when using survival data.
 #' @param ... Arguments of summary.
 #'
-#' @return `list` with the approximated posterior distribution of the treatment
+#' @return Object of class `summary.horseshoe` which is a `list` with the
+#'  approximated posterior distribution of the treatment
 #'  effects and a `data.frame` with the estimated subgroup treatment effect
 #'  (with the median) and the bounds of the credible intervals.
 #'
 #' @export
 #'
 #' @examples
-#' summary(horseshoe_fit_surv)
+#' summary(horseshoe_fit_bin)
 summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, ...) {
   assert_class(object, c("shrinkforest", "horseshoe"))
   assert_scalar(conf)
@@ -162,6 +163,7 @@ summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, 
     trt.cred.low = trt_quant[2, ],
     trt.cred.high = trt_quant[3, ]
   )
-  print(summary_post)
-  invisible(list(posterior = result, summary_post = summary_post))
+  result <- list(posterior = result, summary_post = summary_post)
+  class(result) <- "summary.horseshoe"
+  return(result)
 }

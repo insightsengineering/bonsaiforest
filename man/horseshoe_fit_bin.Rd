@@ -6,7 +6,7 @@
 \title{Horseshoe Fit Binary}
 \format{
 A \code{horseshoe} object fitted with \code{example_data}, considering as subgroup
-variables all the covariates x_1, ..., x_10 and \code{binary} response type.
+variables just the covariates x_1 and x_2 and \code{binary} response type.
 }
 \source{
 This is an artificial example.
