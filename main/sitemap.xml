@@ -97,6 +97,9 @@
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/preprocess.html</loc>
   </url>
   <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/print.summary.horseshoe.html</loc>
+  </url>
+  <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/shrinkforest-package.html</loc>
   </url>
   <url>
@@ -104,6 +107,9 @@
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/summary.elastic_net.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/shrinkforest/main/reference/summary.horseshoe.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/shrinkforest/main/reference/summary.naive.html</loc>

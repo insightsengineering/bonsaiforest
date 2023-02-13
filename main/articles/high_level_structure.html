@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9023</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -231,6 +225,15 @@ specification and we obtain the values of the cumulative baseline hazard
 at a sequence of equally spaced time points. Finally we call
 <code>subgroups</code>.</p>
 </div>
+<div class="section level3">
+<h3 id="print-summary-horseshoe">print.summary.horseshoe<a class="anchor" aria-label="anchor" href="#print-summary-horseshoe"></a>
+</h3>
+<p>The <code>print.summary.horseshoe</code> function is used to print
+the important information of the summary of a <code>horseshoe</code>
+object.</p>
+<p>It prints the subgroups, the subgroup treatment effect estimates and
+the bounds of the credible intervals for them.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
@@ -356,6 +359,20 @@ obtain the treatment estimates. We can also specify the parameter
 <code>gamma</code> (it defines the weights to obtain the average hazard
 ratio). Default is 1 (in this case the average hazard ratio obtained can
 be interpreted as the odds of concordance).</p>
+</div>
+<div class="section level3">
+<h3 id="summary-horseshoe">summary.horseshoe<a class="anchor" aria-label="anchor" href="#summary-horseshoe"></a>
+</h3>
+<p>The <code>summary.horseshoe</code> function obtains the estimated
+posterior distribution of the treatment effects and summarizes its
+information establishing the median of this distribution as the
+estimated treatment effect and using the quantiles to define a credible
+interval.</p>
+<p>We first have to call <code>trt_horseshoe</code> to obtain the
+samples from the estimated posterior distribution of the treatment
+effects and then for each one of the subgroups we obtain the median and
+the correspondent quantiles of the samples to obtain the estimated
+subgroup treatment effects and the bounds of the credible intervals.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
