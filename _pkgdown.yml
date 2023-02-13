@@ -57,3 +57,6 @@ reference:
       - summary.naivepop
       - summary.naive
       - summary.elastic_net
+      - summary.horseshoe
+  - title: Print
+      - print.summary.horseshoe

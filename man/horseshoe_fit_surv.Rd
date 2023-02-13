@@ -6,7 +6,7 @@
 \title{Horseshoe Fit Survival}
 \format{
 A \code{horseshoe} object fitted with \code{example_data}, considering as subgroup
-variables all the covariates x_1, ..., x_10 and \code{survival} response type.
+variables just the covariates x_1 and x_2 and \code{survival} response type.
 }
 \source{
 This is an artificial example.
