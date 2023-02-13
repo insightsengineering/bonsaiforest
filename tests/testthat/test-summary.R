@@ -123,7 +123,7 @@ test_that("summary outputs the right element for horseshoe survival", {
     posterior = posterior,
     summary_post = summary_post
   )
-  class(expected) <- "summary_horseshoe"
+  class(expected) <- "summary.horseshoe"
   expect_equal(result, expected, tolerance = 0.001)
 })
 
@@ -147,6 +147,6 @@ test_that("summary outputs the right element for horseshoe binary", {
     posterior = posterior,
     summary_post = summary_post
   )
-  class(expected) <- "summary_horseshoe"
+  class(expected) <- "summary.horseshoe"
   expect_equal(result, expected, tolerance = 0.001)
 })
