@@ -17,7 +17,7 @@ with the naive function."><!-- mathjax --><script src="https://cdnjs.cloudflare.
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9023</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9024</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,12 +39,6 @@ with the naive function."><!-- mathjax --><script src="https://cdnjs.cloudflare.
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -104,32 +98,32 @@ treatment effect.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">naive_fit_surv</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    subgroup trt.effect trt.conf.low trt.conf.high</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     x_1.a  0.6741880    0.4693783     0.9683648</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     x_1.b  0.6645867    0.4663568     0.9470762</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     x_2.a  0.7087873    0.4743926     1.0589952</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     x_2.b  0.6424496    0.4636818     0.8901394</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     x_3.a  0.5054825    0.3003642     0.8506759</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     x_3.b  0.7168399    0.5365623     0.9576884</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     x_4.a  0.6213593    0.4133445     0.9340571</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     x_4.b  0.5428680    0.3372320     0.8738959</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     x_4.c  0.8575696    0.5483543     1.3411505</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10    x_5.a  1.0714912    0.5843316     1.9647978</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11    x_5.b  0.3981145    0.1911053     0.8293607</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12    x_5.c  0.5966367    0.3719363     0.9570869</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13    x_5.d  0.6818581    0.4569275     1.0175148</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14    x_6.a  0.7500611    0.4833380     1.1639715</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15    x_6.b  0.6203688    0.4551697     0.8455251</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16    x_7.a  0.4884324    0.3137099     0.7604677</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17    x_7.b  0.7883981    0.5775406     1.0762388</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18    x_8.a  0.5723798    0.3253240     1.0070535</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19    x_8.b  0.5663128    0.3505993     0.9147486</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20    x_8.c  0.7809059    0.5485165     1.1117516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21    x_9.a  0.4616452    0.2454835     0.8681493</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22    x_9.b  0.7164771    0.5426620     0.9459653</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   x_10.a  0.6844865    0.3818088     1.2271109</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24   x_10.b  0.7063065    0.4515212     1.1048625</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25   x_10.c  0.6366207    0.4435313     0.9137708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    subgroup trt.estimate   trt.low  trt.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      x_1a    0.6741880 0.4693783 0.9683648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      x_1b    0.6645867 0.4663568 0.9470762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      x_2a    0.7087873 0.4743926 1.0589952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      x_2b    0.6424496 0.4636818 0.8901394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      x_3a    0.5054825 0.3003642 0.8506759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      x_3b    0.7168399 0.5365623 0.9576884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      x_4a    0.6213593 0.4133445 0.9340571</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      x_4b    0.5428680 0.3372320 0.8738959</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9      x_4c    0.8575696 0.5483543 1.3411505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10     x_5a    1.0714912 0.5843316 1.9647978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11     x_5b    0.3981145 0.1911053 0.8293607</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12     x_5c    0.5966367 0.3719363 0.9570869</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13     x_5d    0.6818581 0.4569275 1.0175148</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14     x_6a    0.7500611 0.4833380 1.1639715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15     x_6b    0.6203688 0.4551697 0.8455251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16     x_7a    0.4884324 0.3137099 0.7604677</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17     x_7b    0.7883981 0.5775406 1.0762388</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18     x_8a    0.5723798 0.3253240 1.0070535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19     x_8b    0.5663128 0.3505993 0.9147486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20     x_8c    0.7809059 0.5485165 1.1117516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21     x_9a    0.4616452 0.2454835 0.8681493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22     x_9b    0.7164771 0.5426620 0.9459653</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23    x_10a    0.6844865 0.3818088 1.2271109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24    x_10b    0.7063065 0.4515212 1.1048625</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25    x_10c    0.6366207 0.4435313 0.9137708</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
