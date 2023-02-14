@@ -1,7 +1,7 @@
 Type: Package
 Package: shrinkforest
 Title: Shrinkage based Forest Plots
-Version: 0.0.0.9025
+Version: 0.0.0.9026
 Date: 2023-02-14
 Authors@R:
     person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = c("aut", "cre"))
@@ -22,7 +22,9 @@ Imports:
     broom,
     checkmate,
     dplyr,
+    forcats,
     gbm,
+    ggplot2,
     glmnet,
     Rcpp,
     splines2,
@@ -30,9 +32,7 @@ Imports:
     stringr,
     survival,
     tibble,
-    tidyr,
-    ggplot2,
-    forcats
+    tidyr
 Suggests:
     knitr,
     testthat (>= 2.0)
