@@ -30,7 +30,9 @@ Imports:
     stringr,
     survival,
     tibble,
-    tidyr
+    tidyr,
+    ggplot2,
+    forcats
 Suggests:
     knitr,
     testthat (>= 2.0)

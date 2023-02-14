@@ -12,7 +12,8 @@
 \item{...}{Arguments of summary.}
 }
 \value{
-The estimated overall treatment effects.
+Object of class \code{summary.naivepop} which is a \code{list} with the
+estimated subgroup treatment effects and the \code{resptype}.
 }
 \description{
 Function to obtain the overall subgroup treatment effect of a

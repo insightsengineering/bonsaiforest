@@ -15,9 +15,10 @@
 \item{...}{Arguments of summary.}
 }
 \value{
-A \code{data.frame} with 4 columns: the subgroup variables, the estimated
+Object of class \code{summary.elastic_net} which is a \code{list} with a
+\code{data.frame} with 4 columns (the subgroup variables, the estimated
 treatment effect and the low and high bounds of the confidence interval of the
-treatment effect.
+treatment effect), the \code{resptype} and the confidence level.
 }
 \description{
 Function to obtain the naive subgroup treatment effects of an object fitted

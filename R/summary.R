@@ -5,8 +5,8 @@
 #' @param object (`naivepop`)\cr the naivepop object.
 #' @param ... Arguments of summary.
 #'
-#' @return The estimated overall treatment effects.
-#' @export
+#' @return Object of class `summary.naivepop` which is a `list` with the
+#'  estimated subgroup treatment effects and the `resptype`.
 #'
 #' @examples
 #' summary(naivepop_fit_surv)
@@ -17,7 +17,12 @@ summary.naivepop <- function(object, ...) {
   } else if (object$resptype == "binary") {
     trt_effect <- stats::coef(object$fit)[2]
   }
-  trt_effect
+  result <- list(
+    estimates = trt_effect,
+    resptype = object$resptype
+  )
+  class(result) <- "summary.naivepop"
+  return(result)
 }
 
 
@@ -30,9 +35,10 @@ summary.naivepop <- function(object, ...) {
 #' 0.95.
 #' @param ... Arguments of summary.
 #'
-#' @return A `data.frame` with 4 columns: the subgroup variables, the estimated
+#' @return Object of class `summary.elastic_net` which is a `list` with a
+#' `data.frame` with 4 columns (the subgroup variables, the estimated
 #' treatment effect and the low and high bounds of the confidence interval of the
-#' treatment effect.
+#' treatment effect), the `resptype` and the confidence level.
 #' @export
 #'
 #' @examples
@@ -48,7 +54,13 @@ summary.naive <- function(object, conf = 0.95, ...) {
   if (object$resptype == "survival") {
     estim[, c(7:9)] <- exp(estim[, c(7:9)])
   }
-  estim[, c(1, 7:9)]
+  result <- list(
+    estimates = estim[, c(1, 7:9)],
+    resptype = object$resptype,
+    conf = conf
+  )
+  class(result) <- "summary.naive"
+  return(result)
 }
 
 
@@ -69,8 +81,9 @@ summary.naive <- function(object, conf = 0.95, ...) {
 #' Default is the value that leads to minimal cross validation error.
 #' @param ... Arguments of summary
 #'
-#' @return `data.frame` with the subgroup names and with the estimated subgroup
-#' treatment effects.
+#' @return Object of class `summary.elastic_net` which is a `list` with the
+#'  estimated subgroup treatment effects, the `resptype`, the confidence level
+#'  and the value of `alpha`.
 #' @export
 #'
 #' @examples
@@ -111,7 +124,13 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
     h0 <- bh[ind_time]
     subgroups(object, est_coef, h0, gamma)
   }
-  trt_eff
+  result <- list(
+    estimates = trt_eff,
+    resptype = resptype,
+    alpha = object$alpha
+  )
+  class(result) <- "summary.elastic_net"
+  return(result)
 }
 
 
@@ -137,8 +156,9 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
 #'
 #' @return Object of class `summary.horseshoe` which is a `list` with the
 #'  approximated posterior distribution of the treatment
-#'  effects and a `data.frame` with the estimated subgroup treatment effect
-#'  (with the median) and the bounds of the credible intervals.
+#'  effects, a `data.frame` with the estimated subgroup treatment effect
+#'  (with the median) and the bounds of the credible intervals, the `resptype`
+#'  and the confidence level.
 #'
 #' @export
 #'
@@ -163,7 +183,12 @@ summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, 
     trt.low = trt_quant[2, ],
     trt.high = trt_quant[3, ]
   )
-  result <- list(posterior = result, summary_post = summary_post)
+  result <- list(
+    posterior = result,
+    summary_post = summary_post,
+    resptype = object$resptype,
+    conf = conf
+  )
   class(result) <- "summary.horseshoe"
   return(result)
 }
