@@ -5,7 +5,9 @@
 #' leaves unpenalized the main effects.
 #'
 #' @param resp (`string`)\cr the response variable name.
-#' @param trt (`string`)\cr the treatment variable name.
+#' @param trt (`string`)\cr the treatment variable name. The treatment variable
+#' must be a factor with 2 levels where the first level is the control and the
+#' second one the treatment.
 #' @param subgr (`character`)\cr vector with the name of the subgroup variables
 #'  from which we want to obtain the subgroup treatment effect.
 #' @param covars (`character`)\cr vector with the name of the variables that
