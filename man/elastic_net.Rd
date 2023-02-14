@@ -18,7 +18,9 @@ elastic_net(
 \arguments{
 \item{resp}{(\code{string})\cr the response variable name.}
 
-\item{trt}{(\code{string})\cr the treatment variable name.}
+\item{trt}{(\code{string})\cr the treatment variable name. The treatment variable
+must be a factor with 2 levels where the first level is the control and the
+second one the treatment.}
 
 \item{subgr}{(\code{character})\cr vector with the name of the subgroup variables
 from which we want to obtain the subgroup treatment effect.}
@@ -49,6 +51,8 @@ penalizes the interaction between the covariates and the treatment but
 leaves unpenalized the main effects.
 }
 \examples{
-elastic_net("tt_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
- example_data, "survival", 1, "ev_pfs")
+elastic_net(
+  "tt_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
+  example_data, "survival", 1, "ev_pfs"
+)
 }

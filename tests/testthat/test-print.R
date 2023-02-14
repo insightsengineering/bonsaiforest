@@ -3,13 +3,13 @@ test_that("print.summary.horseshoe outputs the right element", {
   posterior <- trt_horseshoe(horseshoe_fit_bin)
   summary_post <- data.frame(
     subgroup = horseshoe_fit_surv$subgr_names,
-    trt.median = c(
+    trt.estimate = c(
       -0.4633, -0.467, -0.4665, -0.4646
     ),
-    trt.cred.low = c(
+    trt.low = c(
       -0.7766, -0.7841, -0.7985, -0.7675
     ),
-    trt.cred.high = c(
+    trt.high = c(
       -0.1563, -0.1635, -0.1476, -0.162
     )
   )

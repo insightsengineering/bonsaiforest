@@ -5,7 +5,9 @@
 #' treatment effect.
 #'
 #' @param resp (`string`)\cr the response variable name.
-#' @param trt (`string`)\cr the treatment variable name.
+#' @param trt (`string`)\cr the treatment variable name. The treatment variable
+#' must be a factor with 2 levels where the first level is the control and the
+#' second one the treatment.
 #' @param data (`data frame`)\cr the data frame with the variables.
 #' @param resptype (`string`)\cr the type of data used. Can be "survival"
 #'   or "binary".
@@ -32,10 +34,12 @@ naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status
     stats::glm(formula = form_bin, data = data, family = "binomial")
   }
 
-  result <- list(fit = fit_pop,
-                model = "naive_pop",
-                resptype = resptype,
-                data = data)
+  result <- list(
+    fit = fit_pop,
+    model = "naive_pop",
+    resptype = resptype,
+    data = data
+  )
   class(result) <- c("shrinkforest", "naivepop")
   return(result)
 }

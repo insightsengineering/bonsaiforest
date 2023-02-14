@@ -11,6 +11,7 @@ test_that("naive outputs the right elements for survival", {
   fit <- lapply(list_subg, FUN = function(data) {
     survival::coxph(survival::Surv(time, status) ~ arm, data = data)
   })
+  names(fit) <- gsub("\\.", "", names(fit))
   naive_estimates <- cbind(
     subgroup = names(fit),
     do.call(rbind.data.frame, lapply(fit, broom::tidy))
@@ -40,6 +41,7 @@ test_that("naive outputs the right elements for binary", {
   fit <- lapply(list_subg, FUN = function(data) {
     stats::glm(y ~ arm, data = data, family = "binomial")
   })
+  names(fit) <- gsub("\\.", "", names(fit))
   naive_estimates <- cbind(
     subgroup = names(fit),
     do.call(

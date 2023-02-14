@@ -42,9 +42,9 @@ summary.naive <- function(object, conf = 0.95, ...) {
   assert_scalar(conf)
   alpha <- 1 - conf
   estim <- object$estimates
-  estim$trt.effect <- estim$estimate
-  estim$trt.conf.low <- estim$estimate + stats::qnorm(alpha / 2) * estim$std.error
-  estim$trt.conf.high <- estim$estimate - stats::qnorm(alpha / 2) * estim$std.error
+  estim$trt.estimate <- estim$estimate
+  estim$trt.low <- estim$estimate + stats::qnorm(alpha / 2) * estim$std.error
+  estim$trt.high <- estim$estimate - stats::qnorm(alpha / 2) * estim$std.error
   if (object$resptype == "survival") {
     estim[, c(7:9)] <- exp(estim[, c(7:9)])
   }
@@ -159,9 +159,9 @@ summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, 
   )
   summary_post <- data.frame(
     subgroup = object$subgr_names,
-    trt.median = trt_quant[1, ],
-    trt.cred.low = trt_quant[2, ],
-    trt.cred.high = trt_quant[3, ]
+    trt.estimate = trt_quant[1, ],
+    trt.low = trt_quant[2, ],
+    trt.high = trt_quant[3, ]
   )
   result <- list(posterior = result, summary_post = summary_post)
   class(result) <- "summary.horseshoe"

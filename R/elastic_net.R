@@ -5,7 +5,9 @@
 #' leaves unpenalized the main effects.
 #'
 #' @param resp (`string`)\cr the response variable name.
-#' @param trt (`string`)\cr the treatment variable name.
+#' @param trt (`string`)\cr the treatment variable name. The treatment variable
+#' must be a factor with 2 levels where the first level is the control and the
+#' second one the treatment.
 #' @param subgr (`character`)\cr vector with the name of the subgroup variables
 #'  from which we want to obtain the subgroup treatment effect.
 #' @param covars (`character`)\cr vector with the name of the variables that
@@ -25,8 +27,10 @@
 #' @export
 #'
 #' @examples
-#' elastic_net("tt_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
-#'  example_data, "survival", 1, "ev_pfs")
+#' elastic_net(
+#'   "tt_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
+#'   example_data, "survival", 1, "ev_pfs"
+#' )
 elastic_net <- function(resp, trt, subgr, covars, data,
                         resptype = c("survival", "binary"), alpha,
                         status = NULL) {
@@ -40,35 +44,43 @@ elastic_net <- function(resp, trt, subgr, covars, data,
   prep_data <- preprocess(trt, subgr, covars, data)
   if (resptype == "survival") {
     assert_string(status)
-    penalty_factor <- c(rep(0, ncol(prep_data$design_main)),
-                        rep(1, ncol(prep_data$design_ia)))
+    penalty_factor <- c(
+      rep(0, ncol(prep_data$design_main)),
+      rep(1, ncol(prep_data$design_ia))
+    )
     design_matrix <- cbind(prep_data$design_main, prep_data$design_ia)
     fit_glmnet <- glmnet::cv.glmnet(design_matrix,
-                                    survival::Surv(data[[resp]], data[[status]]),
-                                    family = "cox",
-                                    penalty.factor = penalty_factor,
-                                    alpha = alpha)
+      survival::Surv(data[[resp]], data[[status]]),
+      family = "cox",
+      penalty.factor = penalty_factor,
+      alpha = alpha
+    )
     y <- as.data.frame(cbind(data[[resp]], data[[status]]))
     colnames(y) <- c("resp", "status")
   } else if (resptype == "binary") {
-    penalty_factor <- c(rep(0, ncol(prep_data$design_main[, -1])),
-                        rep(1, ncol(prep_data$design_ia)))
+    penalty_factor <- c(
+      rep(0, ncol(prep_data$design_main[, -1])),
+      rep(1, ncol(prep_data$design_ia))
+    )
     design_matrix <- cbind(prep_data$design_main[, -1], prep_data$design_ia)
     fit_glmnet <- glmnet::cv.glmnet(design_matrix, data[[resp]],
-                                    family = "binomial",
-                                    penalty.factor = penalty_factor,
-                                    alpha = alpha)
+      family = "binomial",
+      penalty.factor = penalty_factor,
+      alpha = alpha
+    )
     y <- data[[resp]]
   }
-  result <- list(fit = fit_glmnet,
-                 model = "elastic_net",
-                 resptype = resptype,
-                 data = data,
-                 alpha = alpha,
-                 design_matrix = design_matrix,
-                 design_dummy = prep_data$design_dummy,
-                 y = y,
-                 subgr_names = prep_data$subgr_names)
+  result <- list(
+    fit = fit_glmnet,
+    model = "elastic_net",
+    resptype = resptype,
+    data = data,
+    alpha = alpha,
+    design_matrix = design_matrix,
+    design_dummy = prep_data$design_dummy,
+    y = y,
+    subgr_names = prep_data$subgr_names
+  )
   class(result) <- c("shrinkforest", "elastic_net")
   return(result)
 }
