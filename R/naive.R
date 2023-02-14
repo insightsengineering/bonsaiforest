@@ -18,7 +18,7 @@
 #' @export
 #'
 #' @examples
-#'naive("tt_pfs", "arm", c("x_1", "x_2"), example_data, "survival", "ev_pfs")
+#' naive("tt_pfs", "arm", c("x_1", "x_2"), example_data, "survival", "ev_pfs")
 naive <- function(resp, trt, subgr, data,
                   resptype = c("survival", "binary"), status = NULL) {
   assert_string(resp)
@@ -29,37 +29,51 @@ naive <- function(resp, trt, subgr, data,
   subgr_model <- stats::as.formula(paste("~", paste0(subgr, collapse = "+")))
   if (resptype == "survival") {
     assert_string(status)
-    base_model <- stats::as.formula(paste("Surv(", resp, ",", status, ") ~ ",
-                                          trt))
+    base_model <- stats::as.formula(paste(
+      "Surv(", resp, ",", status, ") ~ ",
+      trt
+    ))
     stacked_data <- generate_stacked_data(base_model, subgr_model, data,
-                                          resptype = resptype)
-    list_subg <- split(stacked_data, ~ subgroup)
+      resptype = resptype
+    )
+    list_subg <- split(stacked_data, ~subgroup)
     fit <- lapply(list_subg, FUN = function(data) {
       survival::coxph(survival::Surv(time, status) ~ arm, data = data)
-      })
-    names(fit) <-  gsub("\\.", "", names(fit))
-    naive_estimates <- cbind(subgroup = names(fit),
-                             do.call(rbind.data.frame, lapply(fit, broom::tidy)))
+    })
+    names(fit) <- gsub("\\.", "", names(fit))
+    naive_estimates <- cbind(
+      subgroup = names(fit),
+      do.call(rbind.data.frame, lapply(fit, broom::tidy))
+    )
   } else if (resptype == "binary") {
     base_model <- stats::as.formula(paste(resp, " ~ ", trt))
     stacked_data <- generate_stacked_data(base_model, subgr_model, data,
-                                          resptype = resptype)
-    list_subg <- split(stacked_data, ~ subgroup)
+      resptype = resptype
+    )
+    list_subg <- split(stacked_data, ~subgroup)
     fit <- lapply(list_subg, FUN = function(data) {
       stats::glm(y ~ arm, data = data, family = "binomial")
-      })
-    names(fit) <-  gsub("\\.", "", names(fit))
-    naive_estimates <- cbind(subgroup = names(fit),
-                             do.call(rbind.data.frame,
-                                     lapply(fit, broom::tidy))[seq(2,
-                                                                   2 * length(fit),
-                                                                   2), ])
+    })
+    names(fit) <- gsub("\\.", "", names(fit))
+    naive_estimates <- cbind(
+      subgroup = names(fit),
+      do.call(
+        rbind.data.frame,
+        lapply(fit, broom::tidy)
+      )[seq(
+        2,
+        2 * length(fit),
+        2
+      ), ]
+    )
   }
-  result <- list(fit = fit,
-                estimates = naive_estimates,
-                model = "naive",
-                resptype = resptype,
-                data = data)
+  result <- list(
+    fit = fit,
+    estimates = naive_estimates,
+    model = "naive",
+    resptype = resptype,
+    data = data
+  )
   class(result) <- c("shrinkforest", "naive")
   return(result)
 }
