@@ -3,7 +3,9 @@
 #' Function to fit the naive models to the data of each one of the subgroups.
 #'
 #' @param resp (`string`)\cr the response variable name.
-#' @param trt (`string`)\cr the treatment variable name.
+#' @param trt (`string`)\cr the treatment variable name. The treatment variable
+#' must be a factor with 2 levels where the first level is the control and the
+#' second one the treatment.
 #' @param subgr (`character`)\cr vector with the name of the subgrouping
 #'   variables.
 #' @param data (`data frame`)\cr the data frame with the variables.
@@ -35,6 +37,7 @@ naive <- function(resp, trt, subgr, data,
     fit <- lapply(list_subg, FUN = function(data) {
       survival::coxph(survival::Surv(time, status) ~ arm, data = data)
       })
+    names(fit) <-  gsub("\\.", "", names(fit))
     naive_estimates <- cbind(subgroup = names(fit),
                              do.call(rbind.data.frame, lapply(fit, broom::tidy)))
   } else if (resptype == "binary") {
@@ -45,6 +48,7 @@ naive <- function(resp, trt, subgr, data,
     fit <- lapply(list_subg, FUN = function(data) {
       stats::glm(y ~ arm, data = data, family = "binomial")
       })
+    names(fit) <-  gsub("\\.", "", names(fit))
     naive_estimates <- cbind(subgroup = names(fit),
                              do.call(rbind.data.frame,
                                      lapply(fit, broom::tidy))[seq(2,
