@@ -1,18 +1,28 @@
 test_that("summary outputs the right element for naivepop survival", {
   result <- summary(naivepop_fit_surv)
-  expected <- exp(coef(naivepop_fit_surv$fit))
+  estimates<- exp(coef(naivepop_fit_surv$fit))
+  expected <- list(
+    estimates = estimates,
+    resptype = "survival"
+  )
+  class(expected) <- "summary.naivepop"
   expect_equal(result, expected)
 })
 
 test_that("summary outputs the right element for naivepop binary", {
   result <- summary(naivepop_fit_bin)
-  expected <- coef(naivepop_fit_bin$fit)[2]
+  estimates <- coef(naivepop_fit_bin$fit)[2]
+  expected <- list(
+    estimates = estimates,
+    resptype = "binary"
+  )
+  class(expected) <- "summary.naivepop"
   expect_equal(result, expected)
 })
 
 test_that("summary outputs the right element for naive survival", {
   result <- summary(naive_fit_surv)
-  expected <- data.frame(
+  estimates <- data.frame(
     subgroup = c(
       "x_1a", "x_1b", "x_2a", "x_2b", "x_3a", "x_3b", "x_4a",
       "x_4b", "x_4c", "x_5a", "x_5b", "x_5c", "x_5d", "x_6a",
@@ -38,12 +48,18 @@ test_that("summary outputs the right element for naive survival", {
       0.946, 1.2271, 1.1049, 0.9138
     )
   )
+  expected <- list(
+    estimates = estimates,
+    resptype = "survival",
+    conf = 0.95
+  )
+  class(expected) <- "summary.naive"
   expect_equal(result, expected, tolerance = 0.001)
 })
 
 test_that("summary outputs the right element for naive binary", {
   result <- summary(naive_fit_bin)
-  expected <- data.frame(
+  estimates <- data.frame(
     subgroup = c(
       "x_1a", "x_1b", "x_2a", "x_2b", "x_3a", "x_3b", "x_4a",
       "x_4b", "x_4c", "x_5a", "x_5b", "x_5c", "x_5d", "x_6a",
@@ -70,13 +86,19 @@ test_that("summary outputs the right element for naive binary", {
       -0.0225, 0.0994, -0.191, -0.0295, 0.2782, 0.1129, -0.088
     )
   )
+  expected <- list(
+    estimates = estimates,
+    resptype = "binary",
+    conf = 0.95
+  )
+  class(expected) <- "summary.naive"
   expect_equal(result, expected, tolerance = 0.001)
 })
 
 
 test_that("summary outputs the right element for elastic_net survival", {
   result <- summary(elastic_net_fit_surv)
-  expected <- data.frame(
+  estimates <- data.frame(
     subgroup = elastic_net_fit_surv$subgr_names,
     trt.estimate = c(
       0.65, 0.6494, 0.6494, 0.6502, 0.6498, 0.649, 0.6474,
@@ -85,12 +107,19 @@ test_that("summary outputs the right element for elastic_net survival", {
       0.6498, 0.6498, 0.6496, 0.6493
     )
   )
+  expected <- list(
+    estimates = estimates,
+    resptype = "survival",
+    alpha = 1
+  )
+  class(expected) <- "summary.elastic_net"
   expect_equal(result, expected, tolerance = 0.001)
 })
 
+
 test_that("summary outputs the right element for elastic_net binary", {
   result <- summary(elastic_net_fit_bin)
-  expected <- data.frame(
+  estimates <- data.frame(
     subgroup = elastic_net_fit_surv$subgr_names,
     trt.estimate = c(
       -0.463, -0.4641, -0.4641, -0.4627, -0.4641, -0.4656,
@@ -100,6 +129,12 @@ test_that("summary outputs the right element for elastic_net binary", {
       -0.4645
     )
   )
+  expected <- list(
+    estimates = estimates,
+    resptype = "binary",
+    alpha = 1
+  )
+  class(expected) <- "summary.elastic_net"
   expect_equal(result, expected, tolerance = 0.001)
 })
 
@@ -121,7 +156,9 @@ test_that("summary outputs the right element for horseshoe survival", {
   )
   expected <- list(
     posterior = posterior,
-    summary_post = summary_post
+    summary_post = summary_post,
+    resptype = "survival",
+    conf = 0.95
   )
   class(expected) <- "summary.horseshoe"
   expect_equal(result, expected, tolerance = 0.001)
@@ -145,7 +182,9 @@ test_that("summary outputs the right element for horseshoe binary", {
   )
   expected <- list(
     posterior = posterior,
-    summary_post = summary_post
+    summary_post = summary_post,
+    resptype = "binary",
+    conf = 0.95
   )
   class(expected) <- "summary.horseshoe"
   expect_equal(result, expected, tolerance = 0.001)

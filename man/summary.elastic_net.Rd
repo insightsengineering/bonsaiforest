@@ -24,8 +24,9 @@ Default is the value that leads to minimal cross validation error.}
 \item{...}{Arguments of summary}
 }
 \value{
-\code{data.frame} with the subgroup names and with the estimated subgroup
-treatment effects.
+Object of class \code{summary.elastic_net} which is a \code{list} with the
+estimated subgroup treatment effects, the \code{resptype}, the confidence level
+and the value of \code{alpha}.
 }
 \description{
 Function to obtain the naive subgroup treatment effects of an object fitted

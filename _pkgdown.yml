@@ -60,4 +60,7 @@ reference:
       - summary.horseshoe
   - title: Print
     contents:
+      - print.summary.naivepop
+      - print.summary.naive
+      - print.summary.elastic_net
       - print.summary.horseshoe
