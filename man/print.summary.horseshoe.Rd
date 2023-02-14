@@ -9,10 +9,10 @@
 \arguments{
 \item{x}{(\code{summary.horseshoe})\cr Summary of a \code{horseshoe} object.}
 
-\item{...}{Other arguments of print}
+\item{...}{Other arguments of print.}
 }
 \value{
-The summary of the object
+The summary of the object.
 }
 \description{
 Function that prints the summary of a horseshoe object

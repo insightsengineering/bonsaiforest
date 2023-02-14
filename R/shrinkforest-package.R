@@ -15,4 +15,6 @@
 #' @importFrom splines2 mSpline
 #' @importFrom Rcpp evalCpp
 #' @importFrom gbm gbm
+#' @import ggplot2
+#' @importFrom forcats fct_inorder
 NULL

@@ -30,8 +30,9 @@ when using survival data.}
 \value{
 Object of class \code{summary.horseshoe} which is a \code{list} with the
 approximated posterior distribution of the treatment
-effects and a \code{data.frame} with the estimated subgroup treatment effect
-(with the median) and the bounds of the credible intervals.
+effects, a \code{data.frame} with the estimated subgroup treatment effect
+(with the median) and the bounds of the credible intervals, the \code{resptype}
+and the confidence level.
 }
 \description{
 Function to obtain the estimated subgroup treatment effects from a \code{horseshoe}
