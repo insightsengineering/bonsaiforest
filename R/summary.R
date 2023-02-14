@@ -187,7 +187,8 @@ summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, 
     posterior = result,
     summary_post = summary_post,
     resptype = object$resptype,
-    conf = conf)
+    conf = conf
+  )
   class(result) <- "summary.horseshoe"
   return(result)
 }

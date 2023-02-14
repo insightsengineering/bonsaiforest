@@ -1,6 +1,6 @@
 test_that("summary outputs the right element for naivepop survival", {
   result <- summary(naivepop_fit_surv)
-  estimates<- exp(coef(naivepop_fit_surv$fit))
+  estimates <- exp(coef(naivepop_fit_surv$fit))
   expected <- list(
     estimates = estimates,
     resptype = "survival"
