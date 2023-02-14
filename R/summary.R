@@ -159,7 +159,7 @@ summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, 
   )
   summary_post <- data.frame(
     subgroup = object$subgr_names,
-    trt.median = trt_quant[1, ],
+    trt.estimate = trt_quant[1, ],
     trt.low = trt_quant[2, ],
     trt.high = trt_quant[3, ]
   )

@@ -51,6 +51,8 @@ penalizes the interaction between the covariates and the treatment but
 leaves unpenalized the main effects.
 }
 \examples{
-elastic_net("tt_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
- example_data, "survival", 1, "ev_pfs")
+elastic_net(
+  "tt_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
+  example_data, "survival", 1, "ev_pfs"
+)
 }
