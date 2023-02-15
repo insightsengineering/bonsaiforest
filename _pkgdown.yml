@@ -64,3 +64,8 @@ reference:
       - print.summary.naive
       - print.summary.elastic_net
       - print.summary.horseshoe
+  - title: Plot
+    contents:
+      - plot.summary.naive
+      - plot.summary.elastic_net
+      - plot.summary.horseshoe

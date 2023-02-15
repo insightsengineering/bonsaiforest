@@ -1,4 +1,4 @@
-test_that("print.summary.naivepop outputs the right element", {
+test_that("print outputs the right element for naivepop", {
   result <- print(summary(naivepop_fit_bin))
   estimates <- coef(naivepop_fit_bin$fit)[2]
   expected <- list(
@@ -10,7 +10,7 @@ test_that("print.summary.naivepop outputs the right element", {
 })
 
 
-test_that("print.summary.naive outputs the right element", {
+test_that("print outputs the right element for naive", {
   result <- print(summary(naive_fit_bin))
   estimates <- data.frame(
     subgroup = c(
@@ -49,7 +49,7 @@ test_that("print.summary.naive outputs the right element", {
 })
 
 
-test_that("print.summary.elastic_net outputs the right element", {
+test_that("print outputs the right element for elastic_net", {
   result <- print(summary(elastic_net_fit_bin))
   estimates <- data.frame(
     subgroup = elastic_net_fit_surv$subgr_names,
@@ -71,7 +71,7 @@ test_that("print.summary.elastic_net outputs the right element", {
 })
 
 
-test_that("print.summary.horseshoe outputs the right element", {
+test_that("print outputs the right element for horseshoe", {
   result <- print(summary(horseshoe_fit_bin))
   posterior <- trt_horseshoe(horseshoe_fit_bin)
   summary_post <- data.frame(
@@ -88,7 +88,7 @@ test_that("print.summary.horseshoe outputs the right element", {
   )
   expected <- list(
     posterior = posterior,
-    summary_post = summary_post,
+    estimates = summary_post,
     resptype = "binary",
     conf = 0.95
   )

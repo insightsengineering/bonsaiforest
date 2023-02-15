@@ -163,5 +163,17 @@ It prints the subgroups, the subgroup treatment effect estimates and the bounds 
 
 
 
+## Plot functions
+With the `plot` function we are going to obtain the forest plot of the summary of a fitted object.
 
 
+### plot.summary.naive
+The `plot.summary.naive` function is used to plot the forest plot of a `naive` object.
+
+
+### plot.summary.elastic_net
+The `plot.summary.elastic_net` function is used to plot the forest plot of a `elastic_net` object.
+
+
+### plot.summary.horseshoe
+The `plot.summary.horseshoe` function is used to plot the forest plot of a `horseshoe` object.
