@@ -1,6 +1,6 @@
-#' Forestplot Summary Naive
+#' Forest plot Summary Naive
 #'
-#' Plot the forestplot of the summary of a `naive` object.
+#' Plot the forest plot of the summary of a `naive` object.
 #'
 #' @param x (`summary.naive`)\cr summary of a `naive` object.
 #' @param ... Additional arguments to plot
@@ -69,9 +69,9 @@ plot.summary.naive <- function(x, ...) {
 }
 
 
-#' Forestplot Summary Elastic Net
+#' Forest plot Summary Elastic Net
 #'
-#' Plot the forestplot of the summary of a `elastic_net` object.
+#' Plot the forest plot of the summary of a `elastic_net` object.
 #'
 #' @param x (`summary.elastic_net`)\cr summary of a `elastic_net` object.
 #' @param ... Additional arguments to plot
@@ -144,9 +144,9 @@ plot.summary.elastic_net <- function(x, ...) {
 }
 
 
-#' Forestplot Summary Horseshoe
+#' Forest plot Summary Horseshoe
 #'
-#' Plot the forestplot of the summary of a `horseshoe` object.
+#' Plot the forest plot of the summary of a `horseshoe` object.
 #'
 #' @param x (`summary.horseshoe`)\cr summary of a `horseshoe` object.
 #' @param ... Additional arguments to plot
