@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.summary.horseshoe}
 \alias{plot.summary.horseshoe}
-\title{Forestplot Summary Horseshoe}
+\title{Forest plot Summary Horseshoe}
 \usage{
 \method{plot}{summary.horseshoe}(x, ...)
 }
@@ -15,7 +15,7 @@
 Forest plot
 }
 \description{
-Plot the forestplot of the summary of a \code{horseshoe} object.
+Plot the forest plot of the summary of a \code{horseshoe} object.
 }
 \examples{
 plot(summary(horseshoe_fit_bin))

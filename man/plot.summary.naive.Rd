@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.summary.naive}
 \alias{plot.summary.naive}
-\title{Forestplot Summary Naive}
+\title{Forest plot Summary Naive}
 \usage{
 \method{plot}{summary.naive}(x, ...)
 }
@@ -15,7 +15,7 @@
 Forest plot
 }
 \description{
-Plot the forestplot of the summary of a \code{naive} object.
+Plot the forest plot of the summary of a \code{naive} object.
 }
 \examples{
 plot(summary(naive_fit_surv))

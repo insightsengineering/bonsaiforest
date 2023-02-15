@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.summary.elastic_net}
 \alias{plot.summary.elastic_net}
-\title{Forestplot Summary Elastic Net}
+\title{Forest plot Summary Elastic Net}
 \usage{
 \method{plot}{summary.elastic_net}(x, ...)
 }
@@ -15,7 +15,7 @@
 Forest plot
 }
 \description{
-Plot the forestplot of the summary of a \code{elastic_net} object.
+Plot the forest plot of the summary of a \code{elastic_net} object.
 }
 \examples{
 plot(summary(elastic_net_fit_surv))
