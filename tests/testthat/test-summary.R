@@ -156,7 +156,7 @@ test_that("summary outputs the right element for horseshoe survival", {
   )
   expected <- list(
     posterior = posterior,
-    summary_post = summary_post,
+    estimates = summary_post,
     resptype = "survival",
     conf = 0.95
   )
@@ -182,7 +182,7 @@ test_that("summary outputs the right element for horseshoe binary", {
   )
   expected <- list(
     posterior = posterior,
-    summary_post = summary_post,
+    estimates = summary_post,
     resptype = "binary",
     conf = 0.95
   )
