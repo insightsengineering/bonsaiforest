@@ -17,4 +17,5 @@
 #' @importFrom gbm gbm
 #' @import ggplot2
 #' @importFrom forcats fct_inorder
+#' @importFrom vdiffr expect_doppelganger
 NULL
