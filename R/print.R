@@ -68,6 +68,6 @@ print.summary.elastic_net <- function(x, ...) {
 #' print(summary(horseshoe_fit_bin))
 print.summary.horseshoe <- function(x, ...) {
   assert_class(x, "summary.horseshoe")
-  print(x$summary_post)
+  print(x$estimates)
   invisible(x)
 }
