@@ -23,8 +23,8 @@ plot.summary.naive <- function(x, ...) {
     ylab("Subgroup") +
     geom_errorbar(aes(xmin = trt.low, xmax = trt.high, col = model), width = 0.5, cex = 1) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
-               strip.position = "left",
-               nrow = nrow(data), scales = "free_y"
+      strip.position = "left",
+      nrow = nrow(data), scales = "free_y"
     ) +
     theme(
       plot.title = element_text(size = 16, face = "bold"),
@@ -36,12 +36,12 @@ plot.summary.naive <- function(x, ...) {
       strip.text.y.left = element_text(angle = 0)
     ) +
     scale_colour_discrete("Model")
-  if(x$resptype == "survival") {
+  if (x$resptype == "survival") {
     forestplot + xlab("Hazard ratio") +
-    geom_vline(xintercept = 1, linetype = 2)
+      geom_vline(xintercept = 1, linetype = 2)
   } else if (x$resptype == "binary") {
     forestplot + xlab("Log Odds-Ratio") +
-    geom_vline(xintercept = 0, linetype = 2)
+      geom_vline(xintercept = 0, linetype = 2)
   }
 }
 
@@ -76,8 +76,8 @@ plot.summary.elastic_net <- function(x, ...) {
     geom_point(aes(col = model)) +
     ylab("Subgroup") +
     facet_wrap(~ forcats::fct_inorder(subgroup),
-               strip.position = "left",
-               nrow = nrow(data), scales = "free_y"
+      strip.position = "left",
+      nrow = nrow(data), scales = "free_y"
     ) +
     theme(
       plot.title = element_text(size = 16, face = "bold"),
@@ -124,8 +124,8 @@ plot.summary.horseshoe <- function(x, ...) {
     ylab("Subgroup") +
     geom_errorbar(aes(xmin = trt.low, xmax = trt.high, col = model), width = 0.5, cex = 1) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
-               strip.position = "left",
-               nrow = nrow(data), scales = "free_y"
+      strip.position = "left",
+      nrow = nrow(data), scales = "free_y"
     ) +
     theme(
       plot.title = element_text(size = 16, face = "bold"),
@@ -137,7 +137,7 @@ plot.summary.horseshoe <- function(x, ...) {
       strip.text.y.left = element_text(angle = 0)
     ) +
     scale_colour_discrete("Model")
-  if(x$resptype == "survival") {
+  if (x$resptype == "survival") {
     forestplot + xlab("Hazard ratio") +
       geom_vline(xintercept = 1, linetype = 2)
   } else if (x$resptype == "binary") {
