@@ -10,8 +10,10 @@
 #' @export
 #'
 #' @examples
-#' compareplot(summary(naive_fit_surv), summary(naivepop_fit_surv),
-#'  summary(elastic_net_fit_surv))
+#' compareplot(
+#'   summary(naive_fit_surv), summary(naivepop_fit_surv),
+#'   summary(elastic_net_fit_surv)
+#' )
 compareplot <- function(...) {
   list_objects <- list(...)
   data <- NULL
@@ -23,20 +25,25 @@ compareplot <- function(...) {
     } else if (inherits(obj, "summary.naive")) {
       assert_class(obj, "summary.naive")
       data_obj <- data.frame(obj$estimates,
-                             model = rep("Naive", nrow(obj$estimates)))
+        model = rep("Naive", nrow(obj$estimates))
+      )
       data <- rbind(data, data_obj)
     } else if (inherits(obj, "summary.elastic_net")) {
       assert_class(obj, "summary.elastic_net")
       data_obj <- data.frame(obj$estimates,
-                           trt.low = obj$estimates[, 2],
-                           trt.high = obj$estimates[, 2],
-                           model = rep(paste("Elastic net alpha =", obj$alpha),
-                                       nrow(obj$estimates)))
+        trt.low = obj$estimates[, 2],
+        trt.high = obj$estimates[, 2],
+        model = rep(
+          paste("Elastic net alpha =", obj$alpha),
+          nrow(obj$estimates)
+        )
+      )
       data <- rbind(data, data_obj)
     } else if (inherits(obj, "summary.horseshoe")) {
       assert_class(obj, "summary.horseshoe")
       data_obj <- data.frame(obj$estimates,
-                             model = rep("Horseshoe", nrow(obj$estimates)))
+        model = rep("Horseshoe", nrow(obj$estimates))
+      )
       data <- rbind(data, data_obj)
     }
   }
@@ -45,17 +52,21 @@ compareplot <- function(...) {
   resptype <- list_objects[[1]]$resptype
   forestplot <- ggplot(
     data = data,
-    aes(x = trt.estimate, y = forcats::fct_inorder(model), xmin = trt.low,
-        xmax = trt.high)
+    aes(
+      x = trt.estimate, y = forcats::fct_inorder(model), xmin = trt.low,
+      xmax = trt.high
+    )
   ) +
     ggtitle("Forest plot") +
     geom_pointrange(aes(col = forcats::fct_inorder(model))) +
     ylab("Subgroup") +
-    geom_errorbar(aes(xmin = trt.low, xmax = trt.high,
-                      col = forcats::fct_inorder(model)), width = 0.5, cex = 1) +
+    geom_errorbar(aes(
+      xmin = trt.low, xmax = trt.high,
+      col = forcats::fct_inorder(model)
+    ), width = 0.5, cex = 1) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
-               strip.position = "left",
-               nrow = nrow(data), scales = "free_y"
+      strip.position = "left",
+      nrow = nrow(data), scales = "free_y"
     ) +
     theme(
       plot.title = element_text(size = 16, face = "bold"),
@@ -74,7 +85,8 @@ compareplot <- function(...) {
   }
   if (!is.null(overall_trt)) {
     forestplot2 + geom_vline(aes(xintercept = overall_trt, linetype = "Overall"),
-                             color = "darkblue") +
+      color = "darkblue"
+    ) +
       scale_linetype_manual("Overall population", values = c("dashed"))
   } else {
     forestplot2
