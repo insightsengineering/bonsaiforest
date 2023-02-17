@@ -177,3 +177,10 @@ The `plot.summary.elastic_net` function is used to plot the forest plot of a `el
 
 ### plot.summary.horseshoe
 The `plot.summary.horseshoe` function is used to plot the forest plot of a `horseshoe` object.
+
+### compareplot
+The `compareplot` function is used to create a forest plot with all the methods fitted in the data to obtain the subgroup treatment effects.
+
+The arguments of the function have to be summaries of `shrinkforest` objects, i.e, objects of class `summary.naivepop`, `summary.naive`, `summary.elastic_net` or `summary.horseshoe`. 
+
+These objects have the treatment effect estimates and the bounds of the credible or confidence intervals (when it applies). We plot them with the shape of a forest plot and if the `summary.naivepop` object is included in the arguments we add a vertical line indicating the overall treatment effect.

@@ -69,3 +69,4 @@ reference:
       - plot.summary.naive
       - plot.summary.elastic_net
       - plot.summary.horseshoe
+      - compareplot

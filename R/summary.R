@@ -7,6 +7,7 @@
 #'
 #' @return Object of class `summary.naivepop` which is a `list` with the
 #'  estimated subgroup treatment effects and the `resptype`.
+#' @export
 #'
 #' @examples
 #' summary(naivepop_fit_surv)
