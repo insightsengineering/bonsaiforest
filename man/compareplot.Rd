@@ -18,6 +18,8 @@ Function to obtain a forest plot with all the different fitted models in
 order to compare their performance.
 }
 \examples{
-compareplot(summary(naive_fit_surv), summary(naivepop_fit_surv),
- summary(elastic_net_fit_surv))
+compareplot(
+  summary(naive_fit_surv), summary(naivepop_fit_surv),
+  summary(elastic_net_fit_surv)
+)
 }
