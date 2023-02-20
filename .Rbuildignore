@@ -9,6 +9,7 @@ SECURITY.md
 ^vignettes/hello\.Rmd$
 ^vignettes/high_level_structure\.Rmd$
 ^vignettes/overview\.Rmd$
+^vignettes/example_guide\.Rmd$
 ^docs$
 ^\.github$
 README.*
