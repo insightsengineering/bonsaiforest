@@ -1,0 +1,183 @@
+---
+title: "Example guide"
+output: html_document
+date: "2023-02-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+In this vignette we are going to show with an example how to use this package. 
+
+We are going to consider a data set with time to event data and 10 categorical covariates. These categorical covariates define 25 subgroups. We are interested in estimating the subgroup treatment effect (in this case the subgroup hazard ratio) of each one of these 25 subgroups. To do so we are going to use all the methods available in this package and we are going to compare their results using a forest plot. 
+
+
+## Data analysis
+
+As it was mentioned before we are going to use survival data as an example of how to use the package. In our data (that should be of class `data.frame`) we should have columns with the following variables:
+
+* Treatment: factor variable with two levels (the first level represents the control group and the second one the treatment group). It is important to make sure that this variable is a factor and that the levels are in the correct order.
+
+* Response: in the case of survival data this should be a numeric variable with the survival time.
+
+* Status: in the case of survival data this variable should be present and is a numeric variable with 0 and 1 indicating whether the observation was censored or not.
+
+* Categorical variables: factor variables with information about the individuals. The levels of these variables are going to be the subgroups that we are interested in studying.
+
+In our case we have the following structure of the data:
+
+```{r str_data}
+str(example_data)
+```
+
+We have that `arm` is our treatment variable, `x_1` to `x_10` are the categorical covariates, `tt_pfs` is the response variable and `ev_pfs` is the status variable.
+
+Once that we are sure that our data is in the correct format and contains all the necessary variables, we are going to fit the different models in order to obtain the subgroup treatment effects.
+
+
+
+## Fit Models and Check Summary
+
+
+### Naivepop
+
+Let's start by fitting the model that will lead to an overall treatment effect estimation.
+
+```{r}
+naivepop_model <- naivepop(resp = "tt_pfs", trt = "arm", data = example_data, resptype = "survival", status = "ev_pfs")
+```
+
+This new `naivepop` object contains the fitted model, the kind of model that was fitted, the response type of the data and the data.
+
+We can take the summary of this object to obtain the overall treatment effect estimate (in this case the overall hazard ratio).
+
+```{r}
+summary_naivepop <- summary(naivepop_model)
+summary_naivepop
+```
+
+
+### Naive
+
+Now we are going to fit the model to obtain the naive subgroup-specific treatment effects. We have to indicate which categorical variables we want to consider to obtain the subgroup treatment effects. If we add variable `x_1` we are going to obtain the subgroup treatment effect of the subgroups `x_1a` and `x_1b`.
+
+```{r}
+naive_model <- naive(resp = "tt_pfs", trt = "arm",
+                     subgr = c("x_1", "x_2", "x_3", "x_4"),
+                     data = example_data, resptype = "survival",
+                     status = "ev_pfs")
+```
+
+This `naive` object contains the fitted models for each one of the subgroups, the main information about the coefficients associated to treatment of these fitted models, the kind of models fitted, the response type and the data.
+
+We can take the summary of this object to obtain the subgroup treatment effects. We can also include a value for the confidence level in order to obtain confidence intervals for these subgroup treatment effect estimates. By default this confidence level is of 95%. 
+
+```{r}
+summary_naive <- summary(naive_model, conf = 0.90)
+summary_naive
+```
+
+We can add a forest plot with the estimated treatment effects:
+
+```{r}
+plot(summary_naive)
+```
+
+
+### Elastic Net
+
+We are going to fit a model considering an elastic net penalization on the subgroup treatment interaction coefficients. Depending on the value of `alpha` we are going to have different kinds of penalties. If we put `alpha` to 0 we consider a ridge penalty and if we put `alpha` to 1 we consider a lasso penalty. We are going to fit both lasso and ridge.
+
+We have to add the `covars` argument which indicates which categorical variables we want to include in our model. It is important that all the variables that are in `subgr` are also in `covars`. The idea is that we can include many variables but then only find the subgroup treatment effect of some of them.
+
+```{r}
+ridge_model <- elastic_net(resp = "tt_pfs", trt = "arm",
+                           subgr = c("x_1", "x_2", "x_3", "x_4"),
+                           covars = c("x_1", "x_2", "x_3", "x_4", "x_5",
+                                      "x_6", "x_7", "x_8", "x_9", "x_10"),
+                           data = example_data, resptype = "survival",
+                           alpha = 0, status = "ev_pfs")
+
+lasso_model <- elastic_net(resp = "tt_pfs", trt = "arm",
+                           subgr = c("x_1", "x_2", "x_3", "x_4"),
+                           covars = c("x_1", "x_2", "x_3", "x_4", "x_5",
+                                      "x_6", "x_7", "x_8", "x_9", "x_10"),
+                           data = example_data, resptype = "survival",
+                           alpha = 1, status = "ev_pfs")
+```
+
+These `elastic_net` models contain the fitted models, the response type, the data, the value of `alpha`, the design and the dummy matrices (that are later going to be used to obtain the subgroup treatment effects), the response and status variables and the names of the subgroups.
+
+We are now going to obtain the summary of these fitted objects to find the subgroup hazard ratio estimates.
+
+```{r}
+summary_ridge <- summary(ridge_model)
+summary_ridge
+summary_lasso <- summary(lasso_model)
+summary_lasso
+```
+
+We can obtain a forest plot for each one of these fitted models:
+
+```{r}
+plot(summary_ridge)
+plot(summary_lasso)
+```
+
+
+### Horseshoe model
+
+We are now going to fit a Bayesian model with a horseshoe prior on the subgroup-treatment interactions. Fitting this kind of models usually takes a bit of time. We can modify the number of Markov chains, the number of iterations and the number of warmup iterations. In this case we chose 2 chains although the default is 4. 
+
+```{r}
+horseshoe_model <- horseshoe(resp = "tt_pfs", trt = "arm",
+                             subgr = c("x_1", "x_2", "x_3", "x_4"),
+                             covars = c("x_1", "x_2", "x_3", "x_4", "x_5",
+                                        "x_6", "x_7", "x_8", "x_9", "x_10"),
+                             data = example_data, resptype = "survival",
+                             status = "ev_pfs", chains = 2)
+```
+
+Once that the model is fitted we have to check if there are convergence problems. In this case we obtained 3 divergent transitions after warmup. In general if there are few divergent transitions (taking into account the total number of iterations, in this case 2000 after warmup) and there are no other problems like high Rhats we can continue with our analysis. This is what happens in our example: we have 3 divergent transitions after warmup out of 2000 and there are no other problems.
+
+We can obtain a summary of the posterior distributions of the coefficients of the fitted model:
+
+```{r}
+horseshoe_model$fit
+```
+
+Apart from the fitted model this `horseshoe` object also contains the data, the response, the design and dummy matrices, the kind of response and the subgroup names.
+
+We are now going to call summary of this object to obtain the subgroup hazard ratio estimates. With this summary we are also going to obtain the samples of the approximate posterior distribution of the subgroup hazard ratios. The estimates are just the median of this approximate posterior distribution. We should select a confidence level in order to obtain credible intervals for the subgroup treatment effects. The default confidence level is 95%. 
+
+```{r}
+summary_horseshoe <- summary(horseshoe_model, conf = 0.9)
+summary_horseshoe
+```
+
+We can obtain a forest plot with the treatment effect estimates and the credible intervals.
+
+```{r}
+plot(summary_horseshoe)
+```
+
+
+## Comparison of the Methods
+
+A last useful thing that we can do is to compare the different treatment effect estimates. For that we are first going to generate a data set with all the estimated hazard ratios and then we are going to plot all of them in a common forest plot.
+
+```{r}
+comparison_data <- compare(naivepop_model, naive_model, ridge_model, lasso_model, horseshoe_model)
+comparison_data
+```
+
+Now we plot all the estimated subgroup hazard ratios and we add a vertical line indicating the value of the overall hazard ratio. 
+
+```{r}
+plot(comparison_data)
+```
+
+In the case of having survival data the procedure would be analogous but instead of having survival `resptype` we would have binary. Also the response variable should be a numeric variable with 1 and 0 and there would be no status variable.
