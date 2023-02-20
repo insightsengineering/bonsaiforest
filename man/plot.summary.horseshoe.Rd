@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{(\code{summary.horseshoe})\cr summary of a \code{horseshoe} object.}
 
-\item{...}{Additional arguments to plot}
+\item{...}{Additional arguments to plot.}
 }
 \value{
 Forest plot
