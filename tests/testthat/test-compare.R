@@ -17,6 +17,8 @@ test_that("compare outputs the right element", {
 })
 
 test_that("compare outputs an error when there are less than two arguments", {
-  expect_error(compare(naive_fit_surv),
-               "There should be at least two models to compare")
+  expect_error(
+    compare(naive_fit_surv),
+    "There should be at least two models to compare"
+  )
 })
