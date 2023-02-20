@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{(\code{summary.elastic_net})\cr summary of a \code{elastic_net} object.}
 
-\item{...}{Additional arguments to plot}
+\item{...}{Additional arguments to plot.}
 }
 \value{
 Forest plot
