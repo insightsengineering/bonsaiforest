@@ -1,12 +1,24 @@
 ---
-title: "Example guide"
-output: html_document
-date: "2023-02-20"
+title: "example_guide"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{example_guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
+
+```{r setup}
+library(shrinkforest)
+```
+
+
 
 ## Introduction
 
