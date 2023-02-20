@@ -182,8 +182,8 @@ plot.compare.data <- function(x, ...) {
       col = forcats::fct_inorder(model)
     ), width = 0.5, cex = 1) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
-               strip.position = "left",
-               nrow = nrow(data), scales = "free_y"
+      strip.position = "left",
+      nrow = nrow(data), scales = "free_y"
     ) +
     theme(
       plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
@@ -202,7 +202,7 @@ plot.compare.data <- function(x, ...) {
   }
   if (!is.null(overall_trt)) {
     forestplot2 + geom_vline(aes(xintercept = overall_trt, linetype = "Overall"),
-                             color = "darkblue"
+      color = "darkblue"
     ) +
       scale_linetype_manual("Overall population", values = c("dashed"))
   } else {

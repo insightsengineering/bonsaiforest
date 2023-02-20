@@ -24,21 +24,21 @@ compare <- function(...) {
     }
     data <- if (inherits(sum_obj, "summary.naive")) {
       rbind(data, data.frame(sum_obj$estimates,
-                             model = rep("Naive", nrow(sum_obj$estimates))
+        model = rep("Naive", nrow(sum_obj$estimates))
       ))
     } else if (inherits(sum_obj, "summary.elastic_net")) {
       rbind(data, data.frame(sum_obj$estimates,
-                             trt.low = sum_obj$estimates[, 2],
-                             trt.high = sum_obj$estimates[, 2],
-                             model = rep(
-                               paste("Elastic net alpha =", sum_obj$alpha),
-                               nrow(sum_obj$estimates)
-                             )
+        trt.low = sum_obj$estimates[, 2],
+        trt.high = sum_obj$estimates[, 2],
+        model = rep(
+          paste("Elastic net alpha =", sum_obj$alpha),
+          nrow(sum_obj$estimates)
+        )
       ))
     } else if (inherits(sum_obj, "summary.horseshoe")) {
       assert_class(sum_obj, "summary.horseshoe")
       rbind(data, data.frame(sum_obj$estimates,
-                             model = rep("Horseshoe", nrow(sum_obj$estimates))
+        model = rep("Horseshoe", nrow(sum_obj$estimates))
       ))
     } else {
       data
