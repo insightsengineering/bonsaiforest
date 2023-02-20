@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{(\code{summary.naive})\cr summary of a \code{naive} object.}
 
-\item{...}{Additional arguments to plot}
+\item{...}{Additional arguments to plot.}
 }
 \value{
 Forest plot

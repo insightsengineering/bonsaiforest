@@ -3,7 +3,7 @@
 #' Plot the forest plot of the summary of a `naive` object.
 #'
 #' @param x (`summary.naive`)\cr summary of a `naive` object.
-#' @param ... Additional arguments to plot
+#' @param ... Additional arguments to plot.
 #'
 #' @return Forest plot
 #' @export
@@ -27,7 +27,7 @@ plot.summary.naive <- function(x, ...) {
       nrow = nrow(data), scales = "free_y"
     ) +
     theme(
-      plot.title = element_text(size = 16, face = "bold"),
+      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank(),
       axis.text.x = element_text(face = "bold"),
@@ -51,7 +51,7 @@ plot.summary.naive <- function(x, ...) {
 #' Plot the forest plot of the summary of a `elastic_net` object.
 #'
 #' @param x (`summary.elastic_net`)\cr summary of a `elastic_net` object.
-#' @param ... Additional arguments to plot
+#' @param ... Additional arguments to plot.
 #'
 #' @return Forest plot
 #' @export
@@ -80,7 +80,7 @@ plot.summary.elastic_net <- function(x, ...) {
       nrow = nrow(data), scales = "free_y"
     ) +
     theme(
-      plot.title = element_text(size = 16, face = "bold"),
+      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank(),
       axis.text.x = element_text(face = "bold"),
@@ -104,7 +104,7 @@ plot.summary.elastic_net <- function(x, ...) {
 #' Plot the forest plot of the summary of a `horseshoe` object.
 #'
 #' @param x (`summary.horseshoe`)\cr summary of a `horseshoe` object.
-#' @param ... Additional arguments to plot
+#' @param ... Additional arguments to plot.
 #'
 #' @return Forest plot
 #' @export
@@ -128,7 +128,7 @@ plot.summary.horseshoe <- function(x, ...) {
       nrow = nrow(data), scales = "free_y"
     ) +
     theme(
-      plot.title = element_text(size = 16, face = "bold"),
+      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank(),
       axis.text.x = element_text(face = "bold"),
@@ -143,5 +143,69 @@ plot.summary.horseshoe <- function(x, ...) {
   } else if (x$resptype == "binary") {
     forestplot + xlab("Log Odds-Ratio") +
       geom_vline(xintercept = 0, linetype = 2)
+  }
+}
+
+
+
+#' Compare Forest Plots
+#'
+#' Function to obtain a forest plot with all the different fitted models in
+#' order to compare their performance.
+#'
+#' @param x (`compare.data`)\cr object with the data of treatment effects estimated
+#' with the different methods.
+#' @param ... Additional arguments to plot.
+#'
+#' @return Forest plot with all the methods that are compared.
+#' @export
+#'
+#' @examples
+#' plot(compare(naivepop_fit_surv, naive_fit_surv, elastic_net_fit_surv))
+plot.compare.data <- function(x, ...) {
+  assert_class(x, "compare.data")
+  data <- x$data
+  resptype <- x$resptype
+  overall_trt <- x$overall_trt
+  forestplot <- ggplot(
+    data = data,
+    aes(
+      x = trt.estimate, y = forcats::fct_inorder(model), xmin = trt.low,
+      xmax = trt.high
+    )
+  ) +
+    ggtitle("Forest plot") +
+    geom_pointrange(aes(col = forcats::fct_inorder(model))) +
+    ylab("Subgroup") +
+    geom_errorbar(aes(
+      xmin = trt.low, xmax = trt.high,
+      col = forcats::fct_inorder(model)
+    ), width = 0.5, cex = 1) +
+    facet_wrap(~ forcats::fct_inorder(subgroup),
+               strip.position = "left",
+               nrow = nrow(data), scales = "free_y"
+    ) +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.x = element_text(face = "bold"),
+      axis.title = element_text(size = 12, face = "bold"),
+      strip.text.x = element_text(hjust = 0, vjust = 1, angle = 180, face = "bold"),
+      strip.text.y.left = element_text(angle = 0)
+    ) +
+    scale_colour_discrete("Subgroup-specific")
+  if (resptype == "survival") {
+    forestplot2 <- forestplot + xlab("Hazard ratio")
+  } else if (resptype == "binary") {
+    forestplot2 <- forestplot + xlab("Log Odds-Ratio")
+  }
+  if (!is.null(overall_trt)) {
+    forestplot2 + geom_vline(aes(xintercept = overall_trt, linetype = "Overall"),
+                             color = "darkblue"
+    ) +
+      scale_linetype_manual("Overall population", values = c("dashed"))
+  } else {
+    forestplot2
   }
 }

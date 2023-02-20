@@ -71,7 +71,10 @@ The `trt_horseshoe` function is used to estimate the posterior distribution of t
 We find the number of iteration that we need to consider in order to obtain all the samples from the posterior distribution of the coefficients. In the case of binary data we can directly call `subgroups` once that we know the matrix of the estimated coefficients. In the case of survival data we also need to obtain the estimated cumulative baseline hazard `h0`. In this case, the model fits a smoothing spline to obtain it. The posterior distribution of the coefficients of this spline can be found in the model information under the name of `sbhaz`. We then obtain the basis matrix of the spline considering the same knots and boundaries as in the model specification and we obtain the values of the cumulative baseline hazard at a sequence of equally spaced time points. Finally we call `subgroups`.
 
 
+## compare
+The `compare` function is used to obtain a `data.frame` with the treatment effects of the subgroups that we want to compare.
 
+The arguments of this function are objects of class `shrinkforest`. We take the summary of these objects and we save in a data frame the subgroup treatment effect estimates. If we have a `naivepop` object then we also save the overall treatment effect. Finally we also add the response type of the data and we export a list with all these elements.
 
 
 
