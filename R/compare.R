@@ -13,6 +13,9 @@
 #' compare(naivepop_fit_surv, naive_fit_surv, elastic_net_fit_surv)
 compare <- function(...) {
   list_objects <- list(...)
+  if (length(list_objects) < 2) {
+    stop("There should be at least two models to compare")
+  }
   data <- NULL
   overall_trt <- NULL
   for (obj in list_objects) {

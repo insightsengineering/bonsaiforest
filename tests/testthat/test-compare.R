@@ -15,3 +15,8 @@ test_that("compare outputs the right element", {
   class(expected) <- "compare.data"
   expect_equal(result, expected, tolerance = 0.001)
 })
+
+test_that("compare outputs an error when there are less than two arguments", {
+  expect_error(compare(naive_fit_surv),
+               "There should be at least two models to compare")
+})
