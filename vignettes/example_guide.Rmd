@@ -33,7 +33,7 @@ In our case we have the following structure of the data:
 str(example_data)
 ```
 
-We have that arm is our treatment variable, x_1 to x_10 are the categorical covariates, tt_pfs is the response variable and ev_pfs is the status variable.
+We have that `arm` is our treatment variable, `x_1` to `x_10` are the categorical covariates, `tt_pfs` is the response variable and `ev_pfs` is the status variable.
 
 Once that we are sure that our data is in the correct format and contains all the necessary variables, we are going to fit the different models in order to obtain the subgroup treatment effects.
 
@@ -62,15 +62,13 @@ summary_naivepop
 
 ### Naive
 
-Now we are going to fit the model to obtain the naive subgroup-specific treatment effects. We have to indicate which categorical variables we want to consider to obtain the subgroup treatment effects. If we add variable x_1 we are going to obtain the subgroup treatment effect of the subgroups x_1a and x_1b.
+Now we are going to fit the model to obtain the naive subgroup-specific treatment effects. We have to indicate which categorical variables we want to consider to obtain the subgroup treatment effects. If we add variable `x_1` we are going to obtain the subgroup treatment effect of the subgroups `x_1a` and `x_1b`.
 
 ```{r}
-naive_model <- naive(
-  resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
-  data = example_data, resptype = "survival",
-  status = "ev_pfs"
-)
+naive_model <- naive(resp = "tt_pfs", trt = "arm",
+                     subgr = c("x_1", "x_2", "x_3", "x_4"),
+                     data = example_data, resptype = "survival",
+                     status = "ev_pfs")
 ```
 
 This `naive` object contains the fitted models for each one of the subgroups, the main information about the coefficients associated to treatment of these fitted models, the kind of models fitted, the response type and the data.
@@ -91,35 +89,27 @@ plot(summary_naive)
 
 ### Elastic Net
 
-We are going to fit a model considering an elastic net penalization on the subgroup treatment interaction coefficients. Depending on the value of alpha we are going to have different kinds of penalties. If we put alpha to 0 we consider a ridge penalty and if we put alpha to 1 we consider a lasso penalty. We are going to fit both lasso and ridge.
+We are going to fit a model considering an elastic net penalization on the subgroup treatment interaction coefficients. Depending on the value of `alpha` we are going to have different kinds of penalties. If we put `alpha` to 0 we consider a ridge penalty and if we put `alpha` to 1 we consider a lasso penalty. We are going to fit both lasso and ridge.
 
 We have to add the `covars` argument which indicates which categorical variables we want to include in our model. It is important that all the variables that are in `subgr` are also in `covars`. The idea is that we can include many variables but then only find the subgroup treatment effect of some of them.
 
 ```{r}
-ridge_model <- elastic_net(
-  resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
-  covars = c(
-    "x_1", "x_2", "x_3", "x_4", "x_5",
-    "x_6", "x_7", "x_8", "x_9", "x_10"
-  ),
-  data = example_data, resptype = "survival",
-  alpha = 0, status = "ev_pfs"
-)
+ridge_model <- elastic_net(resp = "tt_pfs", trt = "arm",
+                           subgr = c("x_1", "x_2", "x_3", "x_4"),
+                           covars = c("x_1", "x_2", "x_3", "x_4", "x_5",
+                                      "x_6", "x_7", "x_8", "x_9", "x_10"),
+                           data = example_data, resptype = "survival",
+                           alpha = 0, status = "ev_pfs")
 
-lasso_model <- elastic_net(
-  resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
-  covars = c(
-    "x_1", "x_2", "x_3", "x_4", "x_5",
-    "x_6", "x_7", "x_8", "x_9", "x_10"
-  ),
-  data = example_data, resptype = "survival",
-  alpha = 1, status = "ev_pfs"
-)
+lasso_model <- elastic_net(resp = "tt_pfs", trt = "arm",
+                           subgr = c("x_1", "x_2", "x_3", "x_4"),
+                           covars = c("x_1", "x_2", "x_3", "x_4", "x_5",
+                                      "x_6", "x_7", "x_8", "x_9", "x_10"),
+                           data = example_data, resptype = "survival",
+                           alpha = 1, status = "ev_pfs")
 ```
 
-These `elastic_net` models contain the fitted models, the response type, the data, the value of alpha, the design and the dummy matrices (that are later going to be used to obtain the subgroup treatment effects), the response and status variables and the names of the subgroups.
+These `elastic_net` models contain the fitted models, the response type, the data, the value of `alpha`, the design and the dummy matrices (that are later going to be used to obtain the subgroup treatment effects), the response and status variables and the names of the subgroups.
 
 We are now going to obtain the summary of these fitted objects to find the subgroup hazard ratio estimates.
 
@@ -140,19 +130,15 @@ plot(summary_lasso)
 
 ### Horseshoe model
 
-We are now going to fit a bayesian model with a horseshoe prior on the subgroup-treatment interactions. Fitting this kind of models usually takes a bit of time. We can modify the number of Markov chains, the number of iterations and the number of warmup iterations. In this case we chose 2 chains although the default is 4. 
+We are now going to fit a Bayesian model with a horseshoe prior on the subgroup-treatment interactions. Fitting this kind of models usually takes a bit of time. We can modify the number of Markov chains, the number of iterations and the number of warmup iterations. In this case we chose 2 chains although the default is 4. 
 
 ```{r}
-horseshoe_model <- horseshoe(
-  resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
-  covars = c(
-    "x_1", "x_2", "x_3", "x_4", "x_5",
-    "x_6", "x_7", "x_8", "x_9", "x_10"
-  ),
-  data = example_data, resptype = "survival",
-  status = "ev_pfs", chains = 2
-)
+horseshoe_model <- horseshoe(resp = "tt_pfs", trt = "arm",
+                             subgr = c("x_1", "x_2", "x_3", "x_4"),
+                             covars = c("x_1", "x_2", "x_3", "x_4", "x_5",
+                                        "x_6", "x_7", "x_8", "x_9", "x_10"),
+                             data = example_data, resptype = "survival",
+                             status = "ev_pfs", chains = 2)
 ```
 
 Once that the model is fitted we have to check if there are convergence problems. In this case we obtained 3 divergent transitions after warmup. In general if there are few divergent transitions (taking into account the total number of iterations, in this case 2000 after warmup) and there are no other problems like high Rhats we can continue with our analysis. This is what happens in our example: we have 3 divergent transitions after warmup out of 2000 and there are no other problems.
