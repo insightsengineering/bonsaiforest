@@ -7,7 +7,8 @@
 #' must be a factor with 2 levels where the first level is the control and the
 #' second one the treatment.
 #' @param subgr (`character`)\cr vector with the name of the subgrouping
-#'   variables.
+#' variables. These variables have to be `factor` variables with the subgroups
+#' as levels.
 #' @param data (`data frame`)\cr the data frame with the variables.
 #' @param resptype (`string`)\cr the type of data used. Can be "survival"
 #'   or "binary".
@@ -25,6 +26,7 @@ naive <- function(resp, trt, subgr, data,
   assert_string(trt)
   assert_character(subgr)
   assert_data_frame(data)
+  assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
   subgr_model <- stats::as.formula(paste("~", paste0(subgr, collapse = "+")))
   if (resptype == "survival") {

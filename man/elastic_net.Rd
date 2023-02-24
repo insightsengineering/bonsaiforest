@@ -23,11 +23,12 @@ must be a factor with 2 levels where the first level is the control and the
 second one the treatment.}
 
 \item{subgr}{(\code{character})\cr vector with the name of the subgroup variables
-from which we want to obtain the subgroup treatment effect.}
+from which we want to obtain the subgroup treatment effect. They have to be
+\code{factor} variables with the subgroups as levels.}
 
 \item{covars}{(\code{character})\cr vector with the name of the variables that
-we want to include in the model. The \code{subgr} variables have to be included
-here.}
+we want to include in the model. They have to be \code{factor} variables with the
+subgroups as levels. The \code{subgr} variables have to be included here.}
 
 \item{data}{(\verb{data frame})\cr the data frame with the variables.}
 
