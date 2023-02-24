@@ -170,7 +170,7 @@ plot.compare.data <- function(x, ...) {
   forestplot <- ggplot(
     data = data,
     aes(
-      x = trt.estimate, y = forcats::fct_inorder(model), xmin = trt.low,
+      x = trt.estimate, y = forcats::fct_rev(forcats::fct_inorder(model)), xmin = trt.low,
       xmax = trt.high
     )
   ) +

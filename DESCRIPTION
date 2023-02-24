@@ -36,6 +36,7 @@ Imports:
     vdiffr
 Suggests:
     knitr,
+    rmarkdown,
     testthat (>= 2.0)
 LinkingTo: 
     Rcpp,
