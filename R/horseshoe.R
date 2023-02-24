@@ -19,12 +19,9 @@
 #' or "binary".
 #' @param status (`string`)\cr only for "survival" `resptype`,
 #' the status variable name in survival data.
-#' @param chains (`scalar`)\cr number of Markov chains in the brms model.
-#' Default is 4.
-#' @param iter (`scalar`)\cr number of total iterations per chain in the brms
-#' model (including warmup; defaults to 2000);
-#' @param warmup (`scalar`)\cr number of warmup (or burn-in) iterations in the
-#' brms model. It should not be larger than `iter` and default is `iter/2`.
+#' @param ... Additional arguments for the Bayesian model: `chains`, `iter`,
+#' `warmup`, `thin` and `adapt_delta`.
+#'
 #'
 #' @return List with `fit`, `model`, `resptype`, `data`, `alpha`,
 #'  `design_matrix`, `design_dummy`, `y`, `subgr_names`.
@@ -37,7 +34,7 @@
 #' )
 horseshoe <- function(resp, trt, subgr, covars, data,
                       resptype = c("survival", "binary"), status = NULL,
-                      chains = 4, iter = 2000, warmup = iter / 2) {
+                      ...) {
   assert_string(resp)
   assert_string(trt)
   assert_character(subgr)
@@ -45,14 +42,42 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   assert_data_frame(data)
   assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
-  assert_scalar(iter)
-  assert_scalar(warmup)
-  assert_scalar(chains)
+  list_arguments <- list(...)
+  if (!is.null(list_arguments$chains)) {
+    chains = list_arguments$chains
+    assert_int(chains)
+  } else {
+    chains = 4
+  }
+  if (!is.null(list_arguments$iter)) {
+    iter = list_arguments$iter
+    assert_int(iter)
+    warmup = floor(iter / 2)
+  } else {
+    iter = 2000
+    warmup = 1000
+  }
+  if (!is.null(list_arguments$warmup)) {
+    warmup = list_arguments$warmup
+    assert_int(warmup)
+  }
+  if (!is.null(list_arguments$adapt_delta)) {
+    adapt_delta = list_arguments$adapt_delta
+    assert_scalar(adapt_delta)
+  } else {
+    adapt_delta = 0.95
+  }
+  if (!is.null(list_arguments$thin)) {
+    thin = list_arguments$thin
+    assert_int(thin, lower = 1)
+  } else {
+    thin = 1
+  }
   prep_data <- preprocess(trt, subgr, covars, data)
   form_b <- stats::as.formula(paste(
     "b ~ 0 +",
     paste0(colnames(prep_data$design_ia),
-      collapse = " + "
+           collapse = " + "
     )
   ))
   if (resptype == "survival") {
@@ -62,7 +87,7 @@ horseshoe <- function(resp, trt, subgr, covars, data,
     form_a_surv <- stats::as.formula(paste(
       "a ~ 0 +",
       paste0(colnames(prep_data$design_main),
-        collapse = " + "
+             collapse = " + "
       )
     ))
     y <- as.data.frame(cbind(data[[resp]], data[[status]]))
@@ -84,18 +109,18 @@ horseshoe <- function(resp, trt, subgr, covars, data,
       family = brms::brmsfamily("cox", bhaz = bhaz),
       brms::prior(normal(0, 5), class = "b", nlpar = "a") +
         brms::prior(horseshoe(1),
-          class = "b",
-          nlpar = "b"
+                    class = "b",
+                    nlpar = "b"
         ),
-      iter = iter, warmup = warmup, chains = chains,
-      control = list(adapt_delta = 0.95), seed = 0
+      iter = iter, warmup = warmup, chains = chains, thin = thin,
+      control = list(adapt_delta = adapt_delta), seed = 0
     )
   } else if (resptype == "binary") {
     design_main <- prep_data$design_main[, -1]
     design_matrix <- cbind(design_main, prep_data$design_ia)
     form_bin <- stats::as.formula(paste(resp, " ~ a + b"))
     form_a_bin <- stats::as.formula(paste("a ~ 1 +", paste0(colnames(design_main),
-      collapse = " + "
+                                                            collapse = " + "
     )))
     y <- as.data.frame(data[[resp]])
     colnames(y) <- resp
@@ -107,8 +132,8 @@ horseshoe <- function(resp, trt, subgr, covars, data,
       family = brms::brmsfamily("bernoulli"),
       brms::prior(normal(0, 5), class = "b", nlpar = "a") +
         brms::prior(horseshoe(1),
-          class = "b",
-          nlpar = "b"
+                    class = "b",
+                    nlpar = "b"
         ),
       iter = iter, warmup = warmup, chains = chains,
       control = list(adapt_delta = 0.95), seed = 0
@@ -127,3 +152,4 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   class(result) <- c("shrinkforest", "horseshoe")
   return(result)
 }
+
