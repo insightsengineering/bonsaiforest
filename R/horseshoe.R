@@ -42,6 +42,7 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   assert_character(subgr)
   assert_character(covars)
   assert_data_frame(data)
+  assert_factor(data[, trt])
   resptype <- match.arg(resptype)
   assert_scalar(iter)
   assert_scalar(warmup)
