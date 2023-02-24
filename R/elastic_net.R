@@ -9,18 +9,19 @@
 #' must be a factor with 2 levels where the first level is the control and the
 #' second one the treatment.
 #' @param subgr (`character`)\cr vector with the name of the subgroup variables
-#'  from which we want to obtain the subgroup treatment effect.
+#' from which we want to obtain the subgroup treatment effect. They have to be
+#' `factor` variables with the subgroups as levels.
 #' @param covars (`character`)\cr vector with the name of the variables that
-#'  we want to include in the model. The `subgr` variables have to be included
-#'  here.
+#' we want to include in the model. They have to be `factor` variables with the
+#' subgroups as levels. The `subgr` variables have to be included here.
 #' @param data (`data frame`)\cr the data frame with the variables.
 #' @param resptype (`string`)\cr the type of data used. Can be "survival"
-#'  or "binary".
+#' or "binary".
 #' @param alpha (`scalar`)\cr the elastic net mixing parameter with values
-#'  between 0 and 1. The special case of `alpha`=1 corresponds to a lasso
-#'  penalty and the case of `alpha`=0 to a ridge penalty.
+#' between 0 and 1. The special case of `alpha`=1 corresponds to a lasso
+#' penalty and the case of `alpha`=0 to a ridge penalty.
 #' @param status (`string`)\cr only for "survival" `resptype`,
-#'  the status variable name in survival data.
+#' the status variable name in survival data.
 #'
 #' @return List with `fit`, `model`, `resptype`, `data`, `alpha`,
 #'  `design_matrix`, `design_dummy`, `y`, `subgr_names`.
@@ -40,7 +41,7 @@ elastic_net <- function(resp, trt, subgr, covars, data,
   assert_character(covars)
   assert_data_frame(data)
   assert_scalar(alpha)
-  assert_factor(data[, trt])
+  assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
   prep_data <- preprocess(trt, subgr, covars, data)
   if (resptype == "survival") {

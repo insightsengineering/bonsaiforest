@@ -23,7 +23,7 @@ naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status
   assert_string(resp)
   assert_string(trt)
   assert_data_frame(data)
-  assert_factor(data[, trt])
+  assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
 
   fit_pop <- if (resptype == "survival") {

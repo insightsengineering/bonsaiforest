@@ -21,7 +21,8 @@ must be a factor with 2 levels where the first level is the control and the
 second one the treatment.}
 
 \item{subgr}{(\code{character})\cr vector with the name of the subgrouping
-variables.}
+variables. These variables have to be \code{factor} variables with the subgroups
+as levels.}
 
 \item{data}{(\verb{data frame})\cr the data frame with the variables.}
 
