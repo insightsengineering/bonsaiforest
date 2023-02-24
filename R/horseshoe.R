@@ -19,12 +19,19 @@
 #' or "binary".
 #' @param status (`string`)\cr only for "survival" `resptype`,
 #' the status variable name in survival data.
-#' @param chains (`scalar`)\cr number of Markov chains in the brms model.
+#' @param chains (`int`)\cr number of Markov chains in the brms model.
 #' Default is 4.
-#' @param iter (`scalar`)\cr number of total iterations per chain in the brms
+#' @param iter (`int`)\cr number of total iterations per chain in the brms
 #' model (including warmup; defaults to 2000);
-#' @param warmup (`scalar`)\cr number of warmup (or burn-in) iterations in the
+#' @param warmup (`int`)\cr number of warmup (or burn-in) iterations in the
 #' brms model. It should not be larger than `iter` and default is `iter/2`.
+#' @param thin (`int`)\cr thinning parameter. Must be a positive integer.
+#' Set `thin>1` to save memory and computation time if `iter` is large. Default
+#' is 1.
+#' @param adapt_delta (`scalar`) scalar usually between 0.8 and 1. Default is 0.95.
+#' Increasing this parameter will slow down the sampler but will decrease the
+#' number of divergent transitions.
+#'
 #'
 #' @return List with `fit`, `model`, `resptype`, `data`, `alpha`,
 #'  `design_matrix`, `design_dummy`, `y`, `subgr_names`.
@@ -37,7 +44,8 @@
 #' )
 horseshoe <- function(resp, trt, subgr, covars, data,
                       resptype = c("survival", "binary"), status = NULL,
-                      chains = 4, iter = 2000, warmup = iter / 2) {
+                      chains = 4, iter = 2000, warmup = floor(iter / 2),
+                      thin = 1, adapt_delta = 0.95) {
   assert_string(resp)
   assert_string(trt)
   assert_character(subgr)
@@ -45,9 +53,11 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   assert_data_frame(data)
   assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
-  assert_scalar(iter)
-  assert_scalar(warmup)
-  assert_scalar(chains)
+  assert_int(iter)
+  assert_int(warmup)
+  assert_int(chains)
+  assert_int(thin, lower = 1)
+  assert_scalar(adapt_delta)
   prep_data <- preprocess(trt, subgr, covars, data)
   form_b <- stats::as.formula(paste(
     "b ~ 0 +",
@@ -87,8 +97,8 @@ horseshoe <- function(resp, trt, subgr, covars, data,
           class = "b",
           nlpar = "b"
         ),
-      iter = iter, warmup = warmup, chains = chains,
-      control = list(adapt_delta = 0.95), seed = 0
+      iter = iter, warmup = warmup, chains = chains, thin = thin,
+      control = list(adapt_delta = adapt_delta), seed = 0
     )
   } else if (resptype == "binary") {
     design_main <- prep_data$design_main[, -1]
