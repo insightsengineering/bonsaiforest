@@ -25,6 +25,7 @@ naive <- function(resp, trt, subgr, data,
   assert_string(trt)
   assert_character(subgr)
   assert_data_frame(data)
+  assert_factor(data[, trt])
   resptype <- match.arg(resptype)
   subgr_model <- stats::as.formula(paste("~", paste0(subgr, collapse = "+")))
   if (resptype == "survival") {

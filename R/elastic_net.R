@@ -40,6 +40,7 @@ elastic_net <- function(resp, trt, subgr, covars, data,
   assert_character(covars)
   assert_data_frame(data)
   assert_scalar(alpha)
+  assert_factor(data[, trt])
   resptype <- match.arg(resptype)
   prep_data <- preprocess(trt, subgr, covars, data)
   if (resptype == "survival") {

@@ -30,5 +30,5 @@ estimate the subgroup treatment effects with the overall population
 treatment effect.
 }
 \examples{
-naivepop("futime", "trt", survival::myeloid, "survival", "death")
+naivepop("tt_pfs", "arm", example_data, "survival", "ev_pfs")
 }

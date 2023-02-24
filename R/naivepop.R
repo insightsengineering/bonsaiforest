@@ -18,11 +18,12 @@
 #' @export
 #'
 #' @examples
-#' naivepop("futime", "trt", survival::myeloid, "survival", "death")
+#' naivepop("tt_pfs", "arm", example_data, "survival", "ev_pfs")
 naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status = NULL) {
   assert_string(resp)
   assert_string(trt)
   assert_data_frame(data)
+  assert_factor(data[, trt])
   resptype <- match.arg(resptype)
 
   fit_pop <- if (resptype == "survival") {
