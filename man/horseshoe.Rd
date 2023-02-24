@@ -12,11 +12,7 @@ horseshoe(
   data,
   resptype = c("survival", "binary"),
   status = NULL,
-  chains = 4,
-  iter = 2000,
-  warmup = floor(iter/2),
-  thin = 1,
-  adapt_delta = 0.95
+  ...
 )
 }
 \arguments{
@@ -42,22 +38,8 @@ or "binary".}
 \item{status}{(\code{string})\cr only for "survival" \code{resptype},
 the status variable name in survival data.}
 
-\item{chains}{(\code{int})\cr number of Markov chains in the brms model.
-Default is 4.}
-
-\item{iter}{(\code{int})\cr number of total iterations per chain in the brms
-model (including warmup; defaults to 2000);}
-
-\item{warmup}{(\code{int})\cr number of warmup (or burn-in) iterations in the
-brms model. It should not be larger than \code{iter} and default is \code{iter/2}.}
-
-\item{thin}{(\code{int})\cr thinning parameter. Must be a positive integer.
-Set \code{thin>1} to save memory and computation time if \code{iter} is large. Default
-is 1.}
-
-\item{adapt_delta}{(\code{scalar}) scalar usually between 0.8 and 1. Default is 0.95.
-Increasing this parameter will slow down the sampler but will decrease the
-number of divergent transitions.}
+\item{...}{Additional arguments for the Bayesian model: \code{chains}, \code{iter},
+\code{warmup}, \code{thin} and \code{adapt_delta}.}
 }
 \value{
 List with \code{fit}, \code{model}, \code{resptype}, \code{data}, \code{alpha},
