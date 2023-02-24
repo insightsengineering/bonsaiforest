@@ -99,8 +99,8 @@ horseshoe <- function(resp, trt, subgr, covars, data,
       family = family,
       brms::prior(normal(0, 5), class = "b", nlpar = "a") +
         brms::prior(horseshoe(1),
-                    class = "b",
-                    nlpar = "b"
+          class = "b",
+          nlpar = "b"
         ),
       control = list(adapt_delta = adapt_delta), seed = 0, ...
     )
