@@ -152,7 +152,7 @@ plot(summary_lasso)
 
 ### Horseshoe model
 
-We are now going to fit a Bayesian model with a horseshoe prior on the subgroup-treatment interactions. Fitting this kind of models usually takes a bit of time. We can modify the number of Markov chains, the number of iterations and the number of warmup iterations. In this case we chose 2 chains although the default is 4. 
+We are now going to fit a Bayesian model with a horseshoe prior on the subgroup-treatment interactions. Fitting this kind of models usually takes a bit of time. We can modify some parameters like the number of Markov chains, the number of iterations or the number of warmup iterations (between others). The parameters that we can change are found in the documentation of the `brm` function from the brms package.
 
 ```{r}
 horseshoe_model <- horseshoe(
@@ -163,7 +163,7 @@ horseshoe_model <- horseshoe(
     "x_6", "x_7", "x_8", "x_9", "x_10"
   ),
   data = example_data, resptype = "survival",
-  status = "ev_pfs", chains = 2
+  status = "ev_pfs", chains = 2, adapt_delta = 0.95
 )
 ```
 

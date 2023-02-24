@@ -38,8 +38,7 @@ or "binary".}
 \item{status}{(\code{string})\cr only for "survival" \code{resptype},
 the status variable name in survival data.}
 
-\item{...}{Additional arguments for the Bayesian model: \code{chains}, \code{iter},
-\code{warmup}, \code{thin} and \code{adapt_delta}.}
+\item{...}{Additional arguments from the \code{brm} function.}
 }
 \value{
 List with \code{fit}, \code{model}, \code{resptype}, \code{data}, \code{alpha},
