@@ -163,7 +163,8 @@ horseshoe_model <- horseshoe(
     "x_6", "x_7", "x_8", "x_9", "x_10"
   ),
   data = example_data, resptype = "survival",
-  status = "ev_pfs", chains = 2, adapt_delta = 0.95
+  status = "ev_pfs", chains = 2, seed = 0,
+  control = list(adapt_delta = 0.95)
 )
 ```
 

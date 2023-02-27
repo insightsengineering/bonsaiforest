@@ -4,7 +4,8 @@ horseshoe_fit_surv <- horseshoe(
     "x_1", "x_2", "x_3", "x_4", "x_5", "x_6",
     "x_7", "x_8", "x_9", "x_10"
   ),
-  example_data, "survival", "ev_pfs"
+  example_data, "survival", "ev_pfs", seed = 0,
+  control = list(adapt_delta = 0.95)
 )
 
 usethis::use_data(horseshoe_fit_surv, compress = "xz", overwrite = TRUE)

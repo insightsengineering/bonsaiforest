@@ -29,7 +29,7 @@
 #' @examples
 #' horseshoe("ev_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
 #'   example_data, "binary",
-#'   chains = 1
+#'   chains = 1, seed = 0, control = list(adapt_delta = 0.95)
 #' )
 horseshoe <- function(resp, trt, subgr, covars, data,
                       resptype = c("survival", "binary"), status = NULL,
@@ -42,13 +42,6 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
   list_arguments <- list(...)
-  if (!is.null(list_arguments$adapt_delta)) {
-    adapt_delta <- list_arguments$adapt_delta
-    assert_scalar(adapt_delta)
-    list_arguments <- within(list_arguments, rm(adapt_delta))
-  } else {
-    adapt_delta <- 0.8
-  }
   prep_data <- preprocess(trt, subgr, covars, data)
   form_b <- stats::as.formula(paste(
     "b ~ 0 +",
@@ -102,7 +95,7 @@ horseshoe <- function(resp, trt, subgr, covars, data,
           class = "b",
           nlpar = "b"
         ),
-      control = list(adapt_delta = adapt_delta), seed = 0, ...
+      ...
     )
   }
   fit_brms <- do.call(fit_function, args = list_arguments)
