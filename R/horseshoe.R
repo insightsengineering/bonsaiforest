@@ -19,12 +19,8 @@
 #' or "binary".
 #' @param status (`string`)\cr only for "survival" `resptype`,
 #' the status variable name in survival data.
-#' @param chains (`scalar`)\cr number of Markov chains in the brms model.
-#' Default is 4.
-#' @param iter (`scalar`)\cr number of total iterations per chain in the brms
-#' model (including warmup; defaults to 2000);
-#' @param warmup (`scalar`)\cr number of warmup (or burn-in) iterations in the
-#' brms model. It should not be larger than `iter` and default is `iter/2`.
+#' @param ... Additional arguments from the `brm` function.
+#'
 #'
 #' @return List with `fit`, `model`, `resptype`, `data`, `alpha`,
 #'  `design_matrix`, `design_dummy`, `y`, `subgr_names`.
@@ -33,11 +29,11 @@
 #' @examples
 #' horseshoe("ev_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
 #'   example_data, "binary",
-#'   chains = 1
+#'   chains = 1, seed = 0, control = list(adapt_delta = 0.95)
 #' )
 horseshoe <- function(resp, trt, subgr, covars, data,
                       resptype = c("survival", "binary"), status = NULL,
-                      chains = 4, iter = 2000, warmup = iter / 2) {
+                      ...) {
   assert_string(resp)
   assert_string(trt)
   assert_character(subgr)
@@ -45,9 +41,7 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   assert_data_frame(data)
   assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
-  assert_scalar(iter)
-  assert_scalar(warmup)
-  assert_scalar(chains)
+  list_arguments <- list(...)
   prep_data <- preprocess(trt, subgr, covars, data)
   form_b <- stats::as.formula(paste(
     "b ~ 0 +",
@@ -58,8 +52,8 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   if (resptype == "survival") {
     assert_string(status)
     design_matrix <- cbind(prep_data$design_main, prep_data$design_ia)
-    form_surv <- stats::as.formula(paste(resp, "|cens(1 - ", status, ") ~ a + b"))
-    form_a_surv <- stats::as.formula(paste(
+    form <- stats::as.formula(paste(resp, "|cens(1 - ", status, ") ~ a + b"))
+    form_a <- stats::as.formula(paste(
       "a ~ 0 +",
       paste0(colnames(prep_data$design_main),
         collapse = " + "
@@ -76,44 +70,35 @@ horseshoe <- function(resp, trt, subgr, covars, data,
       Boundary.knots = limits_resp, knots = quantiles_resp,
       intercept = FALSE
     )
-    fit_brms <- brms::brm(
-      brms::bf(form_surv, nl = TRUE) +
-        brms::lf(form_a_surv) +
-        brms::lf(form_b),
-      data = data_model,
-      family = brms::brmsfamily("cox", bhaz = bhaz),
-      brms::prior(normal(0, 5), class = "b", nlpar = "a") +
-        brms::prior(horseshoe(1),
-          class = "b",
-          nlpar = "b"
-        ),
-      iter = iter, warmup = warmup, chains = chains,
-      control = list(adapt_delta = 0.95), seed = 0
-    )
+    family <- brms::brmsfamily("cox", bhaz = bhaz)
   } else if (resptype == "binary") {
     design_main <- prep_data$design_main[, -1]
     design_matrix <- cbind(design_main, prep_data$design_ia)
-    form_bin <- stats::as.formula(paste(resp, " ~ a + b"))
-    form_a_bin <- stats::as.formula(paste("a ~ 1 +", paste0(colnames(design_main),
+    form <- stats::as.formula(paste(resp, " ~ a + b"))
+    form_a <- stats::as.formula(paste("a ~ 1 +", paste0(colnames(design_main),
       collapse = " + "
     )))
     y <- as.data.frame(data[[resp]])
     colnames(y) <- resp
     data_model <- cbind(design_matrix, y)
-    fit_brms <- brms::brm(
-      brms::bf(form_bin, nl = TRUE) + brms::lf(form_a_bin) +
+    family <- brms::brmsfamily("bernoulli")
+  }
+  fit_function <- function(...) {
+    brms::brm(
+      brms::bf(form, nl = TRUE) +
+        brms::lf(form_a) +
         brms::lf(form_b),
       data = data_model,
-      family = brms::brmsfamily("bernoulli"),
+      family = family,
       brms::prior(normal(0, 5), class = "b", nlpar = "a") +
         brms::prior(horseshoe(1),
           class = "b",
           nlpar = "b"
         ),
-      iter = iter, warmup = warmup, chains = chains,
-      control = list(adapt_delta = 0.95), seed = 0
+      ...
     )
   }
+  fit_brms <- do.call(fit_function, args = list_arguments)
   result <- list(
     fit = fit_brms,
     model = "horseshoe",
