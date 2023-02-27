@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9030</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9031</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,12 +55,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -266,15 +260,15 @@ find the subgroup hazard ratio estimates.</p>
 <code class="sourceCode R"><span><span class="va">summary_ridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ridge_model</span><span class="op">)</span></span>
 <span><span class="va">summary_ridge</span></span>
 <span><span class="co">#&gt;   subgroup trt.estimate</span></span>
-<span><span class="co">#&gt; 1     x_1a    0.6501716</span></span>
-<span><span class="co">#&gt; 2     x_1b    0.6493951</span></span>
-<span><span class="co">#&gt; 3     x_2a    0.6495294</span></span>
-<span><span class="co">#&gt; 4     x_2b    0.6501967</span></span>
-<span><span class="co">#&gt; 5     x_3a    0.6490427</span></span>
-<span><span class="co">#&gt; 6     x_3b    0.6492690</span></span>
-<span><span class="co">#&gt; 7     x_4a    0.6472265</span></span>
-<span><span class="co">#&gt; 8     x_4b    0.6465971</span></span>
-<span><span class="co">#&gt; 9     x_4c    0.6472675</span></span>
+<span><span class="co">#&gt; 1     x_1a    0.6514162</span></span>
+<span><span class="co">#&gt; 2     x_1b    0.6494716</span></span>
+<span><span class="co">#&gt; 3     x_2a    0.6511461</span></span>
+<span><span class="co">#&gt; 4     x_2b    0.6501897</span></span>
+<span><span class="co">#&gt; 5     x_3a    0.6413243</span></span>
+<span><span class="co">#&gt; 6     x_3b    0.6523088</span></span>
+<span><span class="co">#&gt; 7     x_4a    0.6449626</span></span>
+<span><span class="co">#&gt; 8     x_4b    0.6449838</span></span>
+<span><span class="co">#&gt; 9     x_4c    0.6530015</span></span>
 <span><span class="va">summary_lasso</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lasso_model</span><span class="op">)</span></span>
 <span><span class="va">summary_lasso</span></span>
 <span><span class="co">#&gt;   subgroup trt.estimate</span></span>
@@ -300,9 +294,11 @@ find the subgroup hazard ratio estimates.</p>
 </h3>
 <p>We are now going to fit a Bayesian model with a horseshoe prior on
 the subgroup-treatment interactions. Fitting this kind of models usually
-takes a bit of time. We can modify the number of Markov chains, the
-number of iterations and the number of warmup iterations. In this case
-we chose 2 chains although the default is 4.</p>
+takes a bit of time. We can modify some parameters like the number of
+Markov chains, the number of iterations or the number of warmup
+iterations (between others). The parameters that we can change are found
+in the documentation of the <code>brm</code> function from the brms
+package.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">horseshoe_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/horseshoe.html">horseshoe</a></span><span class="op">(</span></span>
 <span>  resp <span class="op">=</span> <span class="st">"tt_pfs"</span>, trt <span class="op">=</span> <span class="st">"arm"</span>,</span>
@@ -312,7 +308,8 @@ we chose 2 chains although the default is 4.</p>
 <span>    <span class="st">"x_6"</span>, <span class="st">"x_7"</span>, <span class="st">"x_8"</span>, <span class="st">"x_9"</span>, <span class="st">"x_10"</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">example_data</span>, resptype <span class="op">=</span> <span class="st">"survival"</span>,</span>
-<span>  status <span class="op">=</span> <span class="st">"ev_pfs"</span>, chains <span class="op">=</span> <span class="fl">2</span></span>
+<span>  status <span class="op">=</span> <span class="st">"ev_pfs"</span>, chains <span class="op">=</span> <span class="fl">2</span>, seed <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Compiling Stan program...</span></span>
 <span><span class="co">#&gt; Trying to compile a simple C file</span></span>
@@ -340,8 +337,8 @@ we chose 2 chains although the default is 4.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; SAMPLING FOR MODEL '4c88d91c9772512e42eae9279bcb6c67' NOW (CHAIN 1).</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1: Gradient evaluation took 0.000832 seconds</span></span>
-<span><span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 8.32 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1: Gradient evaluation took 0.001074 seconds</span></span>
+<span><span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 10.74 seconds.</span></span>
 <span><span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
@@ -358,15 +355,15 @@ we chose 2 chains although the default is 4.</p>
 <span><span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1:  Elapsed Time: 48.3949 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 1:                46.3748 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1:                94.7697 seconds (Total)</span></span>
+<span><span class="co">#&gt; Chain 1:  Elapsed Time: 48.4292 seconds (Warm-up)</span></span>
+<span><span class="co">#&gt; Chain 1:                46.2427 seconds (Sampling)</span></span>
+<span><span class="co">#&gt; Chain 1:                94.6719 seconds (Total)</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; SAMPLING FOR MODEL '4c88d91c9772512e42eae9279bcb6c67' NOW (CHAIN 2).</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2: Gradient evaluation took 0.000522 seconds</span></span>
-<span><span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 5.22 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2: Gradient evaluation took 0.000569 seconds</span></span>
+<span><span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 5.69 seconds.</span></span>
 <span><span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
@@ -383,9 +380,9 @@ we chose 2 chains although the default is 4.</p>
 <span><span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2:  Elapsed Time: 47.5061 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 2:                32.6196 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2:                80.1257 seconds (Total)</span></span>
+<span><span class="co">#&gt; Chain 2:  Elapsed Time: 47.5964 seconds (Warm-up)</span></span>
+<span><span class="co">#&gt; Chain 2:                32.5793 seconds (Sampling)</span></span>
+<span><span class="co">#&gt; Chain 2:                80.1756 seconds (Total)</span></span>
 <span><span class="co">#&gt; Chain 2:</span></span>
 <span><span class="co">#&gt; Warning: There were 3 divergent transitions after warmup. See</span></span>
 <span><span class="co">#&gt; https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></span>
@@ -514,15 +511,15 @@ plot all of them in a common forest plot.</p>
 <span><span class="co">#&gt; 7      x_4a    0.6213593 0.4133445 0.9340571                 Naive</span></span>
 <span><span class="co">#&gt; 8      x_4b    0.5428680 0.3372320 0.8738959                 Naive</span></span>
 <span><span class="co">#&gt; 9      x_4c    0.8575696 0.5483543 1.3411505                 Naive</span></span>
-<span><span class="co">#&gt; 10     x_1a    0.6501716 0.6501716 0.6501716 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 11     x_1b    0.6493951 0.6493951 0.6493951 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 12     x_2a    0.6495294 0.6495294 0.6495294 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 13     x_2b    0.6501967 0.6501967 0.6501967 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 14     x_3a    0.6490427 0.6490427 0.6490427 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 15     x_3b    0.6492690 0.6492690 0.6492690 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 16     x_4a    0.6472265 0.6472265 0.6472265 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 17     x_4b    0.6465971 0.6465971 0.6465971 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 18     x_4c    0.6472675 0.6472675 0.6472675 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 10     x_1a    0.6514162 0.6514162 0.6514162 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 11     x_1b    0.6494716 0.6494716 0.6494716 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 12     x_2a    0.6511461 0.6511461 0.6511461 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 13     x_2b    0.6501897 0.6501897 0.6501897 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 14     x_3a    0.6413243 0.6413243 0.6413243 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 15     x_3b    0.6523088 0.6523088 0.6523088 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 16     x_4a    0.6449626 0.6449626 0.6449626 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 17     x_4b    0.6449838 0.6449838 0.6449838 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 18     x_4c    0.6530015 0.6530015 0.6530015 Elastic net alpha = 0</span></span>
 <span><span class="co">#&gt; 19     x_1a    0.6500483 0.6500483 0.6500483 Elastic net alpha = 1</span></span>
 <span><span class="co">#&gt; 20     x_1b    0.6493824 0.6493824 0.6493824 Elastic net alpha = 1</span></span>
 <span><span class="co">#&gt; 21     x_2a    0.6493749 0.6493749 0.6493749 Elastic net alpha = 1</span></span>
