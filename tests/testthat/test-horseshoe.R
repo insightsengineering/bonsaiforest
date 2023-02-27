@@ -2,7 +2,7 @@ test_that("horseshoe outputs the right elements for survival", {
   result <- suppressWarnings(horseshoe("tt_pfs", "arm", c("x_1", "x_3"),
     c("x_1", "x_2", "x_3"), example_data,
     "survival", "ev_pfs",
-    chains = 1
+    chains = 1, seed = 0, control = list(adapt_delta = 0.95)
   ))
   result[[1]] <- as.matrix(result$fit$fit)
   prep_data <- preprocess(
@@ -56,7 +56,7 @@ test_that("horseshoe outputs the right elements for binary", {
   result <- suppressWarnings(horseshoe("ev_pfs", "arm", c("x_1", "x_3"),
     c("x_1", "x_2", "x_3"), example_data,
     "binary",
-    chains = 1
+    chains = 1, seed = 0, control = list(adapt_delta = 0.95)
   ))
   result[[1]] <- as.matrix(result$fit$fit)
   prep_data <- preprocess(

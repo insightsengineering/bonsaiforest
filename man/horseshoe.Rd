@@ -12,9 +12,7 @@ horseshoe(
   data,
   resptype = c("survival", "binary"),
   status = NULL,
-  chains = 4,
-  iter = 2000,
-  warmup = iter/2
+  ...
 )
 }
 \arguments{
@@ -40,14 +38,7 @@ or "binary".}
 \item{status}{(\code{string})\cr only for "survival" \code{resptype},
 the status variable name in survival data.}
 
-\item{chains}{(\code{scalar})\cr number of Markov chains in the brms model.
-Default is 4.}
-
-\item{iter}{(\code{scalar})\cr number of total iterations per chain in the brms
-model (including warmup; defaults to 2000);}
-
-\item{warmup}{(\code{scalar})\cr number of warmup (or burn-in) iterations in the
-brms model. It should not be larger than \code{iter} and default is \code{iter/2}.}
+\item{...}{Additional arguments from the \code{brm} function.}
 }
 \value{
 List with \code{fit}, \code{model}, \code{resptype}, \code{data}, \code{alpha},
@@ -61,6 +52,6 @@ the treatment.
 \examples{
 horseshoe("ev_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
   example_data, "binary",
-  chains = 1
+  chains = 1, seed = 0, control = list(adapt_delta = 0.95)
 )
 }
