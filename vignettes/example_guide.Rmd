@@ -96,7 +96,7 @@ summary_naive
 
 We can add a forest plot with the estimated treatment effects:
 
-```{r}
+```{r, fig.dim = c(6, 6)}
 plot(summary_naive)
 ```
 
@@ -144,7 +144,7 @@ summary_lasso
 
 We can obtain a forest plot for each one of these fitted models:
 
-```{r}
+```{r, fig.dim = c(6, 6)}
 plot(summary_ridge)
 plot(summary_lasso)
 ```
@@ -187,7 +187,7 @@ summary_horseshoe
 
 We can obtain a forest plot with the treatment effect estimates and the credible intervals.
 
-```{r}
+```{r, fig.dim = c(6, 6)}
 plot(summary_horseshoe)
 ```
 
@@ -203,7 +203,7 @@ comparison_data
 
 Now we plot all the estimated subgroup hazard ratios and we add a vertical line indicating the value of the overall hazard ratio. 
 
-```{r}
+```{r, fig.dim = c(6, 6)}
 plot(comparison_data)
 ```
 

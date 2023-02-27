@@ -1,8 +1,19 @@
 ---
-title: "High level structure"
-date: "2023-01-20"
+title: "high_level_structure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{high_level_structure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-```{r}
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
 library(shrinkforest)
 ```
 
