@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">shrinkforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9031</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9032</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,19 +48,13 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/example_guide.html">example_guide</a>
     <a class="dropdown-item" href="../articles/hello.html">Hello</a>
-    <a class="dropdown-item" href="../articles/high_level_structure.html">High level structure</a>
-    <a class="dropdown-item" href="../articles/overview.html">High level structure</a>
+    <a class="dropdown-item" href="../articles/high_level_structure.html">high_level_structure</a>
+    <a class="dropdown-item" href="../articles/overview.html">overview</a>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/shrinkforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -217,7 +211,7 @@ effect estimates. By default this confidence level is of 95%.</p>
 <p>We can add a forest plot with the estimated treatment effects:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">summary_naive</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example_guide_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="example_guide_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="elastic-net">Elastic Net<a class="anchor" aria-label="anchor" href="#elastic-net"></a>
@@ -266,15 +260,15 @@ find the subgroup hazard ratio estimates.</p>
 <code class="sourceCode R"><span><span class="va">summary_ridge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ridge_model</span><span class="op">)</span></span>
 <span><span class="va">summary_ridge</span></span>
 <span><span class="co">#&gt;   subgroup trt.estimate</span></span>
-<span><span class="co">#&gt; 1     x_1a    0.6514162</span></span>
-<span><span class="co">#&gt; 2     x_1b    0.6494716</span></span>
-<span><span class="co">#&gt; 3     x_2a    0.6511461</span></span>
-<span><span class="co">#&gt; 4     x_2b    0.6501897</span></span>
-<span><span class="co">#&gt; 5     x_3a    0.6413243</span></span>
-<span><span class="co">#&gt; 6     x_3b    0.6523088</span></span>
-<span><span class="co">#&gt; 7     x_4a    0.6449626</span></span>
-<span><span class="co">#&gt; 8     x_4b    0.6449838</span></span>
-<span><span class="co">#&gt; 9     x_4c    0.6530015</span></span>
+<span><span class="co">#&gt; 1     x_1a    0.6502230</span></span>
+<span><span class="co">#&gt; 2     x_1b    0.6493814</span></span>
+<span><span class="co">#&gt; 3     x_2a    0.6495992</span></span>
+<span><span class="co">#&gt; 4     x_2b    0.6501799</span></span>
+<span><span class="co">#&gt; 5     x_3a    0.6486001</span></span>
+<span><span class="co">#&gt; 6     x_3b    0.6494180</span></span>
+<span><span class="co">#&gt; 7     x_4a    0.6470851</span></span>
+<span><span class="co">#&gt; 8     x_4b    0.6464959</span></span>
+<span><span class="co">#&gt; 9     x_4c    0.6475580</span></span>
 <span><span class="va">summary_lasso</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lasso_model</span><span class="op">)</span></span>
 <span><span class="va">summary_lasso</span></span>
 <span><span class="co">#&gt;   subgroup trt.estimate</span></span>
@@ -290,10 +284,10 @@ find the subgroup hazard ratio estimates.</p>
 <p>We can obtain a forest plot for each one of these fitted models:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">summary_ridge</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example_guide_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p><img src="example_guide_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">summary_lasso</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example_guide_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
+<p><img src="example_guide_files/figure-html/unnamed-chunk-9-2.png" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="horseshoe-model">Horseshoe model<a class="anchor" aria-label="anchor" href="#horseshoe-model"></a>
@@ -343,8 +337,8 @@ package.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; SAMPLING FOR MODEL '4c88d91c9772512e42eae9279bcb6c67' NOW (CHAIN 1).</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1: Gradient evaluation took 0.001074 seconds</span></span>
-<span><span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 10.74 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1: Gradient evaluation took 0.000857 seconds</span></span>
+<span><span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 8.57 seconds.</span></span>
 <span><span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
@@ -361,15 +355,15 @@ package.</p>
 <span><span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1:  Elapsed Time: 48.4292 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 1:                46.2427 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1:                94.6719 seconds (Total)</span></span>
+<span><span class="co">#&gt; Chain 1:  Elapsed Time: 49.4805 seconds (Warm-up)</span></span>
+<span><span class="co">#&gt; Chain 1:                47.2973 seconds (Sampling)</span></span>
+<span><span class="co">#&gt; Chain 1:                96.7778 seconds (Total)</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; SAMPLING FOR MODEL '4c88d91c9772512e42eae9279bcb6c67' NOW (CHAIN 2).</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2: Gradient evaluation took 0.000569 seconds</span></span>
-<span><span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 5.69 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2: Gradient evaluation took 0.000543 seconds</span></span>
+<span><span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 5.43 seconds.</span></span>
 <span><span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
@@ -386,9 +380,9 @@ package.</p>
 <span><span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2:  Elapsed Time: 47.5964 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 2:                32.5793 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2:                80.1756 seconds (Total)</span></span>
+<span><span class="co">#&gt; Chain 2:  Elapsed Time: 48.714 seconds (Warm-up)</span></span>
+<span><span class="co">#&gt; Chain 2:                33.3821 seconds (Sampling)</span></span>
+<span><span class="co">#&gt; Chain 2:                82.0961 seconds (Total)</span></span>
 <span><span class="co">#&gt; Chain 2:</span></span>
 <span><span class="co">#&gt; Warning: There were 3 divergent transitions after warmup. See</span></span>
 <span><span class="co">#&gt; https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></span>
@@ -493,7 +487,7 @@ effects. The default confidence level is 95%.</p>
 the credible intervals.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">summary_horseshoe</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example_guide_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<p><img src="example_guide_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 </div>
 </div>
 <div class="section level2">
@@ -517,15 +511,15 @@ plot all of them in a common forest plot.</p>
 <span><span class="co">#&gt; 7      x_4a    0.6213593 0.4133445 0.9340571                 Naive</span></span>
 <span><span class="co">#&gt; 8      x_4b    0.5428680 0.3372320 0.8738959                 Naive</span></span>
 <span><span class="co">#&gt; 9      x_4c    0.8575696 0.5483543 1.3411505                 Naive</span></span>
-<span><span class="co">#&gt; 10     x_1a    0.6514162 0.6514162 0.6514162 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 11     x_1b    0.6494716 0.6494716 0.6494716 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 12     x_2a    0.6511461 0.6511461 0.6511461 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 13     x_2b    0.6501897 0.6501897 0.6501897 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 14     x_3a    0.6413243 0.6413243 0.6413243 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 15     x_3b    0.6523088 0.6523088 0.6523088 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 16     x_4a    0.6449626 0.6449626 0.6449626 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 17     x_4b    0.6449838 0.6449838 0.6449838 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 18     x_4c    0.6530015 0.6530015 0.6530015 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 10     x_1a    0.6502230 0.6502230 0.6502230 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 11     x_1b    0.6493814 0.6493814 0.6493814 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 12     x_2a    0.6495992 0.6495992 0.6495992 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 13     x_2b    0.6501799 0.6501799 0.6501799 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 14     x_3a    0.6486001 0.6486001 0.6486001 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 15     x_3b    0.6494180 0.6494180 0.6494180 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 16     x_4a    0.6470851 0.6470851 0.6470851 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 17     x_4b    0.6464959 0.6464959 0.6464959 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 18     x_4c    0.6475580 0.6475580 0.6475580 Elastic net alpha = 0</span></span>
 <span><span class="co">#&gt; 19     x_1a    0.6500483 0.6500483 0.6500483 Elastic net alpha = 1</span></span>
 <span><span class="co">#&gt; 20     x_1b    0.6493824 0.6493824 0.6493824 Elastic net alpha = 1</span></span>
 <span><span class="co">#&gt; 21     x_2a    0.6493749 0.6493749 0.6493749 Elastic net alpha = 1</span></span>
@@ -557,7 +551,7 @@ plot all of them in a common forest plot.</p>
 vertical line indicating the value of the overall hazard ratio.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">comparison_data</span><span class="op">)</span></span></code></pre></div>
-<p><img src="example_guide_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p><img src="example_guide_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
 <p>In the case of having survival data the procedure would be analogous
 but instead of having survival <code>resptype</code> we would have
 binary. Also the response variable should be a numeric variable with 1
