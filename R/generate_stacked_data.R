@@ -37,18 +37,24 @@ generate_stacked_data <- function(base_model, subgroup_model, data,
   }
   tmp <- lapply(data[, subgroup_vars], function(x) levels(factor(x)))
   subgroup_names <- paste(rep(names(tmp), lapply(tmp, length)),
-                          unlist(tmp), sep = ".")
+    unlist(tmp),
+    sep = "."
+  )
   data <- data[, c(arm_var, resp_var, status_var, subgroup_vars)]
   data[, subgroup_vars] <- lapply(data[, subgroup_vars], as.character)
-  d <- tidyr::gather(data, "subgroup_var", "subgroup_value",
-                     -arm_var, -resp_var, -status_var)
+  d <- tidyr::gather(
+    data, "subgroup_var", "subgroup_value",
+    -arm_var, -resp_var, -status_var
+  )
   subgroup <- paste(d$subgroup_var, d$subgroup_value, sep = ".")
   subgroup <- factor(subgroup, levels = subgroup_names)
   d <- cbind(d, subgroup)
   d <- dplyr::arrange(d, subgroup)
   d <- if (resptype == "survival") {
-    dplyr::rename_at(d, dplyr::vars(c(arm_var, resp_var, status_var)),
-                     ~ c("arm", "time", "status"))
+    dplyr::rename_at(
+      d, dplyr::vars(c(arm_var, resp_var, status_var)),
+      ~ c("arm", "time", "status")
+    )
   } else if (resptype == "binary") {
     dplyr::rename_at(d, dplyr::vars(c(arm_var, resp_var)), ~ c("arm", "y"))
   }

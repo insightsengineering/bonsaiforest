@@ -75,9 +75,12 @@ horseshoe <- function(resp, trt, subgr, covars, data,
     design_main <- prep_data$design_main[, -1]
     design_matrix <- cbind(design_main, prep_data$design_ia)
     form <- stats::as.formula(paste(resp, " ~ a + b"))
-    form_a <- stats::as.formula(paste("a ~ 1 +", paste0(colnames(design_main),
-      collapse = " + "
-    )))
+    form_a <- stats::as.formula(
+      paste(
+        "a ~ 1 +",
+        paste0(colnames(design_main), collapse = " + ")
+      )
+    )
     y <- as.data.frame(data[[resp]])
     colnames(y) <- resp
     data_model <- cbind(design_matrix, y)
