@@ -2,6 +2,5 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 surv_prob <- function(k, h) {
-    .Call(`_shrinkforest_surv_prob`, k, h)
+  .Call(`_shrinkforest_surv_prob`, k, h)
 }
-
