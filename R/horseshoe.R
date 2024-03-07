@@ -93,11 +93,8 @@ horseshoe <- function(resp, trt, subgr, covars, data,
         brms::lf(form_b),
       data = data_model,
       family = family,
-      brms::prior(normal(0, 5), class = "b", nlpar = "a") +
-        brms::prior(horseshoe(1),
-          class = "b",
-          nlpar = "b"
-        ),
+      brms::prior_string("normal(0, 5)", class = "b", nlpar = "a") +
+        brms::prior_string("horseshoe(1)", class = "b", nlpar = "b"),
       ...
     )
   }
