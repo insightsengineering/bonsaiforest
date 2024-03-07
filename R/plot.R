@@ -16,12 +16,24 @@ plot.summary.naive <- function(x, ...) {
   data$subgroup <- as.factor(data$subgroup)
   forestplot <- ggplot(
     data = data,
-    aes(x = trt.estimate, y = model, xmin = trt.low, xmax = trt.high)
+    aes(
+      x = .data$trt.estimate,
+      y = .data$model,
+      xmin = .data$trt.low,
+      xmax = .data$trt.high
+    )
   ) +
     ggtitle("Forest plot Naive") +
-    geom_pointrange(aes(col = model)) +
+    geom_pointrange(aes(col = .data$model)) +
     ylab("Subgroup") +
-    geom_errorbar(aes(xmin = trt.low, xmax = trt.high, col = model), width = 0.5, cex = 1) +
+    geom_errorbar(
+      aes(
+        xmin = .data$trt.low,
+        xmax = .data$trt.high,
+        col = .data$model
+      ),
+      width = 0.5, cex = 1
+    ) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
       strip.position = "left",
       nrow = nrow(data), scales = "free_y"
@@ -70,10 +82,10 @@ plot.summary.elastic_net <- function(x, ...) {
   data$subgroup <- as.factor(data$subgroup)
   forestplot <- ggplot(
     data = data,
-    aes(x = trt.estimate, y = model)
+    aes(x = .data$trt.estimate, y = .data$model)
   ) +
     ggtitle("Forest plot Elastic Net") +
-    geom_point(aes(col = model)) +
+    geom_point(aes(col = .data$model)) +
     ylab("Subgroup") +
     facet_wrap(~ forcats::fct_inorder(subgroup),
       strip.position = "left",
@@ -117,12 +129,25 @@ plot.summary.horseshoe <- function(x, ...) {
   data$subgroup <- as.factor(data$subgroup)
   forestplot <- ggplot(
     data = data,
-    aes(x = trt.estimate, y = model, xmin = trt.low, xmax = trt.high)
+    aes(
+      x = .data$trt.estimate,
+      y = .data$model,
+      xmin = .data$trt.low,
+      xmax = .data$trt.high
+    )
   ) +
     ggtitle("Forest plot Horseshoe") +
-    geom_pointrange(aes(col = model)) +
+    geom_pointrange(aes(col = .data$model)) +
     ylab("Subgroup") +
-    geom_errorbar(aes(xmin = trt.low, xmax = trt.high, col = model), width = 0.5, cex = 1) +
+    geom_errorbar(
+      aes(
+        xmin = .data$trt.low,
+        xmax = .data$trt.high,
+        col = .data$model
+      ),
+      width = 0.5,
+      cex = 1
+    ) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
       strip.position = "left",
       nrow = nrow(data), scales = "free_y"
@@ -170,16 +195,19 @@ plot.compare.data <- function(x, ...) {
   forestplot <- ggplot(
     data = data,
     aes(
-      x = trt.estimate, y = forcats::fct_rev(forcats::fct_inorder(model)), xmin = trt.low,
-      xmax = trt.high
+      x = .data$trt.estimate,
+      y = forcats::fct_rev(forcats::fct_inorder(.data$model)),
+      xmin = .data$trt.low,
+      xmax = .data$trt.high
     )
   ) +
     ggtitle("Forest plot") +
-    geom_pointrange(aes(col = forcats::fct_inorder(model))) +
+    geom_pointrange(aes(col = forcats::fct_inorder(.data$model))) +
     ylab("Subgroup") +
     geom_errorbar(aes(
-      xmin = trt.low, xmax = trt.high,
-      col = forcats::fct_inorder(model)
+      xmin = .data$trt.low,
+      xmax = .data$trt.high,
+      col = forcats::fct_inorder(.data$model)
     ), width = 0.5, cex = 1) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
       strip.position = "left",
