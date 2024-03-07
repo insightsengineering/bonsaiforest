@@ -1,0 +1,10 @@
+---
+blank_issues_enabled: true
+
+contact_links:
+  - name: We are hiring!
+    url: https://careers.gene.com/
+    about: Genentech and Roche are hiring!
+  - name: openstatsware
+    url: https://openstatsware.org/
+    about: Software Engineering in Biostatistics
