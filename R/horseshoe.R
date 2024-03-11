@@ -29,7 +29,8 @@
 #' @examples
 #' horseshoe("ev_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
 #'   example_data, "binary",
-#'   chains = 1, seed = 0, control = list(adapt_delta = 0.95)
+#'   chains = 1, seed = 0, control = list(adapt_delta = 0.95),
+#'   iter = 50 # In practice, you need to omit this or set it much higher!
 #' )
 horseshoe <- function(resp, trt, subgr, covars, data,
                       resptype = c("survival", "binary"), status = NULL,
@@ -75,9 +76,12 @@ horseshoe <- function(resp, trt, subgr, covars, data,
     design_main <- prep_data$design_main[, -1]
     design_matrix <- cbind(design_main, prep_data$design_ia)
     form <- stats::as.formula(paste(resp, " ~ a + b"))
-    form_a <- stats::as.formula(paste("a ~ 1 +", paste0(colnames(design_main),
-      collapse = " + "
-    )))
+    form_a <- stats::as.formula(
+      paste(
+        "a ~ 1 +",
+        paste0(colnames(design_main), collapse = " + ")
+      )
+    )
     y <- as.data.frame(data[[resp]])
     colnames(y) <- resp
     data_model <- cbind(design_matrix, y)
@@ -90,11 +94,8 @@ horseshoe <- function(resp, trt, subgr, covars, data,
         brms::lf(form_b),
       data = data_model,
       family = family,
-      brms::prior(normal(0, 5), class = "b", nlpar = "a") +
-        brms::prior(horseshoe(1),
-          class = "b",
-          nlpar = "b"
-        ),
+      brms::prior_string("normal(0, 5)", class = "b", nlpar = "a") +
+        brms::prior_string("horseshoe(1)", class = "b", nlpar = "b"),
       ...
     )
   }

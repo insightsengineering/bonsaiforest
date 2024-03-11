@@ -30,5 +30,5 @@ Function to obtain the estimated posterior distribution of the subgroup
 treatment effects considering a horseshoe fitted model.
 }
 \examples{
-trt_horseshoe(horseshoe_fit_surv)
+trt_horseshoe(horseshoe_fit_surv, m = 5)
 }

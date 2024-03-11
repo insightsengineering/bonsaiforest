@@ -2,7 +2,8 @@ test_that("horseshoe outputs the right elements for survival", {
   result <- suppressWarnings(horseshoe("tt_pfs", "arm", c("x_1", "x_3"),
     c("x_1", "x_2", "x_3"), example_data,
     "survival", "ev_pfs",
-    chains = 1, seed = 0, control = list(adapt_delta = 0.95)
+    iter = 20, warmup = 10, chains = 1,
+    seed = 0, control = list(adapt_delta = 0.95)
   ))
   result[[1]] <- as.matrix(result$fit$fit)
   prep_data <- preprocess(
@@ -22,20 +23,14 @@ test_that("horseshoe outputs the right elements for survival", {
     intercept = FALSE
   )
   fit_brms <- suppressWarnings(brms::brm(
-    brms::bf(tt_pfs | cens(1 - ev_pfs) ~ a + b,
-      nl = TRUE
-    ) +
-      brms::lf(a ~ 0 + arm0 + arm1 + x_1b +
-        x_2b + x_3b) +
-      brms::lf(b ~ 0 + x_1a_arm + x_1b_arm +
-        x_2a_arm + x_2b_arm
-        + x_3a_arm + x_3b_arm),
-    data = data_model, family = brms::brmsfamily("cox",
-      bhaz = bhaz
-    ),
+    brms::bf(tt_pfs | cens(1 - ev_pfs) ~ a + b, nl = TRUE) +
+      brms::lf(a ~ 0 + arm0 + arm1 + x_1b + x_2b + x_3b) +
+      brms::lf(b ~ 0 + x_1a_arm + x_1b_arm + x_2a_arm + x_2b_arm + x_3a_arm + x_3b_arm),
+    data = data_model,
+    family = brms::brmsfamily("cox", bhaz = bhaz),
     brms::prior(normal(0, 5), class = "b", nlpar = "a") +
       brms::prior(horseshoe(1), class = "b", nlpar = "b"),
-    iter = 2000, warmup = 1000, chains = 1,
+    iter = 20, warmup = 10, chains = 1,
     control = list(adapt_delta = 0.95), seed = 0
   ))
   expected <- list(
@@ -56,7 +51,8 @@ test_that("horseshoe outputs the right elements for binary", {
   result <- suppressWarnings(horseshoe("ev_pfs", "arm", c("x_1", "x_3"),
     c("x_1", "x_2", "x_3"), example_data,
     "binary",
-    chains = 1, seed = 0, control = list(adapt_delta = 0.95)
+    iter = 20, warmup = 10, chains = 1,
+    seed = 0, control = list(adapt_delta = 0.95)
   ))
   result[[1]] <- as.matrix(result$fit$fit)
   prep_data <- preprocess(
@@ -70,12 +66,11 @@ test_that("horseshoe outputs the right elements for binary", {
   fit_brms <- suppressWarnings(brms::brm(
     brms::bf(ev_pfs ~ a + b, nl = TRUE) +
       brms::lf(a ~ 1 + arm1 + x_1b + x_2b + x_3b) +
-      brms::lf(b ~ 0 + x_1a_arm + x_1b_arm + x_2a_arm + x_2b_arm
-        + x_3a_arm + x_3b_arm),
+      brms::lf(b ~ 0 + x_1a_arm + x_1b_arm + x_2a_arm + x_2b_arm + x_3a_arm + x_3b_arm),
     data = data_model, family = brms::brmsfamily("bernoulli"),
     brms::prior(normal(0, 5), class = "b", nlpar = "a") +
       brms::prior(horseshoe(1), class = "b", nlpar = "b"),
-    iter = 2000, warmup = 1000, chains = 1,
+    iter = 20, warmup = 10, chains = 1,
     control = list(adapt_delta = 0.95), seed = 0
   ))
   expected <- list(

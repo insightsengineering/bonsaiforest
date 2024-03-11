@@ -4,7 +4,7 @@
 \name{shrinkforest-package}
 \alias{shrinkforest}
 \alias{shrinkforest-package}
-\title{shrinkforest: Shrinkage based Forest Plots}
+\title{shrinkforest: Shrinkage Based Forest Plots}
 \description{
 Subgroup analyses are routinely performed in clinical trial analyses. From a methodological perspective, two key issues of subgroup analyses are multiplicity (even if only predefined subgroups are investigated) and the low sample sizes of subgroups which lead to highly variable estimates. This package implements subgroup estimates based on Bayesian shrinkage priors, as well as penalized likelihood inference.
 }
@@ -18,6 +18,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Mar Vazquez Rabunal \email{mar.vazquez_rabunal@roche.com}
+
+Authors:
+\itemize{
+  \item Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
+}
 
 }
 \keyword{internal}
