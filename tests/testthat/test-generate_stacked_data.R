@@ -26,7 +26,6 @@ test_that("generate_stacked_data outputs the right element for survival", {
   expect_equal(result, expected)
 })
 
-
 test_that("generate_stacked_data outputs the right element for binary", {
   result <- generate_stacked_data(
     ev_pfs ~ arm, ~ x_1 + x_2,
