@@ -22,3 +22,4 @@ init.sh
 workflows.md
 images
 ^data-raw$
+^\.gitleaksignore$
