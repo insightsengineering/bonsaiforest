@@ -8,7 +8,7 @@ Authors@R: c(
     person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = "aut")
   )
 Description: Subgroup analyses are routinely performed in clinical trial
-    analyses.  From a methodological perspective, two key issues of
+    analyses. From a methodological perspective, two key issues of
     subgroup analyses are multiplicity (even if only predefined subgroups
     are investigated) and the low sample sizes of subgroups which lead to
     highly variable estimates.  This package implements subgroup estimates
