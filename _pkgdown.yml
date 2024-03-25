@@ -1,4 +1,4 @@
-url: https://insightsengineering.github.io/shrinkforest
+url: https://insightsengineering.github.io/bonsaiforest
 
 template:
   bootstrap: 5
@@ -17,7 +17,7 @@ template:
 navbar:
   right:
     - icon: fa-github
-      href: https://github.com/insightsengineering/shrinkforest
+      href: https://github.com/insightsengineering/bonsaiforest
 
 reference:
   - title: Model Fit Functions

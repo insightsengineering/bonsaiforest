@@ -11,8 +11,8 @@ Subgroup analyses are routinely performed in clinical trial analyses. From a met
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/insightsengineering/shrinkforest/}
-  \item Report bugs at \url{https://github.com/insightsengineering/shrinkforest/issues}
+  \item \url{https://github.com/insightsengineering/bonsaiforest/}
+  \item Report bugs at \url{https://github.com/insightsengineering/bonsaiforest/issues}
 }
 
 }

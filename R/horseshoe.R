@@ -110,6 +110,6 @@ horseshoe <- function(resp, trt, subgr, covars, data,
     y = y,
     subgr_names = prep_data$subgr_names
   )
-  class(result) <- c("shrinkforest", "horseshoe")
+  class(result) <- c("bonsaiforest", "horseshoe")
   return(result)
 }

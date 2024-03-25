@@ -23,7 +23,7 @@ test_that("naive outputs the right elements for survival", {
     resptype = "survival",
     data = example_data
   )
-  class(expected) <- c("shrinkforest", "naive")
+  class(expected) <- c("bonsaiforest", "naive")
   expect_equal(result, expected)
 })
 
@@ -56,6 +56,6 @@ test_that("naive outputs the right elements for binary", {
     resptype = "binary",
     data = example_data
   )
-  class(expected) <- c("shrinkforest", "naive")
+  class(expected) <- c("bonsaiforest", "naive")
   expect_equal(result, expected)
 })

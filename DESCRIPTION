@@ -15,8 +15,8 @@ Description: Subgroup analyses are routinely performed in clinical trial
     based on Bayesian shrinkage priors, as well as penalized likelihood
     inference.
 License: Apache License 2.0 | file LICENSE
-URL: https://github.com/insightsengineering/shrinkforest/
-BugReports: https://github.com/insightsengineering/shrinkforest/issues
+URL: https://github.com/insightsengineering/bonsaiforest/
+BugReports: https://github.com/insightsengineering/bonsaiforest/issues
 Depends:
     R (>= 4.1)
 Imports:

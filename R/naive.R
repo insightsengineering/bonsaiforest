@@ -76,6 +76,6 @@ naive <- function(resp, trt, subgr, data,
     resptype = resptype,
     data = data
   )
-  class(result) <- c("shrinkforest", "naive")
+  class(result) <- c("bonsaiforest", "naive")
   return(result)
 }

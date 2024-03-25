@@ -7,7 +7,7 @@
 compare(...)
 }
 \arguments{
-\item{...}{Objects of class \code{shrinkforest}. We write them separated by a comma.}
+\item{...}{Objects of class \code{bonsaiforest}. We write them separated by a comma.}
 }
 \value{
 List with a \code{data.frame} of the estimated subgroup treatment effects,

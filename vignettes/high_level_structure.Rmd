@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(shrinkforest)
+library(bonsaiforest)
 ```
 
 
@@ -85,7 +85,7 @@ We find the number of iteration that we need to consider in order to obtain all 
 ## compare
 The `compare` function is used to obtain a `data.frame` with the treatment effects of the subgroups that we want to compare.
 
-The arguments of this function are objects of class `shrinkforest`. We take the summary of these objects and we save in a data frame the subgroup treatment effect estimates. If we have a `naivepop` object then we also save the overall treatment effect. Finally we also add the response type of the data and we export a list with all these elements.
+The arguments of this function are objects of class `bonsaiforest`. We take the summary of these objects and we save in a data frame the subgroup treatment effect estimates. If we have a `naivepop` object then we also save the overall treatment effect. Finally we also add the response type of the data and we export a list with all these elements.
 
 
 
@@ -195,6 +195,6 @@ The `plot.summary.horseshoe` function is used to plot the forest plot of a `hors
 ### compareplot
 The `compareplot` function is used to create a forest plot with all the methods fitted in the data to obtain the subgroup treatment effects.
 
-The arguments of the function have to be summaries of `shrinkforest` objects, i.e, objects of class `summary.naivepop`, `summary.naive`, `summary.elastic_net` or `summary.horseshoe`. 
+The arguments of the function have to be summaries of `bonsaiforest` objects, i.e, objects of class `summary.naivepop`, `summary.naive`, `summary.elastic_net` or `summary.horseshoe`. 
 
 These objects have the treatment effect estimates and the bounds of the credible or confidence intervals (when it applies). We plot them with the shape of a forest plot and if the `summary.naivepop` object is included in the arguments we add a vertical line indicating the overall treatment effect.

@@ -41,6 +41,6 @@ naivepop <- function(resp, trt, data, resptype = c("survival", "binary"), status
     resptype = resptype,
     data = data
   )
-  class(result) <- c("shrinkforest", "naivepop")
+  class(result) <- c("bonsaiforest", "naivepop")
   return(result)
 }

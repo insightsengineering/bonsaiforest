@@ -7,6 +7,6 @@ date: "`r Sys.Date()`"
 Hello World!
 
 ```{r}
-library(shrinkforest)
-hello("shrinkforest!")
+library(bonsaiforest)
+hello("bonsaiforest!")
 ```
