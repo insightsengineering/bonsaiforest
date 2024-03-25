@@ -13,7 +13,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // surv_prob
 List surv_prob(arma::mat k, arma::mat h);
-RcppExport SEXP _shrinkforest_surv_prob(SEXP kSEXP, SEXP hSEXP) {
+RcppExport SEXP _bonsaiforest_surv_prob(SEXP kSEXP, SEXP hSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -25,11 +25,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_shrinkforest_surv_prob", (DL_FUNC) &_shrinkforest_surv_prob, 2},
+    {"_bonsaiforest_surv_prob", (DL_FUNC) &_bonsaiforest_surv_prob, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_shrinkforest(DllInfo *dll) {
+RcppExport void R_init_bonsaiforest(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

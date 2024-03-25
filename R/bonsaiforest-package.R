@@ -1,7 +1,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @useDynLib shrinkforest, .registration = TRUE
+#' @useDynLib bonsaiforest, .registration = TRUE
 
 #' @import checkmate
 #' @importFrom survival aareg
