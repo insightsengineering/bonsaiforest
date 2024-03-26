@@ -31,10 +31,10 @@ Imports:
     Rcpp,
     splines2,
     stats,
-    stringr,
     survival,
     tibble,
     tidyr,
+    tidyselect,
     vdiffr
 Suggests:
     knitr,
