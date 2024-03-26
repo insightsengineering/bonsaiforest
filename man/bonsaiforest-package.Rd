@@ -6,6 +6,8 @@
 \alias{bonsaiforest-package}
 \title{bonsaiforest: Shrinkage Based Forest Plots}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Subgroup analyses are routinely performed in clinical trial analyses. From a methodological perspective, two key issues of subgroup analyses are multiplicity (even if only predefined subgroups are investigated) and the low sample sizes of subgroups which lead to highly variable estimates. This package implements subgroup estimates based on Bayesian shrinkage priors, as well as penalized likelihood inference.
 }
 \seealso{
