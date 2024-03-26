@@ -32,7 +32,7 @@ plot.summary.naive <- function(x, ...) {
         xmax = .data$trt.high,
         col = .data$model
       ),
-      width = 0.5, cex = 1
+      linewidth = 0.5, cex = 1
     ) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
       strip.position = "left",
@@ -145,7 +145,7 @@ plot.summary.horseshoe <- function(x, ...) {
         xmax = .data$trt.high,
         col = .data$model
       ),
-      width = 0.5,
+      linewidth = 0.5,
       cex = 1
     ) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
@@ -208,7 +208,7 @@ plot.compare.data <- function(x, ...) {
       xmin = .data$trt.low,
       xmax = .data$trt.high,
       col = forcats::fct_inorder(.data$model)
-    ), width = 0.5, cex = 1) +
+    ), linewidth = 0.5, cex = 1) +
     facet_wrap(~ forcats::fct_inorder(subgroup),
       strip.position = "left",
       nrow = nrow(data), scales = "free_y"
