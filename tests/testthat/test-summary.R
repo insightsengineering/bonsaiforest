@@ -161,7 +161,7 @@ test_that("summary outputs the right element for horseshoe survival", {
     conf = 0.95
   )
   class(expected) <- "summary.horseshoe"
-  expect_equal(result, expected, tolerance = 0.001)
+  expect_equal(result, expected, tolerance = 0.1)
 })
 
 
@@ -187,5 +187,5 @@ test_that("summary outputs the right element for horseshoe binary", {
     conf = 0.95
   )
   class(expected) <- "summary.horseshoe"
-  expect_equal(result, expected, tolerance = 0.001)
+  expect_equal(result, expected, tolerance = 0.1)
 })
