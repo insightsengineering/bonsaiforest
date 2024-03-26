@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="ahr_estimation" timestamp="2024-03-26T10:13:33Z" hostname="7c7511409656" tests="1" skipped="0" failures="0" errors="0" time="0.065">
+    <testcase time="0.0649999999999995" classname="ahr_estimation" name="ahr_estimation_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="compare" timestamp="2024-03-26T10:13:33Z" hostname="7c7511409656" tests="2" skipped="0" failures="0" errors="1" time="0.15">
+    <testcase time="0.107" classname="compare" name="compare_outputs_the_right_element">
+      <error type="error" message="Error in `compare(naivepop_fit_surv, naive_fit_surv)`: Assertion on 'obj' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'. ('test-compare.R:2:3')">Error in `compare(naivepop_fit_surv, naive_fit_surv)`: Assertion on 'obj' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'.
+Backtrace:
+    ▆
+ 1. └─bonsaiforest::compare(naivepop_fit_surv, naive_fit_surv) at test-compare.R:2:3
+ 2.   └─checkmate::assert_class(obj, "bonsaiforest")
+ 3.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 4.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0430000000000001" classname="compare" name="compare_outputs_an_error_when_there_are_less_than_two_arguments"/>
+  </testsuite>
+  <testsuite name="elastic_net" timestamp="2024-03-26T10:13:33Z" hostname="7c7511409656" tests="2" skipped="0" failures="0" errors="0" time="0.372">
+    <testcase time="0.269" classname="elastic_net" name="elastic_net_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.103" classname="elastic_net" name="elastic_net_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="generate_stacked_data" timestamp="2024-03-26T10:13:34Z" hostname="7c7511409656" tests="5" skipped="0" failures="0" errors="0" time="0.198">
+    <testcase time="0.0629999999999997" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0390000000000006" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0389999999999997" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0350000000000001" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_survival"/>
+    <testcase time="0.0220000000000002" classname="generate_stacked_data" name="generate_stacked_data_outputs_the_right_element_for_binary"/>
+  </testsuite>
+  <testsuite name="hello" timestamp="2024-03-26T10:13:34Z" hostname="7c7511409656" tests="1" skipped="0" failures="0" errors="1" time="0.008">
+    <testcase time="0.00800000000000001" classname="hello" name="hello_greets_the_entity">
+      <error type="error" message="Error in `hello(&quot;foo&quot;)`: could not find function &quot;hello&quot; ('test-hello.R:2:3')">Error in `hello("foo")`: could not find function "hello"</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="horseshoe" timestamp="2024-03-26T10:13:34Z" hostname="7c7511409656" tests="2" skipped="0" failures="0" errors="0" time="348.119">
+    <testcase time="180.5" classname="horseshoe" name="horseshoe_outputs_the_right_elements_for_survival"/>
+    <testcase time="167.619" classname="horseshoe" name="horseshoe_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="lOR_estimation" timestamp="2024-03-26T10:19:22Z" hostname="7c7511409656" tests="1" skipped="0" failures="0" errors="0" time="0.008">
+    <testcase time="0.00799999999998136" classname="lOR_estimation" name="lor_estimation_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="naive" timestamp="2024-03-26T10:19:22Z" hostname="7c7511409656" tests="2" skipped="0" failures="0" errors="0" time="0.627">
+    <testcase time="0.117999999999995" classname="naive" name="naive_outputs_the_right_elements_for_survival"/>
+    <testcase time="0.509000000000015" classname="naive" name="naive_outputs_the_right_elements_for_binary"/>
+  </testsuite>
+  <testsuite name="naivepop" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="2" skipped="0" failures="0" errors="0" time="0.022">
+    <testcase time="0.0129999999999768" classname="naivepop" name="naivepop_produces_expected_coefficients_of_the_model"/>
+    <testcase time="0.00900000000001455" classname="naivepop" name="naivepop_outputs_the_right_elements"/>
+  </testsuite>
+  <testsuite name="plot" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="4" skipped="0" failures="0" errors="4" time="0.085">
+    <testcase time="0.00999999999999091" classname="plot" name="plot_works_as_expected_for_naive">
+      <error type="error" message="Error in `summary.naive(naive_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'. ('test-plot.R:2:3')">Error in `summary.naive(naive_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'.
+Backtrace:
+    ▆
+ 1. ├─base::plot(summary(naive_fit_surv)) at test-plot.R:2:3
+ 2. ├─base::summary(naive_fit_surv)
+ 3. └─bonsaiforest:::summary.naive(naive_fit_surv)
+ 4.   └─checkmate::assert_class(object, c("bonsaiforest", "naive"))
+ 5.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 6.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0240000000000009" classname="plot" name="plot_works_as_expected_for_elastic_net">
+      <error type="error" message="Error in `summary.elastic_net(elastic_net_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'. ('test-plot.R:7:3')">Error in `summary.elastic_net(elastic_net_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'.
+Backtrace:
+    ▆
+ 1. ├─base::plot(summary(elastic_net_fit_surv)) at test-plot.R:7:3
+ 2. ├─base::summary(elastic_net_fit_surv)
+ 3. └─bonsaiforest:::summary.elastic_net(elastic_net_fit_surv)
+ 4.   └─checkmate::assert_class(object, c("bonsaiforest", "elastic_net"))
+ 5.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 6.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0289999999999964" classname="plot" name="plot_works_as_expected_for_horseshoe">
+      <error type="error" message="Error in `summary.horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'. ('test-plot.R:12:3')">Error in `summary.horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'.
+Backtrace:
+    ▆
+ 1. ├─base::plot(summary(horseshoe_fit_bin)) at test-plot.R:12:3
+ 2. ├─base::summary(horseshoe_fit_bin)
+ 3. └─bonsaiforest:::summary.horseshoe(horseshoe_fit_bin)
+ 4.   └─checkmate::assert_class(object, c("bonsaiforest", "horseshoe"))
+ 5.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 6.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0219999999999914" classname="plot" name="plot_works_as_expected_for_compare.data">
+      <error type="error" message="Error in `compare(naive_fit_surv, naivepop_fit_surv, elastic_net_fit_surv)`: Assertion on 'obj' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'. ('test-plot.R:17:3')">Error in `compare(naive_fit_surv, naivepop_fit_surv, elastic_net_fit_surv)`: Assertion on 'obj' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'.
+Backtrace:
+    ▆
+ 1. ├─base::plot(compare(naive_fit_surv, naivepop_fit_surv, elastic_net_fit_surv)) at test-plot.R:17:3
+ 2. └─bonsaiforest::compare(naive_fit_surv, naivepop_fit_surv, elastic_net_fit_surv)
+ 3.   └─checkmate::assert_class(obj, "bonsaiforest")
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="preprocess" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="1" skipped="0" failures="0" errors="0" time="0.028">
+    <testcase time="0.02800000000002" classname="preprocess" name="preprocess_outputs_the_right_elements"/>
+  </testsuite>
+  <testsuite name="print" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="4" skipped="0" failures="0" errors="4" time="0.077">
+    <testcase time="0.00999999999999091" classname="print" name="print_outputs_the_right_element_for_naivepop">
+      <error type="error" message="Error in `summary.naivepop(naivepop_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'. ('test-print.R:2:3')">Error in `summary.naivepop(naivepop_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'.
+Backtrace:
+    ▆
+ 1. ├─base::print(summary(naivepop_fit_bin)) at test-print.R:2:3
+ 2. ├─base::summary(naivepop_fit_bin)
+ 3. └─bonsaiforest:::summary.naivepop(naivepop_fit_bin)
+ 4.   └─checkmate::assert_class(object, c("bonsaiforest", "naivepop"))
+ 5.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 6.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0219999999999914" classname="print" name="print_outputs_the_right_element_for_naive">
+      <error type="error" message="Error in `summary.naive(naive_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'. ('test-print.R:14:3')">Error in `summary.naive(naive_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'.
+Backtrace:
+    ▆
+ 1. ├─base::print(summary(naive_fit_bin)) at test-print.R:14:3
+ 2. ├─base::summary(naive_fit_bin)
+ 3. └─bonsaiforest:::summary.naive(naive_fit_bin)
+ 4.   └─checkmate::assert_class(object, c("bonsaiforest", "naive"))
+ 5.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 6.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0230000000000246" classname="print" name="print_outputs_the_right_element_for_elastic_net">
+      <error type="error" message="Error in `summary.elastic_net(elastic_net_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'. ('test-print.R:53:3')">Error in `summary.elastic_net(elastic_net_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'.
+Backtrace:
+    ▆
+ 1. ├─base::print(summary(elastic_net_fit_bin)) at test-print.R:53:3
+ 2. ├─base::summary(elastic_net_fit_bin)
+ 3. └─bonsaiforest:::summary.elastic_net(elastic_net_fit_bin)
+ 4.   └─checkmate::assert_class(object, c("bonsaiforest", "elastic_net"))
+ 5.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 6.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0219999999999914" classname="print" name="print_outputs_the_right_element_for_horseshoe">
+      <error type="error" message="Error in `summary.horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'. ('test-print.R:75:3')">Error in `summary.horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'.
+Backtrace:
+    ▆
+ 1. ├─base::print(summary(horseshoe_fit_bin)) at test-print.R:75:3
+ 2. ├─base::summary(horseshoe_fit_bin)
+ 3. └─bonsaiforest:::summary.horseshoe(horseshoe_fit_bin)
+ 4.   └─checkmate::assert_class(object, c("bonsaiforest", "horseshoe"))
+ 5.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 6.       └─checkmate:::mstop(...)</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="subgroups" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="2" skipped="0" failures="0" errors="2" time="0.05">
+    <testcase time="0.0269999999999868" classname="subgroups" name="subgroups_outputs_the_right_element_for_survival">
+      <error type="error" message="Error in `subgroups(elastic_net_fit_surv, elastic_net_surv$est_coef, elastic_net_surv$h0)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'. ('test-subgroups.R:2:3')">Error in `subgroups(elastic_net_fit_surv, elastic_net_surv$est_coef, elastic_net_surv$h0)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'.
+Backtrace:
+    ▆
+ 1. └─bonsaiforest::subgroups(...) at test-subgroups.R:2:3
+ 2.   └─checkmate::assert_class(object, "bonsaiforest")
+ 3.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 4.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0230000000000246" classname="subgroups" name="subgroups_outputs_the_right_element_for_binary">
+      <error type="error" message="Error in `subgroups(elastic_net_fit_bin, est_coef_bin1)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'. ('test-subgroups.R:19:3')">Error in `subgroups(elastic_net_fit_bin, est_coef_bin1)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'.
+Backtrace:
+    ▆
+ 1. └─bonsaiforest::subgroups(elastic_net_fit_bin, est_coef_bin1) at test-subgroups.R:19:3
+ 2.   └─checkmate::assert_class(object, "bonsaiforest")
+ 3.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 4.       └─checkmate:::mstop(...)</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="summary" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="8" skipped="0" failures="0" errors="8" time="0.217">
+    <testcase time="0.0260000000000105" classname="summary" name="summary_outputs_the_right_element_for_naivepop_survival">
+      <error type="error" message="Error in `summary.naivepop(naivepop_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'. ('test-summary.R:2:3')">Error in `summary.naivepop(naivepop_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(naivepop_fit_surv) at test-summary.R:2:3
+ 2. └─bonsaiforest:::summary.naivepop(naivepop_fit_surv)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "naivepop"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0240000000000009" classname="summary" name="summary_outputs_the_right_element_for_naivepop_binary">
+      <error type="error" message="Error in `summary.naivepop(naivepop_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'. ('test-summary.R:13:3')">Error in `summary.naivepop(naivepop_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naivepop'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(naivepop_fit_bin) at test-summary.R:13:3
+ 2. └─bonsaiforest:::summary.naivepop(naivepop_fit_bin)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "naivepop"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0249999999999773" classname="summary" name="summary_outputs_the_right_element_for_naive_survival">
+      <error type="error" message="Error in `summary.naive(naive_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'. ('test-summary.R:24:3')">Error in `summary.naive(naive_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(naive_fit_surv) at test-summary.R:24:3
+ 2. └─bonsaiforest:::summary.naive(naive_fit_surv)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "naive"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0299999999999727" classname="summary" name="summary_outputs_the_right_element_for_naive_binary">
+      <error type="error" message="Error in `summary.naive(naive_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'. ('test-summary.R:61:3')">Error in `summary.naive(naive_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','naive'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(naive_fit_bin) at test-summary.R:61:3
+ 2. └─bonsaiforest:::summary.naive(naive_fit_bin)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "naive"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0289999999999964" classname="summary" name="summary_outputs_the_right_element_for_elastic_net_survival">
+      <error type="error" message="Error in `summary.elastic_net(elastic_net_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'. ('test-summary.R:100:3')">Error in `summary.elastic_net(elastic_net_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(elastic_net_fit_surv) at test-summary.R:100:3
+ 2. └─bonsaiforest:::summary.elastic_net(elastic_net_fit_surv)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "elastic_net"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0340000000000487" classname="summary" name="summary_outputs_the_right_element_for_elastic_net_binary">
+      <error type="error" message="Error in `summary.elastic_net(elastic_net_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'. ('test-summary.R:121:3')">Error in `summary.elastic_net(elastic_net_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','elastic_net'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(elastic_net_fit_bin) at test-summary.R:121:3
+ 2. └─bonsaiforest:::summary.elastic_net(elastic_net_fit_bin)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "elastic_net"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0249999999999773" classname="summary" name="summary_outputs_the_right_element_for_horseshoe_survival">
+      <error type="error" message="Error in `summary.horseshoe(horseshoe_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'. ('test-summary.R:143:3')">Error in `summary.horseshoe(horseshoe_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(horseshoe_fit_surv) at test-summary.R:143:3
+ 2. └─bonsaiforest:::summary.horseshoe(horseshoe_fit_surv)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "horseshoe"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0240000000000009" classname="summary" name="summary_outputs_the_right_element_for_horseshoe_binary">
+      <error type="error" message="Error in `summary.horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'. ('test-summary.R:169:3')">Error in `summary.horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'.
+Backtrace:
+    ▆
+ 1. ├─base::summary(horseshoe_fit_bin) at test-summary.R:169:3
+ 2. └─bonsaiforest:::summary.horseshoe(horseshoe_fit_bin)
+ 3.   └─checkmate::assert_class(object, c("bonsaiforest", "horseshoe"))
+ 4.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 5.       └─checkmate:::mstop(...)</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="surv_prob" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="1" skipped="0" failures="0" errors="0" time="0.024">
+    <testcase time="0.0240000000000009" classname="surv_prob" name="surv_prob_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="survival_curves" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="1" skipped="0" failures="0" errors="0" time="0.007">
+    <testcase time="0.007000000000005" classname="survival_curves" name="survival_curves_outputs_the_right_element"/>
+  </testsuite>
+  <testsuite name="test" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="1" skipped="0" failures="0" errors="1" time="0.009">
+    <testcase time="0.00900000000001455" classname="test" name="test_works_as_expected">
+      <error type="error" message="Error in `test(bla = &quot;a&quot;, bli = c(1, NA), blu = list(1, 2, 3))`: could not find function &quot;test&quot; ('test-test.R:2:3')">Error in `test(bla = "a", bli = c(1, NA), blu = list(1, 2, 3))`: could not find function "test"</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="trt_horseshoe" timestamp="2024-03-26T10:19:23Z" hostname="7c7511409656" tests="2" skipped="0" failures="0" errors="2" time="0.044">
+    <testcase time="0.0209999999999582" classname="trt_horseshoe" name="trt_horseshoe_outputs_the_right_element_for_survival">
+      <error type="error" message="Error in `trt_horseshoe(horseshoe_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'. ('test-trt_horseshoe.R:2:3')">Error in `trt_horseshoe(horseshoe_fit_surv)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'.
+Backtrace:
+    ▆
+ 1. └─bonsaiforest::trt_horseshoe(horseshoe_fit_surv) at test-trt_horseshoe.R:2:3
+ 2.   └─checkmate::assert_class(object, c("bonsaiforest", "horseshoe"))
+ 3.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 4.       └─checkmate:::mstop(...)</error>
+    </testcase>
+    <testcase time="0.0230000000000246" classname="trt_horseshoe" name="trt_horseshoe_outputs_the_right_element_for_binary">
+      <error type="error" message="Error in `trt_horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'. ('test-trt_horseshoe.R:14:3')">Error in `trt_horseshoe(horseshoe_fit_bin)`: Assertion on 'object' failed: Must inherit from class 'bonsaiforest', but has classes 'shrinkforest','horseshoe'.
+Backtrace:
+    ▆
+ 1. └─bonsaiforest::trt_horseshoe(horseshoe_fit_bin) at test-trt_horseshoe.R:14:3
+ 2.   └─checkmate::assert_class(object, c("bonsaiforest", "horseshoe"))
+ 3.     └─checkmate::makeAssertion(x, res, .var.name, add)
+ 4.       └─checkmate:::mstop(...)</error>
+    </testcase>
+  </testsuite>
+</testsuites>
