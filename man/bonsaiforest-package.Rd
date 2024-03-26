@@ -19,11 +19,16 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Mar Vazquez Rabunal \email{mar.vazquez_rabunal@roche.com}
+\strong{Maintainer}: Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
 
 Authors:
 \itemize{
-  \item Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
+  \item Mar Vazquez Rabunal \email{mar.vazquez_rabunal@roche.com}
+}
+
+Other contributors:
+\itemize{
+  \item F. Hoffmann-La Roche AG [copyright holder, funder]
 }
 
 }
