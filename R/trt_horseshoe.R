@@ -21,7 +21,7 @@
 #' @examples
 #' trt_horseshoe(horseshoe_fit_surv, m = 5)
 trt_horseshoe <- function(object, gamma = 1, l = NULL, m = 50) {
-  assert_class(object, c("shrinkforest", "horseshoe"))
+  assert_class(object, c("bonsaiforest", "horseshoe"))
   assert_int(m)
   x <- object$design_matrix
   resptype <- object$resptype

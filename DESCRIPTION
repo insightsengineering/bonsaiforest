@@ -1,22 +1,23 @@
 Type: Package
-Package: shrinkforest
+Package: bonsaiforest
 Title: Shrinkage Based Forest Plots
 Version: 0.0.0.9035
 Date: 2024-03-15
 Authors@R: c(
-    person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = c("aut", "cre")),
-    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = "aut")
+    person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = "aut"),
+    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = c("aut", "cre")),
+    person("F. Hoffmann-La Roche AG", role = c("cph", "fnd"))
   )
 Description: Subgroup analyses are routinely performed in clinical trial
-    analyses.  From a methodological perspective, two key issues of
+    analyses. From a methodological perspective, two key issues of
     subgroup analyses are multiplicity (even if only predefined subgroups
     are investigated) and the low sample sizes of subgroups which lead to
     highly variable estimates.  This package implements subgroup estimates
     based on Bayesian shrinkage priors, as well as penalized likelihood
     inference.
-License: Apache License 2.0 | file LICENSE
-URL: https://github.com/insightsengineering/shrinkforest/
-BugReports: https://github.com/insightsengineering/shrinkforest/issues
+License: Apache License 2.0
+URL: https://github.com/insightsengineering/bonsaiforest/
+BugReports: https://github.com/insightsengineering/bonsaiforest/issues
 Depends:
     R (>= 4.1)
 Imports:
@@ -31,15 +32,15 @@ Imports:
     Rcpp,
     splines2,
     stats,
-    stringr,
     survival,
     tibble,
     tidyr,
+    tidyselect,
     vdiffr
 Suggests:
     knitr,
     rmarkdown,
-    testthat (>= 2.0)
+    testthat (>= 3.0.0)
 LinkingTo: 
     Rcpp,
     RcppArmadillo
@@ -52,3 +53,4 @@ LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
+Config/testthat/edition: 3

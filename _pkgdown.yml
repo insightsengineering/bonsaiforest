@@ -1,4 +1,4 @@
-url: https://insightsengineering.github.io/shrinkforest
+url: https://insightsengineering.github.io/bonsaiforest
 
 template:
   bootstrap: 5
@@ -17,13 +17,11 @@ template:
 navbar:
   right:
     - icon: fa-github
-      href: https://github.com/insightsengineering/shrinkforest
+      href: https://github.com/insightsengineering/bonsaiforest
 
 reference:
   - title: Model Fit Functions
     contents:
-      - hello
-      - test
       - naivepop
       - naive
       - elastic_net
@@ -43,7 +41,6 @@ reference:
       - design_dummy1
       - est_coef_bin1
       - elastic_net_surv
-      - compare
   - title: Helper functions
     contents:
       - generate_stacked_data
@@ -55,6 +52,7 @@ reference:
       - trt_horseshoe
   - title: Summary
     contents:
+      - compare
       - summary.naivepop
       - summary.naive
       - summary.elastic_net

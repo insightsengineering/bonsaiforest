@@ -1,4 +1,4 @@
-# shrinkforest 0.0.0.9035
+# bonsaiforest 0.0.0.9035
 
 ### New features
 * New package!

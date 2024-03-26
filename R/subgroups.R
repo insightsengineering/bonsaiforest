@@ -3,7 +3,7 @@
 #' Function to obtain the estimated treatment effect in each one of the
 #' considered subgroups.
 #'
-#' @param object (`shrinkforest`)\cr the fitted shrinkforest object.
+#' @param object (`bonsaiforest`)\cr the fitted bonsaiforest object.
 #' @param est_coef (`matrix`)\cr the estimated coefficients from the fitted
 #' model.
 #' @param h0 (`numeric`)\cr the vector with the cumulative baseline hazard.
@@ -22,7 +22,7 @@
 #'   elastic_net_surv$h0
 #' )
 subgroups <- function(object, est_coef, h0 = NULL, gamma = 1) {
-  assert_class(object, "shrinkforest")
+  assert_class(object, "bonsaiforest")
   assert_matrix(est_coef)
   x <- object$design_matrix
   x_dummy <- object$design_dummy

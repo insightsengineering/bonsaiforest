@@ -12,7 +12,7 @@
 #' @examples
 #' summary(naivepop_fit_surv)
 summary.naivepop <- function(object, ...) {
-  assert_class(object, c("shrinkforest", "naivepop"))
+  assert_class(object, c("bonsaiforest", "naivepop"))
   if (object$resptype == "survival") {
     trt_effect <- exp(stats::coef(object$fit))
   } else if (object$resptype == "binary") {
@@ -45,7 +45,7 @@ summary.naivepop <- function(object, ...) {
 #' @examples
 #' summary(naive_fit_surv)
 summary.naive <- function(object, conf = 0.95, ...) {
-  assert_class(object, c("shrinkforest", "naive"))
+  assert_class(object, c("bonsaiforest", "naive"))
   assert_scalar(conf)
   alpha <- 1 - conf
   estim <- object$estimates
@@ -90,7 +90,7 @@ summary.naive <- function(object, conf = 0.95, ...) {
 #' @examples
 #' summary(elastic_net_fit_surv)
 summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...) {
-  assert_class(object, c("shrinkforest", "elastic_net"))
+  assert_class(object, c("bonsaiforest", "elastic_net"))
   x <- object$design_matrix
   resptype <- object$resptype
   fit <- object$fit
@@ -166,7 +166,7 @@ summary.elastic_net <- function(object, gamma = 1, l = NULL, lambda = NULL, ...)
 #' @examples
 #' summary(horseshoe_fit_bin)
 summary.horseshoe <- function(object, conf = 0.95, gamma = 1, l = NULL, m = 50, ...) {
-  assert_class(object, c("shrinkforest", "horseshoe"))
+  assert_class(object, c("bonsaiforest", "horseshoe"))
   assert_scalar(conf)
   assert_scalar(gamma)
   assert_int(m)

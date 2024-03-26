@@ -7,7 +7,7 @@
 subgroups(object, est_coef, h0 = NULL, gamma = 1)
 }
 \arguments{
-\item{object}{(\code{shrinkforest})\cr the fitted shrinkforest object.}
+\item{object}{(\code{bonsaiforest})\cr the fitted bonsaiforest object.}
 
 \item{est_coef}{(\code{matrix})\cr the estimated coefficients from the fitted
 model.}

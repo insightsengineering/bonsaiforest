@@ -83,6 +83,6 @@ elastic_net <- function(resp, trt, subgr, covars, data,
     y = y,
     subgr_names = prep_data$subgr_names
   )
-  class(result) <- c("shrinkforest", "elastic_net")
+  class(result) <- c("bonsaiforest", "elastic_net")
   return(result)
 }

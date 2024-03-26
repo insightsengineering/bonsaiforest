@@ -3,7 +3,7 @@
 #' Function to create a data set with the results for all the methods in order
 #' to compare them.
 #'
-#' @param ... Objects of class `shrinkforest`. We write them separated by a comma.
+#' @param ... Objects of class `bonsaiforest`. We write them separated by a comma.
 #'
 #' @return List with a `data.frame` of the estimated subgroup treatment effects,
 #' with the overall treatment effect and with the response type of our data.
@@ -19,7 +19,7 @@ compare <- function(...) {
   data <- NULL
   overall_trt <- NULL
   for (obj in list_objects) {
-    assert_class(obj, "shrinkforest")
+    assert_class(obj, "bonsaiforest")
     sum_obj <- summary(obj)
     if (inherits(sum_obj, "summary.naivepop")) {
       assert_class(sum_obj, "summary.naivepop")

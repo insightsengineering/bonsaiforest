@@ -35,7 +35,7 @@ test_that("elastic_net outputs the right elements for survival", {
     y = y,
     subgr_names = prep_data$subgr_names
   )
-  class(expected) <- c("shrinkforest", "elastic_net")
+  class(expected) <- c("bonsaiforest", "elastic_net")
   expect_equal(result, expected)
 })
 
@@ -73,6 +73,6 @@ test_that("elastic_net outputs the right elements for binary", {
     y = y,
     subgr_names = prep_data$subgr_names
   )
-  class(expected) <- c("shrinkforest", "elastic_net")
+  class(expected) <- c("bonsaiforest", "elastic_net")
   expect_equal(result, expected)
 })
