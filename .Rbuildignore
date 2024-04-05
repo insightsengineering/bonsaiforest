@@ -24,3 +24,4 @@ images
 ^data-raw$
 ^\.gitleaksignore$
 ^README\.Rmd$
+^simulations$
