@@ -10,3 +10,4 @@ Files:
 Directories:
 
 - `legacy`: Old simulation scripts.
+- `results`: Cached results files from simulation runs.

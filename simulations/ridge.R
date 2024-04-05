@@ -25,8 +25,15 @@ ridge_analysis <- function(scenario) {
 }
 
 # Results across all scenarios.
-ridge_results <- mclapply(
-  scenarios,
-  FUN = function(x) ridge_analysis(x$scenario),
-  mc.cores = availableCores()
-)
+ridge_file <- "results/ridge.rds"
+ridge_results <- if (file.exists(ridge_file)) {
+  readRDS(ridge_file)
+} else {
+  res <- mclapply(
+    scenarios,
+    FUN = function(x) ridge_analysis(x$scenario),
+    mc.cores = availableCores()
+  )
+  saveRDS(res, file = ridge_file)
+  res
+}

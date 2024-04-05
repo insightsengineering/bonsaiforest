@@ -23,6 +23,6 @@ str(as.list(scenarios),1)
 
 # Run analyses ----
 
-source("naivepop.R")
-source("ridge.R")
+source("naivepop.R") # fast.
+source("ridge.R")    # takes a few minutes.
 

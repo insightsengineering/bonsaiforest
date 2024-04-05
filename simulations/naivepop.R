@@ -24,7 +24,14 @@ naivepop_analysis <- function(scenario) {
 }
 
 # Results across all scenarios.
-naivepop_results <- lapply(
-  scenarios,
-  function(x) naivepop_analysis(x$scenario)
-)
+naivepop_file <- "results/naivepop.rds"
+naivepop_results <- if (file.exists(naivepop_file)) {
+  readRDS(naivepop_file)
+} else {
+  res <- lapply(
+    scenarios,
+    function(x) naivepop_analysis(x$scenario)
+  )
+  saveRDS(res, file = naivepop_file)
+  res
+}
