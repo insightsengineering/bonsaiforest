@@ -21,8 +21,12 @@ str(as.list(scenarios),1)
 # $ data_scenario5:List of 8
 # $ data_scenario6:List of 8
 
+# Additional functions ----
+
+source("functions.R")
+
 # Run analyses ----
 
 source("naivepop.R") # fast.
 source("ridge.R")    # takes a few minutes.
-
+source("lasso.R")    # takes a few minutes.
