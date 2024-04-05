@@ -5,6 +5,7 @@ Start here:
 Files:
 
 - `naivepop.R`: Script producing the `naivepop` results.
+- `ridge.R`: Script producing the `ridge` results.
 
 Directories:
 

@@ -1,6 +1,8 @@
 # Main script to run the simulations.
 library(checkmate)
 library(bonsaiforest)
+library(parallel)
+library(parallelly)
 
 # Load scenarios ----
 scenario_files <- dir("legacy/scenarios")
@@ -22,3 +24,5 @@ str(as.list(scenarios),1)
 # Run analyses ----
 
 source("naivepop.R")
+source("ridge.R")
+
