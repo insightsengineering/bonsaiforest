@@ -2,10 +2,10 @@ Start here:
 
 - `run.R`: Main script to run the simulations.
 
-Files:
+Other files:
 
-- `naivepop.R`: Script producing the `naivepop` results.
-- `ridge.R`: Script producing the `ridge` results.
+- `horseshoe.R`, `lasso.R`, `naive.R`, `naivepop.R`, `ridge.R`, `subtee.R`: Scripts producing the corresponding methods' results.
+- `functions.R`: Few central helper functions.
 
 Directories:
 
