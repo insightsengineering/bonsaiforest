@@ -9,8 +9,7 @@ naive_method <- function(df) {
     resptype = "survival",
     status = "ev_pfs"
   )
-  s <- summary(model)
-  s
+  summary(model)
 }
 
 # Analysis of a single scenario.
