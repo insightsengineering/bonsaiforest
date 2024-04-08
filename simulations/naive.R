@@ -24,9 +24,10 @@ naive_file <- "results/naive.rds"
 naive_results <- if (file.exists(naive_file)) {
   readRDS(naive_file)
 } else {
-  res <- lapply(
+  res <- mclapply(
     scenarios,
-    function(x) naive_analysis(x$scenario)
+    FUN = function(x) naive_analysis(x$scenario),
+    mc.cores = availableCores()
   )
   saveRDS(res, file = naive_file)
   res
