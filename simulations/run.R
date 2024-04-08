@@ -28,5 +28,6 @@ source("functions.R")
 # Run analyses ----
 
 source("naivepop.R") # fast.
+source("naive.R")
 source("ridge.R")    # takes a few minutes.
 source("lasso.R")    # takes a few minutes.
