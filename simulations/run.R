@@ -34,3 +34,4 @@ source("naive.R")    # fast.
 source("subtee.R")   # takes a few minutes.
 source("ridge.R")    # takes a few minutes.
 source("lasso.R")    # takes a few minutes.
+source("horseshoe.R") # this takes the longest time.
