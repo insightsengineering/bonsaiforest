@@ -3,7 +3,7 @@ horseshoe_method <- function(df, simul_no) {
   assert_data_frame(df)
   assert_count(simul_no)
   df$arm <- factor(df$arm)
-  model <- suppressWarnings(horseshoe(
+  model <- bonsaiforest::horseshoe(
     resp = "tt_pfs",
     trt = "arm",
     subgr = c("x_1", "x_2", "x_3", "x_4", "x_5", "x_6", "x_7", "x_8", "x_9", "x_10"),
@@ -12,11 +12,13 @@ horseshoe_method <- function(df, simul_no) {
     resptype = "survival",
     status = "ev_pfs",
     chains = 1,
+    iter = 8000,
+    warmup = 1000,
+    control = list(adapt_delta = 0.95),
     seed = 0,
-    iter = 10, # todo increase once format is clear.
     backend = "cmdstanr", # Because this enables caching of the compiled Stan binary.
     silent = 2 # Suppress all messages.
-  ))
+  )
   s <- summary(model)
   with(
     s$estimates,
@@ -41,3 +43,4 @@ horseshoe_results <- compute_results(
   analyze = horseshoe_analysis,
   cache = "results/horseshoe.rds"
 )
+# todo: need to run with batchtools on HPC, otherwise takes too long
