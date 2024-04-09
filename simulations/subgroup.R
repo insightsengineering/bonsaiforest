@@ -1,5 +1,7 @@
 # Method for a single data set.
-subgroup_method <- function(df) {
+subgroup_method <- function(df, simul_no) {
+  assert_data_frame(df)
+  assert_count(simul_no)
   df$arm <- factor(df$arm)
   model <- naive(
     resp = "tt_pfs",
@@ -9,26 +11,27 @@ subgroup_method <- function(df) {
     resptype = "survival",
     status = "ev_pfs"
   )
-  summary(model)
+  s <- summary(model)
+  with(
+    s$estimates,
+    data.frame(
+      simul_no = simul_no,
+      estimator = "subgroup",
+      subgroup = gsub(pattern = "^x_", replacement = "S_", x = subgroup),      
+      estimate_ahr = trt.estimate,
+      estimate_log_ahr = log(trt.estimate),
+      lower_ci_ahr = trt.low,
+      upper_ci_ahr = trt.high
+    )
+  )
 }
 
 # Analysis of a single scenario.
-subgroup_analysis <- function(scenario) {
-  assert_list(scenario)
-  results <- lapply(scenario, subgroup_method)
-}
+subgroup_analysis <- fun_analysis(subgroup_method)
 
 # Results across all scenarios.
-subgroup_file <- "results/subgroup.rds"
-subgroup_results <- if (file.exists(subgroup_file)) {
-  readRDS(subgroup_file)
-} else {
-  res <- mclapply(
-    scenarios,
-    FUN = function(x) subgroup_analysis(x$scenario),
-    mc.cores = availableCores()
-  )
-  saveRDS(res, file = subgroup_file)
-  res
-}
-# todo: modify results format once target is clear
+subgroup_results <- compute_results(
+  scenarios,
+  analyze = subgroup_analysis,
+  cache = "results/subgroup.rds"
+)
