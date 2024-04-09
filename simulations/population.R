@@ -1,5 +1,5 @@
 # Method for a single data set.
-naivepop_method <- function(df) {
+population_method <- function(df) {
   df$arm <- factor(df$arm)
   model <- naivepop(
     resp = "tt_pfs",
@@ -18,20 +18,20 @@ naivepop_method <- function(df) {
 }
 
 # Analysis of a single scenario.
-naivepop_analysis <- function(scenario) {
+population_analysis <- function(scenario) {
   assert_list(scenario)
-  results <- t(sapply(scenario, naivepop_method))
+  results <- t(sapply(scenario, population_method))
 }
 
 # Results across all scenarios.
-naivepop_file <- "results/naivepop.rds"
-naivepop_results <- if (file.exists(naivepop_file)) {
-  readRDS(naivepop_file)
+population_file <- "results/population.rds"
+population_results <- if (file.exists(population_file)) {
+  readRDS(population_file)
 } else {
   res <- lapply(
     scenarios,
-    function(x) naivepop_analysis(x$scenario)
+    function(x) population_analysis(x$scenario)
   )
-  saveRDS(res, file = naivepop_file)
+  saveRDS(res, file = population_file)
   res
 }

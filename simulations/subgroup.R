@@ -1,5 +1,5 @@
 # Method for a single data set.
-naive_method <- function(df) {
+subgroup_method <- function(df) {
   df$arm <- factor(df$arm)
   model <- naive(
     resp = "tt_pfs",
@@ -13,22 +13,22 @@ naive_method <- function(df) {
 }
 
 # Analysis of a single scenario.
-naive_analysis <- function(scenario) {
+subgroup_analysis <- function(scenario) {
   assert_list(scenario)
-  results <- lapply(scenario, naive_method)
+  results <- lapply(scenario, subgroup_method)
 }
 
 # Results across all scenarios.
-naive_file <- "results/naive.rds"
-naive_results <- if (file.exists(naive_file)) {
-  readRDS(naive_file)
+subgroup_file <- "results/subgroup.rds"
+subgroup_results <- if (file.exists(subgroup_file)) {
+  readRDS(subgroup_file)
 } else {
   res <- mclapply(
     scenarios,
-    FUN = function(x) naive_analysis(x$scenario),
+    FUN = function(x) subgroup_analysis(x$scenario),
     mc.cores = availableCores()
   )
-  saveRDS(res, file = naive_file)
+  saveRDS(res, file = subgroup_file)
   res
 }
 # todo: modify results format once target is clear

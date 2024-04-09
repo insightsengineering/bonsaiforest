@@ -4,6 +4,7 @@ library(bonsaiforest)
 library(parallel)
 library(parallelly)
 library(subtee) # Install from https://cran.r-project.org/src/contrib/Archive/subtee/subtee_1.0.1.tar.gz
+library(cmdstanr) # Install as described at https://mc-stan.org/cmdstanr/articles/cmdstanr.html
 
 # Load scenarios ----
 scenario_files <- dir("legacy/scenarios")
@@ -29,8 +30,8 @@ source("functions.R")
 # Run analyses ----
 
 # df <- scenarios[[1]]$scenario[[1]]
-source("naivepop.R") # fast.
-source("naive.R")    # fast.
+source("population.R") # fast.
+source("subgroup.R")    # fast.
 source("subtee.R")   # takes a few minutes.
 source("ridge.R")    # takes a few minutes.
 source("lasso.R")    # takes a few minutes.
