@@ -1,5 +1,8 @@
 # Method for a single data set.
-subtee_method <- function(df) {
+subtee_method <- function(df, simul_no) {
+  assert_data_frame(df)
+  assert_count(simul_no)
+
   covariates <- df[, 2:12]
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
   design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)[, -1]
@@ -37,31 +40,23 @@ subtee_method <- function(df) {
   with(
     res_subgroups,
     data.frame(
-      subgroup = Group,
-      trt.estimate = exp(trtEff),
-      trt.low = exp(LB),
-      trt.high = exp(UB)
+      simul_no = simul_no,
+      estimator = "subtee",
+      subgroup = sanitize_subgroups(Group),
+      estimate_ahr = exp(trtEff),
+      estimate_log_ahr = trtEff,
+      lower_ci_ahr = exp(LB),
+      upper_ci_ahr = exp(UB)
     )
   )
 }
 
 # Analysis of a single scenario.
-subtee_analysis <- function(scenario) {
-  assert_list(scenario)
-  results <- lapply(scenario, subtee_method)
-}
+subtee_analysis <- fun_analysis(subtee_method)
 
 # Results across all scenarios.
-subtee_file <- "results/subtee.rds"
-subtee_results <- if (file.exists(subtee_file)) {
-  readRDS(subtee_file)
-} else {
-  res <- mclapply(
-    scenarios,
-    FUN = function(x) subtee_analysis(x$scenario),
-    mc.cores = availableCores()
-  )
-  saveRDS(res, file = subtee_file)
-  res
-}
-# todo: modify results format once target is clear
+subtee_results <- compute_results(
+  scenarios,
+  analyze = subtee_analysis,
+  cache = "results/subtee.rds"
+)

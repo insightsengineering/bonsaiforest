@@ -1,5 +1,14 @@
+# Sanitize subgroup string format.
+sanitize_subgroups <- function(subgroups) {
+  assert_character(subgroups)
+  gsub(pattern = "^x_", replacement = "S_", x = subgroups)
+}
+
 # Elastic Net Method for a single data set.
-elastic_method <- function(df, alpha) {
+elastic_method <- function(df, simul_no, alpha, estimator) {
+  assert_data_frame(df)
+  assert_count(simul_no)
+  assert_string(estimator)
   df$arm <- factor(df$arm)
   model <- elastic_net(
     resp = "tt_pfs",
@@ -12,9 +21,17 @@ elastic_method <- function(df, alpha) {
     status = "ev_pfs"
   )
   s <- summary(model)
-  setNames(
-    s$estimates$trt.estimate,
-    nm = s$estimates$subgroup
+  with(
+    s$estimates,
+    data.frame(
+      simul_no = simul_no,
+      estimator = estimator,
+      subgroup = sanitize_subgroups(subgroup),
+      estimate_ahr = trt.estimate,
+      estimate_log_ahr = log(trt.estimate),
+      lower_ci_ahr = NA_real_,
+      upper_ci_ahr = NA_real_
+    )
   )
 }
 

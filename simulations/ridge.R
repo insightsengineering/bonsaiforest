@@ -1,24 +1,14 @@
 # Method for a single data set.
-ridge_method <- function(df) {
-  elastic_method(df, alpha = 0)
+ridge_method <- function(df, simul_no) {
+  elastic_method(df, simul_no, alpha = 0, estimator = "ridge")
 }
 
 # Analysis of a single scenario.
-ridge_analysis <- function(scenario) {
-  assert_list(scenario)
-  results <- t(sapply(scenario, ridge_method))
-}
+ridge_analysis <- fun_analysis(ridge_method)
 
 # Results across all scenarios.
-ridge_file <- "results/ridge.rds"
-ridge_results <- if (file.exists(ridge_file)) {
-  readRDS(ridge_file)
-} else {
-  res <- mclapply(
-    scenarios,
-    FUN = function(x) ridge_analysis(x$scenario),
-    mc.cores = availableCores()
-  )
-  saveRDS(res, file = ridge_file)
-  res
-}
+ridge_results <- compute_results(
+  scenarios,
+  analyze = ridge_analysis,
+  cache = "results/ridge.rds"
+)

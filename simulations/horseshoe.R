@@ -1,5 +1,7 @@
 # Method for a single data set.
-horseshoe_method <- function(df) {
+horseshoe_method <- function(df, simul_no) {
+  assert_data_frame(df)
+  assert_count(simul_no)
   df$arm <- factor(df$arm)
   model <- suppressWarnings(horseshoe(
     resp = "tt_pfs",
@@ -15,29 +17,27 @@ horseshoe_method <- function(df) {
     backend = "cmdstanr", # Because this enables caching of the compiled Stan binary.
     silent = 2 # Suppress all messages.
   ))
-  summary(model)
+  s <- summary(model)
+  with(
+    s$estimates,
+    data.frame(
+      simul_no = simul_no,
+      estimator = "horseshoe",
+      subgroup = sanitize_subgroups(subgroup),
+      estimate_ahr = trt.estimate,
+      estimate_log_ahr = log(trt.estimate),
+      lower_ci_ahr = trt.low,
+      upper_ci_ahr = trt.high
+    )
+  )
 }
 
 # Analysis of a single scenario.
-horseshoe_analysis <- function(scenario) {
-  assert_list(scenario)
-  results <- lapply(scenario, horseshoe_method)
-}
+horseshoe_analysis <- fun_analysis(horseshoe_method)
 
 # Results across all scenarios.
-horseshoe_file <- "results/horseshoe.rds"
-horseshoe_results <- if (file.exists(horseshoe_file)) {
-  readRDS(horseshoe_file)
-} else {
-  # Tried but does not suppress warnings.
-  # sink(stdout(), type = "message") 
-  res <- mclapply(
-    scenarios,
-    FUN = function(x) horseshoe_analysis(x$scenario),
-    mc.cores = availableCores()
-  )
-  # sink(NULL, type = "message")
-  saveRDS(res, file = horseshoe_file)
-  res
-}
-# todo: modify results format once target is clear
+horseshoe_results <- compute_results(
+  scenarios,
+  analyze = horseshoe_analysis,
+  cache = "results/horseshoe.rds"
+)

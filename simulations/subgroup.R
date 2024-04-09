@@ -17,7 +17,7 @@ subgroup_method <- function(df, simul_no) {
     data.frame(
       simul_no = simul_no,
       estimator = "subgroup",
-      subgroup = gsub(pattern = "^x_", replacement = "S_", x = subgroup),      
+      subgroup = sanitize_subgroups(subgroup),
       estimate_ahr = trt.estimate,
       estimate_log_ahr = log(trt.estimate),
       lower_ci_ahr = trt.low,
