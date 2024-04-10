@@ -12,7 +12,7 @@ horseshoe_method <- function(df, simul_no) {
     resptype = "survival",
     status = "ev_pfs",
     chains = 1,
-    iter = 8000,
+    iter = 2000,
     warmup = 1000,
     control = list(adapt_delta = 0.95),
     seed = 0,

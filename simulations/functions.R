@@ -59,11 +59,13 @@ compute_results <- function(scenarios, analyze, cache = NULL) {
   if (!is.null(cache) && file.exists(cache)) {
     readRDS(cache)
   } else {
-    res <- mcMap(
-      f = function(x, y) analyze(x$scenario, y),
-      scenarios,
-      scenario_no,
-      mc.cores = availableCores()
+    res <- parallel::mcmapply(
+      FUN = function(x, y) analyze(x$scenario, y),
+      x = scenarios,
+      y = scenario_no,
+      SIMPLIFY = FALSE,
+      mc.cores = availableCores(),
+      mc.silent = FALSE
     )
     res <- do.call(rbind, res)
     saveRDS(res, file = cache)

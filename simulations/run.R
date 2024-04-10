@@ -34,7 +34,7 @@ source("functions.R")
 source("population.R") # fast.
 source("subgroup.R")    # fast.
 source("subtee.R")   # takes a few minutes.
-source("horseshoe.R") # this takes the longest time. Needs to be done on HPC.
+source("horseshoe.R") # this takes the longest time.
 source("ridge.R")    # takes a few minutes.
 source("lasso.R")    # takes a few minutes.
 
