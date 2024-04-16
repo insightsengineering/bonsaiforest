@@ -6,6 +6,7 @@ Other files:
 
 - `horseshoe.R`, `lasso.R`, `naive.R`, `naivepop.R`, `ridge.R`, `subtee.R`: Scripts producing the corresponding methods' results.
 - `functions.R`: Few central helper functions.
+- `scenarios.R`: Simulate data from the six different scenarios used.
 
 Directories:
 

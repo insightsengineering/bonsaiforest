@@ -17,7 +17,7 @@ Scenarios construction:
 - `true_parameters_surv.R`: file with the functions to obtain the true parameters of the models of each one of the scenarios.
 - `true_parameters_surv.RData`: resulting saved true parameters.
 - `Rfunctions_datasim_surv.R`: file with the functions to simulate survival data.
-- `Rfunctions_naivefit_surv.R`: file with the functions to generative naive subgoup-specific treatment effect estimates for survival data.
+- `Rfunctions_naivefit_surv.R`: file with the functions to generative naive subgroup-specific treatment effect estimates for survival data.
 
 Required results format:
 

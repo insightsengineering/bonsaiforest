@@ -29,6 +29,7 @@ Imports:
     gbm,
     ggplot2,
     glmnet,
+    MASS,
     Rcpp,
     splines2,
     stats,
