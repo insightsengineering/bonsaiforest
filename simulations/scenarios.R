@@ -41,7 +41,7 @@ coef_1["arm"] <- -log(0.66)*sigma_aft
 scenario1 <- list()
 
 for (i in 1:n_datasets){
-  d <- quicksimul(n=1000,coef=coef_1,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
+  d <- simul_data(n=1000,coef=coef_1,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
   scenario1 <- append(scenario1, list(d))
 }
 
@@ -61,7 +61,7 @@ coef_2["x_4c_arm"] <- -log(0.8)*sigma_aft    # slightly enhanced efffect in x_4b
 scenario2 <- list()
 
 for (i in 1:n_datasets){
-  d <- quicksimul(n=1000,coef=coef_2,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
+  d <- simul_data(n=1000,coef=coef_2,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
   scenario2 <- append(scenario2, list(d))
 }
 
@@ -79,7 +79,7 @@ coef_3["x_4c_arm"] <- -log(1.25)*sigma_aft     # detrimental effect in x_4b and 
 scenario3 <- list()
 
 for (i in 1:n_datasets){
-  d <- quicksimul(n=1000,coef=coef_3,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
+  d <- simul_data(n=1000,coef=coef_3,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
   scenario3 <- append(scenario3, list(d))
 }
 
@@ -97,7 +97,7 @@ coef_4[18:42] <- -log_hr_tmp*sigma_aft
 scenario4 <- list()
 
 for (i in 1:n_datasets){
-  d <- quicksimul(n=1000,coef=coef_4,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
+  d <- simul_data(n=1000,coef=coef_4,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
   scenario4 <- append(scenario4, list(d))
 }
 
@@ -115,7 +115,7 @@ coef_5[18:42] <- -log_hr_tmp*sigma_aft
 scenario5 <- list()
 
 for (i in 1:n_datasets){
-  d <- quicksimul(n=1000,coef=coef_5,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
+  d <- simul_data(n=1000,coef=coef_5,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
   scenario5 <- append(scenario5, list(d))
 }
 

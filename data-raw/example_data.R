@@ -33,7 +33,7 @@ coef_raw["x_6b"] <- -log(1.5) * sigma_aft
 coef_1 <- coef_raw
 coef_1["arm"] <- -log(0.66) * sigma_aft
 
-example_data <- quicksimul(
+example_data <- simul_data(
   n = 1000, coef = coef_1, sigma_aft = sigma_aft,
   recr_duration = 3, rate_cens = 0.02, n_events = 247
 )

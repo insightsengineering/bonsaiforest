@@ -108,45 +108,104 @@ simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE) {
   x
 }
 
-# todo cleanup
-simul_pfs <- function(lp_aft, sigma_aft, recr_duration, rate_cens, n_events) { # nolint
+#' Simulation of Progression Free Survival Times
+#'
+#' @param lp_aft (`numeric`)\cr linear predictor values for the accelerate failure time model (AFT).
+#' @param sigma_aft (`number`)\cr standard deviation for the AFT model.
+#' @param recr_duration (`number`)\cr duration of recruitment.
+#' @param rate_cens (`number`)\cr rate for the exponentially distributed censoring process.
+#' @param n_events (`count`)\cr number of events to reach for the study end.
+#'
+#' @return A `data.frame` with columns `tt_pfs` (PFS time) and `ev_pfs` (corresponding
+#'   event indicator with 1 for an event and 0 for censored).
+#' @export
+#'
+#' @examples
+#' set.seed(123)
+#' simul_pfs(
+#'   lp_aft = rnorm(100),
+#'   sigma_aft = 1,
+#'   recr_duration = 0.2,
+#'   rate_cens = 2,
+#'   n_events = 20
+#' )
+simul_pfs <- function(lp_aft,
+                      sigma_aft,
+                      recr_duration,
+                      rate_cens,
+                      n_events) {
+  assert_numeric(lp_aft)
+  assert_number(sigma_aft, lower = .Machine$double.xmin)
+  assert_number(recr_duration, lower = .Machine$double.xmin)
+  assert_number(rate_cens, lower = .Machine$double.xmin)
+  assert_count(n_events, positive = TRUE)
+
   n <- length(lp_aft)
-  # Uncensored event time
+  # Uncensored event time.
   log_tt_pfs <- c(lp_aft + sigma_aft * log(rexp(n, rate = 1)))
   tt_pfs_uncens <- exp(log_tt_pfs)
-  # censoring 1: with rate_cens
+
+  # Censoring step 1:
+  # with rate_cens.
   tt_pfs_cens1 <- rexp(n, rate = rate_cens)
   tt_pfs_cens1 <- pmin(tt_pfs_uncens, tt_pfs_cens1)
   ev_pfs_cens1 <- ifelse(tt_pfs_uncens <= tt_pfs_cens1, 1, 0)
   if (sum(ev_pfs_cens1) < n_events) {
     stop(paste(
       "Impossible to reach", n_events,
-      "events with", n, "patients,
-                                               a censoring rate of", rate_cens,
+      "events with", n, "patients,",
+      "a censoring rate of", rate_cens,
       "and the specified linear predictor."
     ))
   }
-  # censoring 2: due to staggerred recruitment and recruiting only until target_ev events have been observed
+
+  # Censoring step 2:
+  # due to staggerred recruitment and recruiting only until target_ev
+  # events have been observed.
   rec_time <- runif(n, min = 0, max = recr_duration)
   tt_pfs_cens1_calendar <- rec_time + tt_pfs_cens1
   study_stop_time <- sort(tt_pfs_cens1_calendar[ev_pfs_cens1 == 1])[n_events]
   if (study_stop_time < max(rec_time)) {
     warning("Target number of events reached before all subjects were enrolled.")
   }
+
   tt_pfs <- pmax(0, pmin(tt_pfs_cens1_calendar, study_stop_time) - rec_time)
   ev_pfs <- ifelse(tt_pfs_cens1_calendar <= study_stop_time, ev_pfs_cens1, 0)
   data.frame(tt_pfs = tt_pfs, ev_pfs = ev_pfs)
 }
 
-# todo cleanup
-quicksimul <- function(n, coef, sigma_aft, recr_duration, rate_cens, n_events) { # nolint
-  # Quickly simulate actual data combining functions covariates
-  # and simul_pfs (assuming 10 covariates)
-  # Regression coefficients are for an AFT with over-parametrized dummy
-  # coding for arm-subgroup interactions (see creation of design matrix below)
+#' Simulate Covariates and Progression Free Survival Data
+#'
+#' This combines the covariates simulation via [simul_covariates()] with 10
+#' categorical covariates, and the PFS simulation via [simul_pfs()].
+#'
+#' @details
+#' Regression coefficients are for an AFT with over-parametrized dummy
+#' coding for arm-subgroup interactions.
+#'
+#' @param n (`count`)\cr number of patients.
+#' @param coef (`numeric`)\cr vector of coefficients.
+#' @param \dots additional parameters apart from the linear predictor values
+#'   needed for [simul_pfs()].
+#'
+#' @return A combined `data.frame` with the `id` column, the design matrix and the
+#'    PFS outcomes.
+#' @export
+#'
+#' @examples
+#' set.seed(321)
+#' simul_data(
+#'   n = 100,
+#'   coef = rnorm(42),
+#'   sigma_aft = 1,
+#'   recr_duration = 0.2,
+#'   rate_cens = 2,
+#'   n_events = 30
+#' )
+simul_data <- function(n,
+                       coef,
+                       ...) {
   covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = FALSE)
-  #- create design matrix with over-parametrized
-  # dummy coding for arm-subgroup interactions
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
   design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)
   subgroup_vars <- all.vars(subgroup_model)
@@ -156,15 +215,11 @@ quicksimul <- function(n, coef, sigma_aft, recr_duration, rate_cens, n_events) {
     design_ia <- cbind(design_ia, ia_j)
   }
   colnames(design_ia) <- paste(colnames(design_ia), "arm", sep = "_")
-  colnames(design_ia) <- gsub(" ", "", colnames(design_ia)) # remove any spaces
+  colnames(design_ia) <- gsub(" ", "", colnames(design_ia))
   design_matrix <- cbind(design_main, design_ia)
-  #- get linear predictor for AFT  and simulate corresponding outcome
-  lp_aft <- design_matrix %*% coef # linear predictor
-  outcome <- simul_pfs(
-    lp_aft = lp_aft, sigma_aft = sigma_aft,
-    recr_duration = recr_duration, rate_cens = rate_cens,
-    n_events = n_events
-  )
+  assert_numeric(coef, len = ncol(design_matrix))
+  lp_aft <- design_matrix %*% coef
+  outcome <- simul_pfs(lp_aft = lp_aft, ...)
   d <- cbind(id = 1:n, covariates, outcome)
   d
 }
