@@ -12,3 +12,4 @@ Directories:
 
 - `legacy`: Old simulation scripts.
 - `results`: Cached results files from simulation runs.
+- `scenarios`: Saved data sets for the six different scenarios, produced by `scenarios.R`.
