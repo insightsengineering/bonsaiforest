@@ -67,3 +67,22 @@ test_that("simul_data works as expected", {
   )
   expect_named(result, cols)
 })
+
+test_that("simul_data works as expected with interactions between 1st and 2nd covariate", {
+  set.seed(321)
+  result <- expect_silent(simul_data(
+    n = 100,
+    coef = rnorm(46),
+    sigma_aft = 1,
+    recr_duration = 0.2,
+    rate_cens = 2,
+    n_events = 30,
+    add_interaction = TRUE
+  ))
+  expect_data_frame(result, nrows = 100)
+  cols <- c(
+    "id", "arm", "x_1", "x_2", "x_3", "x_4", "x_5", "x_6", "x_7",
+    "x_8", "x_9", "x_10", "tt_pfs", "ev_pfs"
+  )
+  expect_named(result, cols)
+})

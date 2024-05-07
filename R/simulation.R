@@ -185,6 +185,8 @@ simul_pfs <- function(lp_aft,
 #'
 #' @param n (`count`)\cr number of patients.
 #' @param coef (`numeric`)\cr vector of coefficients.
+#' @param add_interaction (`flag`)\cr whether to add interaction terms between covariates
+#'   1 and 2.
 #' @param \dots additional parameters apart from the linear predictor values
 #'   needed for [simul_pfs()].
 #'
@@ -204,7 +206,9 @@ simul_pfs <- function(lp_aft,
 #' )
 simul_data <- function(n,
                        coef,
+                       add_interaction = FALSE,
                        ...) {
+  assert_flag(add_interaction)
   covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = FALSE)
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
   design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)
@@ -213,6 +217,15 @@ simul_data <- function(n,
   for (j in subgroup_vars) {
     ia_j <- model.matrix(as.formula(paste("~", j, "-1")), data = covariates) * covariates$arm
     design_ia <- cbind(design_ia, ia_j)
+  }
+  if (add_interaction) {
+    design_ia <- cbind(
+      design_ia,
+      "x_1a2a" = design_ia[, 1] * design_ia[, 3],
+      "x_1a2b" = design_ia[, 1] * design_ia[, 4],
+      "x_1b2a" = design_ia[, 2] * design_ia[, 3],
+      "x_1b2b" = design_ia[, 2] * design_ia[, 4]
+    )
   }
   colnames(design_ia) <- paste(colnames(design_ia), "arm", sep = "_")
   colnames(design_ia) <- gsub(" ", "", colnames(design_ia))

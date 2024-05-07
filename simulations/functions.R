@@ -72,25 +72,3 @@ compute_results <- function(scenarios, analyze, cache = NULL) {
     res
   }
 }
-
-# todo cleanup
-create_data <- function(n,coef,sigma_aft,recr_duration,rate_cens,n_events){
-  covariates <- simul_covariates(n=n,p_catvar=10,add_contVars=F)
-  #- create design matrix with over-parametrized dummy coding for arm-subgroup interactions
-  subgroup_model <- ~x_1*x_2+x_3+x_4+x_5+x_6+x_7+x_8+x_9+x_10
-  design_main <- model.matrix(update(subgroup_model,~arm+.),data=covariates)
-  subgroup_vars <- all.vars(subgroup_model)
-  design_ia <- NULL
-  for (j in subgroup_vars){
-    ia_j <- model.matrix(as.formula(paste("~",j,"-1")),data=covariates)*covariates$arm
-    design_ia <- cbind(design_ia,ia_j)
-  }
-  design_ia <- cbind(design_ia, "x_1a2a"= design_ia[,1]*design_ia[,3], "x_1a2b"=design_ia[,1]*design_ia[,4], "x_1b2a"=design_ia[,2]*design_ia[,3], "x_1b2b"=design_ia[,2]*design_ia[,4] )
-  colnames(design_ia) <- paste(colnames(design_ia),"arm",sep="_")
-  colnames(design_ia) <- gsub(" ","",colnames(design_ia)) # remove any spaces
-  design_matrix <- cbind(design_main,design_ia)
-  #- get linear predictor for AFT  and simulate corresponding outcome
-  lp_aft <- design_matrix%*%coef # linear predictor
-  outcome <- simul_pfs(lp_aft=lp_aft,sigma_aft=sigma_aft,recr_duration=recr_duration,rate_cens=rate_cens,n_events=n_events)
-  d <- cbind(id=1:n,covariates,outcome)
-}

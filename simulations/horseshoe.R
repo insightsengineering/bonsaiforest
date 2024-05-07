@@ -43,4 +43,3 @@ horseshoe_results <- compute_results(
   analyze = horseshoe_analysis,
   cache = "results/horseshoe.rds"
 )
-# todo: need to run with batchtools on HPC, otherwise takes too long

@@ -145,7 +145,10 @@ coef_6["x_1b2b_arm"] <- -log(1.07)*sigma_aft
 scenario6 <- list()
 
 for (i in 1:n_datasets){
-  d <- create_data(n=1000,coef=coef_6,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247)
+  d <- simul_data(
+    n=1000,coef=coef_6,sigma_aft=sigma_aft,recr_duration=3,rate_cens=0.02,n_events=247,
+    add_interaction = TRUE
+  )
   scenario6 <- append(scenario6, list(d))
 }
 
