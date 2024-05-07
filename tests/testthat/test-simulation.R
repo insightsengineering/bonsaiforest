@@ -48,17 +48,36 @@ test_that("simul_pfs works as expected", {
   expect_true(all(result$ev_pfs %in% c(0, 1)))
 })
 
+test_that("simul_pfs adds the uncensored PFS when requested", {
+  set.seed(123)
+  result <- expect_silent(simul_pfs(
+    lp_aft = rnorm(100),
+    sigma_aft = 1,
+    recr_duration = 0.2,
+    rate_cens = 2,
+    n_events = 20,
+    add_uncensored_pfs = TRUE
+  ))
+  expect_data_frame(result, nrows = 100, ncols = 3)
+  expect_named(result, c("tt_pfs", "ev_pfs", "tt_pfs_uncens"))
+  expect_numeric(result$tt_pfs, lower = .Machine$double.xmin)
+  expect_numeric(result$ev_pfs)
+  expect_true(all(result$ev_pfs %in% c(0, 1)))
+  expect_numeric(result$tt_pfs_uncens)
+  expect_true(all(result$tt_pfs_uncens >= result$tt_pfs - .Machine$double.eps))
+})
+
 # simul_data ----
 
 test_that("simul_data works as expected", {
   set.seed(321)
   result <- expect_silent(simul_data(
     n = 100,
-    coef = rnorm(42),
+    coefs = c(arm = 1),
     sigma_aft = 1,
     recr_duration = 0.2,
     rate_cens = 2,
-    n_events = 30
+    n_events = 20
   ))
   expect_data_frame(result, nrows = 100)
   cols <- c(
@@ -72,11 +91,11 @@ test_that("simul_data works as expected with interactions between 1st and 2nd co
   set.seed(321)
   result <- expect_silent(simul_data(
     n = 100,
-    coef = rnorm(46),
+    coefs = c(arm = 0.5),
     sigma_aft = 1,
-    recr_duration = 0.2,
+    recr_duration = 0.5,
     rate_cens = 2,
-    n_events = 30,
+    n_events = 20,
     add_interaction = TRUE
   ))
   expect_data_frame(result, nrows = 100)

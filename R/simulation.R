@@ -115,9 +115,12 @@ simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE) {
 #' @param recr_duration (`number`)\cr duration of recruitment.
 #' @param rate_cens (`number`)\cr rate for the exponentially distributed censoring process.
 #' @param n_events (`count`)\cr number of events to reach for the study end.
+#' @param add_uncensored_pfs (`flag`)\cr whether to add the uncensored PFS as well to the resulting
+#'   `data.frame`.
 #'
 #' @return A `data.frame` with columns `tt_pfs` (PFS time) and `ev_pfs` (corresponding
-#'   event indicator with 1 for an event and 0 for censored).
+#'   event indicator with 1 for an event and 0 for censored), and optionally
+#'   `tt_pfs_uncens`.
 #' @export
 #'
 #' @examples
@@ -133,12 +136,14 @@ simul_pfs <- function(lp_aft,
                       sigma_aft,
                       recr_duration,
                       rate_cens,
-                      n_events) {
+                      n_events,
+                      add_uncensored_pfs = FALSE) {
   assert_numeric(lp_aft)
   assert_number(sigma_aft, lower = .Machine$double.xmin)
   assert_number(recr_duration, lower = .Machine$double.xmin)
   assert_number(rate_cens, lower = .Machine$double.xmin)
   assert_count(n_events, positive = TRUE)
+  assert_flag(add_uncensored_pfs)
 
   n <- length(lp_aft)
   # Uncensored event time.
@@ -171,7 +176,11 @@ simul_pfs <- function(lp_aft,
 
   tt_pfs <- pmax(0, pmin(tt_pfs_cens1_calendar, study_stop_time) - rec_time)
   ev_pfs <- ifelse(tt_pfs_cens1_calendar <= study_stop_time, ev_pfs_cens1, 0)
-  data.frame(tt_pfs = tt_pfs, ev_pfs = ev_pfs)
+  result <- data.frame(tt_pfs = tt_pfs, ev_pfs = ev_pfs)
+  if (add_uncensored_pfs) {
+    result$tt_pfs_uncens <- tt_pfs_uncens
+  }
+  result
 }
 
 #' Simulate Covariates and Progression Free Survival Data
@@ -184,7 +193,7 @@ simul_pfs <- function(lp_aft,
 #' coding for arm-subgroup interactions.
 #'
 #' @param n (`count`)\cr number of patients.
-#' @param coef (`numeric`)\cr vector of coefficients.
+#' @param coef (`numeric`)\cr named vector of coefficients to set.
 #' @param add_interaction (`flag`)\cr whether to add interaction terms between covariates
 #'   1 and 2.
 #' @param \dots additional parameters apart from the linear predictor values
@@ -198,19 +207,29 @@ simul_pfs <- function(lp_aft,
 #' set.seed(321)
 #' simul_data(
 #'   n = 100,
-#'   coef = rnorm(42),
+#'   coefs = c(arm = 1),
 #'   sigma_aft = 1,
 #'   recr_duration = 0.2,
 #'   rate_cens = 2,
-#'   n_events = 30
+#'   n_events = 20
 #' )
 simul_data <- function(n,
-                       coef,
                        add_interaction = FALSE,
+                       coefs,
                        ...) {
   assert_flag(add_interaction)
+  assert_numeric(coefs, min.len = 1L, names = "unique")
   covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = FALSE)
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
+  if (add_interaction) {
+    covariates$x_1_2 <- factor(
+      with(
+        covariates,
+        paste(as.character(x_1), as.character(x_2), sep="")
+      )
+    )
+    subgroup_model <- update(subgroup_model, ~.+x_1_2)
+  }
   design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)
   subgroup_vars <- all.vars(subgroup_model)
   design_ia <- NULL
@@ -218,20 +237,21 @@ simul_data <- function(n,
     ia_j <- model.matrix(as.formula(paste("~", j, "-1")), data = covariates) * covariates$arm
     design_ia <- cbind(design_ia, ia_j)
   }
-  if (add_interaction) {
-    design_ia <- cbind(
-      design_ia,
-      "x_1a2a" = design_ia[, 1] * design_ia[, 3],
-      "x_1a2b" = design_ia[, 1] * design_ia[, 4],
-      "x_1b2a" = design_ia[, 2] * design_ia[, 3],
-      "x_1b2b" = design_ia[, 2] * design_ia[, 4]
-    )
-  }
   colnames(design_ia) <- paste(colnames(design_ia), "arm", sep = "_")
   colnames(design_ia) <- gsub(" ", "", colnames(design_ia))
   design_matrix <- cbind(design_main, design_ia)
-  assert_numeric(coef, len = ncol(design_matrix))
-  lp_aft <- design_matrix %*% coef
+
+  if (add_interaction){
+    # Remove created variable again such that final covariates dataset is identical for all scenarios.
+    covariates$x_1_2 <- NULL
+  }
+
+  reg_coef <- rep(0, ncol(design_matrix))
+  names(reg_coef) <- colnames(design_matrix)
+  assert_subset(names(coefs), names(reg_coef))
+  reg_coef[names(coefs)] <- coefs
+
+  lp_aft <- design_matrix %*% reg_coef
   outcome <- simul_pfs(lp_aft = lp_aft, ...)
   d <- cbind(id = 1:n, covariates, outcome)
   d
