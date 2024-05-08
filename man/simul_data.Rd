@@ -4,18 +4,18 @@
 \alias{simul_data}
 \title{Simulate Covariates and Progression Free Survival Data}
 \usage{
-simul_data(n, coef, add_interaction = FALSE, ...)
+simul_data(n, add_interaction = FALSE, coefs, ...)
 }
 \arguments{
 \item{n}{(\code{count})\cr number of patients.}
-
-\item{coef}{(\code{numeric})\cr vector of coefficients.}
 
 \item{add_interaction}{(\code{flag})\cr whether to add interaction terms between covariates
 1 and 2.}
 
 \item{\dots}{additional parameters apart from the linear predictor values
 needed for \code{\link[=simul_pfs]{simul_pfs()}}.}
+
+\item{coef}{(\code{numeric})\cr named vector of coefficients to set.}
 }
 \value{
 A combined \code{data.frame} with the \code{id} column, the design matrix and the
@@ -33,10 +33,10 @@ coding for arm-subgroup interactions.
 set.seed(321)
 simul_data(
   n = 100,
-  coef = rnorm(42),
+  coefs = c(arm = 1),
   sigma_aft = 1,
   recr_duration = 0.2,
   rate_cens = 2,
-  n_events = 30
+  n_events = 20
 )
 }

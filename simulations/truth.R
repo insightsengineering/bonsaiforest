@@ -39,27 +39,14 @@ scen_6_scenario <- scenario_names[6]
 true_ia_subgroup_hr <- init_data_frame(scen_6_scenario, scen_6_subgroups)
 true_ia_subgroup_ahr <- true_ia_subgroup_hr
 
+# Quantile to use for stabilizing the average hazard estimation via Kaplan-Meier.
+t_quantile <- 0.95
+
 # Calculation ----
 
 tictoc::tic()
 
 set.seed(23)
-
-# todo: add to package / refactor
-# Function to get the average hazard ratio based on KM-estimates in both group
-# Note: This function is new! Estimates can be unstable due to the variability of the KM-estimates in the tail
-ahr <- function(d, resp="time", status = "status", trt="arm", t_max = Inf){
-  # Simple function to estimate the AHR based on Kaplan-Meier estimation
-  # Argument t_max can be used to restrict the time range (to reduce impact of instable of KM estimates in the tails)
-  t <- sort(unique(d[[resp]][d[[status]]==1])) # unique event times
-  t <- t[t<t_max]
-  # KM at t in both groups
-  base_model <- stats::as.formula(paste("Surv(", resp, ",", status, ") ~ ",trt))
-  km_C <- summary(survfit(base_model, data = d, subset=(arm==0)),times=t,extend=T)$surv
-  km_I <- summary(survfit(base_model, data = d, subset=(arm==1)),times=t,extend=T)$surv
-  # AHR
-  sum(km_C*diff(c(1,km_I)))/sum(km_I*diff(c(1,km_C)))
-}
 
 for (scenario in all_scenarios) {
   all_overall_results <- matrix(nrow=4, ncol=n_repetitions)
@@ -96,9 +83,7 @@ for (scenario in all_scenarios) {
     summary(naivepop("tt_pfs", "arm", tmp, "survival", "ev_pfs"))
 
 
-    # evaluate "AHR integral" only up to 95% quantile of event times to avoid instability of KM estimates in tails
-    t_max <- quantile(sim_data$tt_pfs[sim_data$ev_pfs==1],0.95)
-    all_overall_results[2,j] <- log(ahr(sim_data, resp="tt_pfs", status = "ev_pfs", t_max = t_max))
+    all_overall_results[2,j] <- log(ahr_from_km("tt_pfs", "arm", sim_data, "ev_pfs", t_quantile))
 
     all_overall_results[3,j] <- median(sim_data$tt_pfs_uncens[sim_data$arm==0])
     all_overall_results[4,j] <- median(sim_data$tt_pfs_uncens[sim_data$arm==1])
@@ -114,9 +99,7 @@ for (scenario in all_scenarios) {
 
     for (k in (1:length(subgroup_names))){
       data_subset_k <- subset(stacked_data,subgroup==subgroup_names[k])
-      # Calculate AHR in subset k (evaluate "AHR integral" only up to 95% quantile of event times to avoid instability of KM estimates in tails)
-      t_max <- quantile(data_subset_k$time[data_subset_k$status==1],0.95)
-      all_subgroups_log_ahr[k,j] <- log(ahr(data_subset_k, t_max=t_max))
+      all_subgroups_log_ahr[k,j] <- log(ahr_from_km("tt_pfs", "arm", data_subset_k, "ev_pfs", t_quantile))
     }
 
     # calculate HR and AHR in interaction subgroups for scenario 6
@@ -134,11 +117,7 @@ for (scenario in all_scenarios) {
 
       for (k in (1:length(scen_6_subgroups))){
         data_subset_k <- subset(stacked_data_ia,subgroup==scen_6_subgroups[k])
-        # Calculate AHR in subset k
-        # (evaluate "AHR integral" only up to 95% quantile of event times to
-        # avoid instability of KM estimates in tails)
-        t_max <- quantile(data_subset_k$time[data_subset_k$status==1],0.95)
-        ia_subgroups_log_ahr[k,j] <- log(ahr(data_subset_k, t_max=t_max))
+        ia_subgroups_log_ahr[k,j] <- log(ahr_from_km("tt_pfs", "arm", data_subset_k, "ev_pfs", t_quantile))
       }
     }
   }

@@ -4,7 +4,14 @@
 \alias{simul_pfs}
 \title{Simulation of Progression Free Survival Times}
 \usage{
-simul_pfs(lp_aft, sigma_aft, recr_duration, rate_cens, n_events)
+simul_pfs(
+  lp_aft,
+  sigma_aft,
+  recr_duration,
+  rate_cens,
+  n_events,
+  add_uncensored_pfs = FALSE
+)
 }
 \arguments{
 \item{lp_aft}{(\code{numeric})\cr linear predictor values for the accelerate failure time model (AFT).}
@@ -16,10 +23,14 @@ simul_pfs(lp_aft, sigma_aft, recr_duration, rate_cens, n_events)
 \item{rate_cens}{(\code{number})\cr rate for the exponentially distributed censoring process.}
 
 \item{n_events}{(\code{count})\cr number of events to reach for the study end.}
+
+\item{add_uncensored_pfs}{(\code{flag})\cr whether to add the uncensored PFS as well to the resulting
+\code{data.frame}.}
 }
 \value{
 A \code{data.frame} with columns \code{tt_pfs} (PFS time) and \code{ev_pfs} (corresponding
-event indicator with 1 for an event and 0 for censored).
+event indicator with 1 for an event and 0 for censored), and optionally
+\code{tt_pfs_uncens}.
 }
 \description{
 Simulation of Progression Free Survival Times
