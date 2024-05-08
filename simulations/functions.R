@@ -179,3 +179,16 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
     simplify = FALSE
   )
 }
+
+init_data_frame <- function(row_names, col_names) {
+  assert_character(row_names)
+  assert_character(col_names)
+  data.frame(matrix(
+    nrow = length(row_names),
+    ncol = length(col_names),
+    dimnames = list(
+      row_names,
+      col_names
+    )
+  ))
+}
