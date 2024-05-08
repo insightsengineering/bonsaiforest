@@ -68,7 +68,9 @@ compute_results <- function(scenarios, analyze, cache = NULL) {
       mc.silent = FALSE
     )
     res <- do.call(rbind, res)
-    saveRDS(res, file = cache)
+    if (!is.null(cache)) {
+      saveRDS(res, file = cache)
+    }
     res
   }
 }
@@ -77,13 +79,15 @@ compute_results <- function(scenarios, analyze, cache = NULL) {
 # `coefs`.
 simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
                            n_datasets = 1000,
-                           n_patients = 1000,
-                           n_events = 247,
+                           n_patients = 1000 * inflation_factor,
+                           n_events = 247 * inflation_factor,
                            sigma_aft = 0.85,
                            # Recruitment duration in years:
                            recr_duration = 3,
                            # Censoring rate at 1 year:
-                           rate_cens = 0.02) {
+                           rate_cens = 0.02,
+                           inflation_factor = 1,
+                           add_uncensored_pfs = FALSE) {
   scenario <- match.arg(scenario)
   assert_count(n_datasets)
 
@@ -174,12 +178,14 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
       sigma_aft = sigma_aft,
       recr_duration = recr_duration,
       rate_cens = rate_cens,
-      n_events = n_events
+      n_events = n_events,
+      add_uncensored_pfs = add_uncensored_pfs
     ),
     simplify = FALSE
   )
 }
 
+# Initialize a `data.frame` with given row and column names.
 init_data_frame <- function(row_names, col_names) {
   assert_character(row_names)
   assert_character(col_names)
@@ -192,3 +198,19 @@ init_data_frame <- function(row_names, col_names) {
     )
   ))
 }
+
+#
+stacked_data <- generate_stacked_data(base_model,subgroup_model,sim_data,rename=T)
+
+naive_estimates <- stacked_data %>%
+  group_by(subgroup) %>%
+  do(tidy(survival::coxph(Surv(time,status)~arm,data=.)))
+all_subgroups_log_hr[,j] <- naive_estimates$estimate
+
+for (k in (1:length(subgroup_names))){
+  data_subset_k <- subset(stacked_data,subgroup==subgroup_names[k])
+  # Calculate AHR in subset k (evaluate "AHR integral" only up to 95% quantile of event times to avoid instability of KM estimates in tails)
+  t_max <- quantile(data_subset_k$time[data_subset_k$status==1],0.95)
+  all_subgroups_log_ahr[k,j] <- log(ahr(data_subset_k, t_max=t_max))
+}
+

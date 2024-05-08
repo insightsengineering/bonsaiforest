@@ -45,34 +45,71 @@ tictoc::tic()
 
 set.seed(23)
 
-for (scenario in 1:6){
-  all_overall_results <- matrix(nrow=4, ncol=nreps)
+# todo: add to package / refactor
+# Function to get the average hazard ratio based on KM-estimates in both group
+# Note: This function is new! Estimates can be unstable due to the variability of the KM-estimates in the tail
+ahr <- function(d, resp="time", status = "status", trt="arm", t_max = Inf){
+  # Simple function to estimate the AHR based on Kaplan-Meier estimation
+  # Argument t_max can be used to restrict the time range (to reduce impact of instable of KM estimates in the tails)
+  t <- sort(unique(d[[resp]][d[[status]]==1])) # unique event times
+  t <- t[t<t_max]
+  # KM at t in both groups
+  base_model <- stats::as.formula(paste("Surv(", resp, ",", status, ") ~ ",trt))
+  km_C <- summary(survfit(base_model, data = d, subset=(arm==0)),times=t,extend=T)$surv
+  km_I <- summary(survfit(base_model, data = d, subset=(arm==1)),times=t,extend=T)$surv
+  # AHR
+  sum(km_C*diff(c(1,km_I)))/sum(km_I*diff(c(1,km_C)))
+}
 
-  all_subgroups_log_hr <- matrix(NA,nrow=length(subgroup_names),ncol=nreps)
-  all_subgroups_log_ahr <- matrix(NA,nrow=length(subgroup_names),ncol=nreps)
+for (scenario in all_scenarios) {
+  all_overall_results <- matrix(nrow=4, ncol=n_repetitions)
+
+  all_subgroups_log_hr <- matrix(NA,nrow=length(subgroup_names),ncol=n_repetitions)
+  all_subgroups_log_ahr <- matrix(NA,nrow=length(subgroup_names),ncol=n_repetitions)
 
   if (scenario==6){
-    ia_subgroups_log_hr <- matrix(NA, nrow=4, ncol=nreps)
-    ia_subgroups_log_ahr <- matrix(NA, nrow=4, ncol=nreps)
+    ia_subgroups_log_hr <- matrix(NA, nrow=4, ncol=n_repetitions)
+    ia_subgroups_log_ahr <- matrix(NA, nrow=4, ncol=n_repetitions)
   }
 
-  for (j in 1:nreps){ # simulation repetitions per scenario
+  # Idea: avoid for loop and instead reuse the `compute_results` function
+  # to parallelize this.
+  for (j in seq_len(n_repetitions)){
 
-    # simulate data
-    sim_data <- simul_tte_scenarios(scenario = scenario, inflation_factor = inflation_factor, add_uncensored_pfs = T)
+    # This should be done outside this loop
+    sim_data <- simul_scenario(
+      scenario = scenario,
+      inflation_factor = inflation_factor,
+      add_uncensored_pfs = TRUE
+    )
+    tst <- compute_results(
+      sim_data,
+      analyze = population_analysis
+    )
 
+    # Idea: Reuse naivepop() function
     # calculate results in overall population
-    all_overall_results[1,j] <- coxph(Surv(tt_pfs,ev_pfs)~arm, data=sim_data)$coef
-    t_max <- quantile(sim_data$tt_pfs[sim_data$ev_pfs==1],0.95) # evaluate "AHR integral" only up to 95% quantile of event times to avoid instability of KM estimates in tails
+    all_overall_results[1,j] <- coxph(Surv(tt_pfs,ev_pfs)~arm, data=sim_data[[1]])$coef
+
+    tmp <- sim_data[[1]]
+    tmp$arm <- factor(tmp$arm)
+    summary(naivepop("tt_pfs", "arm", tmp, "survival", "ev_pfs"))
+
+
+    # evaluate "AHR integral" only up to 95% quantile of event times to avoid instability of KM estimates in tails
+    t_max <- quantile(sim_data$tt_pfs[sim_data$ev_pfs==1],0.95)
     all_overall_results[2,j] <- log(ahr(sim_data, resp="tt_pfs", status = "ev_pfs", t_max = t_max))
 
     all_overall_results[3,j] <- median(sim_data$tt_pfs_uncens[sim_data$arm==0])
     all_overall_results[4,j] <- median(sim_data$tt_pfs_uncens[sim_data$arm==1])
 
+
     # calculate HR and AHR in subgroups
     stacked_data <- generate_stacked_data(base_model,subgroup_model,sim_data,rename=T)
 
-    naive_estimates <- stacked_data %>% group_by(subgroup) %>% do(tidy(survival::coxph(Surv(time,status)~arm,data=.)))
+    naive_estimates <- stacked_data %>%
+      group_by(subgroup) %>%
+      do(tidy(survival::coxph(Surv(time,status)~arm,data=.)))
     all_subgroups_log_hr[,j] <- naive_estimates$estimate
 
     for (k in (1:length(subgroup_names))){
@@ -82,19 +119,24 @@ for (scenario in 1:6){
       all_subgroups_log_ahr[k,j] <- log(ahr(data_subset_k, t_max=t_max))
     }
 
-    # calculate HR and AHR in intreraction subgroups for scenario 6
+    # calculate HR and AHR in interaction subgroups for scenario 6
     if (scenario==6){
       sim_data$x_1_2 <- factor(with(sim_data,paste(as.character(x_1),as.character(x_2),sep="")))
+
+      # Idea: this part is more or less the same as above.
+      # factor this out in a function and then reuse here
       stacked_data_ia <- generate_stacked_data(base_model,~x_1_2,sim_data,rename=T)
 
-      naive_estimates_ia <- stacked_data_ia %>% group_by(subgroup) %>% do(tidy(survival::coxph(Surv(time,status)~arm,data=.)))
+      naive_estimates_ia <- stacked_data_ia %>%
+        group_by(subgroup) %>%
+        do(tidy(survival::coxph(Surv(time,status)~arm,data=.)))
       ia_subgroups_log_hr[,j] <- naive_estimates_ia$estimate
 
-      subgroup_names_ia <- c("x_1_2.aa", "x_1_2.ab", "x_1_2.ba", "x_1_2.bb")
-
-      for (k in (1:length(subgroup_names_ia))){
-        data_subset_k <- subset(stacked_data_ia,subgroup==subgroup_names_ia[k])
-        # Calculate AHR in subset k (evaluate "AHR integral" only up to 95% quantile of event times to avoid instability of KM estimates in tails)
+      for (k in (1:length(scen_6_subgroups))){
+        data_subset_k <- subset(stacked_data_ia,subgroup==scen_6_subgroups[k])
+        # Calculate AHR in subset k
+        # (evaluate "AHR integral" only up to 95% quantile of event times to
+        # avoid instability of KM estimates in tails)
         t_max <- quantile(data_subset_k$time[data_subset_k$status==1],0.95)
         ia_subgroups_log_ahr[k,j] <- log(ahr(data_subset_k, t_max=t_max))
       }
