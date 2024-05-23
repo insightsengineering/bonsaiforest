@@ -228,10 +228,10 @@ simul_data <- function(n,
     covariates$x_1_2 <- factor(
       with(
         covariates,
-        paste(as.character(x_1), as.character(x_2), sep="")
+        paste(as.character(x_1), as.character(x_2), sep = "")
       )
     )
-    subgroup_model <- update(subgroup_model, ~.+x_1_2)
+    subgroup_model <- update(subgroup_model, ~ . + x_1_2)
   }
   design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)
   subgroup_vars <- all.vars(subgroup_model)
@@ -244,7 +244,7 @@ simul_data <- function(n,
   colnames(design_ia) <- gsub(" ", "", colnames(design_ia))
   design_matrix <- cbind(design_main, design_ia)
 
-  if (add_interaction){
+  if (add_interaction) {
     # Remove created variable again such that final covariates dataset is identical for all scenarios.
     covariates$x_1_2 <- NULL
   }

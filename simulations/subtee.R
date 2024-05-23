@@ -2,7 +2,7 @@
 subtee_method <- function(df, simul_no) {
   assert_data_frame(df)
   assert_count(simul_no)
-  
+
   covariates <- df[, 2:12]
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
   design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)[, -1]

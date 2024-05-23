@@ -15,7 +15,7 @@ for (f in scenario_files) {
   load(file.path("legacy/scenarios", f), scenarios)
 }
 scenarios <- as.list(scenarios)
-str(as.list(scenarios),1)
+str(as.list(scenarios), 1)
 # List of 6
 # $ data_scenario1:List of 8
 # $ data_scenario2:List of 8
@@ -32,12 +32,12 @@ source("functions.R")
 
 # df <- scenarios[[1]]$scenario[[1]]
 source("population.R") # fast.
-source("subgroup.R")   # fast.
-source("subtee.R")     # takes a few minutes.
-source("horseshoe.R")  # this takes the longest time: several days.
-source("ridge.R")      # takes a few minutes.
-source("lasso.R")      # takes a few minutes.
-source("truth.R")      # takes about an hour.
+source("subgroup.R") # fast.
+source("subtee.R") # takes a few minutes.
+source("horseshoe.R") # this takes the longest time: several days.
+source("ridge.R") # takes a few minutes.
+source("lasso.R") # takes a few minutes.
+source("truth.R") # takes about an hour.
 
 # Combine analysis results and scenario properties ----
 

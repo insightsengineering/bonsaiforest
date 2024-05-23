@@ -97,8 +97,8 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
   # Set constant (across scenarios) intercept and prognostic factors.
   constant_coefs <- c(
     "(Intercept)" = 2,
-    "x_4c" = - log(0.7) * sigma_aft,
-    "x_6b" = - log(1.5) * sigma_aft
+    "x_4c" = -log(0.7) * sigma_aft,
+    "x_6b" = -log(1.5) * sigma_aft
   )
 
   # Names of all the subgroup specific coefficients.
@@ -110,31 +110,30 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
     "x_10a_arm", "x_10b_arm", "x_10c_arm"
   )
 
-  coefs <- switch(
-    scenario,
+  coefs <- switch(scenario,
     # Positive trial, homogeneous treatment effect.
     "1" = c(
       constant_coefs,
-      "arm1" = - log(0.66) * sigma_aft
+      "arm1" = -log(0.66) * sigma_aft
     ),
     # Overall HR~0.66, but no effect in x_4a.
     "2" = c(
       constant_coefs,
-      "arm1" = - log(0.66) * sigma_aft,
+      "arm1" = -log(0.66) * sigma_aft,
       # No effect in x_4a:
       "x_4a_arm" = log(0.66) * sigma_aft,
       # Slightly enhanced effect in x_4b and x_4c to "compensate" no effect in x_4a:
-      "x_4b_arm" = - log(0.8) * sigma_aft,
-      "x_4c_arm" = - log(0.8) * sigma_aft
+      "x_4b_arm" = -log(0.8) * sigma_aft,
+      "x_4c_arm" = -log(0.8) * sigma_aft
     ),
     # Overall HR~1, but HR~0.5 in x_4a.
     "3" = c(
       constant_coefs,
       "arm1" = 0,
-      "x_4a_arm" = - log(0.5) * sigma_aft,
+      "x_4a_arm" = -log(0.5) * sigma_aft,
       # Detrimental effect in x_4b and x_4c to "compensate" effect in x_4a:
-      "x_4b_arm" = - log(1.25) * sigma_aft,
-      "x_4c_arm" = - log(1.25) * sigma_aft
+      "x_4b_arm" = -log(1.25) * sigma_aft,
+      "x_4c_arm" = -log(1.25) * sigma_aft
     ),
     # Mild heterogeneity.
     "4" = {
@@ -143,7 +142,7 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
         constant_coefs,
         "arm1" = 0,
         setNames(
-          - rnorm(25, sd = 0.15) * sigma_aft,
+          -rnorm(25, sd = 0.15) * sigma_aft,
           group_coefs_names
         )
       )
@@ -155,7 +154,7 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
         constant_coefs,
         arm1 = 0,
         setNames(
-          - rnorm(25, sd = 0.3) * sigma_aft,
+          -rnorm(25, sd = 0.3) * sigma_aft,
           group_coefs_names
         )
       )
@@ -163,11 +162,11 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
     # Model with interaction.
     "6" = c(
       constant_coefs,
-      "arm1" = - log(0.66) * sigma_aft,
-      "x_1_2aa_arm" = - log(1.5) * sigma_aft,
-      "x_1_2ba_arm" = - log(0.5) * sigma_aft,
-      "x_1_2ab_arm" = - log(0.92) * sigma_aft,
-      "x_1_2bb_arm" = - log(1.07) * sigma_aft
+      "arm1" = -log(0.66) * sigma_aft,
+      "x_1_2aa_arm" = -log(1.5) * sigma_aft,
+      "x_1_2ba_arm" = -log(0.5) * sigma_aft,
+      "x_1_2ab_arm" = -log(0.92) * sigma_aft,
+      "x_1_2bb_arm" = -log(1.07) * sigma_aft
     )
   )
   add_interaction <- scenario == "6"
