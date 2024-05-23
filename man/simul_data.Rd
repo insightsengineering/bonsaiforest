@@ -12,10 +12,10 @@ simul_data(n, add_interaction = FALSE, coefs, ...)
 \item{add_interaction}{(\code{flag})\cr whether to add interaction terms between covariates
 1 and 2.}
 
+\item{coefs}{(\code{numeric})\cr named vector of coefficients to set.}
+
 \item{\dots}{additional parameters apart from the linear predictor values
 needed for \code{\link[=simul_pfs]{simul_pfs()}}.}
-
-\item{coef}{(\code{numeric})\cr named vector of coefficients to set.}
 }
 \value{
 A combined \code{data.frame} with the \code{id} column, the design matrix and the

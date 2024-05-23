@@ -103,7 +103,7 @@ ahr_from_km <- function(resp,
   assert_number(t_quantile, lower = 0.5, upper = 1)
 
   times_observed <- data[[resp]][data[[status]] == 1]
-  time_max <- quantile(times_observed, probs = t_quantile)
+  time_max <- stats::quantile(times_observed, probs = t_quantile)
   times_unique <- sort(unique(times_observed))
   times <- times_unique[times_unique <= time_max]
 

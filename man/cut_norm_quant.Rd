@@ -19,3 +19,4 @@ The factor variable.
 \description{
 Helper for Cutting into Normal Quantiles
 }
+\keyword{internal}

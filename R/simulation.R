@@ -5,13 +5,14 @@
 #' @param labels (`character`)\cr corresponding labels for the resulting factor.
 #'
 #' @return The factor variable.
+#' @keywords internal
 cut_norm_quant <- function(x, prob, labels = letters[seq_along(c(prob, 1))]) {
   assert_numeric(x)
   assert_numeric(prob)
   assert_character(labels)
   assert_true(identical(length(prob) + 1L, length(labels)))
 
-  norm_quantiles <- qnorm(p = prob)
+  norm_quantiles <- stats::qnorm(p = prob)
   breaks <- c(-Inf, norm_quantiles, Inf)
   cut(x, breaks, labels = labels)
 }
@@ -150,12 +151,12 @@ simul_pfs <- function(lp_aft,
 
   n <- length(lp_aft)
   # Uncensored event time.
-  log_tt_pfs <- c(lp_aft + sigma_aft * log(rexp(n, rate = 1)))
+  log_tt_pfs <- c(lp_aft + sigma_aft * log(stats::rexp(n, rate = 1)))
   tt_pfs_uncens <- exp(log_tt_pfs)
 
   # Censoring step 1:
   # with rate_cens.
-  tt_pfs_cens1 <- rexp(n, rate = rate_cens)
+  tt_pfs_cens1 <- stats::rexp(n, rate = rate_cens)
   tt_pfs_cens1 <- pmin(tt_pfs_uncens, tt_pfs_cens1)
   ev_pfs_cens1 <- ifelse(tt_pfs_uncens <= tt_pfs_cens1, 1, 0)
   if (sum(ev_pfs_cens1) < n_events) {
@@ -170,7 +171,7 @@ simul_pfs <- function(lp_aft,
   # Censoring step 2:
   # due to staggerred recruitment and recruiting only until target_ev
   # events have been observed.
-  rec_time <- runif(n, min = 0, max = recr_duration)
+  rec_time <- stats::runif(n, min = 0, max = recr_duration)
   tt_pfs_cens1_calendar <- rec_time + tt_pfs_cens1
   study_stop_time <- sort(tt_pfs_cens1_calendar[ev_pfs_cens1 == 1])[n_events]
   if (study_stop_time < max(rec_time)) {
@@ -196,7 +197,7 @@ simul_pfs <- function(lp_aft,
 #' coding for arm-subgroup interactions.
 #'
 #' @param n (`count`)\cr number of patients.
-#' @param coef (`numeric`)\cr named vector of coefficients to set.
+#' @param coefs (`numeric`)\cr named vector of coefficients to set.
 #' @param add_interaction (`flag`)\cr whether to add interaction terms between covariates
 #'   1 and 2.
 #' @param \dots additional parameters apart from the linear predictor values
@@ -231,13 +232,19 @@ simul_data <- function(n,
         paste(as.character(x_1), as.character(x_2), sep = "")
       )
     )
-    subgroup_model <- update(subgroup_model, ~ . + x_1_2)
+    subgroup_model <- stats::update(subgroup_model, ~ . + x_1_2)
   }
-  design_main <- model.matrix(update(subgroup_model, ~ arm + .), data = covariates)
+  design_main <- stats::model.matrix(
+    stats::update(subgroup_model, ~ arm + .),
+    data = covariates
+  )
   subgroup_vars <- all.vars(subgroup_model)
   design_ia <- NULL
   for (j in subgroup_vars) {
-    ia_j <- model.matrix(as.formula(paste("~", j, "-1")), data = covariates) * design_main[, "arm1"]
+    ia_j <- stats::model.matrix(
+      stats::as.formula(paste("~", j, "-1")),
+      data = covariates
+    ) * design_main[, "arm1"]
     design_ia <- cbind(design_ia, ia_j)
   }
   colnames(design_ia) <- paste(colnames(design_ia), "arm", sep = "_")
