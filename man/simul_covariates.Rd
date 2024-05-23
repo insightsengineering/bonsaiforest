@@ -4,7 +4,7 @@
 \alias{simul_covariates}
 \title{Generation of a Design Matrix for Simulations}
 \usage{
-simul_covariates(n, p_catvar = 10, add_contvars = FALSE)
+simul_covariates(n, p_catvar = 10, add_contvars = FALSE, arm_factor = FALSE)
 }
 \arguments{
 \item{n}{(\code{count})\cr number of rows (observations).}
@@ -12,6 +12,8 @@ simul_covariates(n, p_catvar = 10, add_contvars = FALSE)
 \item{p_catvar}{(\code{count})\cr number of covariates (excluding treatment arm).}
 
 \item{add_contvars}{(\code{flag})\cr whether to add continuous covariates.}
+
+\item{arm_factor}{(\code{flag})\cr whether to make the arm variable a factor.}
 }
 \value{
 The design matrix.
@@ -36,4 +38,5 @@ in the returned design matrix.
 \examples{
 simul_covariates(n = 10, p_catvar = 3, add_contvars = FALSE)
 simul_covariates(n = 10, p_catvar = 3, add_contvars = TRUE)
+simul_covariates(n = 10, p_catvar = 3, add_contvars = TRUE, arm_factor = TRUE)
 }

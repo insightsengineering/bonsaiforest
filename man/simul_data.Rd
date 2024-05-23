@@ -33,7 +33,7 @@ coding for arm-subgroup interactions.
 set.seed(321)
 simul_data(
   n = 100,
-  coefs = c(arm = 1),
+  coefs = c(arm1 = 1),
   sigma_aft = 1,
   recr_duration = 0.2,
   rate_cens = 2,
