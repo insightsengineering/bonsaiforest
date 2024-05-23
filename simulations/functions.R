@@ -1,3 +1,5 @@
+library(checkmate)
+
 # Sanitize subgroup string format.
 sanitize_subgroups <- function(subgroups) {
   assert_character(subgroups)
@@ -112,12 +114,12 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
     # Positive trial, homogeneous treatment effect.
     "1" = c(
       constant_coefs,
-      "arm" = - log(0.66) * sigma_aft
+      "arm1" = - log(0.66) * sigma_aft
     ),
     # Overall HR~0.66, but no effect in x_4a.
     "2" = c(
       constant_coefs,
-      "arm" = - log(0.66) * sigma_aft,
+      "arm1" = - log(0.66) * sigma_aft,
       # No effect in x_4a:
       "x_4a_arm" = log(0.66) * sigma_aft,
       # Slightly enhanced effect in x_4b and x_4c to "compensate" no effect in x_4a:
@@ -127,7 +129,7 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
     # Overall HR~1, but HR~0.5 in x_4a.
     "3" = c(
       constant_coefs,
-      "arm" = 0,
+      "arm1" = 0,
       "x_4a_arm" = - log(0.5) * sigma_aft,
       # Detrimental effect in x_4b and x_4c to "compensate" effect in x_4a:
       "x_4b_arm" = - log(1.25) * sigma_aft,
@@ -138,7 +140,7 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
       set.seed(5)
       c(
         constant_coefs,
-        "arm" = 0,
+        "arm1" = 0,
         setNames(
           - rnorm(25, sd = 0.15) * sigma_aft,
           group_coefs_names
@@ -150,7 +152,7 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
       set.seed(5)
       c(
         constant_coefs,
-        arm = 0,
+        arm1 = 0,
         setNames(
           - rnorm(25, sd = 0.3) * sigma_aft,
           group_coefs_names
@@ -160,7 +162,7 @@ simul_scenario <- function(scenario = c("1", "2", "3", "4", "5", "6"),
     # Model with interaction.
     "6" = c(
       constant_coefs,
-      "arm" = - log(0.66) * sigma_aft,
+      "arm1" = - log(0.66) * sigma_aft,
       "x_1_2aa_arm" = - log(1.5) * sigma_aft,
       "x_1_2ba_arm" = - log(0.5) * sigma_aft,
       "x_1_2ab_arm" = - log(0.92) * sigma_aft,
@@ -198,19 +200,3 @@ init_data_frame <- function(row_names, col_names) {
     )
   ))
 }
-
-#
-stacked_data <- generate_stacked_data(base_model,subgroup_model,sim_data,rename=T)
-
-naive_estimates <- stacked_data %>%
-  group_by(subgroup) %>%
-  do(tidy(survival::coxph(Surv(time,status)~arm,data=.)))
-all_subgroups_log_hr[,j] <- naive_estimates$estimate
-
-for (k in (1:length(subgroup_names))){
-  data_subset_k <- subset(stacked_data,subgroup==subgroup_names[k])
-  # Calculate AHR in subset k (evaluate "AHR integral" only up to 95% quantile of event times to avoid instability of KM estimates in tails)
-  t_max <- quantile(data_subset_k$time[data_subset_k$status==1],0.95)
-  all_subgroups_log_ahr[k,j] <- log(ahr(data_subset_k, t_max=t_max))
-}
-

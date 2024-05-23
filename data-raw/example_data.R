@@ -37,5 +37,4 @@ example_data <- simul_data(
   n = 1000, coef = coef_1, sigma_aft = sigma_aft,
   recr_duration = 3, rate_cens = 0.02, n_events = 247
 )
-example_data$arm <- as.factor(example_data$arm)
 usethis::use_data(example_data)

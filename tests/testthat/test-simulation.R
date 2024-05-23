@@ -30,6 +30,12 @@ test_that("simul_covariates works as expected when adding continuous covariates"
   expect_snapshot(result)
 })
 
+test_that("simul_covariates optionally returns arm as factor", {
+  set.seed(123)
+  result <- expect_silent(simul_covariates(n = 5, p_catvar = 23, arm_factor = TRUE))
+  expect_factor(result$arm, levels = c("0", "1"))
+})
+
 # simul_pfs ----
 
 test_that("simul_pfs works as expected", {
@@ -73,7 +79,7 @@ test_that("simul_data works as expected", {
   set.seed(321)
   result <- expect_silent(simul_data(
     n = 100,
-    coefs = c(arm = 1),
+    coefs = c(arm1 = 1),
     sigma_aft = 1,
     recr_duration = 0.2,
     rate_cens = 2,
@@ -85,13 +91,14 @@ test_that("simul_data works as expected", {
     "x_8", "x_9", "x_10", "tt_pfs", "ev_pfs"
   )
   expect_named(result, cols)
+  expect_factor(result$arm, levels = c("0", "1"))
 })
 
 test_that("simul_data works as expected with interactions between 1st and 2nd covariate", {
   set.seed(321)
   result <- expect_silent(simul_data(
     n = 100,
-    coefs = c(arm = 0.5),
+    coefs = c(arm1 = 0.5),
     sigma_aft = 1,
     recr_duration = 0.5,
     rate_cens = 2,

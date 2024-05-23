@@ -36,6 +36,7 @@ cut_norm_quant <- function(x, prob, labels = letters[seq_along(c(prob, 1))]) {
 #' @param n (`count`)\cr number of rows (observations).
 #' @param p_catvar (`count`)\cr number of covariates (excluding treatment arm).
 #' @param add_contvars (`flag`)\cr whether to add continuous covariates.
+#' @param arm_factor (`flag`)\cr whether to make the arm variable a factor.
 #'
 #' @return The design matrix.
 #' @export
@@ -43,10 +44,12 @@ cut_norm_quant <- function(x, prob, labels = letters[seq_along(c(prob, 1))]) {
 #' @examples
 #' simul_covariates(n = 10, p_catvar = 3, add_contvars = FALSE)
 #' simul_covariates(n = 10, p_catvar = 3, add_contvars = TRUE)
-simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE) {
+#' simul_covariates(n = 10, p_catvar = 3, add_contvars = TRUE, arm_factor = TRUE)
+simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE, arm_factor = FALSE) {
   assert_count(n, positive = TRUE)
   assert_count(p_catvar, positive = TRUE)
   assert_flag(add_contvars)
+  assert_flag(arm_factor)
 
   sigma <- matrix(0, nrow = 10, ncol = 10)
   first_grp <- 1:5
@@ -99,7 +102,7 @@ simul_covariates <- function(n, p_catvar = 10, add_contvars = FALSE) {
   )
   index_catvar <- seq_len(p_catvar)
   x <- cbind(
-    arm = trt_arm,
+    arm = if (arm_factor) factor(trt_arm) else trt_arm,
     x[, index_catvar, drop = FALSE]
   )
   if (add_contvars) {
@@ -207,7 +210,7 @@ simul_pfs <- function(lp_aft,
 #' set.seed(321)
 #' simul_data(
 #'   n = 100,
-#'   coefs = c(arm = 1),
+#'   coefs = c(arm1 = 1),
 #'   sigma_aft = 1,
 #'   recr_duration = 0.2,
 #'   rate_cens = 2,
@@ -219,7 +222,7 @@ simul_data <- function(n,
                        ...) {
   assert_flag(add_interaction)
   assert_numeric(coefs, min.len = 1L, names = "unique")
-  covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = FALSE)
+  covariates <- simul_covariates(n = n, p_catvar = 10, add_contvars = FALSE, arm_factor = TRUE)
   subgroup_model <- ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 + x_8 + x_9 + x_10
   if (add_interaction) {
     covariates$x_1_2 <- factor(
@@ -234,7 +237,7 @@ simul_data <- function(n,
   subgroup_vars <- all.vars(subgroup_model)
   design_ia <- NULL
   for (j in subgroup_vars) {
-    ia_j <- model.matrix(as.formula(paste("~", j, "-1")), data = covariates) * covariates$arm
+    ia_j <- model.matrix(as.formula(paste("~", j, "-1")), data = covariates) * design_main[, "arm1"]
     design_ia <- cbind(design_ia, ia_j)
   }
   colnames(design_ia) <- paste(colnames(design_ia), "arm", sep = "_")
