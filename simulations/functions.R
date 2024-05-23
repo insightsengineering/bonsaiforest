@@ -3,7 +3,8 @@ library(checkmate)
 # Sanitize subgroup string format.
 sanitize_subgroups <- function(subgroups) {
   assert_character(subgroups)
-  gsub(pattern = "^x_", replacement = "S_", x = subgroups)
+  result <- gsub(pattern = "^x_", replacement = "S_", x = subgroups)
+  gsub(pattern = ".", replacement = "", x = result, fixed = TRUE)
 }
 
 # Elastic Net Method for a single data set.

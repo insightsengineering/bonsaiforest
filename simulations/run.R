@@ -32,12 +32,12 @@ source("functions.R")
 
 # df <- scenarios[[1]]$scenario[[1]]
 source("population.R") # fast.
-source("subgroup.R")    # fast.
-source("subtee.R")   # takes a few minutes.
-source("horseshoe.R") # this takes the longest time.
-source("ridge.R")    # takes a few minutes.
-source("lasso.R")    # takes a few minutes.
-
+source("subgroup.R")   # fast.
+source("subtee.R")     # takes a few minutes.
+source("horseshoe.R")  # this takes the longest time: several days.
+source("ridge.R")      # takes a few minutes.
+source("lasso.R")      # takes a few minutes.
+source("truth.R")      # takes about an hour.
 
 # Combine analysis results and scenario properties ----
 
@@ -47,6 +47,7 @@ results <- rbind(
   subtee_results,
   ridge_results,
   lasso_results,
-  horeshoe_results
+  horseshoe_results
 ) |>
-  full_join(scenario_properties, by = "scenario_no")
+  full_join(scenario_properties, by = c("scenario_no", "subgroup"))
+head(results)
