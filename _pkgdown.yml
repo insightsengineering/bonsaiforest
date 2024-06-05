@@ -1,3 +1,4 @@
+---
 url: https://insightsengineering.github.io/bonsaiforest
 
 template:
@@ -48,6 +49,7 @@ reference:
       - lor_estimation
       - survival_curves
       - ahr_estimation
+      - ahr_from_km
       - subgroups
       - trt_horseshoe
   - title: Summary
@@ -69,3 +71,8 @@ reference:
       - plot.summary.elastic_net
       - plot.summary.horseshoe
       - plot.compare.data
+  - title: Simulations
+    contents:
+      - simul_covariates
+      - simul_data
+      - simul_pfs
