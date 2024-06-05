@@ -28,10 +28,16 @@
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/ahr_estimation.html</loc>
   </url>
   <url>
+    <loc>https://insightsengineering.github.io/bonsaiforest/reference/ahr_from_km.html</loc>
+  </url>
+  <url>
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/bonsaiforest-package.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/compare.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/bonsaiforest/reference/cut_norm_quant.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/design_dummy1.html</loc>
@@ -71,6 +77,9 @@
   </url>
   <url>
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/bonsaiforest/reference/km_fun.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/lor_estimation.html</loc>
@@ -119,6 +128,15 @@
   </url>
   <url>
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/print.summary.naivepop.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/bonsaiforest/reference/simul_covariates.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/bonsaiforest/reference/simul_data.html</loc>
+  </url>
+  <url>
+    <loc>https://insightsengineering.github.io/bonsaiforest/reference/simul_pfs.html</loc>
   </url>
   <url>
     <loc>https://insightsengineering.github.io/bonsaiforest/reference/subgroups.html</loc>
