@@ -38,7 +38,8 @@ elastic_method <- function(df, simul_no, alpha, estimator) {
   )
 }
 
-# Function constructor to return a function that analyses a single scenario with a `fun_method`.
+# Function constructor to return a function that analyses
+# a single scenario with a `fun_method`.
 fun_analysis <- function(fun_method) {
   function(scenario, scenario_no) {
     assert_list(scenario)
@@ -63,7 +64,7 @@ compute_results <- function(scenarios, analyze, cache = NULL) {
     readRDS(cache)
   } else {
     res <- parallel::mcmapply(
-      FUN = function(x, y) analyze(x$scenario, y),
+      FUN = function(x, y) analyze(x, y),
       x = scenarios,
       y = scenario_no,
       SIMPLIFY = FALSE,
