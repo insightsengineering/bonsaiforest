@@ -25,6 +25,9 @@ str(scenarios, 1)
 # $ :List of 1000
 # $ :List of 1000
 
+# We keep the scenario 2_20 separate because only horseshoe_2_50 will use it:
+scenario_2_20 <- list(readRDS(file.path("scenarios", "scenario2_20.rds")))
+
 # Additional functions ----
 
 source("functions.R")
@@ -39,6 +42,23 @@ source("ridge.R") # takes a few minutes.
 source("lasso.R") # takes a few minutes.
 source("truth.R") # takes about an hour.
 
+## Additional analyses as described in section 3.5 ----
+source("horseshoe_2_3.R")
+source("horseshoe_2_9.R")
+source("horseshoe_2_50.R")
+
+# Investigate convergence in these.
+diag_cols <- c("min_rhat", "max_rhat", "divergent_trans")
+
+summary(subset(horseshoe_2_3_results, select = diag_cols))
+summary(subset(horseshoe_2_9_results, select = diag_cols))
+summary(subset(horseshoe_2_50_results, select = diag_cols))
+
+# Afterwards discard these columns, such that we can row bind with the other results.
+horseshoe_2_3_results <- select(horseshoe_2_3_results, - diag_cols)
+horseshoe_2_9_results <- select(horseshoe_2_9_results, - diag_cols)
+horseshoe_2_50_results <- select(horseshoe_2_50_results, - diag_cols)
+
 # Combine analysis results and scenario properties ----
 
 results <- rbind(
@@ -47,7 +67,13 @@ results <- rbind(
   subtee_results,
   ridge_results,
   lasso_results,
-  horseshoe_results
+  horseshoe_results,
+  horseshoe_2_3_results,
+  horseshoe_2_9_results,
+  horseshoe_2_50_results
 ) |>
   full_join(scenario_properties, by = c("scenario_no", "subgroup"))
+# todo: Check that the join works correctly. We have now multiple scenario 2 with same
+# subgroups.
+
 head(results)

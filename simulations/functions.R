@@ -43,7 +43,7 @@ elastic_method <- function(df, simul_no, alpha, estimator) {
 fun_analysis <- function(fun_method) {
   function(scenario, scenario_no) {
     assert_list(scenario)
-    assert_count(scenario_no)
+    assert_character(scenario_no)
     simul_no <- seq_along(scenario)
     results <- Map(f = fun_method, scenario, simul_no)
     results <- do.call(rbind, results)
@@ -54,11 +54,13 @@ fun_analysis <- function(fun_method) {
 
 # Compute results across all scenarios for a specific method,
 # with optional caching.
-compute_results <- function(scenarios, analyze, cache = NULL) {
+compute_results <- function(scenarios,
+                            analyze,
+                            cache = NULL,
+                            scenario_no = as.character(seq_along(scenarios))) {
   assert_list(scenarios)
   assert_function(analyze)
   assert_string(cache, null.ok = TRUE)
-  scenario_no <- seq_along(scenarios)
 
   if (!is.null(cache) && file.exists(cache)) {
     readRDS(cache)
@@ -76,6 +78,56 @@ compute_results <- function(scenarios, analyze, cache = NULL) {
       saveRDS(res, file = cache)
     }
     res
+  }
+}
+
+# Horseshoe method constructor, given the subgroups and covariates to be used
+# it returns the specific horseshoe method.
+# The label is given by the `estimator` string.
+get_horseshoe_method <- function(subgr, covars, estimator) {
+  assert_character(subgr, min.len = 1L)
+  assert_character(covars, min.len = 1L)
+  assert_string(estimator)
+
+  function(df, simul_no) {
+    assert_data_frame(df)
+    assert_count(simul_no)
+    df$arm <- factor(df$arm)
+    model <- bonsaiforest::horseshoe(
+      resp = "tt_pfs",
+      trt = "arm",
+      subgr = subgr,
+      covars = covars,
+      data = df,
+      resptype = "survival",
+      status = "ev_pfs",
+      chains = 1,
+      iter = 2000,
+      warmup = 1000,
+      control = list(adapt_delta = 0.95),
+      seed = 0,
+      backend = "cmdstanr", # Because this enables caching of the compiled Stan binary.
+      silent = 2 # Suppress all messages.
+    )
+    s <- summary(model)
+    rhats <- brms::rhat(model$fit)
+    np <- brms::nuts_params(model$fit)
+    divergent_trans <- sum(subset(np, Parameter == "divergent__")$Value)
+    with(
+      s$estimates,
+      data.frame(
+        simul_no = simul_no,
+        estimator = estimator,
+        subgroup = sanitize_subgroups(subgroup),
+        estimate_ahr = trt.estimate,
+        estimate_log_ahr = log(trt.estimate),
+        lower_ci_ahr = trt.low,
+        upper_ci_ahr = trt.high,
+        min_rhat = min(rhats),
+        max_rhat = max(rhats),
+        divergent_trans = divergent_trans
+      )
+    )
   }
 }
 
