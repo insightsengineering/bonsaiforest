@@ -63,11 +63,11 @@ summary(subset(horseshoe_2_20_results, select = diag_cols))
 
 # Afterwards discard these columns, such that we can row bind with the other results.
 horseshoe_2_3_results <- horseshoe_2_3_results |>
-  select(- any_of(diag_cols))
+  select(-any_of(diag_cols))
 horseshoe_2_9_results <- horseshoe_2_9_results |>
-  select(- any_of(diag_cols))
+  select(-any_of(diag_cols))
 horseshoe_2_20_results <- horseshoe_2_20_results |>
-  select(- any_of(diag_cols)) |>
+  select(-any_of(diag_cols)) |>
   filter(subgroup %in% all_subgroups)
 
 # Combine analysis results and scenario properties ----
