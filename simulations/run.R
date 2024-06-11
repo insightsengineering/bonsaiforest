@@ -52,21 +52,21 @@ source("truth.R") # takes about an hour.
 ## Additional analyses as described in section 3.5 ----
 source("horseshoe_2_3.R")
 source("horseshoe_2_9.R")
-source("horseshoe_2_20.R")
+source("horseshoe_2_50.R")
 
 # Investigate convergence in these.
 diag_cols <- c("min_rhat", "max_rhat", "divergent_trans")
 
 summary(subset(horseshoe_2_3_results, select = diag_cols))
 summary(subset(horseshoe_2_9_results, select = diag_cols))
-summary(subset(horseshoe_2_20_results, select = diag_cols))
+summary(subset(horseshoe_2_50_results, select = diag_cols))
 
 # Afterwards discard these columns, such that we can row bind with the other results.
 horseshoe_2_3_results <- horseshoe_2_3_results |>
   select(-any_of(diag_cols))
 horseshoe_2_9_results <- horseshoe_2_9_results |>
   select(-any_of(diag_cols))
-horseshoe_2_20_results <- horseshoe_2_20_results |>
+horseshoe_2_50_results <- horseshoe_2_50_results |>
   select(-any_of(diag_cols)) |>
   filter(subgroup %in% all_subgroups)
 
@@ -81,7 +81,7 @@ results <- rbind(
   horseshoe_results,
   horseshoe_2_3_results,
   horseshoe_2_9_results,
-  horseshoe_2_20_results
+  horseshoe_2_50_results
 ) |>
   full_join(scenario_properties, by = c("scenario_no", "subgroup"))
 

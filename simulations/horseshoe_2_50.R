@@ -17,11 +17,11 @@ horseshoe_20 <- get_horseshoe_method(
 horseshoe_20_analysis <- fun_analysis(horseshoe_20)
 
 # Results only for scenario 2_20.
-horseshoe_2_20_results <- compute_results(
+horseshoe_2_50_results <- compute_results(
   scenario_2_20,
   # Note: We call it 2 here, because we need to join in with the properties later.
   scenario_no = "2",
   analyze = horseshoe_20_analysis,
-  cache = "results/horseshoe_2_20.rds"
+  cache = "results/horseshoe_2_50.rds"
 )
-horseshoe_2_20_results
+horseshoe_2_50_results
