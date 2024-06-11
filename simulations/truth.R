@@ -158,7 +158,7 @@ scenario_properties <- simul_parameter$true_subgroup_ahr |>
     ids = all_scenarios
   ) |>
   dplyr::mutate(
-    scenario_no = as.numeric(scenario),
+    scenario_no = scenario,
     subgroup = sanitize_subgroups(subgroup)
   )
 head(scenario_properties)
