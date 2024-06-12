@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version-last-release/bonsaiforest)](https://www.r-pkg.org/badges/version-last-release/bonsaiforest)
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/bonsaiforest)](https://cranlogs.r-pkg.org/badges/bonsaiforest)
 [![CRAN total downloads](https://cranlogs.r-pkg.org/badges/grand-total/bonsaiforest)](https://cranlogs.r-pkg.org/badges/grand-total/bonsaiforest)
-[![Code Coverage](https://raw.githubusercontent.com/openpharma/bonsaiforest/_xml_coverage_reports/data/main/badge.svg)](https://raw.githubusercontent.com/openpharma/bonsaiforest/_xml_coverage_reports/data/main/coverage.xml)
+[![Code Coverage](https://raw.githubusercontent.com/openpharma/bonsaiforest/_xml_coverage_reports/data/main/badge.svg)](https://openpharma.github.io/bonsaiforest/latest-tag/coverage-report/)
 <!-- badges: end -->
 
 Subgroup analyses are routinely performed in clinical trial
@@ -47,7 +47,7 @@ remotes::install_github("insightsengineering/bonsaiforest")
 
 See the [introductory vignette](https://insightsengineering.github.io/bonsaiforest/main/articles/introduction.html) or get started by trying out the example:
 
-```{r, eval = FALSE, echo = TRUE}
+```{r}
 library(bonsaiforest)
 str(example_data)
 
@@ -68,4 +68,3 @@ summary_horseshoe
 
 plot(summary_horseshoe)
 ```
-

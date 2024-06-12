@@ -19,11 +19,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
+\strong{Maintainer}: Isaac Gravestock \email{isaac.gravestock@roche.com}
 
 Authors:
 \itemize{
   \item Mar Vazquez Rabunal \email{mar.vazquez_rabunal@roche.com}
+  \item Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
+  \item Marcel Wolbers \email{marcel.wolbers@roche.com}
 }
 
 Other contributors:

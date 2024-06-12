@@ -1,11 +1,13 @@
 Type: Package
 Package: bonsaiforest
 Title: Shrinkage Based Forest Plots
-Version: 0.0.0.9037
-Date: 2024-06-05
+Version: 0.1.0
+Date: 2024-06-12
 Authors@R: c(
     person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = "aut"),
-    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = c("aut", "cre")),
+    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = "aut"),
+    person("Marcel", "Wolbers", , "marcel.wolbers@roche.com", role = "aut"),
+    person("Isaac", "Gravestock", , "isaac.gravestock@roche.com", role = "cre"),
     person("F. Hoffmann-La Roche AG", role = c("cph", "fnd"))
   )
 Description: Subgroup analyses are routinely performed in clinical trial
