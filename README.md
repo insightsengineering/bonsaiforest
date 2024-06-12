@@ -23,8 +23,16 @@ Subgroup analyses are routinely performed in clinical trial analyses.
 From a methodological perspective, two key issues of subgroup analyses
 are multiplicity (even if only predefined subgroups are investigated)
 and the low sample sizes of subgroups which lead to highly variable
-estimates. `bonsaiforest` implements subgroup estimates based on
-Bayesian shrinkage priors, as well as penalized likelihood inference.
+estimates, see e.g.  [Yusuf et al
+(1991)](https://doi.org/10.1001/jama.1991.03470010097038). This package
+implements subgroup estimates based on Bayesian shrinkage priors, see
+[Carvalho et al
+(2019)](https://proceedings.mlr.press/v5/carvalho09a.html). In addition,
+estimates based on penalized likelihood inference are available, based
+on [Simon et al (2011)](https://doi.org/10.18637/jss.v039.i05). The
+corresponding shrinkage based forest plots address the aforementioned
+issues and can complement standard forest plots in practical clinical
+trial analyses.
 
 ## Installation
 
@@ -93,8 +101,8 @@ horseshoe_model <- horseshoe(
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 0.000232 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.32 seconds.
+#> Chain 1: Gradient evaluation took 0.000253 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.53 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -111,15 +119,15 @@ horseshoe_model <- horseshoe(
 #> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 9.893 seconds (Warm-up)
-#> Chain 1:                7.807 seconds (Sampling)
-#> Chain 1:                17.7 seconds (Total)
+#> Chain 1:  Elapsed Time: 9.937 seconds (Warm-up)
+#> Chain 1:                7.971 seconds (Sampling)
+#> Chain 1:                17.908 seconds (Total)
 #> Chain 1: 
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
 #> Chain 2: 
-#> Chain 2: Gradient evaluation took 0.00013 seconds
-#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.3 seconds.
+#> Chain 2: Gradient evaluation took 0.000122 seconds
+#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.22 seconds.
 #> Chain 2: Adjust your expectations accordingly!
 #> Chain 2: 
 #> Chain 2: 
@@ -136,9 +144,9 @@ horseshoe_model <- horseshoe(
 #> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 2: 
-#> Chain 2:  Elapsed Time: 9.912 seconds (Warm-up)
-#> Chain 2:                6.929 seconds (Sampling)
-#> Chain 2:                16.841 seconds (Total)
+#> Chain 2:  Elapsed Time: 10.027 seconds (Warm-up)
+#> Chain 2:                7.019 seconds (Sampling)
+#> Chain 2:                17.046 seconds (Total)
 #> Chain 2:
 #> Warning: There were 1 divergent transitions after warmup. See
 #> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
