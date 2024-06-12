@@ -25,3 +25,4 @@ images
 ^\.gitleaksignore$
 ^README\.Rmd$
 ^simulations$
+^\.yamllint$
