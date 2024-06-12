@@ -19,7 +19,7 @@
 #' @export
 #'
 #' @examples
-#' trt_horseshoe(horseshoe_fit_surv, m = 5)
+#' trt_horseshoe(horseshoe_fit_surv, m = 1)
 trt_horseshoe <- function(object, gamma = 1, l = NULL, m = 50) {
   assert_class(object, c("bonsaiforest", "horseshoe"))
   assert_int(m)
