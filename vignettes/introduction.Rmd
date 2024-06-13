@@ -24,8 +24,7 @@ library(bonsaiforest)
 
 In this vignette we are going to show with an example how to use this package. 
 
-We are going to consider a data set with time to event data and 10 categorical covariates. These categorical covariates define 25 subgroups. We are interested in estimating the subgroup treatment effect (in this case the subgroup hazard ratio) of each one of these 25 subgroups. To do so we are going to use all the methods available in this package and we are going to compare their results using a forest plot. 
-
+We are going to consider a data set with time to event data and 10 categorical covariates. These categorical covariates define 25 subgroups. We are interested in estimating the subgroup treatment effect (in this case the subgroup hazard ratio) of each one of these 25 subgroups. Here we will show an example where we only use 2 categorical covariates in order to save run time. To do so we are going to use all the methods available in this package and we are going to compare their results using a forest plot. 
 
 ## Data analysis
 
@@ -49,17 +48,20 @@ We have that `arm` is our treatment variable, `x_1` to `x_10` are the categorica
 
 Once that we are sure that our data is in the correct format and contains all the necessary variables, we are going to fit the different models in order to obtain the subgroup treatment effects.
 
-
-
 ## Fit Models and Check Summary
-
 
 ### Naivepop
 
 Let's start by fitting the model that will lead to an overall treatment effect estimation.
 
 ```{r}
-naivepop_model <- naivepop(resp = "tt_pfs", trt = "arm", data = example_data, resptype = "survival", status = "ev_pfs")
+naivepop_model <- naivepop(
+  resp = "tt_pfs", 
+  trt = "arm", 
+  data = example_data, 
+  resptype = "survival", 
+  status = "ev_pfs"
+)
 ```
 
 This new `naivepop` object contains the fitted model, the kind of model that was fitted, the response type of the data and the data.
@@ -74,12 +76,12 @@ summary_naivepop
 
 ### Naive
 
-Now we are going to fit the model to obtain the naive subgroup-specific treatment effects. We have to indicate which categorical variables we want to consider to obtain the subgroup treatment effects. If we add variable `x_1` we are going to obtain the subgroup treatment effect of the subgroups `x_1a` and `x_1b`.
+Now we are going to fit the model to obtain the naive subgroup-specific treatment effects. We have to indicate which categorical variables we want to consider to obtain the subgroup treatment effects. If we add variable `x_1` we are going to obtain the subgroup treatment effect of the subgroups `x_1a` and `x_1b`. We do the same for `x_2`.
 
 ```{r}
 naive_model <- naive(
   resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
+  subgr = c("x_1", "x_2"),
   data = example_data, resptype = "survival",
   status = "ev_pfs"
 )
@@ -100,7 +102,6 @@ We can add a forest plot with the estimated treatment effects:
 plot(summary_naive)
 ```
 
-
 ### Elastic Net
 
 We are going to fit a model considering an elastic net penalization on the subgroup treatment interaction coefficients. Depending on the value of `alpha` we are going to have different kinds of penalties. If we put `alpha` to 0 we consider a ridge penalty and if we put `alpha` to 1 we consider a lasso penalty. We are going to fit both lasso and ridge.
@@ -110,7 +111,7 @@ We have to add the `covars` argument which indicates which categorical variables
 ```{r}
 ridge_model <- elastic_net(
   resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
+  subgr = c("x_1", "x_2"),
   covars = c(
     "x_1", "x_2", "x_3", "x_4", "x_5",
     "x_6", "x_7", "x_8", "x_9", "x_10"
@@ -121,7 +122,7 @@ ridge_model <- elastic_net(
 
 lasso_model <- elastic_net(
   resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
+  subgr = c("x_1", "x_2"),
   covars = c(
     "x_1", "x_2", "x_3", "x_4", "x_5",
     "x_6", "x_7", "x_8", "x_9", "x_10"
@@ -149,15 +150,14 @@ plot(summary_ridge)
 plot(summary_lasso)
 ```
 
-
 ### Horseshoe model
 
 We are now going to fit a Bayesian model with a horseshoe prior on the subgroup-treatment interactions. Fitting this kind of models usually takes a bit of time. We can modify some parameters like the number of Markov chains, the number of iterations or the number of warmup iterations (between others). The parameters that we can change are found in the documentation of the `brm` function from the brms package.
 
-```{r}
+```{r eval=FALSE, echo=TRUE}
 horseshoe_model <- horseshoe(
   resp = "tt_pfs", trt = "arm",
-  subgr = c("x_1", "x_2", "x_3", "x_4"),
+  subgr = c("x_1", "x_2"),
   covars = c(
     "x_1", "x_2", "x_3", "x_4", "x_5",
     "x_6", "x_7", "x_8", "x_9", "x_10"
@@ -167,8 +167,13 @@ horseshoe_model <- horseshoe(
   control = list(adapt_delta = 0.95)
 )
 ```
+```{r echo=FALSE}
+# Load the saved object from the package to save 
+# compilation time for this vignette.
+horseshoe_model <- horseshoe_fit_surv
+```
 
-Once that the model is fitted we have to check if there are convergence problems. In this case we obtained 3 divergent transitions after warmup. In general if there are few divergent transitions (taking into account the total number of iterations, in this case 2000 after warmup) and there are no other problems like high Rhats we can continue with our analysis. This is what happens in our example: we have 3 divergent transitions after warmup out of 2000 and there are no other problems.
+Once that the model is fitted we have to check if there are convergence problems. We might get divergent transitions after warmup. In general if there are few divergent transitions (taking into account the total number of iterations) and there are no other problems like high `Rhat` values we can continue with our analysis. 
 
 We can obtain a summary of the posterior distributions of the coefficients of the fitted model:
 
