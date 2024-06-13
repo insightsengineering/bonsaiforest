@@ -56,10 +56,10 @@ Let's start by fitting the model that will lead to an overall treatment effect e
 
 ```{r}
 naivepop_model <- naivepop(
-  resp = "tt_pfs", 
-  trt = "arm", 
-  data = example_data, 
-  resptype = "survival", 
+  resp = "tt_pfs",
+  trt = "arm",
+  data = example_data,
+  resptype = "survival",
   status = "ev_pfs"
 )
 ```
@@ -168,7 +168,7 @@ horseshoe_model <- horseshoe(
 )
 ```
 ```{r echo=FALSE}
-# Load the saved object from the package to save 
+# Load the saved object from the package to save
 # compilation time for this vignette.
 horseshoe_model <- horseshoe_fit_surv
 ```
