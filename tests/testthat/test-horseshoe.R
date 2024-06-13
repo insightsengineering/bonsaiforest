@@ -48,6 +48,7 @@ test_that("horseshoe outputs the right elements for survival", {
 })
 
 test_that("horseshoe outputs the right elements for binary", {
+  skip_on_cran() # To save time.
   result <- suppressWarnings(horseshoe("ev_pfs", "arm", c("x_1", "x_3"),
     c("x_1", "x_2", "x_3"), example_data,
     "binary",
