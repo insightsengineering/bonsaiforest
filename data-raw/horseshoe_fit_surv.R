@@ -10,7 +10,9 @@ horseshoe_fit_surv <- horseshoe(
   resptype = "survival",
   status = "ev_pfs",
   seed = 0,
+  chains = 2,
+  iter = 1000,
+  warmup = 800,
   control = list(adapt_delta = 0.95)
 )
-
 usethis::use_data(horseshoe_fit_surv, compress = "xz", overwrite = TRUE)

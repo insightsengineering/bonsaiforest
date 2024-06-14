@@ -162,8 +162,13 @@ horseshoe_model <- horseshoe(
     "x_1", "x_2", "x_3", "x_4", "x_5",
     "x_6", "x_7", "x_8", "x_9", "x_10"
   ),
-  data = example_data, resptype = "survival",
-  status = "ev_pfs", chains = 2, seed = 0,
+  data = example_data, 
+  resptype = "survival",
+  status = "ev_pfs", 
+  chains = 2, 
+  seed = 0,
+  iter = 1000,
+  warmup = 800,
   control = list(adapt_delta = 0.95)
 )
 ```
