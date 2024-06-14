@@ -1,9 +1,9 @@
 test_that("trt_horseshoe outputs the right element for survival", {
-  result <- trt_horseshoe(horseshoe_fit_surv)[, c(1, 1800)]
+  result <- trt_horseshoe(horseshoe_fit_surv)[, c(1, 401)]
   expect_data_frame(result, ncols = 2L, nrows = 4L)
-  expect_named(result, c("subgroup", "trt.estimate.1799"))
+  expect_named(result, c("subgroup", "trt.estimate.400"))
   expect_identical(result$subgroup, horseshoe_fit_surv$subgr_names)
-  expect_numeric(result$trt.estimate.1799, finite = TRUE)
+  expect_numeric(result$trt.estimate.400, finite = TRUE)
 })
 
 test_that("trt_horseshoe outputs the right element for binary", {
