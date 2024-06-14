@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coverage SYSTEM "https://raw.githubusercontent.com/cobertura/cobertura/master/cobertura/src/site/htdocs/xml/coverage-04.dtd">
-<coverage line-rate="0.94833524684271" branch-rate="0" lines-covered="826" lines-valid="871" branches-covered="0" branches-valid="0" complexity="0" version="3.6.4" timestamp="2024-06-13 15:05:13.102328">
+<coverage line-rate="0.94833524684271" branch-rate="0" lines-covered="826" lines-valid="871" branches-covered="0" branches-valid="0" complexity="0" version="3.6.4" timestamp="2024-06-14 08:23:59.461119">
   <sources>
     <source>/__w/bonsaiforest/bonsaiforest/bonsaiforest</source>
   </sources>
@@ -1950,12 +1950,12 @@
           <lines>
             <line number="5" hits="229" branch="false"/>
             <line number="6" hits="229" branch="false"/>
-            <line number="7" hits="96434" branch="false"/>
-            <line number="8" hits="384820" branch="false"/>
-            <line number="9" hits="96205" branch="false"/>
-            <line number="10" hits="96205" branch="false"/>
-            <line number="11" hits="96205" branch="false"/>
-            <line number="12" hits="96205" branch="false"/>
+            <line number="7" hits="10034" branch="false"/>
+            <line number="8" hits="39220" branch="false"/>
+            <line number="9" hits="9805" branch="false"/>
+            <line number="10" hits="9805" branch="false"/>
+            <line number="11" hits="9805" branch="false"/>
+            <line number="12" hits="9805" branch="false"/>
             <line number="13" hits="458" branch="false"/>
             <line number="14" hits="229" branch="false"/>
           </lines>
