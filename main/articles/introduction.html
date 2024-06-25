@@ -38,7 +38,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">bonsaiforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,12 +61,6 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/bonsaiforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -111,9 +105,10 @@ package.</p>
 categorical covariates. These categorical covariates define 25
 subgroups. We are interested in estimating the subgroup treatment effect
 (in this case the subgroup hazard ratio) of each one of these 25
-subgroups. To do so we are going to use all the methods available in
-this package and we are going to compare their results using a forest
-plot.</p>
+subgroups. Here we will show an example where we only use 2 categorical
+covariates in order to save run time. To do so we are going to use all
+the methods available in this package and we are going to compare their
+results using a forest plot.</p>
 </div>
 <div class="section level2">
 <h2 id="data-analysis">Data analysis<a class="anchor" aria-label="anchor" href="#data-analysis"></a>
@@ -171,7 +166,13 @@ models in order to obtain the subgroup treatment effects.</p>
 <p>Let’s start by fitting the model that will lead to an overall
 treatment effect estimation.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">naivepop_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/naivepop.html">naivepop</a></span><span class="op">(</span>resp <span class="op">=</span> <span class="st">"tt_pfs"</span>, trt <span class="op">=</span> <span class="st">"arm"</span>, data <span class="op">=</span> <span class="va">example_data</span>, resptype <span class="op">=</span> <span class="st">"survival"</span>, status <span class="op">=</span> <span class="st">"ev_pfs"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">naivepop_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/naivepop.html">naivepop</a></span><span class="op">(</span></span>
+<span>  resp <span class="op">=</span> <span class="st">"tt_pfs"</span>,</span>
+<span>  trt <span class="op">=</span> <span class="st">"arm"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">example_data</span>,</span>
+<span>  resptype <span class="op">=</span> <span class="st">"survival"</span>,</span>
+<span>  status <span class="op">=</span> <span class="st">"ev_pfs"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>This new <code>naivepop</code> object contains the fitted model, the
 kind of model that was fitted, the response type of the data and the
 data.</p>
@@ -191,11 +192,11 @@ subgroup-specific treatment effects. We have to indicate which
 categorical variables we want to consider to obtain the subgroup
 treatment effects. If we add variable <code>x_1</code> we are going to
 obtain the subgroup treatment effect of the subgroups <code>x_1a</code>
-and <code>x_1b</code>.</p>
+and <code>x_1b</code>. We do the same for <code>x_2</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">naive_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/naive.html">naive</a></span><span class="op">(</span></span>
 <span>  resp <span class="op">=</span> <span class="st">"tt_pfs"</span>, trt <span class="op">=</span> <span class="st">"arm"</span>,</span>
-<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span>, <span class="st">"x_3"</span>, <span class="st">"x_4"</span><span class="op">)</span>,</span>
+<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="va">example_data</span>, resptype <span class="op">=</span> <span class="st">"survival"</span>,</span>
 <span>  status <span class="op">=</span> <span class="st">"ev_pfs"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -214,12 +215,7 @@ effect estimates. By default this confidence level is of 95%.</p>
 <span><span class="co">#&gt; 1     x_1a    0.6741880 0.4975147 0.9135999</span></span>
 <span><span class="co">#&gt; 2     x_1b    0.6645867 0.4936858 0.8946489</span></span>
 <span><span class="co">#&gt; 3     x_2a    0.7087873 0.5060265 0.9927928</span></span>
-<span><span class="co">#&gt; 4     x_2b    0.6424496 0.4886396 0.8446746</span></span>
-<span><span class="co">#&gt; 5     x_3a    0.5054825 0.3265821 0.7823840</span></span>
-<span><span class="co">#&gt; 6     x_3b    0.7168399 0.5621416 0.9141103</span></span>
-<span><span class="co">#&gt; 7     x_4a    0.6213593 0.4413407 0.8748057</span></span>
-<span><span class="co">#&gt; 8     x_4b    0.5428680 0.3640585 0.8095008</span></span>
-<span><span class="co">#&gt; 9     x_4c    0.8575696 0.5892299 1.2481132</span></span></code></pre></div>
+<span><span class="co">#&gt; 4     x_2b    0.6424496 0.4886396 0.8446746</span></span></code></pre></div>
 <p>We can add a forest plot with the estimated treatment effects:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">summary_naive</span><span class="op">)</span></span></code></pre></div>
@@ -242,7 +238,7 @@ then only find the subgroup treatment effect of some of them.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ridge_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/elastic_net.html">elastic_net</a></span><span class="op">(</span></span>
 <span>  resp <span class="op">=</span> <span class="st">"tt_pfs"</span>, trt <span class="op">=</span> <span class="st">"arm"</span>,</span>
-<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span>, <span class="st">"x_3"</span>, <span class="st">"x_4"</span><span class="op">)</span>,</span>
+<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span><span class="op">)</span>,</span>
 <span>  covars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"x_1"</span>, <span class="st">"x_2"</span>, <span class="st">"x_3"</span>, <span class="st">"x_4"</span>, <span class="st">"x_5"</span>,</span>
 <span>    <span class="st">"x_6"</span>, <span class="st">"x_7"</span>, <span class="st">"x_8"</span>, <span class="st">"x_9"</span>, <span class="st">"x_10"</span></span>
@@ -253,7 +249,7 @@ then only find the subgroup treatment effect of some of them.</p>
 <span></span>
 <span><span class="va">lasso_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/elastic_net.html">elastic_net</a></span><span class="op">(</span></span>
 <span>  resp <span class="op">=</span> <span class="st">"tt_pfs"</span>, trt <span class="op">=</span> <span class="st">"arm"</span>,</span>
-<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span>, <span class="st">"x_3"</span>, <span class="st">"x_4"</span><span class="op">)</span>,</span>
+<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span><span class="op">)</span>,</span>
 <span>  covars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"x_1"</span>, <span class="st">"x_2"</span>, <span class="st">"x_3"</span>, <span class="st">"x_4"</span>, <span class="st">"x_5"</span>,</span>
 <span>    <span class="st">"x_6"</span>, <span class="st">"x_7"</span>, <span class="st">"x_8"</span>, <span class="st">"x_9"</span>, <span class="st">"x_10"</span></span>
@@ -275,12 +271,7 @@ find the subgroup hazard ratio estimates.</p>
 <span><span class="co">#&gt; 1     x_1a    0.6502065</span></span>
 <span><span class="co">#&gt; 2     x_1b    0.6493804</span></span>
 <span><span class="co">#&gt; 3     x_2a    0.6495783</span></span>
-<span><span class="co">#&gt; 4     x_2b    0.6501798</span></span>
-<span><span class="co">#&gt; 5     x_3a    0.6487013</span></span>
-<span><span class="co">#&gt; 6     x_3b    0.6493782</span></span>
-<span><span class="co">#&gt; 7     x_4a    0.6471145</span></span>
-<span><span class="co">#&gt; 8     x_4b    0.6465158</span></span>
-<span><span class="co">#&gt; 9     x_4c    0.6474843</span></span></code></pre></div>
+<span><span class="co">#&gt; 4     x_2b    0.6501798</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_lasso</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lasso_model</span><span class="op">)</span></span>
 <span><span class="va">summary_lasso</span></span>
@@ -288,12 +279,7 @@ find the subgroup hazard ratio estimates.</p>
 <span><span class="co">#&gt; 1     x_1a    0.6500483</span></span>
 <span><span class="co">#&gt; 2     x_1b    0.6493824</span></span>
 <span><span class="co">#&gt; 3     x_2a    0.6493749</span></span>
-<span><span class="co">#&gt; 4     x_2b    0.6501893</span></span>
-<span><span class="co">#&gt; 5     x_3a    0.6497598</span></span>
-<span><span class="co">#&gt; 6     x_3b    0.6489794</span></span>
-<span><span class="co">#&gt; 7     x_4a    0.6474298</span></span>
-<span><span class="co">#&gt; 8     x_4b    0.6467309</span></span>
-<span><span class="co">#&gt; 9     x_4c    0.6467375</span></span></code></pre></div>
+<span><span class="co">#&gt; 4     x_2b    0.6501893</span></span></code></pre></div>
 <p>We can obtain a forest plot for each one of these fitted models:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">summary_ridge</span><span class="op">)</span></span></code></pre></div>
@@ -315,152 +301,82 @@ package.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">horseshoe_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/horseshoe.html">horseshoe</a></span><span class="op">(</span></span>
 <span>  resp <span class="op">=</span> <span class="st">"tt_pfs"</span>, trt <span class="op">=</span> <span class="st">"arm"</span>,</span>
-<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span>, <span class="st">"x_3"</span>, <span class="st">"x_4"</span><span class="op">)</span>,</span>
+<span>  subgr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x_1"</span>, <span class="st">"x_2"</span><span class="op">)</span>,</span>
 <span>  covars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"x_1"</span>, <span class="st">"x_2"</span>, <span class="st">"x_3"</span>, <span class="st">"x_4"</span>, <span class="st">"x_5"</span>,</span>
 <span>    <span class="st">"x_6"</span>, <span class="st">"x_7"</span>, <span class="st">"x_8"</span>, <span class="st">"x_9"</span>, <span class="st">"x_10"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  data <span class="op">=</span> <span class="va">example_data</span>, resptype <span class="op">=</span> <span class="st">"survival"</span>,</span>
-<span>  status <span class="op">=</span> <span class="st">"ev_pfs"</span>, chains <span class="op">=</span> <span class="fl">2</span>, seed <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">example_data</span>,</span>
+<span>  resptype <span class="op">=</span> <span class="st">"survival"</span>,</span>
+<span>  status <span class="op">=</span> <span class="st">"ev_pfs"</span>,</span>
+<span>  chains <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  iter <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  warmup <span class="op">=</span> <span class="fl">800</span>,</span>
 <span>  control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Compiling Stan program...</span></span>
-<span><span class="co">#&gt; Trying to compile a simple C file</span></span>
-<span><span class="co">#&gt; Running /usr/local/lib/R/bin/R CMD SHLIB foo.c</span></span>
-<span><span class="co">#&gt; using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’</span></span>
-<span><span class="co">#&gt; gcc -I"/usr/local/lib/R/include" -DNDEBUG   -I"/usr/local/lib/R/site-library/Rcpp/include/"  -I"/usr/local/lib/R/site-library/RcppEigen/include/"  -I"/usr/local/lib/R/site-library/RcppEigen/include/unsupported"  -I"/usr/local/lib/R/site-library/BH/include" -I"/usr/local/lib/R/site-library/StanHeaders/include/src/"  -I"/usr/local/lib/R/site-library/StanHeaders/include/"  -I"/usr/local/lib/R/site-library/RcppParallel/include/"  -I"/usr/local/lib/R/site-library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/usr/local/lib/R/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/include    -fpic  -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c foo.c -o foo.o</span></span>
-<span><span class="co">#&gt; In file included from /usr/local/lib/R/site-library/RcppEigen/include/Eigen/Core:19,</span></span>
-<span><span class="co">#&gt;                  from /usr/local/lib/R/site-library/RcppEigen/include/Eigen/Dense:1,</span></span>
-<span><span class="co">#&gt;                  from /usr/local/lib/R/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22,</span></span>
-<span><span class="co">#&gt;                  from &lt;command-line&gt;:</span></span>
-<span><span class="co">#&gt; /usr/local/lib/R/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: cmath: No such file or directory</span></span>
-<span><span class="co">#&gt;   679 | #include &lt;cmath&gt;</span></span>
-<span><span class="co">#&gt;       |          ^~~~~~~</span></span>
-<span><span class="co">#&gt; compilation terminated.</span></span>
-<span><span class="co">#&gt; make: *** [/usr/local/lib/R/etc/Makeconf:195: foo.o] Error 1</span></span>
-<span><span class="co">#&gt; Start sampling</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).</span></span>
-<span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1: Gradient evaluation took 0.000461 seconds</span></span>
-<span><span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 4.61 seconds.</span></span>
-<span><span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span></span>
-<span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1:  Elapsed Time: 32.442 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 1:                22.2 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1:                54.642 seconds (Total)</span></span>
-<span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).</span></span>
-<span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2: Gradient evaluation took 0.000355 seconds</span></span>
-<span><span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 3.55 seconds.</span></span>
-<span><span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span></span>
-<span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2:  Elapsed Time: 33.574 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 2:                22.365 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2:                55.939 seconds (Total)</span></span>
-<span><span class="co">#&gt; Chain 2:</span></span>
-<span><span class="co">#&gt; Warning: There were 3 divergent transitions after warmup. See</span></span>
-<span><span class="co">#&gt; https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></span>
-<span><span class="co">#&gt; to find out why this is a problem and how to eliminate them.</span></span>
-<span><span class="co">#&gt; Warning: Examine the pairs() plot to diagnose sampling problems</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Once that the model is fitted we have to check if there are
-convergence problems. In this case we obtained 3 divergent transitions
-after warmup. In general if there are few divergent transitions (taking
-into account the total number of iterations, in this case 2000 after
-warmup) and there are no other problems like high Rhats we can continue
-with our analysis. This is what happens in our example: we have 3
-divergent transitions after warmup out of 2000 and there are no other
-problems.</p>
+convergence problems. We might get divergent transitions after warmup.
+In general if there are few divergent transitions (taking into account
+the total number of iterations) and there are no other problems like
+high <code>Rhat</code> values we can continue with our analysis.</p>
 <p>We can obtain a summary of the posterior distributions of the
 coefficients of the fitted model:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">horseshoe_model</span><span class="op">$</span><span class="va">fit</span></span>
-<span><span class="co">#&gt; Warning: There were 3 divergent transitions after warmup. Increasing</span></span>
-<span><span class="co">#&gt; adapt_delta above 0.95 may help. See</span></span>
-<span><span class="co">#&gt; http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></span>
 <span><span class="co">#&gt;  Family: cox </span></span>
 <span><span class="co">#&gt;   Links: mu = log </span></span>
 <span><span class="co">#&gt; Formula: tt_pfs | cens(1 - ev_pfs) ~ a + b </span></span>
 <span><span class="co">#&gt;          a ~ 0 + arm0 + arm1 + x_1b + x_2b + x_3b + x_4b + x_4c + x_5b + x_5c + x_5d + x_6b + x_7b + x_8b + x_8c + x_9b + x_10b + x_10c</span></span>
 <span><span class="co">#&gt;          b ~ 0 + x_1a_arm + x_1b_arm + x_2a_arm + x_2b_arm + x_3a_arm + x_3b_arm + x_4a_arm + x_4b_arm + x_4c_arm + x_5a_arm + x_5b_arm + x_5c_arm + x_5d_arm + x_6a_arm + x_6b_arm + x_7a_arm + x_7b_arm + x_8a_arm + x_8b_arm + x_8c_arm + x_9a_arm + x_9b_arm + x_10a_arm + x_10b_arm + x_10c_arm</span></span>
 <span><span class="co">#&gt;    Data: data_model (Number of observations: 1000) </span></span>
-<span><span class="co">#&gt;   Draws: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;</span></span>
-<span><span class="co">#&gt;          total post-warmup draws = 2000</span></span>
+<span><span class="co">#&gt;   Draws: 2 chains, each with iter = 1000; warmup = 800; thin = 1;</span></span>
+<span><span class="co">#&gt;          total post-warmup draws = 400</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Regression Coefficients:</span></span>
 <span><span class="co">#&gt;             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS</span></span>
-<span><span class="co">#&gt; a_arm0         -0.28      0.38    -1.02     0.43 1.00      903     1204</span></span>
-<span><span class="co">#&gt; a_arm1         -0.78      0.46    -1.78     0.04 1.00      837      969</span></span>
-<span><span class="co">#&gt; a_x_1b         -0.07      0.13    -0.33     0.19 1.00     2836     1686</span></span>
-<span><span class="co">#&gt; a_x_2b          0.06      0.14    -0.22     0.34 1.00     2998     1297</span></span>
-<span><span class="co">#&gt; a_x_3b         -0.30      0.17    -0.66     0.03 1.00     1982     1115</span></span>
-<span><span class="co">#&gt; a_x_4b         -0.27      0.17    -0.59     0.06 1.00     1900     1492</span></span>
-<span><span class="co">#&gt; a_x_4c         -0.56      0.18    -0.94    -0.22 1.00     1847     1284</span></span>
-<span><span class="co">#&gt; a_x_5b          0.02      0.26    -0.48     0.55 1.00     1182      898</span></span>
-<span><span class="co">#&gt; a_x_5c         -0.16      0.22    -0.57     0.30 1.00     1017      901</span></span>
-<span><span class="co">#&gt; a_x_5d         -0.25      0.21    -0.64     0.18 1.00      999      909</span></span>
-<span><span class="co">#&gt; a_x_6b          0.20      0.16    -0.10     0.53 1.00     2537     1198</span></span>
-<span><span class="co">#&gt; a_x_7b          0.08      0.16    -0.25     0.37 1.00     2019     1192</span></span>
-<span><span class="co">#&gt; a_x_8b          0.01      0.19    -0.37     0.39 1.00     1875     1479</span></span>
-<span><span class="co">#&gt; a_x_8c         -0.00      0.18    -0.35     0.36 1.00     1838     1205</span></span>
-<span><span class="co">#&gt; a_x_9b          0.09      0.19    -0.27     0.48 1.00     2242     1641</span></span>
-<span><span class="co">#&gt; a_x_10b         0.18      0.20    -0.22     0.56 1.00     1472     1438</span></span>
-<span><span class="co">#&gt; a_x_10c         0.14      0.19    -0.23     0.51 1.00     1396     1416</span></span>
-<span><span class="co">#&gt; b_x_1a_arm      0.00      0.09    -0.19     0.22 1.00     2291     1674</span></span>
-<span><span class="co">#&gt; b_x_1b_arm     -0.00      0.09    -0.21     0.17 1.00     2235     1507</span></span>
-<span><span class="co">#&gt; b_x_2a_arm      0.01      0.09    -0.17     0.25 1.00     1984     1603</span></span>
-<span><span class="co">#&gt; b_x_2b_arm     -0.01      0.09    -0.23     0.15 1.00     2000     1625</span></span>
-<span><span class="co">#&gt; b_x_3a_arm     -0.04      0.13    -0.46     0.11 1.00     1515     1586</span></span>
-<span><span class="co">#&gt; b_x_3b_arm      0.04      0.13    -0.13     0.43 1.01     1661     1440</span></span>
-<span><span class="co">#&gt; b_x_4a_arm     -0.01      0.10    -0.25     0.17 1.00     2127     1503</span></span>
-<span><span class="co">#&gt; b_x_4b_arm     -0.02      0.09    -0.28     0.13 1.00     2151     1469</span></span>
-<span><span class="co">#&gt; b_x_4c_arm      0.04      0.13    -0.11     0.41 1.00     1593     1384</span></span>
-<span><span class="co">#&gt; b_x_5a_arm      0.09      0.21    -0.08     0.76 1.00      945      921</span></span>
-<span><span class="co">#&gt; b_x_5b_arm     -0.07      0.21    -0.72     0.10 1.00     1471     1278</span></span>
-<span><span class="co">#&gt; b_x_5c_arm     -0.01      0.10    -0.26     0.14 1.00     2143     1351</span></span>
-<span><span class="co">#&gt; b_x_5d_arm      0.01      0.09    -0.14     0.25 1.00     2119     1555</span></span>
-<span><span class="co">#&gt; b_x_6a_arm      0.02      0.11    -0.15     0.35 1.00     1671     1208</span></span>
-<span><span class="co">#&gt; b_x_6b_arm     -0.02      0.11    -0.31     0.14 1.00     1952     1494</span></span>
-<span><span class="co">#&gt; b_x_7a_arm     -0.06      0.16    -0.56     0.11 1.00     1181     1125</span></span>
-<span><span class="co">#&gt; b_x_7b_arm      0.05      0.15    -0.10     0.50 1.00     1600     1610</span></span>
-<span><span class="co">#&gt; b_x_8a_arm     -0.02      0.10    -0.29     0.12 1.00     2176     1586</span></span>
-<span><span class="co">#&gt; b_x_8b_arm     -0.02      0.10    -0.31     0.13 1.00     2117     1496</span></span>
-<span><span class="co">#&gt; b_x_8c_arm      0.04      0.12    -0.08     0.39 1.00     1350     1427</span></span>
-<span><span class="co">#&gt; b_x_9a_arm     -0.04      0.16    -0.47     0.13 1.00     1827     1652</span></span>
-<span><span class="co">#&gt; b_x_9b_arm      0.03      0.15    -0.15     0.44 1.00     1592     1122</span></span>
-<span><span class="co">#&gt; b_x_10a_arm     0.00      0.09    -0.19     0.22 1.00     1738     1403</span></span>
-<span><span class="co">#&gt; b_x_10b_arm     0.01      0.09    -0.16     0.23 1.00     2229     1624</span></span>
-<span><span class="co">#&gt; b_x_10c_arm    -0.01      0.10    -0.25     0.19 1.00     2157     1968</span></span>
+<span><span class="co">#&gt; a_arm0         -0.28      0.41    -1.06     0.56 1.04       95      102</span></span>
+<span><span class="co">#&gt; a_arm1         -0.76      0.54    -1.83     0.29 1.03       97      118</span></span>
+<span><span class="co">#&gt; a_x_1b         -0.08      0.15    -0.35     0.18 1.02      347      254</span></span>
+<span><span class="co">#&gt; a_x_2b          0.07      0.13    -0.20     0.32 1.00      531      313</span></span>
+<span><span class="co">#&gt; a_x_3b         -0.32      0.17    -0.64     0.01 1.01      382      270</span></span>
+<span><span class="co">#&gt; a_x_4b         -0.27      0.18    -0.64     0.07 1.00      351      282</span></span>
+<span><span class="co">#&gt; a_x_4c         -0.56      0.19    -0.94    -0.21 1.01      340      270</span></span>
+<span><span class="co">#&gt; a_x_5b          0.04      0.29    -0.44     0.80 1.00      152       88</span></span>
+<span><span class="co">#&gt; a_x_5c         -0.13      0.25    -0.55     0.36 1.01      143       93</span></span>
+<span><span class="co">#&gt; a_x_5d         -0.22      0.23    -0.60     0.30 1.00      137       82</span></span>
+<span><span class="co">#&gt; a_x_6b          0.20      0.15    -0.12     0.51 1.00      313      262</span></span>
+<span><span class="co">#&gt; a_x_7b          0.07      0.16    -0.25     0.35 1.00      332      312</span></span>
+<span><span class="co">#&gt; a_x_8b          0.00      0.20    -0.39     0.37 1.00      289      205</span></span>
+<span><span class="co">#&gt; a_x_8c         -0.01      0.18    -0.36     0.38 1.00      247      130</span></span>
+<span><span class="co">#&gt; a_x_9b          0.10      0.20    -0.27     0.45 1.01      303      237</span></span>
+<span><span class="co">#&gt; a_x_10b         0.18      0.22    -0.24     0.57 1.00      403      365</span></span>
+<span><span class="co">#&gt; a_x_10c         0.15      0.20    -0.23     0.51 1.00      360      299</span></span>
+<span><span class="co">#&gt; b_x_1a_arm     -0.00      0.10    -0.20     0.19 1.00      457      316</span></span>
+<span><span class="co">#&gt; b_x_1b_arm     -0.01      0.11    -0.29     0.20 1.01      473      363</span></span>
+<span><span class="co">#&gt; b_x_2a_arm      0.01      0.09    -0.16     0.25 1.00      325      281</span></span>
+<span><span class="co">#&gt; b_x_2b_arm     -0.01      0.10    -0.27     0.18 1.00      435      215</span></span>
+<span><span class="co">#&gt; b_x_3a_arm     -0.05      0.15    -0.43     0.09 1.02      270      225</span></span>
+<span><span class="co">#&gt; b_x_3b_arm      0.04      0.13    -0.09     0.43 1.01      325      352</span></span>
+<span><span class="co">#&gt; b_x_4a_arm     -0.02      0.10    -0.33     0.16 1.00      381      230</span></span>
+<span><span class="co">#&gt; b_x_4b_arm     -0.02      0.13    -0.35     0.24 1.00      435      367</span></span>
+<span><span class="co">#&gt; b_x_4c_arm      0.04      0.12    -0.10     0.42 1.01      324      255</span></span>
+<span><span class="co">#&gt; b_x_5a_arm      0.10      0.25    -0.10     0.92 1.00      130       94</span></span>
+<span><span class="co">#&gt; b_x_5b_arm     -0.07      0.19    -0.68     0.12 1.01      293      226</span></span>
+<span><span class="co">#&gt; b_x_5c_arm     -0.03      0.10    -0.33     0.13 1.00      453      377</span></span>
+<span><span class="co">#&gt; b_x_5d_arm      0.01      0.10    -0.26     0.22 1.00      515      366</span></span>
+<span><span class="co">#&gt; b_x_6a_arm      0.02      0.11    -0.15     0.30 1.00      412      306</span></span>
+<span><span class="co">#&gt; b_x_6b_arm     -0.03      0.11    -0.35     0.17 1.00      384      315</span></span>
+<span><span class="co">#&gt; b_x_7a_arm     -0.07      0.16    -0.58     0.08 1.01      262      223</span></span>
+<span><span class="co">#&gt; b_x_7b_arm      0.05      0.15    -0.13     0.55 1.01      270      220</span></span>
+<span><span class="co">#&gt; b_x_8a_arm     -0.03      0.11    -0.41     0.13 1.00      420      335</span></span>
+<span><span class="co">#&gt; b_x_8b_arm     -0.01      0.11    -0.28     0.19 1.02      336      317</span></span>
+<span><span class="co">#&gt; b_x_8c_arm      0.04      0.12    -0.10     0.39 1.00      251      249</span></span>
+<span><span class="co">#&gt; b_x_9a_arm     -0.04      0.14    -0.48     0.12 1.01      226      258</span></span>
+<span><span class="co">#&gt; b_x_9b_arm      0.04      0.16    -0.19     0.54 1.01      418      308</span></span>
+<span><span class="co">#&gt; b_x_10a_arm    -0.01      0.10    -0.26     0.22 1.00      440      313</span></span>
+<span><span class="co">#&gt; b_x_10b_arm     0.00      0.08    -0.18     0.20 1.00      249      364</span></span>
+<span><span class="co">#&gt; b_x_10c_arm    -0.02      0.10    -0.28     0.14 1.01      515      341</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS</span></span>
 <span><span class="co">#&gt; and Tail_ESS are effective sample size measures, and Rhat is the potential</span></span>
@@ -479,20 +395,15 @@ effects. The default confidence level is 95%.</p>
 <code class="sourceCode R"><span><span class="va">summary_horseshoe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">horseshoe_model</span>, conf <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
 <span><span class="va">summary_horseshoe</span></span>
 <span><span class="co">#&gt;   subgroup trt.estimate   trt.low  trt.high</span></span>
-<span><span class="co">#&gt; 1     x_1a    0.6576574 0.5232617 0.8265605</span></span>
-<span><span class="co">#&gt; 2     x_1b    0.6499623 0.5154300 0.8136666</span></span>
-<span><span class="co">#&gt; 3     x_2a    0.6561523 0.5180441 0.8398114</span></span>
-<span><span class="co">#&gt; 4     x_2b    0.6489022 0.5232220 0.8116251</span></span>
-<span><span class="co">#&gt; 5     x_3a    0.6294946 0.4489507 0.8017801</span></span>
-<span><span class="co">#&gt; 6     x_3b    0.6618401 0.5296176 0.8282275</span></span>
-<span><span class="co">#&gt; 7     x_4a    0.6419971 0.5027401 0.8117952</span></span>
-<span><span class="co">#&gt; 8     x_4b    0.6420182 0.4921604 0.8156771</span></span>
-<span><span class="co">#&gt; 9     x_4c    0.6643150 0.5312148 0.8878146</span></span></code></pre></div>
+<span><span class="co">#&gt; 1     x_1a    0.6548058 0.5396242 0.8285532</span></span>
+<span><span class="co">#&gt; 2     x_1b    0.6555175 0.5250172 0.7978729</span></span>
+<span><span class="co">#&gt; 3     x_2a    0.6527021 0.5215938 0.8296019</span></span>
+<span><span class="co">#&gt; 4     x_2b    0.6479122 0.5427992 0.7976948</span></span></code></pre></div>
 <p>We can obtain a forest plot with the treatment effect estimates and
 the credible intervals.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">summary_horseshoe</span><span class="op">)</span></span></code></pre></div>
-<p><img src="introduction_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
+<p><img src="introduction_files/figure-html/unnamed-chunk-14-1.png" width="576"></p>
 </div>
 </div>
 <div class="section level2">
@@ -511,38 +422,18 @@ plot all of them in a common forest plot.</p>
 <span><span class="co">#&gt; 2      x_1b    0.6645867 0.4663568 0.9470762                 Naive</span></span>
 <span><span class="co">#&gt; 3      x_2a    0.7087873 0.4743926 1.0589952                 Naive</span></span>
 <span><span class="co">#&gt; 4      x_2b    0.6424496 0.4636818 0.8901394                 Naive</span></span>
-<span><span class="co">#&gt; 5      x_3a    0.5054825 0.3003642 0.8506759                 Naive</span></span>
-<span><span class="co">#&gt; 6      x_3b    0.7168399 0.5365623 0.9576884                 Naive</span></span>
-<span><span class="co">#&gt; 7      x_4a    0.6213593 0.4133445 0.9340571                 Naive</span></span>
-<span><span class="co">#&gt; 8      x_4b    0.5428680 0.3372320 0.8738959                 Naive</span></span>
-<span><span class="co">#&gt; 9      x_4c    0.8575696 0.5483543 1.3411505                 Naive</span></span>
-<span><span class="co">#&gt; 10     x_1a    0.6502065 0.6502065 0.6502065 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 11     x_1b    0.6493804 0.6493804 0.6493804 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 12     x_2a    0.6495783 0.6495783 0.6495783 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 13     x_2b    0.6501798 0.6501798 0.6501798 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 14     x_3a    0.6487013 0.6487013 0.6487013 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 15     x_3b    0.6493782 0.6493782 0.6493782 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 16     x_4a    0.6471145 0.6471145 0.6471145 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 17     x_4b    0.6465158 0.6465158 0.6465158 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 18     x_4c    0.6474843 0.6474843 0.6474843 Elastic net alpha = 0</span></span>
-<span><span class="co">#&gt; 19     x_1a    0.6500483 0.6500483 0.6500483 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 20     x_1b    0.6493824 0.6493824 0.6493824 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 21     x_2a    0.6493749 0.6493749 0.6493749 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 22     x_2b    0.6501893 0.6501893 0.6501893 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 23     x_3a    0.6497598 0.6497598 0.6497598 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 24     x_3b    0.6489794 0.6489794 0.6489794 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 25     x_4a    0.6474298 0.6474298 0.6474298 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 26     x_4b    0.6467309 0.6467309 0.6467309 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 27     x_4c    0.6467375 0.6467375 0.6467375 Elastic net alpha = 1</span></span>
-<span><span class="co">#&gt; 28     x_1a    0.6576574 0.4950766 0.8626731             Horseshoe</span></span>
-<span><span class="co">#&gt; 29     x_1b    0.6499623 0.4911291 0.8453650             Horseshoe</span></span>
-<span><span class="co">#&gt; 30     x_2a    0.6561523 0.4946100 0.8852394             Horseshoe</span></span>
-<span><span class="co">#&gt; 31     x_2b    0.6489022 0.4999330 0.8502635             Horseshoe</span></span>
-<span><span class="co">#&gt; 32     x_3a    0.6294946 0.4097844 0.8344755             Horseshoe</span></span>
-<span><span class="co">#&gt; 33     x_3b    0.6618401 0.5052473 0.8582283             Horseshoe</span></span>
-<span><span class="co">#&gt; 34     x_4a    0.6419971 0.4775875 0.8451303             Horseshoe</span></span>
-<span><span class="co">#&gt; 35     x_4b    0.6420182 0.4648204 0.8520284             Horseshoe</span></span>
-<span><span class="co">#&gt; 36     x_4c    0.6643150 0.5009541 0.9313688             Horseshoe</span></span>
+<span><span class="co">#&gt; 5      x_1a    0.6502065 0.6502065 0.6502065 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 6      x_1b    0.6493804 0.6493804 0.6493804 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 7      x_2a    0.6495783 0.6495783 0.6495783 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 8      x_2b    0.6501798 0.6501798 0.6501798 Elastic net alpha = 0</span></span>
+<span><span class="co">#&gt; 9      x_1a    0.6500483 0.6500483 0.6500483 Elastic net alpha = 1</span></span>
+<span><span class="co">#&gt; 10     x_1b    0.6493824 0.6493824 0.6493824 Elastic net alpha = 1</span></span>
+<span><span class="co">#&gt; 11     x_2a    0.6493749 0.6493749 0.6493749 Elastic net alpha = 1</span></span>
+<span><span class="co">#&gt; 12     x_2b    0.6501893 0.6501893 0.6501893 Elastic net alpha = 1</span></span>
+<span><span class="co">#&gt; 13     x_1a    0.6548058 0.5217772 0.8529706             Horseshoe</span></span>
+<span><span class="co">#&gt; 14     x_1b    0.6555175 0.5070357 0.8349754             Horseshoe</span></span>
+<span><span class="co">#&gt; 15     x_2a    0.6527021 0.5113236 0.9065121             Horseshoe</span></span>
+<span><span class="co">#&gt; 16     x_2b    0.6479122 0.5240480 0.8121235             Horseshoe</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $overall_trt</span></span>
 <span><span class="co">#&gt; [1] 0.666919</span></span>
@@ -556,7 +447,7 @@ plot all of them in a common forest plot.</p>
 vertical line indicating the value of the overall hazard ratio.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">comparison_data</span><span class="op">)</span></span></code></pre></div>
-<p><img src="introduction_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
+<p><img src="introduction_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
 <p>In the case of having survival data the procedure would be analogous
 but instead of having survival <code>resptype</code> we would have
 binary. Also the response variable should be a numeric variable with 1
@@ -569,7 +460,7 @@ and 0 and there would be no status variable.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Mar Vazquez Rabunal, Daniel Sabanés Bové, F. Hoffmann-La Roche AG.</p>
+  <p>Developed by Mar Vazquez Rabunal, Daniel Sabanés Bové, Marcel Wolbers, Isaac Gravestock, F. Hoffmann-La Roche AG.</p>
 </div>
 
 <div class="pkgdown-footer-right">

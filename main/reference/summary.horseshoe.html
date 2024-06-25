@@ -17,7 +17,7 @@ model and a credible interval for them."><meta property="og:image" content="http
     
     <a class="navbar-brand me-2" href="../index.html">bonsaiforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,12 +39,6 @@ model and a credible interval for them."><meta property="og:image" content="http
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/bonsaiforest/main">main</a> </div></li>
-<!-- end dropdown for versions -->
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -128,10 +122,10 @@ effects, a <code>data.frame</code> with the estimated subgroup treatment effect
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">horseshoe_fit_bin</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   subgroup trt.estimate    trt.low   trt.high</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     x_1a   -0.4618632 -0.7699104 -0.1485358</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     x_1b   -0.4658481 -0.7767086 -0.1475334</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     x_2a   -0.4646208 -0.7938019 -0.1464598</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     x_2b   -0.4607391 -0.7693988 -0.1564056</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     x_1a   -0.4686304 -0.7380710 -0.1427408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     x_1b   -0.4826893 -0.7648132 -0.1354808</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     x_2a   -0.4723894 -0.7693384 -0.1718068</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     x_2b   -0.4661806 -0.7565110 -0.1497500</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -139,7 +133,7 @@ effects, a <code>data.frame</code> with the estimated subgroup treatment effect
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Mar Vazquez Rabunal, Daniel Sabanés Bové, F. Hoffmann-La Roche AG.</p>
+  <p>Developed by Mar Vazquez Rabunal, Daniel Sabanés Bové, Marcel Wolbers, Isaac Gravestock, F. Hoffmann-La Roche AG.</p>
 </div>
 
 <div class="pkgdown-footer-right">
