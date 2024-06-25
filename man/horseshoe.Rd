@@ -50,9 +50,11 @@ on the interaction coefficients between the subgrouping covariates and
 the treatment.
 }
 \examples{
+\donttest{
 horseshoe("ev_pfs", "arm", c("x_1", "x_2"), c("x_1", "x_2", "x_3"),
   example_data, "binary",
   chains = 1, seed = 0, control = list(adapt_delta = 0.95),
   iter = 50 # In practice, you need to omit this or set it much higher!
 )
+}
 }

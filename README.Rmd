@@ -21,24 +21,41 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version-last-release/bonsaiforest)](https://www.r-pkg.org/badges/version-last-release/bonsaiforest)
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/bonsaiforest)](https://cranlogs.r-pkg.org/badges/bonsaiforest)
 [![CRAN total downloads](https://cranlogs.r-pkg.org/badges/grand-total/bonsaiforest)](https://cranlogs.r-pkg.org/badges/grand-total/bonsaiforest)
-[![Code Coverage](https://raw.githubusercontent.com/openpharma/bonsaiforest/_xml_coverage_reports/data/main/badge.svg)](https://raw.githubusercontent.com/openpharma/bonsaiforest/_xml_coverage_reports/data/main/coverage.xml)
+[![Code Coverage](https://raw.githubusercontent.com/openpharma/bonsaiforest/_xml_coverage_reports/data/main/badge.svg)](https://openpharma.github.io/bonsaiforest/latest-tag/coverage-report/)
 <!-- badges: end -->
 
 Subgroup analyses are routinely performed in clinical trial
 analyses. From a methodological perspective, two key issues of
 subgroup analyses are multiplicity (even if only predefined subgroups
 are investigated) and the low sample sizes of subgroups which lead to
-highly variable estimates. `bonsaiforest` implements subgroup estimates
-based on Bayesian shrinkage priors, as well as penalized likelihood
-inference.
+highly variable estimates, see e.g. 
+[Yusuf et al (1991)](https://doi.org/10.1001/jama.1991.03470010097038).
+This package implements subgroup estimates
+based on Bayesian shrinkage priors, see 
+[Carvalho et al (2019)](https://proceedings.mlr.press/v5/carvalho09a.html). 
+In addition, estimates based on penalized likelihood inference are available, 
+based on [Simon et al (2011)](https://doi.org/10.18637/jss.v039.i05). 
+The corresponding shrinkage based forest plots address the aforementioned issues
+and can complement standard forest plots in practical clinical trial analyses.
 
 ## Installation
+
+Please note that on Windows, you will need to install [`Rtools`](https://cran.r-project.org/bin/windows/Rtools/),
+because you will need to have a working `C++` toolchain to compile the Stan models.
+
+### Release
+
+You can install the current release version of `bonsaiforest` from CRAN with:
+
+```{r cran-installation, eval = FALSE, echo = TRUE}
+install.packages("bonsaiforest")
+```
 
 ### Development
 
 You can install the development version of `bonsaiforest` from [GitHub](https://github.com/) with:
 
-``` r
+```{r gh-installation, eval = FALSE, echo = TRUE}
 # install.packages("remotes")
 remotes::install_github("insightsengineering/bonsaiforest")
 ```
@@ -47,7 +64,7 @@ remotes::install_github("insightsengineering/bonsaiforest")
 
 See the [introductory vignette](https://insightsengineering.github.io/bonsaiforest/main/articles/introduction.html) or get started by trying out the example:
 
-```{r, eval = FALSE, echo = TRUE}
+```{r}
 library(bonsaiforest)
 str(example_data)
 
@@ -68,4 +85,3 @@ summary_horseshoe
 
 plot(summary_horseshoe)
 ```
-

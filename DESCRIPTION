@@ -1,20 +1,28 @@
 Type: Package
 Package: bonsaiforest
 Title: Shrinkage Based Forest Plots
-Version: 0.0.0.9038
-Date: 2024-06-11
+Version: 0.1.0
+Date: 2024-06-12
 Authors@R: c(
     person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = "aut"),
-    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = c("aut", "cre")),
+    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = "aut"),
+    person("Marcel", "Wolbers", , "marcel.wolbers@roche.com", role = "aut"),
+    person("Isaac", "Gravestock", , "isaac.gravestock@roche.com", role = "cre"),
     person("F. Hoffmann-La Roche AG", role = c("cph", "fnd"))
   )
 Description: Subgroup analyses are routinely performed in clinical trial
     analyses. From a methodological perspective, two key issues of
     subgroup analyses are multiplicity (even if only predefined subgroups
     are investigated) and the low sample sizes of subgroups which lead to
-    highly variable estimates.  This package implements subgroup estimates
-    based on Bayesian shrinkage priors, as well as penalized likelihood
-    inference.
+    highly variable estimates, see e.g. Yusuf et al (1991)
+    <doi:10.1001/jama.1991.03470010097038>.
+    This package implements subgroup estimates
+    based on Bayesian shrinkage priors, see Carvalho et al (2019)
+    <https://proceedings.mlr.press/v5/carvalho09a.html>. In addition, estimates 
+    based on penalized likelihood inference are available, based on Simon et al (2011) 
+    <doi:10.18637/jss.v039.i05>. The corresponding shrinkage based forest plots
+    address the aforementioned issues and can complement standard forest plots 
+    in practical clinical trial analyses.
 License: Apache License 2.0
 URL: https://github.com/insightsengineering/bonsaiforest/
 BugReports: https://github.com/insightsengineering/bonsaiforest/issues

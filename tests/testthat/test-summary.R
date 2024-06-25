@@ -95,7 +95,6 @@ test_that("summary outputs the right element for naive binary", {
   expect_equal(result, expected, tolerance = 0.001)
 })
 
-
 test_that("summary outputs the right element for elastic_net survival", {
   result <- summary(elastic_net_fit_surv)
   estimates <- data.frame(
@@ -115,7 +114,6 @@ test_that("summary outputs the right element for elastic_net survival", {
   class(expected) <- "summary.elastic_net"
   expect_equal(result, expected, tolerance = 0.001)
 })
-
 
 test_that("summary outputs the right element for elastic_net binary", {
   result <- summary(elastic_net_fit_bin)
@@ -137,7 +135,6 @@ test_that("summary outputs the right element for elastic_net binary", {
   class(expected) <- "summary.elastic_net"
   expect_equal(result, expected, tolerance = 0.001)
 })
-
 
 test_that("summary outputs the right element for horseshoe survival", {
   result <- summary(horseshoe_fit_surv)
@@ -164,7 +161,6 @@ test_that("summary outputs the right element for horseshoe survival", {
   expect_equal(result, expected, tolerance = 0.1)
 })
 
-
 test_that("summary outputs the right element for horseshoe binary", {
   result <- summary(horseshoe_fit_bin)
   posterior <- trt_horseshoe(horseshoe_fit_bin)
@@ -177,7 +173,7 @@ test_that("summary outputs the right element for horseshoe binary", {
       -0.7766, -0.7841, -0.7985, -0.7675
     ),
     trt.high = c(
-      -0.1563, -0.1635, -0.1476, -0.162
+      -0.1427, -0.1355, -0.1718, -0.1498
     )
   )
   expected <- list(

@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Subgroup analyses are routinely performed in clinical trial analyses. From a methodological perspective, two key issues of subgroup analyses are multiplicity (even if only predefined subgroups are investigated) and the low sample sizes of subgroups which lead to highly variable estimates. This package implements subgroup estimates based on Bayesian shrinkage priors, as well as penalized likelihood inference.
+Subgroup analyses are routinely performed in clinical trial analyses. From a methodological perspective, two key issues of subgroup analyses are multiplicity (even if only predefined subgroups are investigated) and the low sample sizes of subgroups which lead to highly variable estimates, see e.g. Yusuf et al (1991) \doi{10.1001/jama.1991.03470010097038}. This package implements subgroup estimates based on Bayesian shrinkage priors, see Carvalho et al (2019) \url{https://proceedings.mlr.press/v5/carvalho09a.html}. In addition, estimates based on penalized likelihood inference are available, based on Simon et al (2011) \doi{10.18637/jss.v039.i05}. The corresponding shrinkage based forest plots address the aforementioned issues and can complement standard forest plots in practical clinical trial analyses.
 }
 \seealso{
 Useful links:
@@ -19,11 +19,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
+\strong{Maintainer}: Isaac Gravestock \email{isaac.gravestock@roche.com}
 
 Authors:
 \itemize{
   \item Mar Vazquez Rabunal \email{mar.vazquez_rabunal@roche.com}
+  \item Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
+  \item Marcel Wolbers \email{marcel.wolbers@roche.com}
 }
 
 Other contributors:
