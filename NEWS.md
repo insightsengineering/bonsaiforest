@@ -1,4 +1,4 @@
-# bonsaiforest 0.1.0
+# bonsaiforest 0.1.0.9000
 
 * First CRAN version of the package.
 * This package implements subgroup estimates based on Bayesian shrinkage priors, as well as penalized likelihood inference.
