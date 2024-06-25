@@ -36,6 +36,19 @@ trial analyses.
 
 ## Installation
 
+Please note that on Windows, you will need to install
+[`Rtools`](https://cran.r-project.org/bin/windows/Rtools/), because you
+will need to have a working `C++` toolchain to compile the Stan models.
+
+### Release
+
+You can install the current release version of `bonsaiforest` from CRAN
+with:
+
+``` r
+install.packages("bonsaiforest")
+```
+
 ### Development
 
 You can install the development version of `bonsaiforest` from
@@ -70,6 +83,9 @@ str(example_data)
 #>  $ x_10  : Factor w/ 3 levels "a","b","c": 3 3 3 3 3 1 2 2 2 3 ...
 #>  $ tt_pfs: num  0.9795 3.4762 1.7947 0.0197 2.2168 ...
 #>  $ ev_pfs: num  1 0 1 1 0 0 0 0 0 0 ...
+```
+
+``` r
 
 horseshoe_model <- horseshoe(
   resp = "tt_pfs", trt = "arm",
@@ -83,26 +99,12 @@ horseshoe_model <- horseshoe(
   control = list(adapt_delta = 0.95)
 )
 #> Compiling Stan program...
-#> Trying to compile a simple C file
-#> Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
-#> using C compiler: ‘Homebrew clang version 13.0.1’
-#> using SDK: ‘MacOSX13.3.sdk’
-#> /opt/homebrew/opt/llvm@13/bin/clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/opt/R/arm64/include "-I/opt/homebrew/opt/llvm@13/include"    -fPIC  -falign-functions=64 -Wall -g -O2  -c foo.c -o foo.o
-#> In file included from <built-in>:1:
-#> In file included from /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-#> In file included from /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
-#> In file included from /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/RcppEigen/include/Eigen/Core:19:
-#> /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: 'cmath' file not found
-#> #include <cmath>
-#>          ^~~~~~~
-#> 1 error generated.
-#> make: *** [foo.o] Error 1
 #> Start sampling
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 0.000253 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.53 seconds.
+#> Chain 1: Gradient evaluation took 0.00022 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.2 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -119,15 +121,15 @@ horseshoe_model <- horseshoe(
 #> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 9.937 seconds (Warm-up)
-#> Chain 1:                7.971 seconds (Sampling)
-#> Chain 1:                17.908 seconds (Total)
+#> Chain 1:  Elapsed Time: 9.899 seconds (Warm-up)
+#> Chain 1:                7.865 seconds (Sampling)
+#> Chain 1:                17.764 seconds (Total)
 #> Chain 1: 
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
 #> Chain 2: 
-#> Chain 2: Gradient evaluation took 0.000122 seconds
-#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.22 seconds.
+#> Chain 2: Gradient evaluation took 0.000117 seconds
+#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.17 seconds.
 #> Chain 2: Adjust your expectations accordingly!
 #> Chain 2: 
 #> Chain 2: 
@@ -144,14 +146,17 @@ horseshoe_model <- horseshoe(
 #> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 2: 
-#> Chain 2:  Elapsed Time: 10.027 seconds (Warm-up)
-#> Chain 2:                7.019 seconds (Sampling)
-#> Chain 2:                17.046 seconds (Total)
+#> Chain 2:  Elapsed Time: 10.131 seconds (Warm-up)
+#> Chain 2:                7.004 seconds (Sampling)
+#> Chain 2:                17.135 seconds (Total)
 #> Chain 2:
 #> Warning: There were 1 divergent transitions after warmup. See
 #> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 #> to find out why this is a problem and how to eliminate them.
 #> Warning: Examine the pairs() plot to diagnose sampling problems
+```
+
+``` r
 
 summary_horseshoe <- summary(horseshoe_model, conf = 0.9)
 summary_horseshoe
@@ -165,6 +170,9 @@ summary_horseshoe
 #> 7     x_4a    0.6385074 0.4967184 0.8150692
 #> 8     x_4b    0.6438776 0.4929574 0.8245606
 #> 9     x_4c    0.6673139 0.5271375 0.8948151
+```
+
+``` r
 
 plot(summary_horseshoe)
 ```
