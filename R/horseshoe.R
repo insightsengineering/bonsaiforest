@@ -55,7 +55,6 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   if (resptype == "survival") {
     assert_string(status)
     design_matrix <- cbind(prep_data$design_main, prep_data$design_ia)
-    form <- stats::as.formula(paste(resp, "|cens(1 - ", status, ") ~ a + b"))
     form_a <- stats::as.formula(paste(
       "a ~ 0 +",
       paste0(colnames(prep_data$design_main),
@@ -68,12 +67,14 @@ horseshoe <- function(resp, trt, subgr, covars, data,
     sort_resp <- sort(y[, 1])
     diff_resp <- min(sort_resp - c(0, sort_resp[-length(y[, 1])]))
     limits_resp <- c(max(min(y[, 1]) - diff_resp, 0), max(y[, 1]) + diff_resp)
-    quantiles_resp <- stats::quantile(y[, 1], c(0.25, 0.5, 0.75))
-    bhaz <- list(
-      Boundary.knots = limits_resp, knots = quantiles_resp,
-      intercept = FALSE
+    quantiles_resp <- stats::quantile(y[, 1], c(0.25, 0.5, 0.75), names = FALSE)
+    family <- brms::brmsfamily("cox")
+    bhaz_term <- paste0(
+      "bhaz(Boundary.knots = ", deparse(limits_resp), ", ",
+      "knots = ", deparse(quantiles_resp), ", ",
+      "intercept = FALSE)"
     )
-    family <- brms::brmsfamily("cox", bhaz = bhaz)
+    form <- stats::as.formula(paste(resp, "|cens(1 - ", status, ") + ", bhaz_term, " ~ a + b"))
   } else if (resptype == "binary") {
     design_main <- prep_data$design_main[, -1]
     design_matrix <- cbind(design_main, prep_data$design_ia)

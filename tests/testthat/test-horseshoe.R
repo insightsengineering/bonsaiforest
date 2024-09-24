@@ -24,17 +24,19 @@ test_that("horseshoe outputs the right elements for survival", {
   sort_resp <- sort(y[, 1])
   diff_resp <- min(sort_resp - c(0, sort_resp[-length(y[, 1])]))
   limits_resp <- c(max(min(y[, 1]) - diff_resp, 0), max(y[, 1]) + diff_resp)
-  quantiles_resp <- quantile(y[, 1], c(0.25, 0.5, 0.75))
-  bhaz <- list(
-    Boundary.knots = limits_resp, knots = quantiles_resp,
-    intercept = FALSE
+  quantiles_resp <- quantile(y[, 1], c(0.25, 0.5, 0.75), names = FALSE)
+  form <- paste0(
+    "tt_pfs | cens(1 - ev_pfs) + ",
+    "bhaz(Boundary.knots = ", deparse(limits_resp), ", ",
+    "knots = ", deparse(quantiles_resp), ", intercept = FALSE) ",
+    "~ a + b"
   )
   fit_brms <- suppressWarnings(brms::brm(
-    brms::bf(tt_pfs | cens(1 - ev_pfs) ~ a + b, nl = TRUE) +
+    brms::bf(form, nl = TRUE) +
       brms::lf(a ~ 0 + arm0 + arm1 + x_1b + x_2b + x_3b) +
       brms::lf(b ~ 0 + x_1a_arm + x_1b_arm + x_2a_arm + x_2b_arm + x_3a_arm + x_3b_arm),
     data = data_model,
-    family = brms::brmsfamily("cox", bhaz = bhaz),
+    family = brms::brmsfamily("cox"),
     brms::prior(normal(0, 5), class = "b", nlpar = "a") +
       brms::prior(horseshoe(1), class = "b", nlpar = "b"),
     iter = 20, warmup = 10, chains = 1,
