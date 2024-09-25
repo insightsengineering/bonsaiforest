@@ -1,7 +1,7 @@
 Type: Package
 Package: bonsaiforest
 Title: Shrinkage Based Forest Plots
-Version: 0.1.0.9001
+Version: 0.1.1
 Date: 2024-09-25
 Authors@R: c(
     person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = "aut"),
@@ -29,7 +29,7 @@ BugReports: https://github.com/insightsengineering/bonsaiforest/issues
 Depends:
     R (>= 4.1)
 Imports:
-    brms,
+    brms (>= 2.22.0),
     broom,
     checkmate,
     dplyr,
