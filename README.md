@@ -83,9 +83,6 @@ str(example_data)
 #>  $ x_10  : Factor w/ 3 levels "a","b","c": 3 3 3 3 3 1 2 2 2 3 ...
 #>  $ tt_pfs: num  0.9795 3.4762 1.7947 0.0197 2.2168 ...
 #>  $ ev_pfs: num  1 0 1 1 0 0 0 0 0 0 ...
-```
-
-``` r
 
 horseshoe_model <- horseshoe(
   resp = "tt_pfs", trt = "arm",
@@ -103,8 +100,8 @@ horseshoe_model <- horseshoe(
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 0.00022 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.2 seconds.
+#> Chain 1: Gradient evaluation took 0.000173 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.73 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -121,15 +118,15 @@ horseshoe_model <- horseshoe(
 #> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 9.899 seconds (Warm-up)
-#> Chain 1:                7.865 seconds (Sampling)
-#> Chain 1:                17.764 seconds (Total)
+#> Chain 1:  Elapsed Time: 6.74 seconds (Warm-up)
+#> Chain 1:                4.679 seconds (Sampling)
+#> Chain 1:                11.419 seconds (Total)
 #> Chain 1: 
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
 #> Chain 2: 
-#> Chain 2: Gradient evaluation took 0.000117 seconds
-#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.17 seconds.
+#> Chain 2: Gradient evaluation took 7.4e-05 seconds
+#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.74 seconds.
 #> Chain 2: Adjust your expectations accordingly!
 #> Chain 2: 
 #> Chain 2: 
@@ -146,33 +143,27 @@ horseshoe_model <- horseshoe(
 #> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 2: 
-#> Chain 2:  Elapsed Time: 10.131 seconds (Warm-up)
-#> Chain 2:                7.004 seconds (Sampling)
-#> Chain 2:                17.135 seconds (Total)
+#> Chain 2:  Elapsed Time: 6.486 seconds (Warm-up)
+#> Chain 2:                9.279 seconds (Sampling)
+#> Chain 2:                15.765 seconds (Total)
 #> Chain 2:
-#> Warning: There were 1 divergent transitions after warmup. See
+#> Warning: There were 3 divergent transitions after warmup. See
 #> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 #> to find out why this is a problem and how to eliminate them.
 #> Warning: Examine the pairs() plot to diagnose sampling problems
-```
-
-``` r
 
 summary_horseshoe <- summary(horseshoe_model, conf = 0.9)
 summary_horseshoe
 #>   subgroup trt.estimate   trt.low  trt.high
-#> 1     x_1a    0.6557710 0.5269372 0.8319575
-#> 2     x_1b    0.6497113 0.5195755 0.8197317
-#> 3     x_2a    0.6545330 0.5229767 0.8356877
-#> 4     x_2b    0.6493245 0.5202362 0.8144661
-#> 5     x_3a    0.6262720 0.4585270 0.8121477
-#> 6     x_3b    0.6597057 0.5328791 0.8345641
-#> 7     x_4a    0.6385074 0.4967184 0.8150692
-#> 8     x_4b    0.6438776 0.4929574 0.8245606
-#> 9     x_4c    0.6673139 0.5271375 0.8948151
-```
-
-``` r
+#> 1     x_1a    0.6561374 0.5260189 0.8162805
+#> 2     x_1b    0.6535959 0.5176018 0.8102726
+#> 3     x_2a    0.6550734 0.5189214 0.8256944
+#> 4     x_2b    0.6534071 0.5261231 0.8076542
+#> 5     x_3a    0.6308748 0.4582799 0.7998477
+#> 6     x_3b    0.6631032 0.5325865 0.8224179
+#> 7     x_4a    0.6437881 0.5059100 0.8047302
+#> 8     x_4b    0.6431772 0.4921286 0.8127279
+#> 9     x_4c    0.6727510 0.5257881 0.8657248
 
 plot(summary_horseshoe)
 ```
