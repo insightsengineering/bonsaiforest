@@ -34,5 +34,6 @@ penalizations
 preprocess
 subgrouping
 surv
+toolchain
 trt
 warmup
