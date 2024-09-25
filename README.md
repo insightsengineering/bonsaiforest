@@ -2,7 +2,7 @@
 <!-- markdownlint-disable-file -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bonsaiforest <a href="https://insightsengineering.github.io/bonsaiforest"><img src="man/figures/logo.png" align="right" height="88" alt="bonsaiforest website" /></a>
+# bonsaiforest <a href="https://insightsengineering.github.io/bonsaiforest/latest-tag"><img src="man/figures/logo.png" align="right" height="88" alt="bonsaiforest website" /></a>
 
 <!-- badges: start -->
 
@@ -177,4 +177,4 @@ summary_horseshoe
 plot(summary_horseshoe)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-bonsaiforest-horseshoe-1.png" width="100%" />
