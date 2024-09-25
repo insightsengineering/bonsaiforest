@@ -50,7 +50,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
-LinkingTo: 
+LinkingTo:
     Rcpp,
     RcppArmadillo
 VignetteBuilder:
@@ -62,4 +62,4 @@ Language: en-US
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
