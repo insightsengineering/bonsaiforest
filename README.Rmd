@@ -64,7 +64,7 @@ remotes::install_github("insightsengineering/bonsaiforest")
 
 See the [introductory vignette](https://insightsengineering.github.io/bonsaiforest/main/articles/introduction.html) or get started by trying out the example:
 
-```{r}
+```{r bonsaiforest-horseshoe}
 library(bonsaiforest)
 str(example_data)
 
