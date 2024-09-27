@@ -1,4 +1,4 @@
-# bonsaiforest 0.1.1
+# bonsaiforest 0.1.1.9000
 
 * Adapt to changes in `brms 2.22.0` for the specification of baseline hazards. (#79)
 

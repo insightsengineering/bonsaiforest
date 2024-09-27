@@ -1,8 +1,8 @@
 Type: Package
 Package: bonsaiforest
 Title: Shrinkage Based Forest Plots
-Version: 0.1.1
-Date: 2024-09-25
+Version: 0.1.1.9000
+Date: 2024-09-27
 Authors@R: c(
     person("Mar", "Vazquez Rabunal", , "mar.vazquez_rabunal@roche.com", role = "aut"),
     person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = "aut"),
