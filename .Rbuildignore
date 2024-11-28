@@ -26,3 +26,4 @@ images
 ^README\.Rmd$
 ^simulations$
 ^\.yamllint$
+^node_modules$
