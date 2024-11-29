@@ -12,6 +12,8 @@ horseshoe(
   data,
   resptype = c("survival", "binary"),
   status = NULL,
+  horseshoe_prior = brms::horseshoe(),
+  normal_prior = "normal(0, 5)",
   ...
 )
 }
@@ -37,6 +39,13 @@ or "binary".}
 
 \item{status}{(\code{string})\cr only for "survival" \code{resptype},
 the status variable name in survival data.}
+
+\item{horseshoe_prior}{(\code{string})\cr the shrinkage prior definition,
+typically constructed with \code{brms::horseshoe()}.}
+
+\item{normal_prior}{(\code{string})\cr the normal prior definition in Stan language
+\code{"normal(0, 5)"}.
+.}
 
 \item{...}{Additional arguments from the \code{brm} function.}
 }
