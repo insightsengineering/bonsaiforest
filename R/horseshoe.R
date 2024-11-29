@@ -19,6 +19,11 @@
 #' or "binary".
 #' @param status (`string`)\cr only for "survival" `resptype`,
 #' the status variable name in survival data.
+#' @param horseshoe_prior (`string`)\cr the shrinkage prior definition,
+#' typically constructed with `brms::horseshoe()`.
+#' @param normal_prior (`string`)\cr the normal prior definition in Stan language
+#' `"normal(0, 5)"`.
+#' .
 #' @param ... Additional arguments from the `brm` function.
 #'
 #'
@@ -36,6 +41,8 @@
 #' }
 horseshoe <- function(resp, trt, subgr, covars, data,
                       resptype = c("survival", "binary"), status = NULL,
+                      horseshoe_prior = brms::horseshoe(),
+                      normal_prior = "normal(0, 5)",
                       ...) {
   assert_string(resp)
   assert_string(trt)
@@ -44,6 +51,9 @@ horseshoe <- function(resp, trt, subgr, covars, data,
   assert_data_frame(data)
   assert_factor(data[[trt]])
   resptype <- match.arg(resptype)
+  assert_string(horseshoe_prior)
+  horseshoe_prior <- gsub("brms::", "", horseshoe_prior, fixed = TRUE)
+  assert_string(normal_prior)
   list_arguments <- list(...)
   prep_data <- preprocess(trt, subgr, covars, data)
   form_b <- stats::as.formula(paste(
@@ -97,8 +107,8 @@ horseshoe <- function(resp, trt, subgr, covars, data,
         brms::lf(form_b),
       data = data_model,
       family = family,
-      brms::prior_string("normal(0, 5)", class = "b", nlpar = "a") +
-        brms::prior_string("horseshoe(1)", class = "b", nlpar = "b"),
+      brms::set_prior(normal_prior, class = "b", nlpar = "a") +
+        brms::set_prior(horseshoe_prior, class = "b", nlpar = "b"),
       ...
     )
   }

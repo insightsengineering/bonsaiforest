@@ -103,3 +103,65 @@ test_that("horseshoe outputs the right elements for binary", {
   class(expected) <- c("bonsaiforest", "horseshoe")
   expect_equal(result, expected)
 })
+
+test_that("horseshoe works with different horsehoe parameters", {
+  result_1_2 <- suppressWarnings(horseshoe(
+    "tt_pfs",
+    "arm",
+    c("x_1", "x_3"),
+    c("x_1", "x_2", "x_3"),
+    example_data,
+    "survival", "ev_pfs",
+    iter = 20,
+    warmup = 10,
+    chains = 1,
+    seed = 0,
+    control = list(adapt_delta = 0.95),
+    horseshoe_prior = brms::horseshoe(df = 2, scale_global = 2)
+  ))
+
+  expect_equal(
+    summary(result_1_2)$estimates$trt.estimate,
+    c(0.65416396929456, 0.600816938551847, 0.619122568326682, 0.622155095860528)
+  )
+
+  result_2_1 <- suppressWarnings(horseshoe(
+    "tt_pfs",
+    "arm",
+    c("x_1", "x_3"),
+    c("x_1", "x_2", "x_3"),
+    example_data,
+    "survival", "ev_pfs",
+    iter = 20,
+    warmup = 10,
+    chains = 1,
+    seed = 0,
+    control = list(adapt_delta = 0.95),
+    horseshoe_prior = brms::horseshoe(df = 2)
+  ))
+
+  expect_equal(
+    summary(result_2_1)$estimates$trt.estimate,
+    c(0.634816327624216, 0.647031888165315, 0.608360177875747, 0.626950253467059)
+  )
+
+  result_1_1 <- suppressWarnings(horseshoe(
+    "tt_pfs",
+    "arm",
+    c("x_1", "x_3"),
+    c("x_1", "x_2", "x_3"),
+    example_data,
+    "survival", "ev_pfs",
+    iter = 20,
+    warmup = 10,
+    chains = 1,
+    seed = 0,
+    control = list(adapt_delta = 0.95),
+    horseshoe_prior = brms::horseshoe(df = 1)
+  ))
+
+  expect_equal(
+    summary(result_1_1)$estimates$trt.estimate,
+    c(0.645449993316656, 0.603629055392864, 0.59286841204553, 0.651850986522326)
+  )
+})
