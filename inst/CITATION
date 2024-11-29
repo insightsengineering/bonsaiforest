@@ -1,0 +1,14 @@
+citation(auto = meta)
+
+bibentry(
+  bibtype  = "misc",
+  title    = "Using shrinkage methods to estimate treatment effects in overlapping subgroups in randomized clinical trials with a time-to-event endpoint",
+  author   = c(
+    person("Marcel", "Wolbers"), person("Mar", "Vázquez Rabunal"), person("Ke", "Li"),
+    person("Kaspar", "Rufibach"), person("Daniel", "Sabanés Bové")
+    ),
+  year     = "2024",
+  eprint   = "2407.11729",
+  archivePrefix = "arXiv",
+  url      = "https://arxiv.org/abs/2407.11729"
+)

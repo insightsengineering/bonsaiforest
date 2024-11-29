@@ -20,19 +20,17 @@ Coverage](https://raw.githubusercontent.com/openpharma/bonsaiforest/_xml_coverag
 <!-- badges: end -->
 
 Subgroup analyses are routinely performed in clinical trial analyses.
-From a methodological perspective, two key issues of subgroup analyses
-are multiplicity (even if only predefined subgroups are investigated)
-and the low sample sizes of subgroups which lead to highly variable
-estimates, see e.g.  [Yusuf et al
-(1991)](https://doi.org/10.1001/jama.1991.03470010097038). This package
-implements subgroup estimates based on Bayesian shrinkage priors, see
-[Carvalho et al
-(2019)](https://proceedings.mlr.press/v5/carvalho09a.html). In addition,
-estimates based on penalized likelihood inference are available, based
-on [Simon et al (2011)](https://doi.org/10.18637/jss.v039.i05). The
-corresponding shrinkage based forest plots address the aforementioned
-issues and can complement standard forest plots in practical clinical
-trial analyses.
+This package implements shrinkage methods to estimate treatment effects
+in overlapping subgroups with a binary or time-to-event endpoint as
+described in [Wolbers et al (2024)](https://arxiv.org/pdf/2407.11729).
+Both Bayesian estimation with a regularized horseshoe prior as well as
+penalized frequentist methods using the lasso or ridge penalties are
+implemented. The Bayesian approach provides both point estimates and
+credible intervals whereas only point estimates are available for the
+penalized frequentist methods. The estimators are intended to
+completement standard subgroup-specific estimators which are routinely
+displayed in forest plots. They typically have substantially smaller
+overall mean squared error compared to the standard estimator.
 
 ## Installation
 
@@ -100,8 +98,8 @@ horseshoe_model <- horseshoe(
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 #> Chain 1: 
-#> Chain 1: Gradient evaluation took 0.000173 seconds
-#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.73 seconds.
+#> Chain 1: Gradient evaluation took 0.000254 seconds
+#> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.54 seconds.
 #> Chain 1: Adjust your expectations accordingly!
 #> Chain 1: 
 #> Chain 1: 
@@ -118,15 +116,15 @@ horseshoe_model <- horseshoe(
 #> Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 1: 
-#> Chain 1:  Elapsed Time: 6.74 seconds (Warm-up)
-#> Chain 1:                4.679 seconds (Sampling)
-#> Chain 1:                11.419 seconds (Total)
+#> Chain 1:  Elapsed Time: 6.543 seconds (Warm-up)
+#> Chain 1:                4.446 seconds (Sampling)
+#> Chain 1:                10.989 seconds (Total)
 #> Chain 1: 
 #> 
 #> SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
 #> Chain 2: 
-#> Chain 2: Gradient evaluation took 7.4e-05 seconds
-#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.74 seconds.
+#> Chain 2: Gradient evaluation took 7.5e-05 seconds
+#> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.75 seconds.
 #> Chain 2: Adjust your expectations accordingly!
 #> Chain 2: 
 #> Chain 2: 
@@ -143,9 +141,9 @@ horseshoe_model <- horseshoe(
 #> Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #> Chain 2: 
-#> Chain 2:  Elapsed Time: 6.486 seconds (Warm-up)
-#> Chain 2:                9.279 seconds (Sampling)
-#> Chain 2:                15.765 seconds (Total)
+#> Chain 2:  Elapsed Time: 6.227 seconds (Warm-up)
+#> Chain 2:                8.713 seconds (Sampling)
+#> Chain 2:                14.94 seconds (Total)
 #> Chain 2:
 #> Warning: There were 3 divergent transitions after warmup. See
 #> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
