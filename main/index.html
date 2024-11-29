@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Shrinkage Based Forest Plots">
-<meta name="description" content="Subgroup analyses are routinely performed in clinical trial analyses. From a methodological perspective, two key issues of subgroup analyses are multiplicity (even if only predefined subgroups are investigated) and the low sample sizes of subgroups which lead to highly variable estimates, see e.g. Yusuf et al (1991) &lt;doi:10.1001/jama.1991.03470010097038&gt;. This package implements subgroup estimates based on Bayesian shrinkage priors, see Carvalho et al (2019) &lt;https://proceedings.mlr.press/v5/carvalho09a.html&gt;. In addition, estimates based on penalized likelihood inference are available, based on Simon et al (2011) &lt;doi:10.18637/jss.v039.i05&gt;. The corresponding shrinkage based forest plots address the aforementioned issues and can complement standard forest plots in practical clinical trial analyses.">
-<meta property="og:description" content="Subgroup analyses are routinely performed in clinical trial analyses. From a methodological perspective, two key issues of subgroup analyses are multiplicity (even if only predefined subgroups are investigated) and the low sample sizes of subgroups which lead to highly variable estimates, see e.g. Yusuf et al (1991) &lt;doi:10.1001/jama.1991.03470010097038&gt;. This package implements subgroup estimates based on Bayesian shrinkage priors, see Carvalho et al (2019) &lt;https://proceedings.mlr.press/v5/carvalho09a.html&gt;. In addition, estimates based on penalized likelihood inference are available, based on Simon et al (2011) &lt;doi:10.18637/jss.v039.i05&gt;. The corresponding shrinkage based forest plots address the aforementioned issues and can complement standard forest plots in practical clinical trial analyses.">
+<meta name="description" content="Subgroup analyses are routinely performed in clinical trial analyses. This package implements shrinkage methods to estimate treatment effects in overlapping subgroups with a binary or time-to-event endpoint as described in Wolbers et al (2024) &lt;arXiv:2407.11729&gt;. Both Bayesian estimation with a regularized horseshoe prior as well as penalized frequentist methods using the lasso or ridge penalties are implemented. The Bayesian approach provides both point estimates and credible intervals whereas only point estimates are available for the penalized frequentist methods. The estimators are intended to completement standard subgroup-specific estimators which are routinely displayed in forest plots. They typically have substantially smaller overall mean squared error compared to the standard estimator.">
+<meta property="og:description" content="Subgroup analyses are routinely performed in clinical trial analyses. This package implements shrinkage methods to estimate treatment effects in overlapping subgroups with a binary or time-to-event endpoint as described in Wolbers et al (2024) &lt;arXiv:2407.11729&gt;. Both Bayesian estimation with a regularized horseshoe prior as well as penalized frequentist methods using the lasso or ridge penalties are implemented. The Bayesian approach provides both point estimates and credible intervals whereas only point estimates are available for the penalized frequentist methods. The estimators are intended to completement standard subgroup-specific estimators which are routinely displayed in forest plots. They typically have substantially smaller overall mean squared error compared to the standard estimator.">
 <meta property="og:image" content="https://insightsengineering.github.io/bonsaiforest/logo.png">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-125641273-1"></script><script>
   window.dataLayer = window.dataLayer || [];
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">bonsaiforest</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,15 +49,6 @@
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
-<!-- start dropdown for versions --> <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown" role="button"
-          aria-expanded="false" aria-haspopup="true"
-          id="dropdown-versions">Versions</a> <div class="dropdown-menu" aria-labelledby="dropdown-versions"> <a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/bonsaiforest/main">main</a>
-<a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/bonsaiforest/latest-tag">latest-tag</a>
-<a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/bonsaiforest/v0.1.1">v0.1.1</a>
-<a class="dropdown-item" data-toggle="tooltip" title="" href="https://insightsengineering.github.io/bonsaiforest/v0.1.0">v0.1.0</a> </div></li>
-<!-- end dropdown for versions -->
 <ul class="navbar-nav">
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/insightsengineering/bonsaiforest"><span class="fa fa-github"></span></a></li>
       </ul>
@@ -75,7 +66,7 @@
 </div>
 <!-- badges: start -->
 
-<p>Subgroup analyses are routinely performed in clinical trial analyses. From a methodological perspective, two key issues of subgroup analyses are multiplicity (even if only predefined subgroups are investigated) and the low sample sizes of subgroups which lead to highly variable estimates, see e.g.  <a href="https://doi.org/10.1001/jama.1991.03470010097038" class="external-link">Yusuf et al (1991)</a>. This package implements subgroup estimates based on Bayesian shrinkage priors, see <a href="https://proceedings.mlr.press/v5/carvalho09a.html" class="external-link">Carvalho et al (2019)</a>. In addition, estimates based on penalized likelihood inference are available, based on <a href="https://doi.org/10.18637/jss.v039.i05" class="external-link">Simon et al (2011)</a>. The corresponding shrinkage based forest plots address the aforementioned issues and can complement standard forest plots in practical clinical trial analyses.</p>
+<p>Subgroup analyses are routinely performed in clinical trial analyses. This package implements shrinkage methods to estimate treatment effects in overlapping subgroups with a binary or time-to-event endpoint as described in <a href="https://arxiv.org/pdf/2407.11729" class="external-link">Wolbers et al (2024)</a>. Both Bayesian estimation with a regularized horseshoe prior as well as penalized frequentist methods using the lasso or ridge penalties are implemented. The Bayesian approach provides both point estimates and credible intervals whereas only point estimates are available for the penalized frequentist methods. The estimators are intended to completement standard subgroup-specific estimators which are routinely displayed in forest plots. They typically have substantially smaller overall mean squared error compared to the standard estimator.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -135,8 +126,8 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1: Gradient evaluation took 0.000173 seconds</span></span>
-<span><span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.73 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1: Gradient evaluation took 0.000254 seconds</span></span>
+<span><span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.54 seconds.</span></span>
 <span><span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
@@ -153,15 +144,15 @@
 <span><span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
-<span><span class="co">#&gt; Chain 1:  Elapsed Time: 6.74 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 1:                4.679 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 1:                11.419 seconds (Total)</span></span>
+<span><span class="co">#&gt; Chain 1:  Elapsed Time: 6.543 seconds (Warm-up)</span></span>
+<span><span class="co">#&gt; Chain 1:                4.446 seconds (Sampling)</span></span>
+<span><span class="co">#&gt; Chain 1:                10.989 seconds (Total)</span></span>
 <span><span class="co">#&gt; Chain 1: </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2: Gradient evaluation took 7.4e-05 seconds</span></span>
-<span><span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.74 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2: Gradient evaluation took 7.5e-05 seconds</span></span>
+<span><span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.75 seconds.</span></span>
 <span><span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
@@ -178,9 +169,9 @@
 <span><span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span></span>
 <span><span class="co">#&gt; Chain 2: </span></span>
-<span><span class="co">#&gt; Chain 2:  Elapsed Time: 6.486 seconds (Warm-up)</span></span>
-<span><span class="co">#&gt; Chain 2:                9.279 seconds (Sampling)</span></span>
-<span><span class="co">#&gt; Chain 2:                15.765 seconds (Total)</span></span>
+<span><span class="co">#&gt; Chain 2:  Elapsed Time: 6.227 seconds (Warm-up)</span></span>
+<span><span class="co">#&gt; Chain 2:                8.713 seconds (Sampling)</span></span>
+<span><span class="co">#&gt; Chain 2:                14.94 seconds (Total)</span></span>
 <span><span class="co">#&gt; Chain 2:</span></span>
 <span><span class="co">#&gt; Warning: There were 3 divergent transitions after warmup. See</span></span>
 <span><span class="co">#&gt; https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></span>
@@ -259,7 +250,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
