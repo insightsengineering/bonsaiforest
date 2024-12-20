@@ -1,8 +1,9 @@
 
 <!-- markdownlint-disable-file -->
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# bonsaiforest <a href="https://insightsengineering.github.io/bonsaiforest/latest-tag"><img src="man/figures/logo.png" align="right" height="88" alt="bonsaiforest website" /></a>
+# bonsaiforest <a href="https://insightsengineering.github.io/bonsaiforest/latest-tag"><img src="man/figures/logo.svg" align="right" height="88" alt="bonsaiforest website" /></a>
 
 <!-- badges: start -->
 
