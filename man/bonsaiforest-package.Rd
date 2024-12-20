@@ -6,8 +6,6 @@
 \alias{bonsaiforest-package}
 \title{bonsaiforest: Shrinkage Based Forest Plots}
 \description{
-\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
-
 Subgroup analyses are routinely performed in clinical trial analyses. This package implements shrinkage methods to estimate treatment effects in overlapping subgroups with a binary or time-to-event endpoint as described in Wolbers et al (2024) \href{https://arxiv.org/abs/2407.11729}{arXiv:2407.11729}. Both Bayesian estimation with a regularized horseshoe prior as well as penalized frequentist methods using the lasso or ridge penalties are implemented. The Bayesian approach provides both point estimates and credible intervals whereas only point estimates are available for the penalized frequentist methods. The estimators are intended to completement standard subgroup-specific estimators which are routinely displayed in forest plots. They typically have substantially smaller overall mean squared error compared to the standard estimator.
 }
 \seealso{
